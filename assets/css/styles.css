@@ -184,3 +184,35 @@ footer{
   .brand__logo-img{ max-height:36px; }
   .brand__name{ font-size:1rem; }
 }
+/* === Double Logo Size === */
+.brand__logo-wrap{
+  width:84px;           /* doubled from ~42px */
+  height:84px;
+  border-radius:14px;
+}
+
+.brand__logo-img{
+  max-height:70px;      /* doubled from ~34px */
+  width:auto;
+}
+
+/* Adjust name spacing so text aligns */
+.brand{
+  gap:16px;
+  align-items:center;
+}
+.brand__name{
+  font-size:1.25rem;
+  line-height:1;
+}
+.nav__inner{
+  padding:18px 0; /* a little more vertical breathing space */
+}
+
+/* keep header neat on mobile */
+@media (max-width:520px){
+  .brand__logo-wrap{ width:58px; height:58px; border-radius:10px; }
+  .brand__logo-img{ max-height:48px; }
+  .brand__name{ font-size:1rem; }
+}
+
