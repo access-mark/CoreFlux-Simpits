@@ -369,7 +369,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   show(0); play();
 });
 
-/* ---------- Configurator (robust: uses data-price or parses $ from label) ---------- */
+<script>
+/* ---------- Configurator (force-parse visible $price; then sync data-price) ---------- */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -378,25 +379,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  // radio group names
+  // find radio group names
   const radioGroups = Array.from(
-    new Set(
-      [...root.querySelectorAll('input[type="radio"][name]')].map(i => i.name)
-    )
+    new Set([...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name))
   );
 
-  // price resolver
-  function resolvePrice(input){
-    const dp = Number(input.dataset.price || 0);
-    if (dp > 0) return dp;
-
+  // Parse price from card text (handles $, commas, spaces, en/em dashes)
+  function parsePriceFromCard(input){
     const card = input.closest('.card') || input.parentElement;
-    if (!card) return 0;
+    if(!card) return 0;
     const strong = card.querySelector('strong');
-    const source = (strong ? strong.textContent : card.textContent) || '';
-    const m = source.match(/\$\s*([\d,]+(?:\.\d+)?)/);
-    if (!m) return 0;
-    return Number(m[1].replace(/,/g,''));
+    const src = (strong ? strong.textContent : card.textContent) || '';
+    // grab the LAST $number in the string: supports $1,000.00 and non-breaking spaces
+    const matches = [...src.matchAll(/\$\s*([\d][\d,\s]*(?:\.\d+)?)/g)];
+    if(!matches.length) return 0;
+    const raw = matches[matches.length - 1][1].replace(/[,\s]/g,'');
+    const n = Number(raw);
+    return isNaN(n) ? 0 : n;
   }
 
   function resolveLabel(input){
@@ -404,16 +403,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const card = input.closest('.card') || input.parentElement;
     const strong = card ? card.querySelector('strong') : null;
     if (strong){
-      return strong.textContent.replace(/\s*—\s*\$.*$/,'').trim();
+      // strip “ — $...” using any dash type
+      return strong.textContent.replace(/\s*[–—-]\s*\$.*$/,'').trim();
     }
     return input.name || 'Item';
   }
 
   function getSelectedRadios(){
-    const sel = [];
-    for (const group of radioGroups){
-      const chosen = root.querySelector(`input[type="radio"][name="${group}"]:checked`);
-      if (chosen) sel.push(chosen);
+    const sel=[];
+    for(const g of radioGroups){
+      const r = root.querySelector(`input[type="radio"][name="${g}"]:checked`);
+      if(r) sel.push(r);
     }
     return sel;
   }
@@ -422,49 +422,47 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
+    // checkboxes
     root.querySelectorAll('input[type="checkbox"]').forEach(ch=>{
-      if (ch.checked){
-        const price = resolvePrice(ch);
+      if(ch.checked){
+        const price = parsePriceFromCard(ch);
         total += price;
         picked.push(`${resolveLabel(ch)} — $${price}`);
       }
     });
 
+    // radios (one per group)
     getSelectedRadios().forEach(r=>{
-      const price = resolvePrice(r);
+      const price = parsePriceFromCard(r);
       total += price;
       picked.push(`${resolveLabel(r)} — $${price}`);
     });
 
-    if (linesEl) linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
-    if (countEl) countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
-    if (totalEl) totalEl.textContent = `$${total}`;
+    if(linesEl) linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
+    if(countEl) countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
+    if(totalEl) totalEl.textContent = `$${total}`;
   }
 
-  // click anywhere on card
+  // make entire card clickable
   root.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
     if(!input) return;
-    card.addEventListener('click', (e)=>{
-      if (e.target === input) return;
-      if (input.type === 'checkbox'){
-        input.checked = !input.checked;
-        input.dispatchEvent(new Event('change', {bubbles:true}));
-      } else if (input.type === 'radio'){
-        input.checked = true;
-        input.dispatchEvent(new Event('change', {bubbles:true}));
-      }
+    card.addEventListener('click',(e)=>{
+      if(e.target === input) return;
+      if(input.type==='checkbox'){ input.checked = !input.checked; input.dispatchEvent(new Event('change',{bubbles:true})); }
+      if(input.type==='radio'){ input.checked = true; input.dispatchEvent(new Event('change',{bubbles:true})); }
     });
   });
 
+  // wire changes
   root.querySelectorAll('input').forEach(i=> i.addEventListener('change', update));
 
-  // sync data attributes once
-  (function syncData(){
+  // one-time: sync data-price + data-label to what’s visible (keeps future edits consistent)
+  (function syncOnce(){
     root.querySelectorAll('input').forEach(i=>{
-      const p = resolvePrice(i);
-      if (p > 0) i.dataset.price = String(p);
-      if (!i.dataset.label) i.dataset.label = resolveLabel(i);
+      const p = parsePriceFromCard(i);
+      if(p>0) i.dataset.price = String(p);
+      if(!i.dataset.label) i.dataset.label = resolveLabel(i);
     });
   })();
 
