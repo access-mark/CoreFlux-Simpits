@@ -842,11 +842,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
   presetBtns.forEach(btn=> btn.addEventListener('click',()=> apply(btn.dataset.preset)));
 })();
 
-/* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
+/* ---------- Full-page AI Particle Network (fixed brightness) ---------- */
 (function(){
   const c = document.getElementById('aiCanvas');
   if(!c) return;
   const ctx = c.getContext('2d');
+
   let w, h, pts = [];
   const DENSITY = 0.00012;   // particles per px
   const LINK_DIST = 140;
@@ -873,15 +874,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     pmy = (e.clientY - h/2) * 0.02;
   });
 
-  function fadeByScroll(){
-    const max = Math.max(1, document.body.scrollHeight - h);
-    const t = window.scrollY / max;                 // 0..1
-    return 0.45 + 0.35 * (1 - Math.abs(t - 0.5)*2); // bright at top/bottom, softer mid
-  }
-
   function tick(){
     ctx.clearRect(0,0,w,h);
-    c.style.opacity = fadeByScroll();
+
+    // fixed brightness (matches CSS #aiCanvas{opacity:.55})
+    c.style.opacity = '0.55';
 
     // move
     for(const p of pts){
@@ -928,6 +925,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   requestAnimationFrame(tick);
 })();
+
 </script>
 
 </body>
