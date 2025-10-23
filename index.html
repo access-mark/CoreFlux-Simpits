@@ -369,8 +369,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   show(0); play();
 });
 
-<script>
-/* ---------- Configurator (force-parse visible $price; then sync data-price) ---------- */
+/* ---------- Configurator (force-parse visible $price; sync data-price) ---------- */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -379,18 +378,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  // find radio group names
+  // radio group names
   const radioGroups = Array.from(
     new Set([...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name))
   );
 
-  // Parse price from card text (handles $, commas, spaces, en/em dashes)
+  // Parse price from visible text (supports $1,000.00 and any dash)
   function parsePriceFromCard(input){
     const card = input.closest('.card') || input.parentElement;
     if(!card) return 0;
     const strong = card.querySelector('strong');
     const src = (strong ? strong.textContent : card.textContent) || '';
-    // grab the LAST $number in the string: supports $1,000.00 and non-breaking spaces
     const matches = [...src.matchAll(/\$\s*([\d][\d,\s]*(?:\.\d+)?)/g)];
     if(!matches.length) return 0;
     const raw = matches[matches.length - 1][1].replace(/[,\s]/g,'');
@@ -402,10 +400,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (input.dataset.label) return input.dataset.label;
     const card = input.closest('.card') || input.parentElement;
     const strong = card ? card.querySelector('strong') : null;
-    if (strong){
-      // strip “ — $...” using any dash type
-      return strong.textContent.replace(/\s*[–—-]\s*\$.*$/,'').trim();
-    }
+    if (strong) return strong.textContent.replace(/\s*[–—-]\s*\$.*$/,'').trim();
     return input.name || 'Item';
   }
 
@@ -422,7 +417,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
-    // checkboxes
     root.querySelectorAll('input[type="checkbox"]').forEach(ch=>{
       if(ch.checked){
         const price = parsePriceFromCard(ch);
@@ -431,7 +425,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
 
-    // radios (one per group)
     getSelectedRadios().forEach(r=>{
       const price = parsePriceFromCard(r);
       total += price;
@@ -443,7 +436,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(totalEl) totalEl.textContent = `$${total}`;
   }
 
-  // make entire card clickable
+  // card-wide click
   root.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
     if(!input) return;
@@ -454,10 +447,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  // wire changes
+  // changes
   root.querySelectorAll('input').forEach(i=> i.addEventListener('change', update));
 
-  // one-time: sync data-price + data-label to what’s visible (keeps future edits consistent)
+  // sync data-* once to what’s visible
   (function syncOnce(){
     root.querySelectorAll('input').forEach(i=>{
       const p = parsePriceFromCard(i);
@@ -467,7 +460,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })();
 
   update();
-
+})();  /* <-- CLOSES Configurator IIFE */
 
 /* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
 (function(){
@@ -530,7 +523,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
           ctx.beginPath();
           ctx.moveTo(a.x+pmx*alpha, a.y+pmy*alpha);
           ctx.lineTo(b.x+pmx*alpha, b.y+pmy*alpha);
-          ctx.strokeStyle = 'rgba(0,198,255,1)'; // cyan
+          ctx.strokeStyle = 'rgba(0,198,255,1)';
           ctx.lineWidth = 1;
           ctx.stroke();
           if(++links >= MAX_LINKS) break;
