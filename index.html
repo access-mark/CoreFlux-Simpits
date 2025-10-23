@@ -154,7 +154,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 
       <label class="card" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="299" data-label="BASE">
-        <strong> BASE — $999</strong>
+        <strong> BASE — $1000</strong>
         <p>Core 4080 aluminium frame + fasteners, pre-cut and anodized.</p>
       </label>
 
@@ -226,7 +226,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 
       <label class="card" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="59" data-label="KEY LIGHT MOUNT">
-        <strong> KEY LIGHT MOUNT — $150</strong>
+        <strong> KEY LIGHT MOUNT — $200</strong>
         <p>Frame-mounted post for key/fill lights.</p>
       </label>
     </div>
@@ -365,68 +365,119 @@ document.addEventListener('DOMContentLoaded', ()=>{
   show(0); play();
 });
 
-/* ---------- Configurator (live USD total, radios + checkboxes) ---------- */
+<script>
+/* ---------- Configurator (robust: uses data-price or parses $ from label) ---------- */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
-
-  const checkboxes = root.querySelectorAll('input[type="checkbox"][data-price][data-label]');
-  const radioGroups = Array.from(new Set(
-    [...root.querySelectorAll('.radio-group[data-group]')].map(n=>n.getAttribute('data-group'))
-  ));
 
   const totalEl = document.getElementById('totalPrice');
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  function getSelectedRadios(){
-    const radios = [];
-    for(const group of radioGroups){
-      const chosen = root.querySelector(`input[type="radio"][name="${group}"]:checked[data-price][data-label]`);
-      if(chosen) radios.push(chosen);
+  // Collect radio group names by input[name]
+  const radioGroups = Array.from(
+    new Set(
+      [...root.querySelectorAll('input[type="radio"][name]')].map(i => i.name)
+    )
+  );
+
+  // Price resolver: prefer data-price; if missing/mismatched, parse from visible text
+  function resolvePrice(input){
+    // 1) Use data-price if present and > 0
+    const dp = Number(input.dataset.price || 0);
+    if (dp > 0) return dp;
+
+    // 2) Parse the closest <strong> text or card text for $... (handles $1,000)
+    const card = input.closest('.card') || input.parentElement;
+    if (!card) return 0;
+    const strong = card.querySelector('strong');
+    const source = (strong ? strong.textContent : card.textContent) || '';
+    const m = source.match(/\$\s*([\d,]+(?:\.\d+)?)/);
+    if (!m) return 0;
+    return Number(m[1].replace(/,/g,''));
+  }
+
+  function resolveLabel(input){
+    if (input.dataset.label) return input.dataset.label;
+    // Fallback: first <strong> text before the price
+    const card = input.closest('.card') || input.parentElement;
+    const strong = card ? card.querySelector('strong') : null;
+    if (strong){
+      // Strip price suffix, keep label
+      return strong.textContent.replace(/\s*—\s*\$.*$/,'').trim();
     }
-    return radios;
+    return input.name || 'Item';
+  }
+
+  function getSelectedRadios(){
+    const sel = [];
+    for (const group of radioGroups){
+      const chosen = root.querySelector(`input[type="radio"][name="${group}"]:checked`);
+      if (chosen) sel.push(chosen);
+    }
+    return sel;
   }
 
   function update(){
     let total = 0;
     const picked = [];
 
-    checkboxes.forEach(b=>{
-      if(b.checked){ total += Number(b.dataset.price); picked.push(b.dataset.label + ` — $${b.dataset.price}`); }
+    // Checkboxes
+    const checks = root.querySelectorAll('input[type="checkbox"]');
+    checks.forEach(ch=>{
+      if (ch.checked){
+        const price = resolvePrice(ch);
+        total += price;
+        picked.push(`${resolveLabel(ch)} — $${price}`);
+      }
     });
 
+    // Radios (one per group)
     getSelectedRadios().forEach(r=>{
-      total += Number(r.dataset.price);
-      picked.push(r.dataset.label + ` — $${r.dataset.price}`);
+      const price = resolvePrice(r);
+      total += price;
+      picked.push(`${resolveLabel(r)} — $${price}`);
     });
 
-    // render summary
+    // Render
     linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
     countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
     totalEl.textContent = `$${total}`;
   }
 
-  // Wire events
-  [...checkboxes].forEach(b=>b.addEventListener('change', update));
-  radioGroups.forEach(group=>{
-    root.querySelectorAll(`input[type="radio"][name="${group}"]`).forEach(r=>r.addEventListener('change', update));
-  });
-
-  // Card click convenience (click anywhere on card toggles)
+  // Make entire card clickable (without double toggling)
   root.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
     if(!input) return;
     card.addEventListener('click', (e)=>{
-      // avoid double-toggling when clicking directly on input
-      if(e.target.tagName.toLowerCase()==='input') return;
-      if(input.type==='checkbox'){ input.checked = !input.checked; input.dispatchEvent(new Event('change')); }
-      if(input.type==='radio'){ input.checked = true; input.dispatchEvent(new Event('change')); }
+      if (e.target === input) return; // native click on input
+      if (input.type === 'checkbox'){
+        input.checked = !input.checked;
+        input.dispatchEvent(new Event('change', {bubbles:true}));
+      } else if (input.type === 'radio'){
+        input.checked = true;
+        input.dispatchEvent(new Event('change', {bubbles:true}));
+      }
     });
   });
 
+  // Wire change events
+  root.querySelectorAll('input').forEach(i=> i.addEventListener('change', update));
+
+  // Optional: at runtime, sync data-price to parsed price (keeps future totals fast/consistent)
+  (function syncDataPrices(){
+    root.querySelectorAll('input').forEach(i=>{
+      const p = resolvePrice(i);
+      if (p > 0) i.dataset.price = String(p);
+      if (!i.dataset.label) i.dataset.label = resolveLabel(i);
+    });
+  })();
+
   update();
 })();
+</script>
+
 
 
 /* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
