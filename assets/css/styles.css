@@ -215,4 +215,31 @@ footer{
   .brand__logo-img{ max-height:48px; }
   .brand__name{ font-size:1rem; }
 }
+/* === Make hero image equal in height to the text card === */
+.hero__grid{
+  grid-template-columns:1.05fr .95fr;
+  align-items:stretch;          /* both columns same row height */
+}
+
+.hero__panel,
+.mock{
+  height:100%;                  /* fill the row height */
+}
+
+/* Remove the image box's independent height control */
+.mock{
+  min-height:0 !important;      /* kill the previous clamp(...) */
+  aspect-ratio:auto !important; /* let height be governed by the grid */
+}
+
+/* Ensure inner carousel respects the container height */
+.mock__carousel{height:100%}
+.mock__img{height:100%}
+
+/* Mobile: when stacked, let each size itself naturally */
+@media (max-width:1080px){
+  .hero__panel,
+  .mock{ height:auto }
+}
+
 
