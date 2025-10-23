@@ -39,13 +39,22 @@ img{max-width:100%;display:block}
 .links a:hover{color:var(--ink)}
 
 /* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:84px 0}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:100px 0}
 .hero h1{font-size:clamp(36px,4vw,56px);margin:0;background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);-webkit-background-clip:text;color:transparent}
 .hero p{color:var(--muted);margin:18px 0 22px;line-height:1.6}
 .btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer}
 .btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;box-shadow:0 10px 28px rgba(0,198,255,.32)}
 .btn.ghost{background:rgba(255,255,255,.05);color:var(--ink)}
-.mock{position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 0 50px rgba(0,198,255,.22);background:#0b1020;height:100%}
+.mock{
+  position:relative;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,198,255,.25);
+  background:#0b1020;
+  height:625px; /* enlarged by 25% */
+  max-height:640px;
+}
 .mock__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity 1s ease,transform 9s ease}
 .mock__slide.active{opacity:1;transform:scale(1.08)}
 .mock__nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
@@ -54,7 +63,7 @@ img{max-width:100%;display:block}
 .mock__toggle{position:absolute;top:12px;right:12px;z-index:2;padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);font-weight:900;font-size:12px}
 .mock.fit .mock__slide{object-fit:contain;transform:scale(1)!important;background:#0b1020}
 
-/* Shared sections */
+/* Content sections */
 section{position:relative;z-index:1}
 #workswith,#configurator,#accessories,#philosophy,#specs,#compat,#testimonials,#faq,#cta{padding:70px 0}
 .logo-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;padding:18px 0}
@@ -64,7 +73,7 @@ section{position:relative;z-index:1}
 .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
 .card:hover{transform:translateY(-4px)}
 footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
-@media(max-width:980px){.hero{grid-template-columns:1fr}.brand img{height:96px}}
+@media(max-width:980px){.hero{grid-template-columns:1fr}.brand img{height:96px}.mock{height:480px}}
 </style>
 </head>
 <body>
@@ -134,6 +143,78 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 </section>
 
+<section id="philosophy" class="wrap">
+  <h2>Why We Build</h2>
+  <p class="lede">Rigs that balance aerospace-grade precision with living-room usability.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;">
+    <div>
+      <p>We design for posture, endurance, and immersion. Every part can be printed, machined, or sourced locally. Every module locks with tight tolerances.</p>
+      <p>Less wrenching. More flying.</p>
+    </div>
+    <div><img src="assets/images/design-lab.jpg" alt="Design lab" style="border-radius:14px"></div>
+  </div>
+</section>
+
+<section id="specs" class="wrap">
+  <h2>Engineering Specs</h2>
+  <p class="lede">Everything measured, nothing assumed.</p>
+  <table style="width:100%;border-collapse:collapse;margin-top:16px">
+    <thead><tr style="color:var(--muted);font-size:13px;text-transform:uppercase;">
+      <th style="text-align:left;padding:8px 0;">Component</th>
+      <th style="text-align:left;padding:8px 0;">Material</th>
+      <th style="text-align:left;padding:8px 0;">Finish / Tolerance</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Frame Extrusion</td><td>4080 Aluminium</td><td>Anodized matte black, ±0.2 mm</td></tr>
+      <tr><td>Connectors</td><td>PETG / CF-Nylon</td><td>Printed @ 0.15 mm</td></tr>
+      <tr><td>Seat Rails</td><td>Steel</td><td>Powder-coated, dual-lock slides</td></tr>
+      <tr><td>Monitor Arm</td><td>Aluminium + Damp</td><td>VESA 75/100 up to 49″</td></tr>
+      <tr><td>Fasteners</td><td>A2-70 Stainless</td><td>ISO 7380 / M8 Set</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="compat" class="wrap">
+  <h2>Compatibility</h2>
+  <p class="lede">If it flies or drives, it fits.</p>
+  <table style="width:100%;border-collapse:collapse;margin-top:16px">
+    <thead><tr><th>Brand</th><th>Device</th><th>Mount Type</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Honeycomb</td><td>Alpha / Bravo</td><td>Dual clamp</td><td>Verified</td></tr>
+      <tr><td>Thrustmaster</td><td>Warthog / TCA / T16000</td><td>Quick-plate</td><td>Verified</td></tr>
+      <tr><td>Logitech</td><td>X56 / G Pro Wheel</td><td>Universal base</td><td>Tested</td></tr>
+      <tr><td>Virpil</td><td>MongoosT-50CM3</td><td>Bolted</td><td>Verified</td></tr>
+      <tr><td>VKB</td><td>Gunfighter Mk IV</td><td>Center plate</td><td>Verified</td></tr>
+      <tr><td>MFG</td><td>Crosswind V3</td><td>Pedal tray</td><td>Verified</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="testimonials" class="wrap">
+  <h2>What Builders Say</h2>
+  <div class="cards-grid" style="margin-top:14px">
+    <div class="card" style="padding:16px"><p>“Assembly took an evening. Cable tray alone is worth it.”</p><p><strong>— JP</strong>, MSFS + VR</p></div>
+    <div class="card" style="padding:16px"><p>“Swapped from yoke to HOTAS in minutes. Rock solid.”</p><p><strong>— K</strong>, DCS F-16</p></div>
+    <div class="card" style="padding:16px"><p>“Looks like furniture, not scaffolding.”</p><p><strong>— T</strong>, Home Office</p></div>
+  </div>
+</section>
+
+<section id="faq" class="wrap">
+  <h2>FAQ</h2>
+  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+    <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
+    <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
+  </details>
+  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+    <summary style="font-weight:800;cursor:pointer;">Will it fit my chair?</summary>
+    <p>Standard office/recliner shells fit the rails; bucket seats need side mounts.</p>
+  </details>
+  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+    <summary style="font-weight:800;cursor:pointer;">Triple-monitor support?</summary>
+    <p>Yes. Use the display module with the triple-arm kit. VESA 75/100.</p>
+  </details>
+</section>
+
 <section id="cta" class="wrap" style="text-align:center;padding:80px 0">
   <h2>Own the Blueprint</h2>
   <p class="lede">Download the STL pack or pre-order the aluminium kit.</p>
@@ -148,47 +229,26 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
 
-/* === Hero Carousel Fix === */
+/* Hero Carousel */
 document.addEventListener('DOMContentLoaded', ()=>{
   const slides=[...document.querySelectorAll('.mock__slide')];
   const dots=[...document.querySelectorAll('.dot')];
   const mock=document.getElementById('mock');
   const fitBtn=document.getElementById('fitToggle');
   let i=0,timer;
-  function show(n){
-    i=(n+slides.length)%slides.length;
-    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-    dots.forEach((d,k)=>d.classList.toggle('active',k===i));
-  }
-  function play(){ timer=setInterval(()=>show(i+1),5000); }
-  function stop(){ clearInterval(timer); }
+  function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('active',k===i));dots.forEach((d,k)=>d.classList.toggle('active',k===i));}
+  function play(){timer=setInterval(()=>show(i+1),5000);}
+  function stop(){clearInterval(timer);}
   dots.forEach((d,idx)=>d.addEventListener('click',()=>{stop();show(idx);play();}));
   mock.addEventListener('mouseenter',stop);
   mock.addEventListener('mouseleave',play);
   fitBtn.addEventListener('click',()=>{mock.classList.toggle('fit');fitBtn.textContent=mock.classList.contains('fit')?'Fill':'Fit';});
-  show(0); play();
+  show(0);play();
 });
 
-/* === AI Particles Full-Page === */
+/* AI Particles */
 (function(){
-  const c=document.getElementById('aiCanvas');
-  const ctx=c.getContext('2d');
-  let w,h,pts=[];
+  const c=document.getElementById('aiCanvas'),ctx=c.getContext('2d');let w,h,pts=[];
   function size(){w=c.width=innerWidth;h=c.height=innerHeight;pts=Array.from({length:120},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.8+0.5}));}
   size();addEventListener('resize',size);
-  function anim(){
-    ctx.clearRect(0,0,w,h);
-    for(const p of pts){
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>w)p.vx*=-1;
-      if(p.y<0||p.y>h)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-      ctx.fillStyle='rgba(0,198,255,.5)';ctx.fill();
-    }
-    requestAnimationFrame(anim);
-  }
-  anim();
-})();
-</script>
-</body>
-</html>
+  function anim(){ctx.clearRect(0,0,w
