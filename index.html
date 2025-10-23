@@ -141,56 +141,108 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 <section id="configurator" class="wrap">
   <h2>Configurator</h2>
   <p class="lede">Select your modules and see your build total update live.</p>
+
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
-    <div>
-      <div class="cards-grid" id="moduleList">
-        <label class="card" style="padding:16px;cursor:pointer">
-          <input type="checkbox" data-price="299" style="accent-color:var(--accent)"> 
-          <strong> Base Frame — $299</strong>
-          <p>Core extrusion + fasteners, pre-cut and anodized.</p>
-        </label>
-        <label class="card" style="padding:16px;cursor:pointer">
-          <input type="checkbox" data-price="159"> 
-          <strong> HOTAS Mount Kit — $159</strong>
-          <p>Adjustable plates for joystick/throttle systems.</p>
-        </label>
-        <label class="card" style="padding:16px;cursor:pointer">
-          <input type="checkbox" data-price="129"> 
-          <strong> Pedal Tray — $129</strong>
-          <p>Sliding adjustable tray with non-slip runners.</p>
-        </label>
-        <label class="card" style="padding:16px;cursor:pointer">
-          <input type="checkbox" data-price="189"> 
-          <strong> Monitor Arm — $189</strong>
-          <p>Single or triple display VESA mount (up to 49").</p>
-        </label>
-        <label class="card" style="padding:16px;cursor:pointer">
-          <input type="checkbox" data-price="99"> 
-          <strong> Cable Management — $99</strong>
-          <p>Quick-clamp trays and harnesses for clean routing.</p>
-        </label>
+    <!-- LEFT: MODULES -->
+    <div id="moduleList" class="cards-grid">
+
+      <!-- Core -->
+      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+        <h3 style="margin:0 0 6px">Core</h3>
+        <p class="lede" style="margin:0">Start with the BASE, then add what you need.</p>
       </div>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="299" data-label="BASE">
+        <strong> BASE — $299</strong>
+        <p>Core 4080 aluminium frame + fasteners, pre-cut and anodized.</p>
+      </label>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="129" data-label="PEDAL TRAY">
+        <strong> PEDAL TRAY — $129</strong>
+        <p>Sliding tray with non-slip runners and quick alignment.</p>
+      </label>
+
+      <!-- Monitor System (choose one) -->
+      <div class="card radio-group" data-group="monitor" style="grid-column:1/-1;padding:14px 16px">
+        <h3 style="margin:0 0 6px">Monitor System</h3>
+        <p class="lede" style="margin:0">Choose one configuration.</p>
+      </div>
+
+      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+        <input type="radio" name="monitor" data-price="149" data-label="Monitor Stand">
+        <strong> Monitor stand — $149</strong>
+        <p>Floor stand with rigid center post (VESA 75/100).</p>
+      </label>
+
+      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+        <input type="radio" name="monitor" data-price="89" data-label="Single Monitor Mount">
+        <strong> Single monitor mount — $89</strong>
+        <p>Frame-mounted arm for 24–34″ displays.</p>
+      </label>
+
+      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+        <input type="radio" name="monitor" data-price="229" data-label="Triple Monitor Arm">
+        <strong> Triple monitor arm — $229</strong>
+        <p>Independent tilt/angle for triple 24–32″ setups.</p>
+      </label>
+
+      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+        <input type="radio" name="monitor" data-price="119" data-label="Top Monitor Arm">
+        <strong> Top monitor arm — $119</strong>
+        <p>HUD/aux display above main view (ultra-stable).</p>
+      </label>
+
+      <!-- Controls & Mounts -->
+      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+        <h3 style="margin:0 0 6px">Controls & Mounts</h3>
+        <p class="lede" style="margin:0">Add one or many.</p>
+      </div>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="159" data-label="HOTAS MOUNT">
+        <strong> HOTAS MOUNT — $159</strong>
+        <p>Quick-change plates for joystick & throttle.</p>
+      </label>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="169" data-label="DUAL JOYSTICK MOUNT">
+        <strong> DUAL JOYSTICK MOUNT — $169</strong>
+        <p>Left + right sticks with mirrored adjustability.</p>
+      </label>
+
+      <!-- Capture & Lighting -->
+      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+        <h3 style="margin:0 0 6px">Capture & Lighting</h3>
+        <p class="lede" style="margin:0">Dial in your stream setup.</p>
+      </div>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="79" data-label="CAMERA MOUNT">
+        <strong> CAMERA MOUNT — $79</strong>
+        <p>Low-vibration arm for face/overhead cams.</p>
+      </label>
+
+      <label class="card" style="padding:16px;cursor:pointer">
+        <input type="checkbox" data-price="59" data-label="KEY LIGHT MOUNT">
+        <strong> KEY LIGHT MOUNT — $59</strong>
+        <p>Frame-mounted post for key/fill lights.</p>
+      </label>
     </div>
 
+    <!-- RIGHT: SUMMARY -->
     <aside style="position:sticky;top:100px;background:rgba(255,255,255,.03);border:1px solid var(--border);
       border-radius:16px;padding:20px;backdrop-filter:blur(6px)">
       <h3>Your Build</h3>
-      <p id="selectedCount">0 modules selected</p>
+      <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:220px;overflow:auto"></ul>
+      <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
       <a href="#cta" class="btn primary" style="width:100%;text-align:center">Checkout</a>
     </aside>
   </div>
 </section>
-<!-- ACCESSORIES -->
-<section id="accessories" class="wrap">
-  <h2>Accessories & Add-Ons</h2>
-  <p class="lede">Dial in your setup with finishing touches engineered for comfort and control.</p>
-  <div class="cards-grid" style="margin-top:16px">
-    <div class="card"><img src="assets/images/caster-kit.png" alt=""><div style="padding:14px"><h4>Caster Kit</h4><p>Roll and lock between flight and work modes.</p></div></div>
-    <div class="card"><img src="assets/images/cable-tray.png" alt=""><div style="padding:14px"><h4>Cable Tray</h4><p>Under-frame route with quick-clamp harness system.</p></div></div>
-    <div class="card"><img src="assets/images/mount-plate.png" alt=""><div style="padding:14px"><h4>Quick-Change Plate</h4><p>Swap from yoke to HOTAS in seconds.</p></div></div>
-  </div>
-</section>
+
 
 <!-- PHILOSOPHY -->
 <section id="philosophy" class="wrap">
@@ -313,23 +365,69 @@ document.addEventListener('DOMContentLoaded', ()=>{
   show(0); play();
 });
 
-/* ---------- Configurator (live USD total) ---------- */
+/* ---------- Configurator (live USD total, radios + checkboxes) ---------- */
 (function(){
-  const list = document.getElementById('moduleList');
-  if(!list) return;
-  const boxes = list.querySelectorAll('input[type="checkbox"][data-price]');
+  const root = document.getElementById('moduleList');
+  if(!root) return;
+
+  const checkboxes = root.querySelectorAll('input[type="checkbox"][data-price][data-label]');
+  const radioGroups = Array.from(new Set(
+    [...root.querySelectorAll('.radio-group[data-group]')].map(n=>n.getAttribute('data-group'))
+  ));
+
   const totalEl = document.getElementById('totalPrice');
   const countEl = document.getElementById('selectedCount');
+  const linesEl = document.getElementById('buildLines');
+
+  function getSelectedRadios(){
+    const radios = [];
+    for(const group of radioGroups){
+      const chosen = root.querySelector(`input[type="radio"][name="${group}"]:checked[data-price][data-label]`);
+      if(chosen) radios.push(chosen);
+    }
+    return radios;
+  }
 
   function update(){
-    let total = 0, count = 0;
-    boxes.forEach(b=>{ if(b.checked){ total += Number(b.dataset.price); count++; } });
+    let total = 0;
+    const picked = [];
+
+    checkboxes.forEach(b=>{
+      if(b.checked){ total += Number(b.dataset.price); picked.push(b.dataset.label + ` — $${b.dataset.price}`); }
+    });
+
+    getSelectedRadios().forEach(r=>{
+      total += Number(r.dataset.price);
+      picked.push(r.dataset.label + ` — $${r.dataset.price}`);
+    });
+
+    // render summary
+    linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
+    countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
     totalEl.textContent = `$${total}`;
-    countEl.textContent = `${count} module${count===1?'':'s'} selected`;
   }
-  boxes.forEach(b=> b.addEventListener('change', update));
+
+  // Wire events
+  [...checkboxes].forEach(b=>b.addEventListener('change', update));
+  radioGroups.forEach(group=>{
+    root.querySelectorAll(`input[type="radio"][name="${group}"]`).forEach(r=>r.addEventListener('change', update));
+  });
+
+  // Card click convenience (click anywhere on card toggles)
+  root.querySelectorAll('.card').forEach(card=>{
+    const input = card.querySelector('input');
+    if(!input) return;
+    card.addEventListener('click', (e)=>{
+      // avoid double-toggling when clicking directly on input
+      if(e.target.tagName.toLowerCase()==='input') return;
+      if(input.type==='checkbox'){ input.checked = !input.checked; input.dispatchEvent(new Event('change')); }
+      if(input.type==='radio'){ input.checked = true; input.dispatchEvent(new Event('change')); }
+    });
+  });
+
   update();
 })();
+
 
 /* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
 (function(){
