@@ -197,3 +197,18 @@ footer{
   .brand__name{ font-size:1rem; }
   :root{ --logo-h:40px; }
 }
+/* Brand text stack */
+.brand{gap:16px; align-items:center}
+.brand__text{display:flex; flex-direction:column; line-height:1.05}
+
+/* Name (already set, keep here for safety) */
+.brand__name{font-weight:800; letter-spacing:.5px; font-size:1.25rem; line-height:1}
+
+/* Tagline */
+.brand__tagline{
+  font-weight:700; font-size:.92rem; letter-spacing:.2px;
+  background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; opacity:.9;
+}
+@media (max-width:820px){ .brand__tagline{font-size:.86rem; opacity:.85} }
+@media (max-width:600px){ .brand__tagline{display:none} } /* keep header clean on mobile */
