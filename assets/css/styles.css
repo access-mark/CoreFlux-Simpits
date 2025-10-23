@@ -161,3 +161,26 @@ footer{
   .g--w4{grid-column:span 6}
   .g--w3{grid-column:span 3}
 }
+/* === Logo size upgrade === */
+.brand__logo-wrap{
+  width:56px;           /* was 42px */
+  height:56px;          /* was 42px */
+  border-radius:12px;   /* was 8px  */
+}
+
+.brand__logo-img{
+  max-height:46px;      /* was 34px */
+  width:auto;
+}
+
+/* Tweak brand label spacing */
+.brand__name{
+  font-size:1.05rem;
+}
+
+/* Mobile: keep header tight */
+@media (max-width: 520px){
+  .brand__logo-wrap{ width:44px; height:44px; border-radius:10px; }
+  .brand__logo-img{ max-height:36px; }
+  .brand__name{ font-size:1rem; }
+}
