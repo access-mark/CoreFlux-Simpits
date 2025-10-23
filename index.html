@@ -14,95 +14,218 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
+/* ===== CoreFlux Simpit — Clean CSS ===== */
+
+/* ---- Tokens ---- */
 :root{
-  --bg1:#070b1a;--bg2:#0a1024;--bg3:#0f1530;
-  --ink:#e8f0ff;--muted:#9aa6c7;
-  --accent:#00c6ff;--accent2:#ffd23f;
-  --border:rgba(255,255,255,.12)
+  --bg:#0b1020; --bg-2:#0a0f1e; --bg-3:#090e1a;
+  --panel:#111831; --panel-2:#0f152b;
+  --text:#e6eefc; --muted:#a6b0cf;
+  --accent:#00c6ff;          /* CoreFlux cyan */
+  --accent-2:#ffd23f;        /* soft gold */
+  --border:rgba(255,255,255,.08);
+  --blur:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+  --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
+  --logo-h:54px;             /* partner logos height */
 }
+
+/* ---- Base ---- */
 *{box-sizing:border-box}
+html,body{height:100%}
 body{
-  margin:0;font-family:'Inter',sans-serif;color:var(--ink);
-  background:radial-gradient(1100px 760px at 80% -10%,rgba(0,198,255,.12),transparent 60%),
-             radial-gradient(900px 650px at 8% 18%,rgba(255,210,63,.08),transparent 60%),
-             linear-gradient(180deg,var(--bg2),var(--bg1) 40%,var(--bg3));
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 800px at 70% -10%, rgba(0,198,255,.12), transparent 60%),
+    radial-gradient(1000px 700px at 10% 20%, rgba(255,210,63,.10), transparent 60%),
+    linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 60%,var(--bg-3) 100%);
   overflow-x:hidden;
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-.wrap{width:min(1200px,92vw);margin:auto}
-.lede{color:var(--muted)}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.lede{color:var(--muted);font-size:clamp(15px,1.25vw,18px)}
+section{padding:48px 0}
+
+/* Global AI particles canvas */
 #aiCanvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.7;transition:opacity .8s ease}
 
-/* NAV */
-.nav{position:sticky;top:0;z-index:20;background:rgba(10,14,28,.6);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav__inner{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
-.brand{display:flex;align-items:center;gap:14px}
-.brand img{height:120px;width:auto;filter:drop-shadow(0 0 24px rgba(0,198,255,.35))}
-.brand span{font-weight:900;font-size:1.5rem}
-.links a{margin:0 10px;font-weight:600;color:var(--muted)}
-.links a:hover{color:var(--ink)}
+/* ---- NAV ---- */
+.nav{
+  position:sticky; top:0; z-index:40;
+  backdrop-filter:saturate(140%) blur(var(--blur));
+  background:rgba(8,12,26,.6);
+  border-bottom:1px solid var(--border);
+}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{display:flex;align-items:center;gap:16px}
+.brand__name{font-weight:800;letter-spacing:.5px;font-size:1.25rem;line-height:1}
 
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:90px 0}
-.hero h1{
-  font-size:clamp(38px,4.6vw,62px);margin:0 0 8px 0;line-height:1.05;
-  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);
-  -webkit-background-clip:text;color:transparent
+/* Logo (boxed, aspect-ratio safe) */
+.brand__logo-wrap{
+  width:84px; height:84px; border-radius:14px;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.08);
+  flex:0 0 auto; /* hard stop shrinking */
 }
-.hero .sub{color:var(--muted);margin:10px 0 18px;line-height:1.55;font-size:1.05rem}
-.mode-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+.brand__logo-img{
+  height:100%; width:auto; max-height:70px;
+  object-fit:contain; image-rendering:auto; display:block;
+}
+
+.nav__links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .chip{
-  border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;
-  background:rgba(255,255,255,.04);font-size:.85rem;letter-spacing:.2px
+  padding:8px 14px;border:1px solid var(--border);
+  border-radius:999px;color:var(--muted);
+  transition:120ms ease;font-weight:600
 }
-.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.chip:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.cta{
+  padding:10px 16px;border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;font-weight:800;
+  box-shadow:0 12px 28px rgba(0,198,255,.28)
+}
+
+/* ---- HERO ---- */
+.hero{position:relative;padding:100px 0 48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.h1{font-size:clamp(32px,3.4vw,56px);line-height:1.04;margin:0 0 14px;letter-spacing:-.5px;
+  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);-webkit-background-clip:text;color:transparent}
 
 /* Buttons */
-.btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer;transition:transform .08s ease}
-.btn:active{transform:translateY(1px)}
-.btn.primary{
-  position:relative;background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;box-shadow:0 10px 28px rgba(0,198,255,.32);isolation:isolate;
-}
-.btn.primary::after{
-  content:"";position:absolute;inset:-4px;border-radius:16px;z-index:-1;filter:blur(12px);
-  background:radial-gradient(60% 60% at 50% 50%, rgba(0,198,255,.35), transparent 60%);
-  animation:pulse 2.2s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:.55}50%{opacity:.15}}
-.btn.ghost{background:rgba(255,255,255,.05);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);font-weight:800;cursor:pointer}
+.btn--primary,.btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;border:none;box-shadow:0 10px 22px rgba(0,198,255,.25)}
+.btn--ghost,.btn.ghost{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));color:var(--text)}
 
-/* MOCK */
-.mock{position:relative;border:1px solid var(--border);border-radius:20px;overflow:hidden;
-  box-shadow:0 0 60px rgba(0,198,255,.25);background:#0b1020;height:625px;max-height:640px}
-.mock__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);
-  transition:opacity 1s ease,transform 9s ease}
-.mock__slide.active{opacity:1;transform:scale(1.08)}
+/* Stats (optional) */
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.stat{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border:1px solid var(--border);border-radius:16px;
+  padding:14px;text-align:center
+}
+.stat .v{font-weight:800;font-size:18px}
+.stat .k{color:var(--muted);font-size:12px}
+
+/* ---- HERO MOCK ---- */
+.mock{
+  position:relative;border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,198,255,.25);background:#0b1020;
+  height:625px; max-height:640px;
+}
+.mock__slide{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:0; transform:scale(1.03);
+  transition:opacity 1s ease, transform 9s ease;
+}
+.mock__slide.active{opacity:1; transform:scale(1.08)}
 .mock__nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
 .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.32);cursor:pointer;transition:transform .2s,background .2s}
 .dot.active{background:linear-gradient(135deg,var(--accent),#4be3d1);transform:scale(1.2)}
-.mock__toggle{position:absolute;top:12px;right:12px;z-index:2;padding:7px 10px;border-radius:10px;border:1px solid var(--border);
-  background:rgba(255,255,255,.06);backdrop-filter:blur(8px);font-weight:900;font-size:12px}
+.mock__toggle{
+  position:absolute;top:12px;right:12px;z-index:2;padding:7px 10px;border-radius:10px;
+  border:1px solid var(--border);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);
+  font-weight:900;font-size:12px
+}
 .mock.fit .mock__slide{object-fit:contain;transform:scale(1)!important;background:#0b1020}
 
-/* SECTIONS */
-section{position:relative;z-index:1}
-#prologue,#story,#presets,#configurator,#games,#gallery,#community,#tuning,#quickstart,#philosophy,#faq{padding:70px 0}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-.card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
-.card:hover{transform:translateY(-4px)}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.gallery img{border-radius:12px;border:1px solid var(--border);}
-.table{width:100%;border-collapse:collapse;margin-top:16px}
-.table th,.table td{padding:10px 0;border-bottom:1px solid var(--border);text-align:left}
-.table thead th{color:var(--muted);font-size:13px;text-transform:uppercase}
-.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.85rem;color:var(--muted)}
-.section__head{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+/* ---- Sections / Panels ---- */
+.section__head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+.section__title{font-size:clamp(22px,2.2vw,34px);letter-spacing:-.2px}
+.pill{font-size:12px;color:#06142b;background:linear-gradient(135deg,var(--accent-2),#ffe39a);border-radius:999px;padding:6px 10px;font-weight:800}
+.panel{background:rgba(14,20,42,.66);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
 
-footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
-@media(max-width:980px){.hero{grid-template-columns:1fr}.brand img{height:96px}.mock{height:480px}}
+/* ---- Build log ---- */
+.timeline{display:grid;gap:12px}
+.entry{
+  display:grid;grid-template-columns:120px 1fr;gap:16px;
+  padding:16px;border-radius:var(--radius-md);
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))
+}
+.entry .t{color:var(--muted);font-weight:700}
+.entry .b{line-height:1.6}
+
+/* ---- Gallery ---- */
+.gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
+.g{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#0e1430;box-shadow:var(--shadow)}
+.g--w6{grid-column:span 6;aspect-ratio:16/10}
+.g--w4{grid-column:span 4;aspect-ratio:4/3}
+.g--w3{grid-column:span 3;aspect-ratio:4/3}
+
+/* ---- Cards ---- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{
+  padding:18px;border-radius:16px;border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-direction:column
+}
+.card h4,.card h3{margin:0}
+
+/* ---- Partner Logos (SVGs) ---- */
+.logo-strip{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:40px;padding:24px 0
+}
+.logo-strip img,.logo-strip svg{
+  height:var(--logo-h);max-height:var(--logo-h);width:auto;opacity:.8;
+  transition:opacity .25s ease, transform .25s ease, filter .25s ease;
+  filter: drop-shadow(0 6px 14px rgba(0,198,255,.12));
+}
+.logo-strip img:hover,.logo-strip svg:hover{
+  opacity:1; transform: translateY(-2px) scale(1.04);
+  filter: drop-shadow(0 8px 18px rgba(0,198,255,.18));
+}
+
+/* ---- Footer ---- */
+footer{
+  padding:40px 0 60px;color:var(--muted);
+  border-top:1px solid var(--border);background:rgba(6,10,24,.55);
+  margin-top:40px
+}
+
+/* ---- Responsive ---- */
+@media (max-width:1080px){
+  .hero{grid-template-columns:1fr}
+  .mock{height:480px}
+}
+@media (max-width:980px){
+  .statbar{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(6,1fr)}
+  .g--w6{grid-column:span 6}
+  .g--w4{grid-column:span 6}
+  .g--w3{grid-column:span 3}
+  :root{ --logo-h:46px; }
+}
+@media (max-width:520px){
+  .brand__logo-wrap{ width:58px; height:58px; border-radius:10px; }
+  .brand__logo-img{ max-height:48px; }
+  .brand__name{ font-size:1rem; }
+  :root{ --logo-h:40px; }
+}
+
+/* Brand text stack */
+.brand{gap:16px; align-items:center}
+.brand__text{display:flex; flex-direction:column; line-height:1.05}
+.brand__tagline{
+  font-weight:700; font-size:.92rem; letter-spacing:.2px;
+  background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; opacity:.9;
+}
+@media (max-width:820px){ .brand__tagline{font-size:.86rem; opacity:.85} }
+@media (max-width:600px){ .brand__tagline{display:none} }
+
+/* Compat grid (kept utility for future use) */
+.compat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px; margin-top:20px; }
+.compat-block { background: rgba(14, 20, 42, .7); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease; }
+.compat-block:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,198,255,.25); }
+.compat-block h3 { color: var(--accent); margin: 0 0 10px; }
+.compat-block ul { list-style: none; padding: 0; margin: 0; }
+.compat-block li { padding: 6px 0; color: var(--text); font-weight: 500; border-bottom: 1px solid rgba(255,255,255,.05); }
+.compat-block li:last-child { border-bottom: none; }
 </style>
 </head>
 
@@ -116,42 +239,41 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
       </div>
       <div class="brand__text">
+        <span class="brand__name">CoreFlux</span>
         <span class="brand__tagline">Dynamic Simpits. Brought to Life.</span>
       </div>
     </div>
 
-    <!-- NAV LINKS -->
-    <div class="links">
-      <a href="#prologue">About</a>
-      <a href="#story">The Switch</a>
-      <a href="#presets">Loadouts</a>
-      <a href="#configurator">Build</a>
-      <a href="#games">Games</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#tuning">Tuning</a>
-      <a href="#quickstart">Quick-Start</a>
-      <a href="#community">Community</a>
-      <a href="#philosophy">Why</a>
-      <a href="#faq">FAQ</a>
+    <div class="nav__links">
+      <a class="chip" href="#prologue">About</a>
+      <a class="chip" href="#story">The Switch</a>
+      <a class="chip" href="#presets">Loadouts</a>
+      <a class="chip" href="#configurator">Build</a>
+      <a class="chip" href="#games">Games</a>
+      <a class="chip" href="#gallery">Gallery</a>
+      <a class="chip" href="#tuning">Tuning</a>
+      <a class="chip" href="#quickstart">Quick-Start</a>
+      <a class="chip" href="#community">Community</a>
+      <a class="cta"  href="#configurator">Configure</a>
     </div>
   </div>
 </nav>
 
 <section class="hero wrap">
   <div>
-    <h1>One Rig. Infinite Worlds.</h1>
-    <p class="sub">CoreFlux merges productivity, simulation, and pure immersion — transforming in minutes from a focused workstation to a first-person powerhouse, a racing simulator, or a full-flight cockpit.</p>
+    <h1 class="h1">One Rig. Infinite Worlds.</h1>
+    <p class="lede">CoreFlux merges productivity, simulation, and pure immersion — transforming in minutes from a focused workstation to a first-person powerhouse, a racing simulator, or a full-flight cockpit.</p>
 
-    <div class="mode-chips" aria-label="Quick modes">
-      <span class="chip">Workstation</span>
-      <span class="chip">FPS / First-Person</span>
-      <span class="chip">Racing</span>
-      <span class="chip">Flight</span>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+      <a href="#configurator" class="btn btn--primary">Configure My Build</a>
+      <a href="#story" class="btn btn--ghost">See How It Works</a>
     </div>
 
-    <div class="ctas">
-      <a href="#configurator" class="btn primary">Configure My Build</a>
-      <a href="#story" class="btn ghost">See How It Works</a>
+    <div class="statbar">
+      <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
+      <div class="stat"><div class="v">4080</div><div class="k">Aluminium frame</div></div>
+      <div class="stat"><div class="v">VESA</div><div class="k">75/100 ready</div></div>
+      <div class="stat"><div class="v">Zero</div><div class="k">Drilling</div></div>
     </div>
   </div>
 
@@ -170,25 +292,28 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 
 <!-- PROLOGUE -->
 <section id="prologue" class="wrap">
-  <h2>Built for Workdays, Wired for Play</h2>
+  <div class="section__head">
+    <h2 class="section__title">Built for Workdays, Wired for Play</h2>
+    <span class="pill">One stop. No compromise.</span>
+  </div>
   <p class="lede">
     I needed one place to do it all. Head-down productivity at 09:00, a quick FPS session at lunch,
     racing after hours, and a full flight at night — without rebuilding a room or wrecking my posture.
     CoreFlux is that one-stop rig: fast to re-configure, comfortable all day, and clean enough for the living room.
   </p>
 
-  <div class="cards-grid" style="margin-top:16px">
-    <article class="card" style="padding:18px">
+  <div class="cards" style="margin-top:16px">
+    <article class="card">
       <h3>Focus without friction</h3>
       <p class="lede">Work like it’s a dedicated workstation.</p>
       <p>Keyboard, mouse, mic, and camera live where they should. Cable runs stay tidy. Nothing rattles, nothing wobbles — so deep work stays deep.</p>
     </article>
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Flow, not setup</h3>
       <p class="lede">Mode-switching takes minutes, not hours.</p>
       <p>Quick-plates and indexed geometry lock controls into repeatable positions. Swap from keyboard to wheel, from yoke to HOTAS, without re-measuring.</p>
     </article>
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Comfort that lasts</h3>
       <p class="lede">All-day ergonomics, all-night sessions.</p>
       <p>Seat rails, reach, and angles dial in precisely. The frame absorbs load; your body doesn’t.</p>
@@ -196,30 +321,31 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-    <a href="#presets" class="btn primary">Pick a Loadout</a>
-    <a href="#story" class="btn ghost">See The Switch</a>
+    <a href="#presets" class="btn btn--primary">Pick a Loadout</a>
+    <a href="#story" class="btn btn--ghost">See The Switch</a>
   </div>
 </section>
 
 <!-- STORY -->
 <section id="story" class="wrap">
-  <h2>The Switch</h2>
-  <p class="lede">From deep work to full-tilt immersion — CoreFlux is the rig that moves with you, not against you.</p>
-
-  <div class="cards-grid" style="margin-top:16px">
-    <article class="card" style="padding:18px">
+  <div class="section__head">
+    <h2 class="section__title">The Switch</h2>
+    <span class="pill">Work → FPS → Racing → Flight</span>
+  </div>
+  <div class="cards">
+    <article class="card">
       <h3>Workstation → FPS</h3>
       <p class="lede">Sit-stand posture dialed. Keyboard clears, peripherals lock in.</p>
       <p>Rigid extrusion, zero flex, cable runs that don’t snag. You focus on the shot — the rig disappears.</p>
     </article>
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>FPS → Racing</h3>
-      <p class="lede">Wheel on, pedals aligned, rails snap to your mark. No wobble.</p>
+      <p class="lede">Wheel on, pedals aligned, rails snap to your mark.</p>
       <p>Angles and reach lock with repeatable stops. Muscle memory holds — lap after lap.</p>
     </article>
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Racing → Flight</h3>
-      <p class="lede">Yoke/HOTAS? Center-stick or dual-stick? Mounts swap without chaos.</p>
+      <p class="lede">Yoke/HOTAS? Center-stick or dual-stick? Swap without chaos.</p>
       <p>Throttle, trim, and cams sit exactly where they should. You’re airborne in minutes.</p>
     </article>
   </div>
@@ -229,28 +355,28 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 <section id="presets" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Loadouts</h2>
-    <span class="pill">One-click presets for gamers</span>
+    <span class="pill">One-click presets</span>
   </div>
   <p class="lede">Start fast. These presets toggle the configurator for you — tweak anything after.</p>
 
-  <div class="grid-3" style="margin-top:14px">
-    <button class="btn ghost" data-preset="fps" style="text-align:left;padding:14px 16px">
-      <strong>FPS / First-Person</strong><br>
-      Keyboard clearance, single monitor arm, dual joystick or HOTAS.
+  <div class="cards" style="margin-top:14px">
+    <button class="card" data-preset="fps" style="text-align:left;cursor:pointer">
+      <h3>FPS / First-Person</h3>
+      <p class="lede">Keyboard clearance, single monitor arm, dual joystick or HOTAS.</p>
     </button>
-    <button class="btn ghost" data-preset="racing" style="text-align:left;padding:14px 16px">
-      <strong>Racing</strong><br>
-      Wheel quick-plate, pedal tray aligned, optional triple arm.
+    <button class="card" data-preset="racing" style="text-align:left;cursor:pointer">
+      <h3>Racing</h3>
+      <p class="lede">Wheel quick-plate, pedal tray aligned, optional triple arm.</p>
     </button>
-    <button class="btn ghost" data-preset="flight" style="text-align:left;padding:14px 16px">
-      <strong>Flight</strong><br>
-      Center-stick or yoke, throttle, top HUD arm, pedal tray locked.
+    <button class="card" data-preset="flight" style="text-align:left;cursor:pointer">
+      <h3>Flight</h3>
+      <p class="lede">Center-stick or yoke, throttle, top HUD arm, pedal tray locked.</p>
     </button>
   </div>
 
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-    <a href="#configurator" class="btn primary">Apply & Open Configurator</a>
-    <a href="#games" class="btn ghost">See Supported Titles</a>
+    <a href="#configurator" class="btn btn--primary">Apply & Open Configurator</a>
+    <a href="#games" class="btn btn--ghost">See Supported Titles</a>
   </div>
 </section>
 
@@ -263,95 +389,101 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   <p class="lede">Select your modules and see your build total update live.</p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
-    <div id="moduleList" class="cards-grid">
-      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+    <!-- LEFT: MODULES -->
+    <div id="moduleList" class="cards">
+
+      <!-- Core -->
+      <div class="card" style="grid-column:1/-1">
         <h3 style="margin:0 0 6px">Core</h3>
         <p class="lede" style="margin:0">Start with the BASE, then add what you need.</p>
       </div>
 
-      <label class="card" data-key="base" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="base" style="cursor:pointer">
         <input type="checkbox" data-price="1000" data-label="BASE">
-        <strong> BASE — $1,000</strong>
+        <strong>BASE — $1,000</strong>
         <p>Core 4080 aluminium frame + fasteners, pre-cut and anodized.</p>
       </label>
 
-      <label class="card" data-key="pedal" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="pedal" style="cursor:pointer">
         <input type="checkbox" data-price="300" data-label="PEDAL TRAY">
-        <strong> PEDAL TRAY — $300</strong>
+        <strong>PEDAL TRAY — $300</strong>
         <p>Sliding tray with non-slip runners and quick alignment.</p>
       </label>
 
-      <div class="card radio-group" data-group="monitor" style="grid-column:1/-1;padding:14px 16px">
+      <!-- Monitor System (choose one) -->
+      <div class="card" style="grid-column:1/-1">
         <h3 style="margin:0 0 6px">Monitor System</h3>
         <p class="lede" style="margin:0">Choose one configuration.</p>
       </div>
 
-      <label class="card radio-group" data-group="monitor" data-key="stand" style="padding:16px;cursor:pointer">
+      <label class="card" data-group="monitor" data-key="stand" style="cursor:pointer">
         <input type="radio" name="monitor" data-price="500" data-label="Monitor Stand">
-        <strong> Monitor stand — $500</strong>
+        <strong>Monitor stand — $500</strong>
         <p>Floor stand with rigid center post (VESA 75/100).</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" data-key="single" style="padding:16px;cursor:pointer">
+      <label class="card" data-group="monitor" data-key="single" style="cursor:pointer">
         <input type="radio" name="monitor" data-price="150" data-label="Single Monitor Mount">
-        <strong> Single monitor mount — $150</strong>
+        <strong>Single monitor mount — $150</strong>
         <p>Frame-mounted arm for 24–34″ displays.</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" data-key="triple" style="padding:16px;cursor:pointer">
+      <label class="card" data-group="monitor" data-key="triple" style="cursor:pointer">
         <input type="radio" name="monitor" data-price="400" data-label="Triple Monitor Arm">
-        <strong> Triple monitor arm — $400</strong>
+        <strong>Triple monitor arm — $400</strong>
         <p>Independent tilt/angle for triple 24–32″ setups.</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" data-key="top" style="padding:16px;cursor:pointer">
+      <label class="card" data-group="monitor" data-key="top" style="cursor:pointer">
         <input type="radio" name="monitor" data-price="200" data-label="Top Monitor Arm">
-        <strong> Top monitor arm — $200</strong>
+        <strong>Top monitor arm — $200</strong>
         <p>HUD/aux display above main view (ultra-stable).</p>
       </label>
 
-      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+      <!-- Controls & Mounts -->
+      <div class="card" style="grid-column:1/-1">
         <h3 style="margin:0 0 6px">Controls & Mounts</h3>
         <p class="lede" style="margin:0">Add one or many.</p>
       </div>
 
-      <label class="card" data-key="hotas" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="hotas" style="cursor:pointer">
         <input type="checkbox" data-price="200" data-label="HOTAS MOUNT">
-        <strong> HOTAS MOUNT — $200</strong>
+        <strong>HOTAS MOUNT — $200</strong>
         <p>Quick-change plates for joystick & throttle.</p>
       </label>
 
-      <label class="card" data-key="dual" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="dual" style="cursor:pointer">
         <input type="checkbox" data-price="200" data-label="DUAL JOYSTICK MOUNT">
-        <strong> DUAL JOYSTICK MOUNT — $200</strong>
+        <strong>DUAL JOYSTICK MOUNT — $200</strong>
         <p>Left + right sticks with mirrored adjustability.</p>
       </label>
 
-      <div class="card" style="grid-column:1/-1;padding:14px 16px">
+      <!-- Capture & Lighting -->
+      <div class="card" style="grid-column:1/-1">
         <h3 style="margin:0 0 6px">Capture & Lighting</h3>
         <p class="lede" style="margin:0">Dial in your stream setup.</p>
       </div>
 
-      <label class="card" data-key="camera" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="camera" style="cursor:pointer">
         <input type="checkbox" data-price="100" data-label="CAMERA MOUNT">
-        <strong> CAMERA MOUNT — $100</strong>
+        <strong>CAMERA MOUNT — $100</strong>
         <p>Low-vibration arm for face/overhead cams.</p>
       </label>
 
-      <label class="card" data-key="light" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="light" style="cursor:pointer">
         <input type="checkbox" data-price="200" data-label="KEY LIGHT MOUNT">
-        <strong> KEY LIGHT MOUNT — $200</strong>
+        <strong>KEY LIGHT MOUNT — $200</strong>
         <p>Frame-mounted post for key/fill lights.</p>
       </label>
     </div>
 
-    <aside style="position:sticky;top:100px;background:rgba(255,255,255,.03);border:1px solid var(--border);
-      border-radius:16px;padding:20px;backdrop-filter:blur(6px)">
+    <!-- RIGHT: SUMMARY -->
+    <aside class="panel" style="position:sticky;top:100px;padding:20px">
       <h3>Your Build</h3>
-      <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:220px;overflow:auto"></ul>
+      <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
       <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
-      <a href="#community" class="btn primary" style="width:100%;text-align:center">Join the Community</a>
+      <a href="#community" class="btn btn--primary" style="width:100%;justify-content:center">Join the Community</a>
     </aside>
   </div>
 </section>
@@ -362,18 +494,18 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <h2 class="section__title">Games & Sims</h2>
     <span class="pill">Dialed for today’s titles</span>
   </div>
-  <div class="cards-grid" style="margin-top:14px">
-    <article class="card" style="padding:16px">
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
       <h3>Flight</h3>
       <p class="lede">Microsoft Flight Simulator • DCS • X-Plane • IL-2</p>
       <p>Center-stick, dual-stick, or yoke. Pedal tray alignment for smooth rudder control.</p>
     </article>
-    <article class="card" style="padding:16px">
+    <article class="card">
       <h3>Racing</h3>
       <p class="lede">iRacing • Assetto Corsa • ACC • Forza • Gran Turismo (PC rig)</p>
       <p>Wheel mounts with rigid clamping and repeatable seating marks for stint consistency.</p>
     </article>
-    <article class="card" style="padding:16px">
+    <article class="card">
       <h3>FPS / Tactical</h3>
       <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
       <p>Keyboard clearance, low-latency cable routes, quick swap to sticks or throttle as needed.</p>
@@ -388,9 +520,9 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <span class="pill">Angles that matter</span>
   </div>
   <div class="gallery" style="margin-top:14px">
-    <img src="assets/images/frame-left.png" alt="Left angle">
-    <img src="assets/images/frame-right.png" alt="Right angle">
-    <img src="assets/images/top-view.png" alt="Top view">
+    <img class="g g--w6" src="assets/images/frame-left.png" alt="Left angle">
+    <img class="g g--w3" src="assets/images/frame-right.png" alt="Right angle">
+    <img class="g g--w3" src="assets/images/top-view.png" alt="Top view">
   </div>
 </section>
 
@@ -400,19 +532,18 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <h2 class="section__title">Performance Tuning</h2>
     <span class="pill">Lock comfort, unlock pace</span>
   </div>
-  <div class="cards-grid" style="margin-top:14px">
-    <article class="card" style="padding:18px">
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
       <h3>Seat & Reach</h3>
       <p class="lede">Posture that lasts all night.</p>
       <ul>
         <li>Seat back: 95–105°; hips slightly below knees.</li>
         <li>Knees: ~110° in racing; ~100–110° in flight.</li>
-        <li>Arms: 15–30° bend at full lock (wheel/yoke) or stick deflection.</li>
+        <li>Arms: 15–30° bend at full lock or stick deflection.</li>
         <li>Elbows low, shoulders relaxed; no shrugging to reach controls.</li>
       </ul>
     </article>
-
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Wheel / Yoke / Stick</h3>
       <p class="lede">Precision beats strength.</p>
       <ul>
@@ -421,8 +552,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <li>Dual-stick: forearms parallel; wrists neutral; symmetrical reach.</li>
       </ul>
     </article>
-
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Pedals</h3>
       <p class="lede">Control without cramp.</p>
       <ul>
@@ -430,123 +560,110 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <li>Flight: heels supported; avoid toe-only posture; rudder travel clear of rails.</li>
       </ul>
     </article>
-
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Screen & FOV</h3>
       <p class="lede">Clarity without motion sickness.</p>
       <ul>
-        <li>Top bezel ≈ eye height; center of screen ~15° below eye line.</li>
-        <li>Rule of thumb distance: ~1.2× screen height (27″ ≈ 35–45 cm; 34″ ≈ 45–60 cm).</li>
+        <li>Top bezel ≈ eye height; center ~15° below eye line.</li>
+        <li>Distance: ~1.2× screen height (27″ ≈ 35–45 cm; 34″ ≈ 45–60 cm).</li>
         <li>Triples: angle 45–60°; side edges just out of peripheral vision.</li>
-        <li>Use in-game FOV calculators; don’t chase “wide” — chase scale.</li>
+        <li>Use in-game FOV calculators; chase scale, not “wide”.</li>
       </ul>
     </article>
-
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>Input Curves</h3>
       <p class="lede">Smooth at center, control at the edge.</p>
       <ul>
-        <li>Flight sticks: start with curve 15–25, deadzone 2–3% (fine trim, no wander).</li>
-        <li>Racing brake: linear or mild progressive; calibrate for full travel without spike.</li>
-        <li>Mouse/FPS: stable pad, cable relief; lift-off distance low; no desk wobble.</li>
+        <li>Flight sticks: curve 15–25, deadzone 2–3%.</li>
+        <li>Racing brake: linear or mild progressive; full travel without spike.</li>
+        <li>Mouse/FPS: stable pad, cable relief; LOD low; no desk wobble.</li>
       </ul>
     </article>
-
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>VR Notes</h3>
       <p class="lede">Comfort first, frames second.</p>
       <ul>
         <li>Dial IPD physically, then software. Clear edges > raw sharpness.</li>
         <li>Enable motion reprojection if FPS dips; prioritize CPU frametime.</li>
-        <li>Lock cable runs high on the frame; avoid neck tugs.</li>
+        <li>Route cables high on frame; avoid neck tugs.</li>
       </ul>
     </article>
   </div>
 </section>
 
-<!-- QUICK-START CARDS -->
+<!-- QUICK-START -->
 <section id="quickstart" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Quick-Start</h2>
     <span class="pill">Pick a title, get dialed</span>
   </div>
 
-  <div class="cards-grid" style="margin-top:14px">
-    <article class="card" style="padding:18px">
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
       <h3>Star Citizen</h3>
       <p class="lede">Dual-stick or HOTAS with pedal rudder.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Joystick</em> or <em>HOTAS</em>, <em>Pedal Tray</em>, <em>Top HUD</em>.</li>
-        <li>Curves: start 20–25; deadzone 2–3%; reduce if you overshoot fine aim.</li>
+        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Joystick</em>/<em>HOTAS</em>, <em>Pedal Tray</em>, <em>Top HUD</em>.</li>
+        <li>Curves: start 20–25; deadzone 2–3%.</li>
         <li>View: top monitor for mobiglas/chat; main at eye height.</li>
         <li>Cable: mount cams/lights to the frame; avoid desk shake on comms.</li>
       </ol>
     </article>
 
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>DCS</h3>
-      <p class="lede">Center-stick HOTAS + pedals for most airframes.</p>
+      <p class="lede">Center-stick HOTAS + pedals.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → <em>HOTAS Mount</em>, <em>Pedal Tray</em>, optional <em>Top HUD</em>.</li>
-        <li>Curves: pitch/roll 20–30; rudder 10–20 to calm taxi/landing.</li>
+        <li>Loadout: <strong>Flight</strong> preset → <em>HOTAS</em>, <em>Pedal Tray</em>, optional <em>Top HUD</em>.</li>
+        <li>Curves: pitch/roll 20–30; rudder 10–20.</li>
         <li>Seat: elbows ~90°, wrists neutral; trim so stick centers hands-off.</li>
         <li>Views: top bezel at eye height; no craning for MFDs.</li>
       </ol>
     </article>
 
-    <article class="card" style="padding:18px">
+    <article class="card">
       <h3>iRacing / ACC</h3>
       <p class="lede">Wheel + pedals; triples optional.</p>
       <ol>
         <li>Loadout: <strong>Racing</strong> preset → <em>Pedal Tray</em>, <em>Wheel mount</em>, optional <em>Triple Arm</em>.</li>
-        <li>Seat: knee 110–120°, shoulders relaxed at 9-and-3; rim just below shoulders.</li>
-        <li>Brake: set a preload you can hold for 60s without shaking; no spike at end.</li>
-        <li>FOV: use in-game calc; aim for realistic scale, not tunnel vision.</li>
+        <li>Seat: knee 110–120°, rim just below shoulders; relaxed shoulders.</li>
+        <li>Brake: preload you can hold for 60s without shake.</li>
+        <li>FOV: use in-game calc; aim for true scale.</li>
       </ol>
     </article>
   </div>
 
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-    <a href="#presets" class="btn primary">Apply A Preset</a>
-    <a href="#tuning" class="btn ghost">Tune Ergonomics</a>
+    <a href="#presets" class="btn btn--primary">Apply A Preset</a>
+    <a href="#tuning" class="btn btn--ghost">Tune Ergonomics</a>
   </div>
 </section>
 
 <!-- COMMUNITY -->
 <section id="community" class="wrap" style="text-align:center">
-  <h2>Build With Us</h2>
+  <h2 class="section__title">Build With Us</h2>
   <p class="lede">Share loadouts, print files, and tuning tips. Ask questions. Show your rig.</p>
   <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
-    <a href="#faq" class="btn primary">Get Answers</a>
-    <a href="#configurator" class="btn ghost">Tweak My Build</a>
-  </div>
-</section>
-
-<!-- WHY -->
-<section id="philosophy" class="wrap">
-  <h2>Why We Build</h2>
-  <p class="lede">Aerospace-grade precision. Living-room usability.</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin-top:16px">
-    <div>
-      <p>We design for posture, endurance, and immersion. Every part can be printed, machined, or sourced locally. Every module locks with tight tolerances.</p>
-      <p>Less wrenching. More flying. More racing. More playing.</p>
-    </div>
-    <div><img src="assets/images/design-lab.jpg" alt="CoreFlux design lab" style="border-radius:14px"></div>
+    <a href="#configurator" class="btn btn--primary">Tweak My Build</a>
+    <a href="#faq" class="btn btn--ghost">Get Answers</a>
   </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq" class="wrap">
-  <h2>FAQ</h2>
-  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+  <div class="section__head">
+    <h2 class="section__title">FAQ</h2>
+    <span class="pill">Straight answers</span>
+  </div>
+  <details class="panel" style="margin:10px 0;padding:12px;">
     <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
     <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
   </details>
-  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+  <details class="panel" style="margin:10px 0;padding:12px;">
     <summary style="font-weight:800;cursor:pointer;">Will it fit my chair?</summary>
     <p>Standard office/recliner shells fit the rails; bucket seats need side mounts.</p>
   </details>
-  <details style="margin:10px 0;border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.03);">
+  <details class="panel" style="margin:10px 0;padding:12px;">
     <summary style="font-weight:800;cursor:pointer;">Triple-monitor support?</summary>
     <p>Yes. Use the display module with the triple-arm kit. VESA 75/100.</p>
   </details>
@@ -559,7 +676,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- Hero Carousel ---------- */
+/* ---------- Hero Carousel (auto-rotate + dots + fit/fill) ---------- */
 document.addEventListener('DOMContentLoaded', ()=>{
   const slides=[...document.querySelectorAll('.mock__slide')];
   const dots=[...document.querySelectorAll('.dot')];
@@ -725,13 +842,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   presetBtns.forEach(btn=> btn.addEventListener('click',()=> apply(btn.dataset.preset)));
 })();
 
-/* ---------- AI Particle Network (with scroll fade) ---------- */
+/* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
 (function(){
   const c = document.getElementById('aiCanvas');
   if(!c) return;
   const ctx = c.getContext('2d');
   let w, h, pts = [];
-  const DENSITY = 0.00012;
+  const DENSITY = 0.00012;   // particles per px
   const LINK_DIST = 140;
   const MAX_LINKS = 3;
 
@@ -758,20 +875,22 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function fadeByScroll(){
     const max = Math.max(1, document.body.scrollHeight - h);
-    const t = window.scrollY / max;
-    return 0.45 + 0.35 * (1 - Math.abs(t - 0.5)*2);
+    const t = window.scrollY / max;                 // 0..1
+    return 0.45 + 0.35 * (1 - Math.abs(t - 0.5)*2); // bright at top/bottom, softer mid
   }
 
   function tick(){
     ctx.clearRect(0,0,w,h);
     c.style.opacity = fadeByScroll();
 
+    // move
     for(const p of pts){
       p.x += p.vx; p.y += p.vy;
       if(p.x<0||p.x>w) p.vx*=-1;
       if(p.y<0||p.y>h) p.vy*=-1;
     }
 
+    // links
     for(let i=0;i<pts.length;i++){
       const a = pts[i]; let links = 0;
       for(let j=i+1;j<pts.length;j++){
@@ -793,6 +912,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     ctx.globalAlpha = 1;
 
+    // dots (glow)
     for(const p of pts){
       const gx = p.x + pmx*0.3, gy = p.y + pmy*0.3;
       const g = ctx.createRadialGradient(gx,gy,0, gx,gy, p.r*6);
