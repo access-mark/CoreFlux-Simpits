@@ -1,350 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Simpit — CoreFlux</title>
-<meta name="theme-color" content="#070b1a" />
-<meta name="description" content="CoreFlux Simpit — modular cockpit with designer-grade visuals, product storytelling, and slick motion." />
-<link rel="icon" type="image/png" href="assets/images/coreflux-logo.png" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
-<style>
-  /* Base variables & reset */
-  :root{
-    --bg-1:#070b1a; --bg-2:#0a1024; --bg-3:#0f1530;
-    --ink:#e8f0ff; --muted:#9aa6c7;
-    --accent:#00c6ff; --accent-2:#ffd23f;
-    --border:rgba(255,255,255,.12);
-    --shadow:0 22px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
-    --radius-xl:28px; --radius-lg:18px; --radius-md:14px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink);
-    background:
-      radial-gradient(1100px 760px at 80% -10%, rgba(0,198,255,.14), transparent 60%),
-      radial-gradient(900px 650px at 8% 18%, rgba(255,210,63,.10), transparent 60%),
-      linear-gradient(180deg,var(--bg-2),var(--bg-1) 40%,var(--bg-3));
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  .wrap{width:min(1240px,92vw);margin:0 auto}
-  section{padding:60px 0}
-  .section__head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
-  .section__title{font-size:clamp(22px,2.2vw,34px);letter-spacing:-.25px}
-  .underline{position:relative;display:inline-block;padding-bottom:6px}
-  .underline::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--accent),#4be3d1 50%,var(--accent-2));border-radius:999px}
-  .pill{font-size:12px;color:#06142b;font-weight:900;background:linear-gradient(135deg,var(--accent-2),#ffe39a);border-radius:999px;padding:6px 10px}
-  .panel{border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--border);background:rgba(16,24,48,.5);backdrop-filter:saturate(140%) blur(10px)}
-  .lede{color:var(--muted)}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-
-  /* NAV */
-  .nav{position:sticky; top:0; z-index:50}
-  .nav__inner{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-  .nav__shell{backdrop-filter:saturate(160%) blur(14px); background:rgba(10,14,28,.55); border-bottom:1px solid var(--border); box-shadow:var(--shadow)}
-  .brand{display:flex;align-items:center;gap:16px}
-  .brand__logo-wrap{width:88px;height:88px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--border);box-shadow:0 0 70px rgba(0,198,255,.25)}
-  .brand__logo-img{max-height:72px;width:auto;object-fit:contain}
-  .brand__name{font-weight:900;letter-spacing:.4px;font-size:1.3rem}
-  .nav__links{display:flex;gap:18px}
-  .chip{padding:10px 16px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-weight:700;transition:all .18s ease}
-  .chip:hover{color:var(--ink);transform:translateY(-1px);border-color:rgba(255,255,255,.2)}
-  .cta{padding:12px 18px;border-radius:14px;font-weight:900;color:#041221;background:linear-gradient(135deg,var(--accent),#46e7d7);box-shadow:0 16px 42px rgba(0,198,255,.32); display:inline-block}
-
-  /* HERO */
-  header.hero{padding:96px 0 48px; position:relative; z-index:1}
-  #ai{position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.7}
-  .hero__grid{position:relative; z-index:1; display:grid; grid-template-columns:1.05fr .95fr; gap:32px; align-items:stretch}
-  .h1{font-size:clamp(40px,4.2vw,72px);line-height:1.02;margin:0 0 8px;letter-spacing:-.68px}
-  .h1 .fx{background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 22px rgba(0,198,255,.18))}
-  .actions{display:flex;gap:12px;margin-top:16px}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border-radius:14px;border:1px solid var(--border);font-weight:900;letter-spacing:.2px;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
-  .btn--primary{color:#041221;border:none;background:linear-gradient(135deg,var(--accent),#4be3d1);box-shadow:0 14px 38px rgba(0,198,255,.35)}
-  .btn--ghost{color:var(--ink);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02))}
-  .btn:hover{transform:translateY(-1px)}
-  .hero__panel{
-    border-radius:var(--radius-xl); padding:26px; border:1px solid var(--border);
-    backdrop-filter:saturate(140%) blur(12px); background:linear-gradient(180deg,rgba(16,24,48,.6),rgba(16,24,48,.44));
-    box-shadow:var(--shadow); height:100%; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;
-  }
-  .hero__panel::after{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:
-      radial-gradient(400px 400px at 0% 0%, rgba(0,198,255,.15), transparent 60%),
-      radial-gradient(400px 400px at 100% 100%, rgba(255,210,63,.12), transparent 60%);
-    animation: pulseHue 8s ease-in-out infinite alternate;
-  }
-  @keyframes pulseHue{ to{ filter:hue-rotate(25deg) saturate(120%)} }
-  .statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
-  .stat{border-radius:16px;padding:14px;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));border:1px solid var(--border)}
-  .stat .v{font-weight:900;font-size:18px}
-  .stat .k{color:var(--muted);font-size:12px}
-
-  /* HERO IMAGE window */
-  .mock{
-    position:relative; border-radius:24px; overflow:hidden; border:1px solid var(--border);
-    box-shadow:var(--shadow), 0 0 80px rgba(0,198,255,.18);
-    background:linear-gradient(#0f1433,#0a0f22);
-    height:100%; isolation:isolate;
-  }
-  .mock::after{
-    content:""; position:absolute; inset:-30% -10%;
-    background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,.12) 55%,transparent 100%);
-    transform:translateY(-100%); animation:sheen 6s ease-in-out infinite;
-    mix-blend-mode:screen; pointer-events:none;
-  }
-  @keyframes sheen{ 0%{transform:translateY(-100%)} 55%{transform:translateY(95%)} 100%{transform:translateY(115%)} }
-  .mock__carousel{position:absolute; inset:0}
-  .mock__img{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; opacity:0; transform:scale(1.02); transition:opacity 1s ease, transform 9s ease;
-    background:#0b1020;
-  }
-  .mock__img.active{opacity:1; transform:scale(1.12) translate3d(1.2%, -1.2%, 0)}
-  .mock.mock--fit .mock__img{ object-fit:contain; transform:scale(.98)}
-  .mock__toggle{
-    position:absolute; top:12px; right:12px; z-index:2;
-    padding:8px 10px; border-radius:10px; border:1px solid var(--border);
-    background:rgba(14,20,42,.6); backdrop-filter:saturate(140%) blur(8px);
-    font-weight:800; font-size:12px; cursor:pointer;
-  }
-  .mock__nav{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:8px}
-  .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer;transition:background .3s,transform .3s}
-  .dot.active{background:linear-gradient(135deg,var(--accent),#4be3d1); transform:scale(1.22)}
-
-  /* Works With logo strip */
-  .logo-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:36px;padding:20px 0}
-  .logo-strip img{height:42px;opacity:.75;transition:opacity .3s ease,transform .3s ease}
-  .logo-strip img:hover{opacity:1;transform:scale(1.08)}
-
-  /* Configurator section */
-  .config-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start}
-  .config-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-  .config-summary{position:sticky;top:100px;border-radius:16px;padding:20px;background:rgba(255,255,255,.04);border:1px solid var(--border);height:max-content}
-  .config-summary h3{margin-top:0}
-  .config-summary ul{list-style:none;margin:0;padding:0;color:var(--muted)}
-  .config-summary li{padding:4px 0;border-bottom:1px solid var(--border)}
-  .config-summary .total{margin-top:12px;font-weight:900;font-size:1.1rem}
-
-  /* Cards and accessory grid */
-  .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .cardx{border-radius:18px;overflow:hidden;background:rgba(255,255,255,.02);border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .25s ease}
-  .cardx:hover{transform:translateY(-6px) scale(1.02)}
-  .cardx img{width:100%;aspect-ratio:16/10;object-fit:cover}
-  .cardx h4{margin:16px;font-size:1.1rem}
-  .cardx p{margin:0 16px 16px;color:var(--muted)}
-
-  /* Specs and compatibility tables */
-  .specs, .compat{overflow:auto}
-  .specs table, .compat table{width:100%;border-collapse:collapse}
-  .specs th,.specs td, .compat th,.compat td{padding:12px 10px;border-bottom:1px solid var(--border);text-align:left}
-  .specs thead th, .compat thead th{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.3px}
-  .badge{padding:4px 8px;border-radius:999px;border:1px solid var(--border);font-size:12px}
-  .ok{background:rgba(0,198,255,.15)}
-  .wip{background:rgba(255,210,63,.15)}
-  .req{background:rgba(255,255,255,.06)}
-
-  /* Testimonials */
-  .testis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .quote{padding:18px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.03)}
-  .quote em{color:var(--muted)}
-
-  /* FAQ */
-  .faq{display:grid;gap:10px}
-  .qa{border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.03);overflow:hidden}
-  .qa summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}
-  .qa summary::-webkit-details-marker{display:none}
-  .qa .ans{padding:0 16px 16px;color:var(--muted)}
-
-  /* CTA */
-  .cta-panel{text-align:center;padding:60px;border-radius:20px;background:linear-gradient(135deg,rgba(0,198,255,.15),rgba(255,210,63,.08));box-shadow:var(--shadow)}
-
-  /* Reveal on scroll */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
-  .reveal.on{opacity:1;transform:translateY(0)}
-
-  /* Responsive */
-  @media (max-width:1080px){ .hero__grid{grid-template-columns:1fr} .hero__panel{height:auto} .mock{height:auto} }
-  @media (max-width:980px){
-    .grid2{grid-template-columns:1fr}
-    .grid3{grid-template-columns:1fr}
-    .grid4{grid-template-columns:1fr 1fr}
-    .cards-grid{grid-template-columns:1fr}
-    .statbar{grid-template-columns:repeat(2,1fr)}
-    .brand__logo-wrap{width:66px;height:66px}.brand__logo-img{max-height:54px}.brand__name{font-size:1.06rem}
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CoreFlux Simpit</title>
+  <meta name="description" content="A cockpit you’ll actually finish — modular, affordable, and sleek enough for the living room." />
+  <link rel="icon" href="assets/images/coreflux-logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg1:#070b1a; --bg2:#0a1024; --bg3:#0f1530;
+      --ink:#e8f0ff; --muted:#9aa6c7;
+      --accent:#00c6ff; --accent2:#ffd23f;
+      --border:rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    body {
+      margin:0;font-family:'Inter',sans-serif;color:var(--ink);
+      background:radial-gradient(1200px 800px at 70% -10%,rgba(0,198,255,.1),transparent),
+                 radial-gradient(900px 600px at 10% 15%,rgba(255,210,63,.08),transparent),
+                 linear-gradient(180deg,var(--bg2),var(--bg1) 40%,var(--bg3));
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1200px,92vw);margin:auto}
+    .nav{position:sticky;top:0;z-index:10;background:rgba(10,14,28,.65);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav__inner{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:70px}
+    .brand span{font-weight:900;font-size:1.4rem}
+    .links a{margin:0 10px;font-weight:600;color:var(--muted)}
+    .links a:hover{color:var(--ink)}
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:80px 0}
+    .hero h1{font-size:3rem;margin:0;background:linear-gradient(90deg,#fff,#99d6ff,#ffe189);-webkit-background-clip:text;color:transparent}
+    .hero p{color:var(--muted);margin:20px 0}
+    .btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#000;box-shadow:0 10px 30px rgba(0,198,255,.3)}
+    .btn.ghost{background:rgba(255,255,255,.05);color:var(--ink)}
+    .mock{position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 0 40px rgba(0,198,255,.2)}
+    .mock img{width:100%;height:auto;object-fit:cover}
+    /* Works With */
+    .logo-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:36px;padding:40px 0}
+    .logo-strip img{height:40px;opacity:.7;transition:.3s}
+    .logo-strip img:hover{opacity:1;transform:scale(1.1)}
+    /* Configurator */
+    #configurator{padding:80px 0}
+    .config-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
+    .config-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
+    .card:hover{transform:translateY(-5px)}
+    .card h4{margin:16px;font-size:1.1rem}
+    .card p{margin:0 16px 16px;color:var(--muted)}
+    .config-summary{position:sticky;top:100px;padding:20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+    .config-summary h3{margin-top:0}
+    .config-summary ul{list-style:none;padding:0;margin:0}
+    .config-summary li{padding:4px 0;border-bottom:1px solid var(--border);color:var(--muted)}
+    /* Accessories */
+    #accessories{padding:80px 0}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.config-grid{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
-  <canvas id="ai" width="1920" height="900" aria-hidden="true"></canvas>
-
-  <!-- NAV -->
   <nav class="nav">
-    <div class="nav__shell">
-      <div class="wrap nav__inner">
-        <div class="brand">
-          <div class="brand__logo-wrap">
-            <img src="assets/images/coreflux-logo.png" alt="CoreFlux logo" class="brand__logo-img">
-          </div>
-          <div class="brand__name">Simpit</div>
-        </div>
-        <div class="nav__links">
-          <a class="chip" href="#challenge">Challenge</a>
-          <a class="chip" href="#solution">Solution</a>
-          <a class="chip" href="#specs">Specs</a>
-          <a class="chip" href="#compatibility">Compatibility</a>
-          <a class="chip" href="#modules">Modules</a>
-          <a class="chip" href="#features">Features</a>
-          <a class="cta" href="#downloads">Downloads</a>
-        </div>
+    <div class="wrap nav__inner">
+      <div class="brand"><img src="assets/images/coreflux-logo.png"><span>Simpit</span></div>
+      <div class="links">
+        <a href="#workswith">Works With</a>
+        <a href="#configurator">Build</a>
+        <a href="#accessories">Accessories</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <header class="hero wrap">
-    <div class="hero__grid">
-      <div class="hero__panel">
-        <div>
-          <h1 class="h1"><span class="fx">A cockpit you’ll actually finish</span></h1>
-          <p class="lede">From first sketch to maiden flight. Modular, affordable, and comfortable for long sessions — clean enough for the living room.</p>
-          <div class="actions">
-            <a href="#downloads" class="btn btn--primary" id="mag1">Get the files</a>
-            <a href="#features" class="btn btn--ghost" id="mag2">See the build</a>
-          </div>
-        </div>
-        <div class="statbar">
-          <div class="stat"><div class="v">3</div><div class="k">modules</div></div>
-          <div class="stat"><div class="v"><span aria-hidden="true">≈</span> 36kg</div><div class="k">total mass</div></div>
-          <div in the statbar… />
-        </div>
-      </div>
-
-      <div class="mock" id="mockBox">
-        <button class="mock__toggle" type="button" id="fitToggle">Fit</button>
-        <div class="mock__carousel">
-          <img src="assets/images/frame-left.png"  alt="CoreFlux Simpit — left view"  class="mock__img active">
-          <img src="assets/images/frame-right.png" alt="CoreFlux Simpit — right view" class="mock__img">
-          <img src="assets/images/top-view.png"   alt="CoreFlux Simpit — top view"   class="mock__img">
-        </div>
-        <div class="mock__nav" aria-label="carousel navigation">
-          <span class="dot active" aria-label="slide 1"></span>
-          <span class="dot" aria-label="slide 2"></span>
-          <span class="dot" aria-label="slide 3"></span>
-        </div>
-      </div>
+  <section class="hero wrap">
+    <div>
+      <h1>A cockpit you’ll actually finish</h1>
+      <p>From first sketch to maiden flight. Modular, affordable, and comfortable for long sessions — clean enough for the living room.</p>
+      <button class="btn primary" id="mag1">Get the Files</button>
+      <button class="btn ghost" id="mag2">See the Build</button>
     </div>
-  </header>
+    <div class="mock"><img src="assets/images/top-view.png" alt="Top view"></div>
+  </section>
 
-  <!-- WORKS WITH -->
-  <section id="workswith" class="wrap reveal">
-    <div class="section__head">
-      <h2 class="section__title underline">Works With</h2>
-      <p class="lede">Fully compatible with top-tier hardware — no drilling, no adapters.</p>
-    </div>
+  <section id="workswith" class="wrap">
+    <h2>Works With</h2>
+    <p class="lede">Fully compatible with leading flight and racing hardware — no drilling required.</p>
     <div class="logo-strip">
-      <img src="assets/images/logos/honeycomb.svg" alt="Honeycomb" />
-      <img src="assets/images/logos/thrustmaster.svg" alt="Thrustmaster" />
-      <img src="assets/images/logos/logitech.svg" alt="Logitech" />
-      <img src="assets/images/logos/virpil.svg" alt="Virpil" />
-      <img src="assets/images/logos/vkb.svg" alt="VKB" />
-      <img src="assets/images/logos/mfg.svg" alt="MFG" />
+      <img src="assets/images/logos/honeycomb.svg" alt="Honeycomb">
+      <img src="assets/images/logos/thrustmaster.svg" alt="Thrustmaster">
+      <img src="assets/images/logos/logitech.svg" alt="Logitech">
+      <img src="assets/images/logos/virpil.svg" alt="Virpil">
+      <img src="assets/images/logos/vkb.svg" alt="VKB">
+      <img src="assets/images/logos/mfg.svg" alt="MFG">
     </div>
   </section>
 
-  <!-- CONFIGURATOR -->
-  <section id="configurator" class="wrap reveal">
-    <div class="section__head">
-      <h2 class="section__title underline">Build Your Rig</h2>
-      <p class="lede">Start with the CoreFlux base and add what you need. Modular, future-proof, zero guesswork.</p>
-    </div>
+  <section id="configurator" class="wrap">
+    <h2>Build Your Rig</h2>
+    <p class="lede">Start with the CoreFlux base, add what you need, and see your total in real time.</p>
     <div class="config-grid">
       <div class="config-cards">
-        <div class="cardx">
-          <img src="assets/images/base-module.png" alt="Base Frame">
-          <h4>Base Frame</h4>
-          <p>Core 4080 aluminium structure with pre-tapped mounts.</p>
-          <button class="btn btn--ghost" onclick="addItem('Base Frame',799)">Add</button>
-        </div>
-        <div class="cardx">
-          <img src="assets/images/seat-module.png" alt="Seat Module">
-          <h4>Seat Module</h4>
-          <p>Recliner-ready rails, lumbar lock, side-mount support.</p>
-          <button class="btn btn--ghost" onclick="addItem('Seat Module',249)">Add</button>
-        </div>
-        <div class="cardx">
-          <img src="assets/images/hotas-module.png" alt="HOTAS Mount">
-          <h4>HOTAS Mount</h4>
-          <p>Left/right quick-change mounts with height dial.</p>
-          <button class="btn btn--ghost" onclick="addItem('HOTAS Mount',189)">Add</button>
-        </div>
-        <div class="cardx">
-          <img src="assets/images/monitor-module.png" alt="Display Module">
-          <h4>Display Module</h4>
-          <p>Single/triple monitor setup with tilt lock.</p>
-          <button class="btn btn--ghost" onclick="addItem('Display Module',299)">Add</button>
-        </div>
+        <div class="card"><img src="assets/images/base-module.png"><h4>Base Frame</h4><p>Core 4080 aluminium structure with pre-tapped mounts.</p><button class="btn ghost" onclick="addItem('Base Frame',799)">Add</button></div>
+        <div class="card"><img src="assets/images/seat-module.png"><h4>Seat Module</h4><p>Recliner-ready rails, lumbar lock, side-mount support.</p><button class="btn ghost" onclick="addItem('Seat Module',249)">Add</button></div>
+        <div class="card"><img src="assets/images/hotas-module.png"><h4>HOTAS Mount</h4><p>Left/right quick-change mounts with height dial.</p><button class="btn ghost" onclick="addItem('HOTAS Mount',189)">Add</button></div>
+        <div class="card"><img src="assets/images/monitor-module.png"><h4>Display Module</h4><p>Single/triple monitor setup with tilt lock.</p><button class="btn ghost" onclick="addItem('Display Module',299)">Add</button></div>
       </div>
       <aside class="config-summary">
         <h3>Your Build</h3>
         <ul id="buildList"></ul>
-        <div class="total">Total: <span id="totalPrice">$0</span></div>
-        <button class="btn btn--primary" onclick="alert('Checkout coming soon')">Checkout</button>
+        <p><strong>Total: <span id="totalPrice">$0</span></strong></p>
+        <button class="btn primary" onclick="alert('Checkout coming soon')">Checkout</button>
       </aside>
     </div>
   </section>
 
-  <!-- ACCESSORIES -->
-  <section id="accessories" class="wrap reveal">
-    <div class="section__head">
-      <h2 class="section__title underline">Accessories & Add-Ons</h2>
-      <p class="lede">Dial in your setup with finishing touches engineered for comfort and control.</p>
-    </div>
+  <section id="accessories" class="wrap">
+    <h2>Accessories & Add-Ons</h2>
+    <p class="lede">Dial in your setup with finishing touches engineered for comfort and control.</p>
     <div class="cards-grid">
-      <div class="cardx">
-        <img src="assets/images/caster-kit.png" alt="Caster Kit">
-        <h4>Caster Kit</h4>
-        <p>Roll and lock instantly between flight and work modes.</p>
-      </div>
-      <div class="cardx">
-        <img src="assets/images/cable-tray.png" alt="Cable Tray">
-        <h4>Cable Tray</h4>
-        <p>Under-frame route with quick-clamp harness system.</p>
-      </div>
-      <div class="cardx">
-        <img src="assets/images/mount-plate.png" alt="Quick-Change Plate">
-        <h4>Quick-Change Plate</h4>
-        <p>Swap from yoke to HOTAS in seconds, no tools.</p>
-      </div>
+      <div class="card"><img src="assets/images/caster-kit.png"><h4>Caster Kit</h4><p>Roll and lock instantly between flight and work modes.</p></div>
+      <div class="card"><img src="assets/images/cable-tray.png"><h4>Cable Tray</h4><p>Under-frame route with quick-clamp harness system.</p></div>
+      <div class="card"><img src="assets/images/mount-plate.png"><h4>Quick-Change Plate</h4><p>Swap from yoke to HOTAS in seconds, no tools.</p></div>
     </div>
   </section>
 
-  <!-- (Insert other sections: Challenge, Solution, Specs, Compatibility, Modules, Features, Testimonials, Downloads, FAQ, CTA, Contact, Footer – reuse previous markup) -->
-
-  <!-- Footer and scripts omitted for brevity; include the sections you already have. -->
+  <footer>© <span id="year"></span> CoreFlux Simpit</footer>
 
 <script>
-  // Javascript: Build your rig logic + other interactive parts
-  const buildList=document.getElementById('buildList');
-  const totalPrice=document.getElementById('totalPrice');
-  let total=0;
-  function addItem(name,price){
-    const li=document.createElement('li');
-    li.textContent=`${name} — $${price}`;
-    buildList.appendChild(li);
-    total+=price;
-    totalPrice.textContent=`$${total}`;
-  }
-
-  // Include your previous scroll reveal, carousel, fit/fill toggle, AI-particles script here.
-
+document.getElementById('year').textContent=new Date().getFullYear();
+let total=0;
+function addItem(name,price){
+  const list=document.getElementById('buildList');
+  const li=document.createElement('li');
+  li.textContent=`${name} — $${price}`;
+  list.appendChild(li);
+  total+=price;
+  document.getElementById('totalPrice').textContent=`$${total}`;
+}
 </script>
 </body>
 </html>
