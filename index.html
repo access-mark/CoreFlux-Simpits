@@ -355,17 +355,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function stop(){ clearInterval(timer); }
 
   dots.forEach((d,idx)=>d.addEventListener('click',()=>{ stop(); show(idx); play(); }));
-  mock.addEventListener('mouseenter',stop);
-  mock.addEventListener('mouseleave',play);
-  fitBtn.addEventListener('click',()=>{
-    mock.classList.toggle('fit');
-    fitBtn.textContent = mock.classList.contains('fit') ? 'Fill' : 'Fit';
-  });
+  if (mock) {
+    mock.addEventListener('mouseenter',stop);
+    mock.addEventListener('mouseleave',play);
+  }
+  if (fitBtn && mock){
+    fitBtn.addEventListener('click',()=>{
+      mock.classList.toggle('fit');
+      fitBtn.textContent = mock.classList.contains('fit') ? 'Fill' : 'Fit';
+    });
+  }
 
   show(0); play();
 });
 
-<script>
 /* ---------- Configurator (robust: uses data-price or parses $ from label) ---------- */
 (function(){
   const root = document.getElementById('moduleList');
@@ -375,20 +378,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  // Collect radio group names by input[name]
+  // radio group names
   const radioGroups = Array.from(
     new Set(
       [...root.querySelectorAll('input[type="radio"][name]')].map(i => i.name)
     )
   );
 
-  // Price resolver: prefer data-price; if missing/mismatched, parse from visible text
+  // price resolver
   function resolvePrice(input){
-    // 1) Use data-price if present and > 0
     const dp = Number(input.dataset.price || 0);
     if (dp > 0) return dp;
 
-    // 2) Parse the closest <strong> text or card text for $... (handles $1,000)
     const card = input.closest('.card') || input.parentElement;
     if (!card) return 0;
     const strong = card.querySelector('strong');
@@ -400,11 +401,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function resolveLabel(input){
     if (input.dataset.label) return input.dataset.label;
-    // Fallback: first <strong> text before the price
     const card = input.closest('.card') || input.parentElement;
     const strong = card ? card.querySelector('strong') : null;
     if (strong){
-      // Strip price suffix, keep label
       return strong.textContent.replace(/\s*—\s*\$.*$/,'').trim();
     }
     return input.name || 'Item';
@@ -423,9 +422,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
-    // Checkboxes
-    const checks = root.querySelectorAll('input[type="checkbox"]');
-    checks.forEach(ch=>{
+    root.querySelectorAll('input[type="checkbox"]').forEach(ch=>{
       if (ch.checked){
         const price = resolvePrice(ch);
         total += price;
@@ -433,25 +430,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     });
 
-    // Radios (one per group)
     getSelectedRadios().forEach(r=>{
       const price = resolvePrice(r);
       total += price;
       picked.push(`${resolveLabel(r)} — $${price}`);
     });
 
-    // Render
-    linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
-    countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
-    totalEl.textContent = `$${total}`;
+    if (linesEl) linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
+    if (countEl) countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
+    if (totalEl) totalEl.textContent = `$${total}`;
   }
 
-  // Make entire card clickable (without double toggling)
+  // click anywhere on card
   root.querySelectorAll('.card').forEach(card=>{
     const input = card.querySelector('input');
     if(!input) return;
     card.addEventListener('click', (e)=>{
-      if (e.target === input) return; // native click on input
+      if (e.target === input) return;
       if (input.type === 'checkbox'){
         input.checked = !input.checked;
         input.dispatchEvent(new Event('change', {bubbles:true}));
@@ -462,11 +457,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  // Wire change events
   root.querySelectorAll('input').forEach(i=> i.addEventListener('change', update));
 
-  // Optional: at runtime, sync data-price to parsed price (keeps future totals fast/consistent)
-  (function syncDataPrices(){
+  // sync data attributes once
+  (function syncData(){
     root.querySelectorAll('input').forEach(i=>{
       const p = resolvePrice(i);
       if (p > 0) i.dataset.price = String(p);
@@ -474,9 +468,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   })();
 
+  update();
+})();
+
 /* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
 (function(){
   const c = document.getElementById('aiCanvas');
+  if(!c) return;
   const ctx = c.getContext('2d');
   let w, h, pts = [];
   const DENSITY = 0.00012;   // particles per px
@@ -495,7 +493,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
       r: Math.random()*1.6 + 0.7
     }));
   }
-  resize(); window.addEventListener('resize', resize);
+  resize();
+  window.addEventListener('resize', resize);
 
   let pmx = 0, pmy = 0;
   window.addEventListener('pointermove', e=>{
@@ -533,8 +532,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
           ctx.beginPath();
           ctx.moveTo(a.x+pmx*alpha, a.y+pmy*alpha);
           ctx.lineTo(b.x+pmx*alpha, b.y+pmy*alpha);
-          // cyan base with a faint gold shimmer
-          ctx.strokeStyle = 'rgba(0,198,255,1)';
+          ctx.strokeStyle = 'rgba(0,198,255,1)'; // cyan
           ctx.lineWidth = 1;
           ctx.stroke();
           if(++links >= MAX_LINKS) break;
