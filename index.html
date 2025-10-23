@@ -1,179 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CoreFlux Simpit</title>
-  <meta name="description" content="A cockpit you’ll actually finish — modular, affordable, and sleek enough for the living room." />
-  <link rel="icon" href="assets/images/coreflux-logo.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg1:#070b1a; --bg2:#0a1024; --bg3:#0f1530;
-      --ink:#e8f0ff; --muted:#9aa6c7;
-      --accent:#00c6ff; --accent2:#ffd23f;
-      --border:rgba(255,255,255,.12);
-    }
-    *{box-sizing:border-box}
-    body {
-      margin:0;font-family:'Inter',sans-serif;color:var(--ink);
-      background:radial-gradient(1200px 800px at 70% -10%,rgba(0,198,255,.1),transparent),
-                 radial-gradient(900px 600px at 10% 15%,rgba(255,210,63,.08),transparent),
-                 linear-gradient(180deg,var(--bg2),var(--bg1) 40%,var(--bg3));
-      overflow-x:hidden;
-    }
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
-    .wrap{width:min(1200px,92vw);margin:auto}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CoreFlux Simpit</title>
+<meta name="description" content="A cockpit you’ll actually finish — modular, affordable, and sleek enough for the living room." />
+<link rel="icon" href="assets/images/coreflux-logo.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#070b1a; --bg2:#0a1024; --bg3:#0f1530;
+    --ink:#e8f0ff; --muted:#9aa6c7;
+    --accent:#00c6ff; --accent2:#ffd23f;
+    --border:rgba(255,255,255,.12);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:'Inter',system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
+    background:
+      radial-gradient(1100px 760px at 80% -10%, rgba(0,198,255,.14), transparent 60%),
+      radial-gradient(900px 650px at 8% 18%, rgba(255,210,63,.10), transparent 60%),
+      linear-gradient(180deg,var(--bg2),var(--bg1) 40%,var(--bg3));
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:min(1200px,92vw);margin:0 auto}
+  .lede{color:var(--muted)}
+  /* ===== Global AI particle canvas (full page) ===== */
+  #aiCanvas{
+    position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.55;
+  }
 
-    /* NAV */
-    .nav{position:sticky;top:0;z-index:10;background:rgba(10,14,28,.65);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-    .nav__inner{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 0 25px rgba(0,198,255,.35))}
-    .brand span{font-weight:900;font-size:1.5rem;letter-spacing:.5px}
-    .links a{margin:0 10px;font-weight:600;color:var(--muted)}
-    .links a:hover{color:var(--ink)}
+  /* ===== NAV ===== */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(10,14,28,.65);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav__inner{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand img{height:120px;width:auto;object-fit:contain;filter:drop-shadow(0 0 24px rgba(0,198,255,.35))}
+  .brand span{font-weight:900;font-size:1.5rem;letter-spacing:.4px}
+  .links a{margin:0 10px;font-weight:600;color:var(--muted)}
+  .links a:hover{color:var(--ink)}
 
-    /* HERO */
-    .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:80px 0;position:relative;z-index:1}
-    #aiCanvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.5}
-    .hero h1{font-size:3.4rem;margin:0;background:linear-gradient(90deg,#fff,#99d6ff,#ffe189);-webkit-background-clip:text;color:transparent}
-    .hero p{color:var(--muted);margin:20px 0;line-height:1.6}
-    .btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#000;box-shadow:0 10px 30px rgba(0,198,255,.3)}
-    .btn.ghost{background:rgba(255,255,255,.05);color:var(--ink)}
-    .mock{position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 0 40px rgba(0,198,255,.2)}
-    .mock img{width:100%;height:auto;object-fit:cover;border-radius:18px}
+  /* ===== HERO ===== */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:84px 0}
+  .hero h1{font-size:clamp(36px,4vw,56px);margin:0;background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);-webkit-background-clip:text;color:transparent}
+  .hero p{color:var(--muted);margin:18px 0 22px;line-height:1.6}
+  .btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;box-shadow:0 10px 28px rgba(0,198,255,.32)}
+  .btn.ghost{background:rgba(255,255,255,.05);color:var(--ink)}
+  .mock{position:relative;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 0 50px rgba(0,198,255,.22);background:#0b1020}
+  .mock__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.02);transition:opacity 800ms ease, transform 8s ease}
+  .mock__slide.active{opacity:1;transform:scale(1.10) translate3d(1%, -1%, 0)}
+  .mock__nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+  .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.32);cursor:pointer;transition:transform .2s,background .2s}
+  .dot.active{background:linear-gradient(135deg,var(--accent),#4be3d1);transform:scale(1.2)}
+  .mock__toggle{position:absolute;top:12px;right:12px;z-index:2;padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);backdrop-filter:blur(8px);font-weight:900;font-size:12px}
+  .mock.fit .mock__slide{object-fit:contain;transform:scale(1) !important;background:#0b1020}
 
-    /* Works With */
-    .logo-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;padding:60px 0}
-    .logo-strip img{height:50px;opacity:.75;transition:.3s}
-    .logo-strip img:hover{opacity:1;transform:scale(1.1)}
+  /* ===== Works With ===== */
+  #workswith{padding:50px 0}
+  .logo-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:40px;padding:18px 0}
+  .logo-strip img{height:50px;opacity:.75;transition:opacity .25s,transform .25s}
+  .logo-strip img:hover{opacity:1;transform:scale(1.08)}
 
-    /* Configurator */
-    #configurator{padding:80px 0}
-    .config-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px}
-    .config-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-    .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
-    .card:hover{transform:translateY(-5px)}
-    .card h4{margin:16px;font-size:1.1rem}
-    .card p{margin:0 16px 16px;color:var(--muted)}
-    .config-summary{position:sticky;top:100px;padding:20px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
-    .config-summary h3{margin-top:0}
-    .config-summary ul{list-style:none;padding:0;margin:0}
-    .config-summary li{padding:4px 0;border-bottom:1px solid var(--border);color:var(--muted)}
+  /* ===== Configurator ===== */
+  #configurator{padding:70px 0}
+  .config-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start}
+  .config-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .25s}
+  .card:hover{transform:translateY(-4px)}
+  .card h4{margin:16px;font-size:1.06rem}
+  .card p{margin:0 16px 16px;color:var(--muted)}
+  .config-summary{position:sticky;top:100px;padding:18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+  .config-summary h3{margin:6px 0 10px}
+  .config-summary ul{list-style:none;padding:0;margin:0}
+  .config-summary li{padding:6px 0;border-bottom:1px solid var(--border);color:var(--muted)}
+  .config-summary .total{margin-top:10px;font-weight:900}
 
-    /* Accessories */
-    #accessories{padding:80px 0}
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+  /* ===== Accessories ===== */
+  #accessories{padding:70px 0}
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 
-    footer{padding:40px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
-    @media(max-width:900px){.hero{grid-template-columns:1fr}.config-grid{grid-template-columns:1fr}}
-  </style>
+  /* ===== Content Blocks ===== */
+  section.block{padding:70px 0}
+  .panel{border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.035);backdrop-filter:blur(8px)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+
+  /* ===== Tables ===== */
+  table{width:100%;border-collapse:collapse}
+  th,td{padding:12px 8px;border-bottom:1px solid var(--border);text-align:left}
+  thead th{font-size:12px;color:var(--muted);letter-spacing:.3px}
+
+  /* ===== FAQ ===== */
+  .faq{display:grid;gap:10px}
+  .qa{border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.035);overflow:hidden}
+  .qa summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa .ans{padding:0 16px 16px;color:var(--muted)}
+
+  /* ===== CTA + Footer ===== */
+  #cta{text-align:center;padding:80px 0}
+  footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
+
+  /* ===== Responsive ===== */
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;gap:24px}
+    .config-grid{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+    .brand img{height:96px}
+  }
+</style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="wrap nav__inner">
-      <div class="brand">
-        <img src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
-        <span>Simpit</span>
+<canvas id="aiCanvas"></canvas>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap nav__inner">
+    <div class="brand">
+      <img src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
+      <span>Simpit</span>
+    </div>
+    <div class="links">
+      <a href="#workswith">Works With</a>
+      <a href="#configurator">Build</a>
+      <a href="#accessories">Accessories</a>
+      <a href="#philosophy">Why</a>
+      <a href="#specs">Specs</a>
+      <a href="#compat">Compatibility</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div>
+    <h1>A cockpit you’ll actually finish</h1>
+    <p>From first sketch to maiden flight. Modular, affordable, and comfortable for long sessions — clean enough for the living room.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="#configurator" class="btn primary" id="mag1">Build yours</a>
+      <a href="#features" class="btn ghost" id="mag2">See the build</a>
+    </div>
+  </div>
+
+  <!-- Rotating image carousel -->
+  <div class="mock" id="mock">
+    <button class="mock__toggle" id="fitToggle" type="button">Fit</button>
+    <img class="mock__slide active" src="assets/images/frame-left.png"  alt="CoreFlux — left view">
+    <img class="mock__slide"        src="assets/images/frame-right.png" alt="CoreFlux — right view">
+    <img class="mock__slide"        src="assets/images/top-view.png"    alt="CoreFlux — top view">
+    <div class="mock__nav" aria-label="carousel navigation">
+      <span class="dot active" aria-label="slide 1"></span>
+      <span class="dot" aria-label="slide 2"></span>
+      <span class="dot" aria-label="slide 3"></span>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS WITH -->
+<section id="workswith" class="wrap">
+  <h2>Works With</h2>
+  <p class="lede">Fully compatible with leading flight and racing hardware — no drilling required.</p>
+  <div class="logo-strip">
+    <img src="assets/images/logos/honeycomb.svg" alt="Honeycomb">
+    <img src="assets/images/logos/thrustmaster.svg" alt="Thrustmaster">
+    <img src="assets/images/logos/logitech.svg" alt="Logitech">
+    <img src="assets/images/logos/virpil.svg" alt="Virpil">
+    <img src="assets/images/logos/vkb.svg" alt="VKB">
+    <img src="assets/images/logos/mfg.svg" alt="MFG">
+  </div>
+</section>
+
+<!-- CONFIGURATOR -->
+<section id="configurator" class="wrap">
+  <h2>Build Your Rig</h2>
+  <p class="lede">Start with the CoreFlux base. Add modules. See your total in real time.</p>
+  <div class="config-grid">
+    <div class="config-cards">
+      <div class="card">
+        <img src="assets/images/base-module.png" alt="">
+        <h4>Base Frame</h4>
+        <p>Core 4080 aluminium structure with pre-tapped mounts.</p>
+        <button class="btn ghost" onclick="addItem('Base Frame',799)">Add</button>
       </div>
-      <div class="links">
-        <a href="#workswith">Works With</a>
-        <a href="#configurator">Build</a>
-        <a href="#accessories">Accessories</a>
+      <div class="card">
+        <img src="assets/images/seat-module.png" alt="">
+        <h4>Seat Module</h4>
+        <p>Recliner-ready rails, lumbar lock, side-mount support.</p>
+        <button class="btn ghost" onclick="addItem('Seat Module',249)">Add</button>
+      </div>
+      <div class="card">
+        <img src="assets/images/hotas-module.png" alt="">
+        <h4>HOTAS Mount</h4>
+        <p>Left/right quick-change mounts with height dial.</p>
+        <button class="btn ghost" onclick="addItem('HOTAS Mount',189)">Add</button>
+      </div>
+      <div class="card">
+        <img src="assets/images/monitor-module.png" alt="">
+        <h4>Display Module</h4>
+        <p>Single/triple monitor setup with tilt lock.</p>
+        <button class="btn ghost" onclick="addItem('Display Module',299)">Add</button>
       </div>
     </div>
-  </nav>
+    <aside class="config-summary">
+      <h3>Your Build</h3>
+      <ul id="buildList"></ul>
+      <div class="total">Total: <strong id="totalPrice">$0</strong></div>
+      <button class="btn primary" onclick="alert('Checkout coming soon')">Checkout</button>
+    </aside>
+  </div>
+</section>
 
-  <section class="hero wrap">
-    <canvas id="aiCanvas"></canvas>
+<!-- ACCESSORIES -->
+<section id="accessories" class="wrap">
+  <h2>Accessories & Add-Ons</h2>
+  <p class="lede">Dial in your setup with finishing touches engineered for comfort and control.</p>
+  <div class="cards-grid">
+    <div class="card"><img src="assets/images/caster-kit.png" alt=""><h4>Caster Kit</h4><p>Roll and lock between flight and work modes.</p></div>
+    <div class="card"><img src="assets/images/cable-tray.png" alt=""><h4>Cable Tray</h4><p>Under-frame route with quick-clamp harness system.</p></div>
+    <div class="card"><img src="assets/images/mount-plate.png" alt=""><h4>Quick-Change Plate</h4><p>Swap from yoke to HOTAS in seconds, no tools.</p></div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="wrap block">
+  <h2>Why We Build</h2>
+  <p class="lede">Rigs that balance aerospace-grade precision with living-room usability.</p>
+  <div class="grid2">
     <div>
-      <h1>A cockpit you’ll actually finish</h1>
-      <p>From first sketch to maiden flight. Modular, affordable, and comfortable for long sessions — clean enough for the living room.</p>
-      <button class="btn primary" id="mag1">Get the Files</button>
-      <button class="btn ghost" id="mag2">See the Build</button>
+      <p>We design for posture, endurance, and immersion. Every part can be printed, machined, or sourced locally. Every module locks with tight tolerances.</p>
+      <p>Less wrenching. More flying.</p>
     </div>
-    <div class="mock"><img src="assets/images/top-view.png" alt="Top view"></div>
-  </section>
-
-  <section id="workswith" class="wrap">
-    <h2>Works With</h2>
-    <p class="lede">Fully compatible with leading flight and racing hardware — no drilling required.</p>
-    <div class="logo-strip">
-      <img src="assets/images/logos/honeycomb.svg" alt="Honeycomb">
-      <img src="assets/images/logos/thrustmaster.svg" alt="Thrustmaster">
-      <img src="assets/images/logos/logitech.svg" alt="Logitech">
-      <img src="assets/images/logos/virpil.svg" alt="Virpil">
-      <img src="assets/images/logos/vkb.svg" alt="VKB">
-      <img src="assets/images/logos/mfg.svg" alt="MFG">
+    <div class="panel" style="padding:10px">
+      <img src="assets/images/design-lab.jpg" alt="CoreFlux design lab" style="border-radius:12px">
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="configurator" class="wrap">
-    <h2>Build Your Rig</h2>
-    <p class="lede">Start with the CoreFlux base, add what you need, and see your total in real time.</p>
-    <div class="config-grid">
-      <div class="config-cards">
-        <div class="card"><img src="assets/images/base-module.png"><h4>Base Frame</h4><p>Core 4080 aluminium structure with pre-tapped mounts.</p><button class="btn ghost" onclick="addItem('Base Frame',799)">Add</button></div>
-        <div class="card"><img src="assets/images/seat-module.png"><h4>Seat Module</h4><p>Recliner-ready rails, lumbar lock, side-mount support.</p><button class="btn ghost" onclick="addItem('Seat Module',249)">Add</button></div>
-        <div class="card"><img src="assets/images/hotas-module.png"><h4>HOTAS Mount</h4><p>Left/right quick-change mounts with height dial.</p><button class="btn ghost" onclick="addItem('HOTAS Mount',189)">Add</button></div>
-        <div class="card"><img src="assets/images/monitor-module.png"><h4>Display Module</h4><p>Single/triple monitor setup with tilt lock.</p><button class="btn ghost" onclick="addItem('Display Module',299)">Add</button></div>
-      </div>
-      <aside class="config-summary">
-        <h3>Your Build</h3>
-        <ul id="buildList"></ul>
-        <p><strong>Total: <span id="totalPrice">$0</span></strong></p>
-        <button class="btn primary" onclick="alert('Checkout coming soon')">Checkout</button>
-      </aside>
-    </div>
-  </section>
+<!-- SPECS -->
+<section id="specs" class="wrap block">
+  <h2>Engineering Specs</h2>
+  <p class="lede">Everything measured, nothing assumed.</p>
+  <div class="panel" style="padding:12px;margin-top:12px">
+    <table>
+      <thead><tr><th>Component</th><th>Material</th><th>Finish / Tolerance</th></tr></thead>
+      <tbody>
+        <tr><td>Frame Extrusion</td><td>4080 Aluminium</td><td>Anodized matte black · ±0.2 mm</td></tr>
+        <tr><td>Connectors</td><td>PETG / CF-Nylon</td><td>Printed @ 0.15 mm</td></tr>
+        <tr><td>Seat Rails</td><td>Steel</td><td>Powder-coated · dual-lock slides</td></tr>
+        <tr><td>Monitor Arm</td><td>Aluminium + Damp</td><td>VESA 75/100 up to 49″</td></tr>
+        <tr><td>Fasteners</td><td>A2-70 Stainless</td><td>ISO 7380 / M8 set</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-  <section id="accessories" class="wrap">
-    <h2>Accessories & Add-Ons</h2>
-    <p class="lede">Dial in your setup with finishing touches engineered for comfort and control.</p>
-    <div class="cards-grid">
-      <div class="card"><img src="assets/images/caster-kit.png"><h4>Caster Kit</h4><p>Roll and lock instantly between flight and work modes.</p></div>
-      <div class="card"><img src="assets/images/cable-tray.png"><h4>Cable Tray</h4><p>Under-frame route with quick-clamp harness system.</p></div>
-      <div class="card"><img src="assets/images/mount-plate.png"><h4>Quick-Change Plate</h4><p>Swap from yoke to HOTAS in seconds, no tools.</p></div>
-    </div>
-  </section>
+<!-- COMPATIBILITY -->
+<section id="compat" class="wrap block">
+  <h2>Compatibility</h2>
+  <p class="lede">If it flies or drives, it fits.</p>
+  <div class="panel" style="padding:12px;margin-top:12px;overflow:auto">
+    <table>
+      <thead><tr><th>Brand</th><th>Device</th><th>Mount Type</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Honeycomb</td><td>Alpha / Bravo</td><td>Dual clamp</td><td>Verified</td></tr>
+        <tr><td>Thrustmaster</td><td>Warthog / TCA / T16000</td><td>Quick-plate</td><td>Verified</td></tr>
+        <tr><td>Logitech</td><td>X56 / G Pro Wheel</td><td>Universal base</td><td>Tested</td></tr>
+        <tr><td>Virpil</td><td>MongoosT-50CM3</td><td>Bolted</td><td>Verified</td></tr>
+        <tr><td>VKB</td><td>Gunfighter Mk IV</td><td>Center plate</td><td>Verified</td></tr>
+        <tr><td>MFG</td><td>Crosswind V3</td><td>Pedal tray</td><td>Verified</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-  <footer>© <span id="year"></span> CoreFlux Simpit</footer>
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="wrap block">
+  <h2>What Builders Say</h2>
+  <div class="cards-grid" style="margin-top:14px">
+    <div class="card" style="padding:16px"><p>“Assembly took an evening. Cable tray alone is worth it.”</p><p><strong>— JP</strong>, MSFS + VR</p></div>
+    <div class="card" style="padding:16px"><p>“Swapped from yoke to HOTAS in minutes. Rock solid.”</p><p><strong>— K</strong>, DCS F-16</p></div>
+    <div class="card" style="padding:16px"><p>“Looks like furniture, not scaffolding.”</p><p><strong>— T</strong>, Home Office</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="wrap block">
+  <h2>FAQ</h2>
+  <div class="faq" style="margin-top:12px">
+    <details class="qa"><summary>How long does assembly take?</summary><div class="ans">About 2 hours with a hex set. Modules click in — no drilling.</div></details>
+    <details class="qa"><summary>Will it fit my chair?</summary><div class="ans">Standard office/recliner shells fit the rails; bucket seats need side mounts.</div></details>
+    <details class="qa"><summary>Triple-monitor support?</summary><div class="ans">Yes. Use the display module with the triple-arm kit. VESA 75/100.</div></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="wrap">
+  <h2>Own the Blueprint</h2>
+  <p class="lede">Download the STL pack or pre-order the aluminium kit.</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
+    <a class="btn primary" href="#configurator">Build now</a>
+    <a class="btn ghost" href="#accessories">Browse accessories</a>
+  </div>
+</section>
+
+<footer>© <span id="year"></span> CoreFlux Simpit</footer>
 
 <script>
-document.getElementById('year').textContent=new Date().getFullYear();
-let total=0;
-function addItem(name,price){
-  const list=document.getElementById('buildList');
-  const li=document.createElement('li');
-  li.textContent=`${name} — $${price}`;
-  list.appendChild(li);
-  total+=price;
-  document.getElementById('totalPrice').textContent=`$${total}`;
-}
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// === AI PARTICLES ===
-const canvas=document.getElementById('aiCanvas');
-const ctx=canvas.getContext('2d');
-let w,h,particles=[];
-function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}
-window.addEventListener('resize',resize);resize();
+  // Smooth internal anchor scroll
+  document.addEventListener('click',(e)=>{
+    const a=e.target.closest('a[href^="#"]'); if(!a) return;
+    const id=a.getAttribute('href').slice(1); const el=document.getElementById(id);
+    if(!el) return; e.preventDefault();
+    window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+  });
 
-class Particle{
-  constructor(){this.reset();}
-  reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*0.6;this.vy=(Math.random()-.5)*0.6;this.size=Math.random()*2+1;}
-  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w||this.y<0||this.y>h)this.reset();}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,2*Math.PI);ctx.fillStyle='rgba(0,198,255,.5)';ctx.fill();}
-}
-for(let i=0;i<120;i++)particles.push(new Particle());
-function animate(){
-  ctx.clearRect(0,0,w,h);
-  for(let p of particles){p.update();p.draw();}
-  requestAnimationFrame(animate);
-}
-animate();
+  // Configurator mini-cart
+  let total=0;
+  function addItem(name,price){
+    const list=document.getElementById('buildList');
+    const li=document.createElement('li');
+    li.textContent=`${name} — $${price}`;
+    list.appendChild(li);
+    total+=price;
+    document.getElementById('totalPrice').textContent=`$${total}`;
+  }
+  window.addItem = addItem;
+
+  // Hero carousel (auto-rotate + dots)
+  (function(){
+    const slides=[...document.querySelectorAll('.mock__slide')];
+    const dots=[...document.querySelectorAll('.dot')];
+    const mock=document.getElementById('mock');
+    const fitBtn=document.getElementById('fitToggle');
+    let i=0, timer;
+
+    function show(n){
+      i=(n+slides.length)%slides.length;
+      slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+      dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+    }
+    function play(){ timer=setInterval(()=>show(i+1), 5200); }
+    function stop(){ clearInterval(timer); }
+
+    dots.forEach((d,idx)=>d.addEventListener('click',()=>{ stop(); show(idx); play(); }));
+    mock.addEventListener('mouseenter',stop);
+    mock.addEventListener('mouseleave',play);
+    fitBtn.addEventListener('click',()=>{
+      mock.classList.toggle('fit');
+      fitBtn.textContent = mock.classList.contains('fit') ? 'Fill' : 'Fit';
+    });
+
+    show(0); play();
+  })();
+
+  // ===== Full-page AI particles (lightweight, respects reduced motion) =====
+  (function(){
+    const c=document.getElementById('aiCanvas');
+    const ctx=c.getContext('2d');
+    let w,h,pts=[],mx=0,my=0,raf,then=0;
+    const density=0.00010;      // particles per px
+    const linkDist=140;         // link threshold
+    const maxLinks=3;           // limit fan-out
+    const parallax=0.03;
+
+    function size(){
+      w=c.width=window.innerWidth; h=c.height=window.innerHeight;
+      const count=Math.max(70,Math.floor(w*h*density));
+      pts = Array.from({length:count},()=>({
+        x:Math.random()*w, y:Math.random()*h,
+        vx:(Math.random()-.5)*0.35, vy:(Math.random()-.5)*0.35,
+        r:Math.random()*1.5+0.6
+      }));
+    }
+    size(); window.addEventListener('resize', size);
+    window.addEventListener('pointermove', e=>{
+      mx = (e.clientX - window.innerWidth/2) * parallax;
+      my = (e.clientY - window.innerHeight/2) * parallax;
+    });
+
+    function tick(ts){
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){ ctx.clearRect(0,0,w,h); return; }
+      if (ts - then < 16) { raf=requestAnimationFrame(tick); return; }
+      then=ts;
+      ctx.clearRect(0,0,w,h);
+
+      // move
+      for(const p of pts){
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>w) p.vx*=-1;
+        if(p.y<0||p.y>h) p.vy*=-1;
+      }
+
+      // links
+      for(let i=0;i<pts.length;i++){
+        const a=pts[i]; let links=0;
+        for(let j=i+1;j<pts.length;j++){
+          const b=pts[j]; const dx=a.x-b.x, dy=a.y-b.y;
+          const d2=dx*dx+dy*dy;
+          if(d2<linkDist*linkDist){
+            const alpha=1-Math.sqrt(d2)/linkDist;
+            ctx.globalAlpha=alpha*0.35;
+            ctx.beginPath();
+            ctx.moveTo(a.x+mx*alpha, a.y+my*alpha);
+            ctx.lineTo(b.x+mx*alpha, b.y+my*alpha);
+            ctx.strokeStyle='rgba(0,198,255,1)'; ctx.lineWidth=1; ctx.stroke();
+            if(++links>=maxLinks) break;
+          }
+        }
+      }
+      ctx.globalAlpha=1;
+      for(const p of pts){
+        const gx = p.x+mx*0.3, gy=p.y+my*0.3;
+        const g=ctx.createRadialGradient(gx,gy,0,gx,gy,p.r*6);
+        g.addColorStop(0,'rgba(0,198,255,.65)');
+        g.addColorStop(1,'rgba(0,198,255,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      }
+      raf=requestAnimationFrame(tick);
+    }
+    raf=requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange',()=>{ if(document.hidden) cancelAnimationFrame(raf); else raf=requestAnimationFrame(tick); });
+  })();
 </script>
 </body>
 </html>
