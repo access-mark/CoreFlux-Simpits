@@ -88,20 +88,18 @@ img{max-width:100%;display:block}
 
 /* SECTIONS */
 section{position:relative;z-index:1}
-#prologue,#story,#presets,#configurator,#accessories,#philosophy,#games,#gallery,#community,#faq{padding:70px 0}
+#prologue,#story,#presets,#configurator,#games,#gallery,#community,#tuning,#quickstart,#philosophy,#faq{padding:70px 0}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
 .card:hover{transform:translateY(-4px)}
-.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.85rem;color:var(--muted)}
-.section__head{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
 .gallery img{border-radius:12px;border:1px solid var(--border);}
-
-/* Tables */
 .table{width:100%;border-collapse:collapse;margin-top:16px}
 .table th,.table td{padding:10px 0;border-bottom:1px solid var(--border);text-align:left}
 .table thead th{color:var(--muted);font-size:13px;text-transform:uppercase}
+.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.85rem;color:var(--muted)}
+.section__head{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
 
 footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
 @media(max-width:980px){.hero{grid-template-columns:1fr}.brand img{height:96px}.mock{height:480px}}
@@ -130,6 +128,8 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
       <a href="#configurator">Build</a>
       <a href="#games">Games</a>
       <a href="#gallery">Gallery</a>
+      <a href="#tuning">Tuning</a>
+      <a href="#quickstart">Quick-Start</a>
       <a href="#community">Community</a>
       <a href="#philosophy">Why</a>
       <a href="#faq">FAQ</a>
@@ -168,7 +168,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 </section>
 
-<!-- PROLOGUE / NARRATIVE -->
+<!-- PROLOGUE -->
 <section id="prologue" class="wrap">
   <h2>Built for Workdays, Wired for Play</h2>
   <p class="lede">
@@ -183,17 +183,15 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
       <p class="lede">Work like it’s a dedicated workstation.</p>
       <p>Keyboard, mouse, mic, and camera live where they should. Cable runs stay tidy. Nothing rattles, nothing wobbles — so deep work stays deep.</p>
     </article>
-
     <article class="card" style="padding:18px">
       <h3>Flow, not setup</h3>
       <p class="lede">Mode-switching takes minutes, not hours.</p>
-      <p>Quick-plates and indexed geometry lock controls into repeatable positions. Swap from keyboard to wheel, from yoke to HOTAS, without re-measuring every time.</p>
+      <p>Quick-plates and indexed geometry lock controls into repeatable positions. Swap from keyboard to wheel, from yoke to HOTAS, without re-measuring.</p>
     </article>
-
     <article class="card" style="padding:18px">
       <h3>Comfort that lasts</h3>
       <p class="lede">All-day ergonomics, all-night sessions.</p>
-      <p>Seat rails, reach, and angles dial in precisely. The frame absorbs load; your body doesn’t. Stay fresh for spreadsheets and stints alike.</p>
+      <p>Seat rails, reach, and angles dial in precisely. The frame absorbs load; your body doesn’t.</p>
     </article>
   </div>
 
@@ -203,7 +201,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 </section>
 
-<!-- STORY / NARRATIVE -->
+<!-- STORY -->
 <section id="story" class="wrap">
   <h2>The Switch</h2>
   <p class="lede">From deep work to full-tilt immersion — CoreFlux is the rig that moves with you, not against you.</p>
@@ -211,45 +209,23 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   <div class="cards-grid" style="margin-top:16px">
     <article class="card" style="padding:18px">
       <h3>Workstation → FPS</h3>
-      <p class="lede">Sit-stand posture dialed. Keyboard clears, peripherals lock in. In under five minutes you’re sighted-in and ready to push frames.</p>
+      <p class="lede">Sit-stand posture dialed. Keyboard clears, peripherals lock in.</p>
       <p>Rigid extrusion, zero flex, cable runs that don’t snag. You focus on the shot — the rig disappears.</p>
     </article>
-
     <article class="card" style="padding:18px">
       <h3>FPS → Racing</h3>
-      <p class="lede">Wheel on, pedals aligned, seat rails snap to your mark. No drilling, no shims, no wobble.</p>
+      <p class="lede">Wheel on, pedals aligned, rails snap to your mark. No wobble.</p>
       <p>Angles and reach lock with repeatable stops. Muscle memory holds — lap after lap.</p>
     </article>
-
     <article class="card" style="padding:18px">
       <h3>Racing → Flight</h3>
-      <p class="lede">Yoke or HOTAS? Center-stick or dual-stick? Mounts change without tearing the desk apart.</p>
-      <p>Throttle, trim, and cams sit exactly where they should. You’re airborne in minutes, not hours.</p>
-    </article>
-  </div>
-
-  <div class="cards-grid" style="margin-top:16px">
-    <article class="card" style="padding:18px">
-      <h3>Living-Room Ready</h3>
-      <p class="lede">Looks like furniture, performs like a tool. Clean lines, hidden fasteners, routed cables.</p>
-      <p>No scaffolding vibes — just purpose.</p>
-    </article>
-
-    <article class="card" style="padding:18px">
-      <h3>Engineered, Not Assembled</h3>
-      <p class="lede">4080 aluminium, stainless fasteners, tight tolerances. Everything measured, nothing assumed.</p>
-      <p>Replace, upgrade, or re-configure without buying a new frame.</p>
-    </article>
-
-    <article class="card" style="padding:18px">
-      <h3>Repeatable By Design</h3>
-      <p class="lede">Index marks, fixed geometry, and quick-plates mean your setup returns to exact positions every time.</p>
-      <p>Less wrenching. More driving. More flying.</p>
+      <p class="lede">Yoke/HOTAS? Center-stick or dual-stick? Mounts swap without chaos.</p>
+      <p>Throttle, trim, and cams sit exactly where they should. You’re airborne in minutes.</p>
     </article>
   </div>
 </section>
 
-<!-- PRESETS / LOADOUTS -->
+<!-- LOADOUTS -->
 <section id="presets" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Loadouts</h2>
@@ -264,7 +240,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     </button>
     <button class="btn ghost" data-preset="racing" style="text-align:left;padding:14px 16px">
       <strong>Racing</strong><br>
-      Wheel on quick-plate, pedal tray aligned, triple monitor arm optional.
+      Wheel quick-plate, pedal tray aligned, optional triple arm.
     </button>
     <button class="btn ghost" data-preset="flight" style="text-align:left;padding:14px 16px">
       <strong>Flight</strong><br>
@@ -287,10 +263,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   <p class="lede">Select your modules and see your build total update live.</p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
-    <!-- LEFT: MODULES -->
     <div id="moduleList" class="cards-grid">
-
-      <!-- Core -->
       <div class="card" style="grid-column:1/-1;padding:14px 16px">
         <h3 style="margin:0 0 6px">Core</h3>
         <p class="lede" style="margin:0">Start with the BASE, then add what you need.</p>
@@ -308,7 +281,6 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p>Sliding tray with non-slip runners and quick alignment.</p>
       </label>
 
-      <!-- Monitor System (choose one) -->
       <div class="card radio-group" data-group="monitor" style="grid-column:1/-1;padding:14px 16px">
         <h3 style="margin:0 0 6px">Monitor System</h3>
         <p class="lede" style="margin:0">Choose one configuration.</p>
@@ -338,7 +310,6 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p>HUD/aux display above main view (ultra-stable).</p>
       </label>
 
-      <!-- Controls & Mounts -->
       <div class="card" style="grid-column:1/-1;padding:14px 16px">
         <h3 style="margin:0 0 6px">Controls & Mounts</h3>
         <p class="lede" style="margin:0">Add one or many.</p>
@@ -356,7 +327,6 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p>Left + right sticks with mirrored adjustability.</p>
       </label>
 
-      <!-- Capture & Lighting -->
       <div class="card" style="grid-column:1/-1;padding:14px 16px">
         <h3 style="margin:0 0 6px">Capture & Lighting</h3>
         <p class="lede" style="margin:0">Dial in your stream setup.</p>
@@ -375,7 +345,6 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
       </label>
     </div>
 
-    <!-- RIGHT: SUMMARY -->
     <aside style="position:sticky;top:100px;background:rgba(255,255,255,.03);border:1px solid var(--border);
       border-radius:16px;padding:20px;backdrop-filter:blur(6px)">
       <h3>Your Build</h3>
@@ -422,29 +391,124 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <img src="assets/images/frame-left.png" alt="Left angle">
     <img src="assets/images/frame-right.png" alt="Right angle">
     <img src="assets/images/top-view.png" alt="Top view">
-    <!-- Add more images as you shoot them -->
   </div>
 </section>
 
-<!-- COMPATIBLE ECOSYSTEM (kept brief for gamers) -->
-<section class="wrap" id="accessories">
+<!-- PERFORMANCE TUNING -->
+<section id="tuning" class="wrap">
   <div class="section__head">
-    <h2 class="section__title">Compatible Ecosystem</h2>
-    <span class="pill">No hacks, no wobble</span>
+    <h2 class="section__title">Performance Tuning</h2>
+    <span class="pill">Lock comfort, unlock pace</span>
   </div>
-  <div class="cards-grid" aria-label="Ecosystem highlights" style="margin-top:14px">
-    <div class="card" style="padding:16px">
-      <h3>Flight Controls</h3>
-      <p class="lede">Virpil · VKB · Thrustmaster · Honeycomb</p>
-    </div>
-    <div class="card" style="padding:16px">
-      <h3>Wheels & Pedals</h3>
-      <p class="lede">Fanatec · Moza · (Soon) Simucube · Logitech</p>
-    </div>
-    <div class="card" style="padding:16px">
-      <h3>Displays</h3>
-      <p class="lede">Single · Triple · Top HUD (VESA 75/100 up to 49″)</p>
-    </div>
+  <div class="cards-grid" style="margin-top:14px">
+    <article class="card" style="padding:18px">
+      <h3>Seat & Reach</h3>
+      <p class="lede">Posture that lasts all night.</p>
+      <ul>
+        <li>Seat back: 95–105°; hips slightly below knees.</li>
+        <li>Knees: ~110° in racing; ~100–110° in flight.</li>
+        <li>Arms: 15–30° bend at full lock (wheel/yoke) or stick deflection.</li>
+        <li>Elbows low, shoulders relaxed; no shrugging to reach controls.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>Wheel / Yoke / Stick</h3>
+      <p class="lede">Precision beats strength.</p>
+      <ul>
+        <li>Wheel/yoke height: top rim ≈ at or just below shoulder height.</li>
+        <li>Center-stick: between knees; elbow ≈ 90° at neutral; add extension if wrists bend.</li>
+        <li>Dual-stick: forearms parallel; wrists neutral; symmetrical reach.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>Pedals</h3>
+      <p class="lede">Control without cramp.</p>
+      <ul>
+        <li>Racing: knee 110–120°, ankle 15–30° at rest; brake preload you can hold 60s.</li>
+        <li>Flight: heels supported; avoid toe-only posture; rudder travel clear of rails.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>Screen & FOV</h3>
+      <p class="lede">Clarity without motion sickness.</p>
+      <ul>
+        <li>Top bezel ≈ eye height; center of screen ~15° below eye line.</li>
+        <li>Rule of thumb distance: ~1.2× screen height (27″ ≈ 35–45 cm; 34″ ≈ 45–60 cm).</li>
+        <li>Triples: angle 45–60°; side edges just out of peripheral vision.</li>
+        <li>Use in-game FOV calculators; don’t chase “wide” — chase scale.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>Input Curves</h3>
+      <p class="lede">Smooth at center, control at the edge.</p>
+      <ul>
+        <li>Flight sticks: start with curve 15–25, deadzone 2–3% (fine trim, no wander).</li>
+        <li>Racing brake: linear or mild progressive; calibrate for full travel without spike.</li>
+        <li>Mouse/FPS: stable pad, cable relief; lift-off distance low; no desk wobble.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>VR Notes</h3>
+      <p class="lede">Comfort first, frames second.</p>
+      <ul>
+        <li>Dial IPD physically, then software. Clear edges > raw sharpness.</li>
+        <li>Enable motion reprojection if FPS dips; prioritize CPU frametime.</li>
+        <li>Lock cable runs high on the frame; avoid neck tugs.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- QUICK-START CARDS -->
+<section id="quickstart" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Quick-Start</h2>
+    <span class="pill">Pick a title, get dialed</span>
+  </div>
+
+  <div class="cards-grid" style="margin-top:14px">
+    <article class="card" style="padding:18px">
+      <h3>Star Citizen</h3>
+      <p class="lede">Dual-stick or HOTAS with pedal rudder.</p>
+      <ol>
+        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Joystick</em> or <em>HOTAS</em>, <em>Pedal Tray</em>, <em>Top HUD</em>.</li>
+        <li>Curves: start 20–25; deadzone 2–3%; reduce if you overshoot fine aim.</li>
+        <li>View: top monitor for mobiglas/chat; main at eye height.</li>
+        <li>Cable: mount cams/lights to the frame; avoid desk shake on comms.</li>
+      </ol>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>DCS</h3>
+      <p class="lede">Center-stick HOTAS + pedals for most airframes.</p>
+      <ol>
+        <li>Loadout: <strong>Flight</strong> preset → <em>HOTAS Mount</em>, <em>Pedal Tray</em>, optional <em>Top HUD</em>.</li>
+        <li>Curves: pitch/roll 20–30; rudder 10–20 to calm taxi/landing.</li>
+        <li>Seat: elbows ~90°, wrists neutral; trim so stick centers hands-off.</li>
+        <li>Views: top bezel at eye height; no craning for MFDs.</li>
+      </ol>
+    </article>
+
+    <article class="card" style="padding:18px">
+      <h3>iRacing / ACC</h3>
+      <p class="lede">Wheel + pedals; triples optional.</p>
+      <ol>
+        <li>Loadout: <strong>Racing</strong> preset → <em>Pedal Tray</em>, <em>Wheel mount</em>, optional <em>Triple Arm</em>.</li>
+        <li>Seat: knee 110–120°, shoulders relaxed at 9-and-3; rim just below shoulders.</li>
+        <li>Brake: set a preload you can hold for 60s without shaking; no spike at end.</li>
+        <li>FOV: use in-game calc; aim for realistic scale, not tunnel vision.</li>
+      </ol>
+    </article>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+    <a href="#presets" class="btn primary">Apply A Preset</a>
+    <a href="#tuning" class="btn ghost">Tune Ergonomics</a>
   </div>
 </section>
 
@@ -458,7 +522,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
+<!-- WHY -->
 <section id="philosophy" class="wrap">
   <h2>Why We Build</h2>
   <p class="lede">Aerospace-grade precision. Living-room usability.</p>
@@ -495,7 +559,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ---------- Hero Carousel (auto-rotate + dots + fit/fill) ---------- */
+/* ---------- Hero Carousel ---------- */
 document.addEventListener('DOMContentLoaded', ()=>{
   const slides=[...document.querySelectorAll('.mock__slide')];
   const dots=[...document.querySelectorAll('.dot')];
@@ -625,7 +689,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const root = document.getElementById('moduleList');
   if(!presetBtns.length || !root) return;
 
-  // helpers
   const byKey = k => root.querySelector(`[data-key="${k}"] input`);
   const check = (inp, v=true) => { if(inp){ inp.checked = v; inp.dispatchEvent(new Event('change',{bubbles:true})); } };
   const chooseRadio = k => { const i = byKey(k); if(i && i.type==='radio'){ i.checked = true; i.dispatchEvent(new Event('change',{bubbles:true})); } };
@@ -637,16 +700,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const apply = (name)=>{
     clearAll();
-    // base is always on
-    check(byKey('base'), true);
+    check(byKey('base'), true); // base always on
 
     if(name==='fps'){
       chooseRadio('single');
-      check(byKey('dual'), true);    // dual sticks for space/FPS hybrids
+      check(byKey('dual'), true);
       check(byKey('camera'), true);
     }
     if(name==='racing'){
-      chooseRadio('triple');         // or swap to stand as you prefer
+      chooseRadio('triple');
       check(byKey('pedal'), true);
       check(byKey('camera'), true);
     }
@@ -657,22 +719,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
       check(byKey('camera'), true);
       check(byKey('light'), true);
     }
-    // soft scroll to configurator
     document.querySelector('#configurator').scrollIntoView({behavior:'smooth', block:'start'});
   };
 
-  presetBtns.forEach(btn=>{
-    btn.addEventListener('click',()=> apply(btn.dataset.preset));
-  });
+  presetBtns.forEach(btn=> btn.addEventListener('click',()=> apply(btn.dataset.preset)));
 })();
 
-/* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
+/* ---------- AI Particle Network (with scroll fade) ---------- */
 (function(){
   const c = document.getElementById('aiCanvas');
   if(!c) return;
   const ctx = c.getContext('2d');
   let w, h, pts = [];
-  const DENSITY = 0.00012;   // particles per px
+  const DENSITY = 0.00012;
   const LINK_DIST = 140;
   const MAX_LINKS = 3;
 
@@ -699,22 +758,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function fadeByScroll(){
     const max = Math.max(1, document.body.scrollHeight - h);
-    const t = window.scrollY / max;                 // 0..1
-    return 0.45 + 0.35 * (1 - Math.abs(t - 0.5)*2); // bright at top/bottom, softer mid
+    const t = window.scrollY / max;
+    return 0.45 + 0.35 * (1 - Math.abs(t - 0.5)*2);
   }
 
   function tick(){
     ctx.clearRect(0,0,w,h);
     c.style.opacity = fadeByScroll();
 
-    // move
     for(const p of pts){
       p.x += p.vx; p.y += p.vy;
       if(p.x<0||p.x>w) p.vx*=-1;
       if(p.y<0||p.y>h) p.vy*=-1;
     }
 
-    // links
     for(let i=0;i<pts.length;i++){
       const a = pts[i]; let links = 0;
       for(let j=i+1;j<pts.length;j++){
@@ -736,7 +793,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     ctx.globalAlpha = 1;
 
-    // dots (glow)
     for(const p of pts){
       const gx = p.x + pmx*0.3, gy = p.y + pmy*0.3;
       const g = ctx.createRadialGradient(gx,gy,0, gx,gy, p.r*6);
