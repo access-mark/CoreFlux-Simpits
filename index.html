@@ -62,10 +62,8 @@ img{max-width:100%;display:block}
 .btn{padding:12px 18px;border-radius:12px;font-weight:800;border:1px solid var(--border);cursor:pointer;transition:transform .08s ease}
 .btn:active{transform:translateY(1px)}
 .btn.primary{
-  position:relative;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;box-shadow:0 10px 28px rgba(0,198,255,.32);
-  isolation:isolate;
+  position:relative;background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;box-shadow:0 10px 28px rgba(0,198,255,.32);isolation:isolate;
 }
 .btn.primary::after{
   content:"";position:absolute;inset:-4px;border-radius:16px;z-index:-1;filter:blur(12px);
@@ -90,15 +88,21 @@ img{max-width:100%;display:block}
 
 /* SECTIONS */
 section{position:relative;z-index:1}
-#prologue,#story,#configurator,#accessories,#philosophy,#specs,#compat,#testimonials,#faq,#cta{padding:70px 0}
+#prologue,#story,#presets,#configurator,#accessories,#philosophy,#games,#gallery,#community,#faq{padding:70px 0}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
 .card:hover{transform:translateY(-4px)}
+.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.85rem;color:var(--muted)}
+.section__head{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.gallery img{border-radius:12px;border:1px solid var(--border);}
+
+/* Tables */
 .table{width:100%;border-collapse:collapse;margin-top:16px}
 .table th,.table td{padding:10px 0;border-bottom:1px solid var(--border);text-align:left}
 .table thead th{color:var(--muted);font-size:13px;text-transform:uppercase}
-.pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.85rem;color:var(--muted)}
-.section__head{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+
 footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid var(--border)}
 @media(max-width:980px){.hero{grid-template-columns:1fr}.brand img{height:96px}.mock{height:480px}}
 </style>
@@ -122,11 +126,12 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <div class="links">
       <a href="#prologue">About</a>
       <a href="#story">The Switch</a>
+      <a href="#presets">Loadouts</a>
       <a href="#configurator">Build</a>
-      <a href="#accessories">Accessories</a>
+      <a href="#games">Games</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#community">Community</a>
       <a href="#philosophy">Why</a>
-      <a href="#specs">Specs</a>
-      <a href="#compat">Compatibility</a>
       <a href="#faq">FAQ</a>
     </div>
   </div>
@@ -146,7 +151,7 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
 
     <div class="ctas">
       <a href="#configurator" class="btn primary">Configure My Build</a>
-      <a href="#specs" class="btn ghost">See Engineering</a>
+      <a href="#story" class="btn ghost">See How It Works</a>
     </div>
   </div>
 
@@ -193,8 +198,8 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-    <a href="#configurator" class="btn primary">Configure My Build</a>
-    <a href="#story" class="btn ghost">See How the Switch Works</a>
+    <a href="#presets" class="btn primary">Pick a Loadout</a>
+    <a href="#story" class="btn ghost">See The Switch</a>
   </div>
 </section>
 
@@ -244,6 +249,35 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   </div>
 </section>
 
+<!-- PRESETS / LOADOUTS -->
+<section id="presets" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Loadouts</h2>
+    <span class="pill">One-click presets for gamers</span>
+  </div>
+  <p class="lede">Start fast. These presets toggle the configurator for you — tweak anything after.</p>
+
+  <div class="grid-3" style="margin-top:14px">
+    <button class="btn ghost" data-preset="fps" style="text-align:left;padding:14px 16px">
+      <strong>FPS / First-Person</strong><br>
+      Keyboard clearance, single monitor arm, dual joystick or HOTAS.
+    </button>
+    <button class="btn ghost" data-preset="racing" style="text-align:left;padding:14px 16px">
+      <strong>Racing</strong><br>
+      Wheel on quick-plate, pedal tray aligned, triple monitor arm optional.
+    </button>
+    <button class="btn ghost" data-preset="flight" style="text-align:left;padding:14px 16px">
+      <strong>Flight</strong><br>
+      Center-stick or yoke, throttle, top HUD arm, pedal tray locked.
+    </button>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+    <a href="#configurator" class="btn primary">Apply & Open Configurator</a>
+    <a href="#games" class="btn ghost">See Supported Titles</a>
+  </div>
+</section>
+
 <!-- CONFIGURATOR -->
 <section id="configurator" class="wrap">
   <div class="section__head">
@@ -262,13 +296,13 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p class="lede" style="margin:0">Start with the BASE, then add what you need.</p>
       </div>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="base" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="1000" data-label="BASE">
         <strong> BASE — $1,000</strong>
         <p>Core 4080 aluminium frame + fasteners, pre-cut and anodized.</p>
       </label>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="pedal" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="300" data-label="PEDAL TRAY">
         <strong> PEDAL TRAY — $300</strong>
         <p>Sliding tray with non-slip runners and quick alignment.</p>
@@ -280,25 +314,25 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p class="lede" style="margin:0">Choose one configuration.</p>
       </div>
 
-      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+      <label class="card radio-group" data-group="monitor" data-key="stand" style="padding:16px;cursor:pointer">
         <input type="radio" name="monitor" data-price="500" data-label="Monitor Stand">
         <strong> Monitor stand — $500</strong>
         <p>Floor stand with rigid center post (VESA 75/100).</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+      <label class="card radio-group" data-group="monitor" data-key="single" style="padding:16px;cursor:pointer">
         <input type="radio" name="monitor" data-price="150" data-label="Single Monitor Mount">
         <strong> Single monitor mount — $150</strong>
         <p>Frame-mounted arm for 24–34″ displays.</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+      <label class="card radio-group" data-group="monitor" data-key="triple" style="padding:16px;cursor:pointer">
         <input type="radio" name="monitor" data-price="400" data-label="Triple Monitor Arm">
         <strong> Triple monitor arm — $400</strong>
         <p>Independent tilt/angle for triple 24–32″ setups.</p>
       </label>
 
-      <label class="card radio-group" data-group="monitor" style="padding:16px;cursor:pointer">
+      <label class="card radio-group" data-group="monitor" data-key="top" style="padding:16px;cursor:pointer">
         <input type="radio" name="monitor" data-price="200" data-label="Top Monitor Arm">
         <strong> Top monitor arm — $200</strong>
         <p>HUD/aux display above main view (ultra-stable).</p>
@@ -310,13 +344,13 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p class="lede" style="margin:0">Add one or many.</p>
       </div>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="hotas" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="200" data-label="HOTAS MOUNT">
         <strong> HOTAS MOUNT — $200</strong>
         <p>Quick-change plates for joystick & throttle.</p>
       </label>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="dual" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="200" data-label="DUAL JOYSTICK MOUNT">
         <strong> DUAL JOYSTICK MOUNT — $200</strong>
         <p>Left + right sticks with mirrored adjustability.</p>
@@ -328,13 +362,13 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
         <p class="lede" style="margin:0">Dial in your stream setup.</p>
       </div>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="camera" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="100" data-label="CAMERA MOUNT">
         <strong> CAMERA MOUNT — $100</strong>
         <p>Low-vibration arm for face/overhead cams.</p>
       </label>
 
-      <label class="card" style="padding:16px;cursor:pointer">
+      <label class="card" data-key="light" style="padding:16px;cursor:pointer">
         <input type="checkbox" data-price="200" data-label="KEY LIGHT MOUNT">
         <strong> KEY LIGHT MOUNT — $200</strong>
         <p>Frame-mounted post for key/fill lights.</p>
@@ -348,24 +382,57 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
       <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:220px;overflow:auto"></ul>
       <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
-      <a href="#cta" class="btn primary" style="width:100%;text-align:center">Checkout</a>
+      <a href="#community" class="btn primary" style="width:100%;text-align:center">Join the Community</a>
     </aside>
   </div>
 </section>
 
-<!-- COMPATIBLE ECOSYSTEM -->
+<!-- GAMES & SIMS -->
+<section id="games" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Games & Sims</h2>
+    <span class="pill">Dialed for today’s titles</span>
+  </div>
+  <div class="cards-grid" style="margin-top:14px">
+    <article class="card" style="padding:16px">
+      <h3>Flight</h3>
+      <p class="lede">Microsoft Flight Simulator • DCS • X-Plane • IL-2</p>
+      <p>Center-stick, dual-stick, or yoke. Pedal tray alignment for smooth rudder control.</p>
+    </article>
+    <article class="card" style="padding:16px">
+      <h3>Racing</h3>
+      <p class="lede">iRacing • Assetto Corsa • ACC • Forza • Gran Turismo (PC rig)</p>
+      <p>Wheel mounts with rigid clamping and repeatable seating marks for stint consistency.</p>
+    </article>
+    <article class="card" style="padding:16px">
+      <h3>FPS / Tactical</h3>
+      <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
+      <p>Keyboard clearance, low-latency cable routes, quick swap to sticks or throttle as needed.</p>
+    </article>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Gallery</h2>
+    <span class="pill">Angles that matter</span>
+  </div>
+  <div class="gallery" style="margin-top:14px">
+    <img src="assets/images/frame-left.png" alt="Left angle">
+    <img src="assets/images/frame-right.png" alt="Right angle">
+    <img src="assets/images/top-view.png" alt="Top view">
+    <!-- Add more images as you shoot them -->
+  </div>
+</section>
+
+<!-- COMPATIBLE ECOSYSTEM (kept brief for gamers) -->
 <section class="wrap" id="accessories">
   <div class="section__head">
     <h2 class="section__title">Compatible Ecosystem</h2>
-    <span class="pill">Trusted by sim veterans</span>
+    <span class="pill">No hacks, no wobble</span>
   </div>
-
-  <p class="lede">
-    The CoreFlux rig is designed for real hardware — no hacks, no wobbles.
-    Compatible out of the box with leading flight and racing systems.
-  </p>
-
-  <div class="cards-grid" aria-label="Ecosystem highlights">
+  <div class="cards-grid" aria-label="Ecosystem highlights" style="margin-top:14px">
     <div class="card" style="padding:16px">
       <h3>Flight Controls</h3>
       <p class="lede">Virpil · VKB · Thrustmaster · Honeycomb</p>
@@ -375,9 +442,19 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
       <p class="lede">Fanatec · Moza · (Soon) Simucube · Logitech</p>
     </div>
     <div class="card" style="padding:16px">
-      <h3>Displays & Stands</h3>
-      <p class="lede">Single / Triple / Top HUD · VESA 75/100 up to 49″</p>
+      <h3>Displays</h3>
+      <p class="lede">Single · Triple · Top HUD (VESA 75/100 up to 49″)</p>
     </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community" class="wrap" style="text-align:center">
+  <h2>Build With Us</h2>
+  <p class="lede">Share loadouts, print files, and tuning tips. Ask questions. Show your rig.</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+    <a href="#faq" class="btn primary">Get Answers</a>
+    <a href="#configurator" class="btn ghost">Tweak My Build</a>
   </div>
 </section>
 
@@ -388,54 +465,9 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;margin-top:16px">
     <div>
       <p>We design for posture, endurance, and immersion. Every part can be printed, machined, or sourced locally. Every module locks with tight tolerances.</p>
-      <p>Less wrenching. More flying.</p>
+      <p>Less wrenching. More flying. More racing. More playing.</p>
     </div>
     <div><img src="assets/images/design-lab.jpg" alt="CoreFlux design lab" style="border-radius:14px"></div>
-  </div>
-</section>
-
-<!-- SPECS -->
-<section id="specs" class="wrap">
-  <h2>Engineering Specs</h2>
-  <p class="lede">Everything measured, nothing assumed.</p>
-  <table class="table" aria-label="Engineering specifications">
-    <thead><tr>
-      <th>Component</th><th>Material</th><th>Finish / Tolerance</th>
-    </tr></thead>
-    <tbody>
-      <tr><td>Frame Extrusion</td><td>4080 Aluminium</td><td>Anodized matte black · ±0.2 mm</td></tr>
-      <tr><td>Connectors</td><td>PETG / CF-Nylon</td><td>Printed @ 0.15 mm</td></tr>
-      <tr><td>Seat Rails</td><td>Steel</td><td>Powder-coated · dual-lock slides</td></tr>
-      <tr><td>Monitor Arm</td><td>Aluminium + Damp</td><td>VESA 75/100 up to 49″</td></tr>
-      <tr><td>Fasteners</td><td>A2-70 Stainless</td><td>ISO 7380 / M8 set</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- COMPATIBILITY -->
-<section id="compat" class="wrap">
-  <h2>Compatibility</h2>
-  <p class="lede">If it flies or drives, it fits.</p>
-  <table class="table" aria-label="Brand compatibility">
-    <thead><tr><th>Brand</th><th>Device</th><th>Mount Type</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Honeycomb</td><td>Alpha / Bravo</td><td>Dual clamp</td><td>Verified</td></tr>
-      <tr><td>Thrustmaster</td><td>Warthog / TCA / T16000</td><td>Quick-plate</td><td>Verified</td></tr>
-      <tr><td>Logitech</td><td>X56 / G Pro Wheel</td><td>Universal base</td><td>Tested</td></tr>
-      <tr><td>Virpil</td><td>MongoosT-50CM3</td><td>Bolted</td><td>Verified</td></tr>
-      <tr><td>VKB</td><td>Gunfighter Mk IV</td><td>Center plate</td><td>Verified</td></tr>
-      <tr><td>MFG</td><td>Crosswind V3</td><td>Pedal tray</td><td>Verified</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials" class="wrap">
-  <h2>What Builders Say</h2>
-  <div class="cards-grid" style="margin-top:14px">
-    <div class="card" style="padding:16px"><p>“Assembly took an evening. Cable tray alone is worth it.”</p><p><strong>— JP</strong>, MSFS + VR</p></div>
-    <div class="card" style="padding:16px"><p>“Swapped from yoke to HOTAS in minutes. Rock solid.”</p><p><strong>— K</strong>, DCS F-16</p></div>
-    <div class="card" style="padding:16px"><p>“Looks like furniture, not scaffolding.”</p><p><strong>— T</strong>, Home Office</p></div>
   </div>
 </section>
 
@@ -454,16 +486,6 @@ footer{padding:44px 0;text-align:center;color:var(--muted);border-top:1px solid 
     <summary style="font-weight:800;cursor:pointer;">Triple-monitor support?</summary>
     <p>Yes. Use the display module with the triple-arm kit. VESA 75/100.</p>
   </details>
-</section>
-
-<!-- CTA -->
-<section id="cta" class="wrap" style="text-align:center;padding:80px 0">
-  <h2>Own the Blueprint</h2>
-  <p class="lede">Download the STL pack or pre-order the aluminium kit.</p>
-  <div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
-    <a class="btn primary" href="#configurator">Build Now</a>
-    <a class="btn ghost" href="#accessories">Browse Accessories</a>
-  </div>
 </section>
 
 <footer>© <span id="year"></span> CoreFlux Simpit</footer>
@@ -596,6 +618,53 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   update();
 })();  /* CLOSES Configurator IIFE */
+
+/* ---------- Presets: one-click loadouts ---------- */
+(function(){
+  const presetBtns = document.querySelectorAll('[data-preset]');
+  const root = document.getElementById('moduleList');
+  if(!presetBtns.length || !root) return;
+
+  // helpers
+  const byKey = k => root.querySelector(`[data-key="${k}"] input`);
+  const check = (inp, v=true) => { if(inp){ inp.checked = v; inp.dispatchEvent(new Event('change',{bubbles:true})); } };
+  const chooseRadio = k => { const i = byKey(k); if(i && i.type==='radio'){ i.checked = true; i.dispatchEvent(new Event('change',{bubbles:true})); } };
+
+  function clearAll(){
+    root.querySelectorAll('input[type="checkbox"]').forEach(i=>{ i.checked=false; i.dispatchEvent(new Event('change',{bubbles:true})); });
+    root.querySelectorAll('input[type="radio"]').forEach(i=>{ i.checked=false; i.dispatchEvent(new Event('change',{bubbles:true})); });
+  }
+
+  const apply = (name)=>{
+    clearAll();
+    // base is always on
+    check(byKey('base'), true);
+
+    if(name==='fps'){
+      chooseRadio('single');
+      check(byKey('dual'), true);    // dual sticks for space/FPS hybrids
+      check(byKey('camera'), true);
+    }
+    if(name==='racing'){
+      chooseRadio('triple');         // or swap to stand as you prefer
+      check(byKey('pedal'), true);
+      check(byKey('camera'), true);
+    }
+    if(name==='flight'){
+      chooseRadio('top');
+      check(byKey('pedal'), true);
+      check(byKey('hotas'), true);
+      check(byKey('camera'), true);
+      check(byKey('light'), true);
+    }
+    // soft scroll to configurator
+    document.querySelector('#configurator').scrollIntoView({behavior:'smooth', block:'start'});
+  };
+
+  presetBtns.forEach(btn=>{
+    btn.addEventListener('click',()=> apply(btn.dataset.preset));
+  });
+})();
 
 /* ---------- Full-page AI Particle Network (with scroll fade) ---------- */
 (function(){
