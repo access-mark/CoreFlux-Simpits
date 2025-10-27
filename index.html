@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — v13 ===== */
+/* ===== CoreFlux Simpit — v14 (group borders in configurator) ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -744,6 +744,51 @@ section{
   letter-spacing:.03em;
 }
 
+/* Configurator group wrapper */
+.config-group{
+  border-radius:20px;
+  padding:20px;
+  background:rgba(10,14,30,.6);
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+  border:1px solid var(--border);
+  display:grid;
+  gap:12px;
+}
+.config-group--core{ /* neutral steel edge */
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 0 30px rgba(255,255,255,.07),
+    0 30px 80px rgba(0,0,0,.9);
+}
+.config-group--monitor{ /* soft cyan edge */
+  border:1px solid rgba(0,198,255,.45);
+  box-shadow:
+    0 0 40px rgba(0,198,255,.4),
+    0 40px 120px rgba(0,198,255,.12),
+    0 60px 160px rgba(0,0,0,.9);
+}
+.config-group--flight{ /* cyan glow */
+  border:1px solid rgba(0,198,255,.6);
+  box-shadow:
+    0 0 40px rgba(0,198,255,.5),
+    0 40px 120px rgba(0,198,255,.18),
+    0 60px 160px rgba(0,0,0,.9);
+}
+.config-group--racing{ /* gold glow */
+  border:1px solid rgba(255,210,63,.6);
+  box-shadow:
+    0 0 40px rgba(255,210,63,.4),
+    0 40px 120px rgba(255,210,63,.14),
+    0 60px 160px rgba(0,0,0,.9);
+}
+.config-group--stream{ /* teal/cyan mix */
+  border:1px solid rgba(0,198,255,.45);
+  box-shadow:
+    0 0 40px rgba(75,227,209,.4),
+    0 40px 120px rgba(0,198,255,.16),
+    0 60px 160px rgba(0,0,0,.9);
+}
+
 /* Footer */
 footer{
   padding:40px 0 60px;color:var(--muted);
@@ -1071,7 +1116,7 @@ footer{
   </div>
 </section>
 
-<!-- STARTER KITS / POSITIONING -->
+<!-- STARTER KITS -->
 <section id="kits" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Starter Kits</h2>
@@ -1114,74 +1159,74 @@ footer{
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
-    <div id="moduleList" class="cards" style="grid-template-columns:1fr">
+    <div id="moduleList" style="display:grid;gap:24px;align-content:start">
 
-      <!-- CORE SYSTEM -->
-      <div class="card" style="grid-column:1/-1">
-        <h3>Core System</h3>
-        <p class="lede">This is the chassis. Everything else snaps to this.</p>
+      <!-- CORE SYSTEM GROUP -->
+      <div class="config-group config-group--core">
+        <div class="card" style="grid-column:1/-1">
+          <h3>Core System</h3>
+          <p class="lede">This is the chassis. Everything else snaps to this.</p>
+        </div>
+
+        <label class="card" data-key="base" style="cursor:pointer">
+          <input type="checkbox" data-price="1000" data-label="BASE FRAME">
+          <strong>BASE FRAME — $1,000</strong>
+          <p>4080 aluminium main structure, pre-cut and anodized. No drilling.</p>
+        </label>
+
+        <label class="card" data-key="pedaltray" style="cursor:pointer">
+          <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
+          <strong>PEDAL TRAY / PLATE — $300</strong>
+          <p>Rigid pedal mount with indexed position. Locks brake load without walking.</p>
+        </label>
+
+        <label class="card" data-key="stand" style="cursor:pointer">
+          <input type="checkbox" data-price="500" data-label="MONITOR STAND">
+          <strong>MONITOR STAND — $500</strong>
+          <p>Primary display stand (VESA 75/100). Steady under racing or work use.</p>
+        </label>
+
+        <label class="card" data-key="deskpad" style="cursor:pointer">
+          <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
+          <strong>MOUSE PAD BASE — $120</strong>
+          <p>Keyboard and mouse tray. Converts rig into a full workstation.</p>
+        </label>
       </div>
 
-      <label class="card" data-key="base" style="cursor:pointer">
-        <input type="checkbox" data-price="1000" data-label="BASE FRAME">
-        <strong>BASE FRAME — $1,000</strong>
-        <p>4080 aluminium main structure, pre-cut and anodized. No drilling.</p>
-      </label>
+      <!-- MONITOR SYSTEM GROUP -->
+      <div class="config-group config-group--monitor">
+        <div class="card" style="grid-column:1/-1">
+          <h3>Monitor System</h3>
+          <p class="lede">Choose one display layout — you can swap arms later.</p>
+        </div>
 
-      <label class="card" data-key="pedaltray" style="cursor:pointer">
-        <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
-        <strong>PEDAL TRAY / PLATE — $300</strong>
-        <p>Rigid pedal mount with indexed position. Locks brake load without walking.</p>
-      </label>
+        <label class="card" data-group="monitor" data-key="single" style="cursor:pointer">
+          <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
+          <strong>SINGLE MONITOR ARM — $150</strong>
+          <p>One display arm (24–34″). Ideal for workstation or FPS setup.</p>
+        </label>
 
-      <label class="card" data-key="stand" style="cursor:pointer">
-        <input type="checkbox" data-price="500" data-label="MONITOR STAND">
-        <strong>MONITOR STAND — $500</strong>
-        <p>Primary display stand (VESA 75/100). Steady under racing or work use.</p>
-      </label>
+        <label class="card" data-group="monitor" data-key="triple" style="cursor:pointer">
+          <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
+          <strong>TRIPLE MONITOR ARM — $400</strong>
+          <p>Three-arm configuration for immersive racing / sim environment.</p>
+        </label>
 
-      <label class="card" data-key="deskpad" style="cursor:pointer">
-        <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
-        <strong>MOUSE PAD BASE — $120</strong>
-        <p>Keyboard and mouse tray. Converts rig into a full workstation.</p>
-      </label>
-
-      <!-- MONITOR SYSTEM -->
-      <div class="card" style="grid-column:1/-1">
-        <h3>Monitor System</h3>
-        <p class="lede">Choose one display layout — you can swap arms later.</p>
+        <label class="card" data-group="monitor" data-key="quad" style="cursor:pointer">
+          <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
+          <strong>QUAD MONITOR SETUP — $450</strong>
+          <p>Triple base monitors plus 4th overhead HUD/top display for flight, telemetry, or chat.</p>
+        </label>
       </div>
 
-      <label class="card" data-group="monitor" data-key="single" style="cursor:pointer">
-        <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
-        <strong>SINGLE MONITOR ARM — $150</strong>
-        <p>One display arm (24–34″). Ideal for workstation or FPS setup.</p>
-      </label>
+      <!-- FLIGHT CONTROLS GROUP -->
+      <div class="config-group config-group--flight">
+        <div class="card" style="grid-column:1/-1">
+          <h3>Flight Controls</h3>
+          <p class="lede">HOTAS / dual-stick / throttle. Lock-in repeatable reach.</p>
+        </div>
 
-      <label class="card" data-group="monitor" data-key="triple" style="cursor:pointer">
-        <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
-        <strong>TRIPLE MONITOR ARM — $400</strong>
-        <p>Three-arm configuration for immersive racing / sim environment.</p>
-      </label>
-
-      <label class="card" data-group="monitor" data-key="quad" style="cursor:pointer">
-        <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
-        <strong>QUAD MONITOR SETUP — $450</strong>
-        <p>Triple base monitors plus 4th overhead HUD/top display for flight, telemetry, or chat.</p>
-      </label>
-
-      <!-- CONTROLS -->
-      <div class="card" style="grid-column:1/-1">
-        <h3>Controls</h3>
-        <p class="lede">Flight. Racing. Creator. Add what you run.</p>
-      </div>
-
-      <!-- Flight -->
-      <div class="card" style="border-style:dashed;border-color:rgba(0,198,255,.5);">
-        <h3>Flight Controls</h3>
-        <p class="lede">HOTAS / dual-stick / throttle. Lock-in repeatable reach.</p>
-
-        <label style="cursor:pointer;width:100%;display:block">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="flight-single" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
           <strong>FLIGHT: STICK + THROTTLE — $220</strong>
           <p style="margin-top:6px">
@@ -1189,7 +1234,7 @@ footer{
           </p>
         </label>
 
-        <label style="cursor:pointer;width:100%;display:block;margin-top:12px">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="flight-dual" data-price="240" data-label="FLIGHT: DUAL STICK">
           <strong>FLIGHT: DUAL STICK — $240</strong>
           <p style="margin-top:6px">
@@ -1198,12 +1243,14 @@ footer{
         </label>
       </div>
 
-      <!-- Racing -->
-      <div class="card" style="border-style:dashed;border-color:rgba(255,210,63,.4);">
-        <h3>Racing Controls</h3>
-        <p class="lede">Steering, pedals, shifting — under real torque load.</p>
+      <!-- RACING CONTROLS GROUP -->
+      <div class="config-group config-group--racing">
+        <div class="card" style="grid-column:1/-1">
+          <h3>Racing Controls</h3>
+          <p class="lede">Steering, pedals, shifting — under real torque load.</p>
+        </div>
 
-        <label style="cursor:pointer;width:100%;display:block">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="race-wheel" data-price="250" data-label="RACING: WHEEL ARM">
           <strong>RACING: WHEEL ARM — $250</strong>
           <p style="margin-top:6px">
@@ -1211,7 +1258,7 @@ footer{
           </p>
         </label>
 
-        <label style="cursor:pointer;width:100%;display:block;margin-top:12px">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="race-pedal" data-price="180" data-label="RACING: PEDAL MOUNT">
           <strong>RACING: PEDAL MOUNT — $180</strong>
           <p style="margin-top:6px">
@@ -1219,7 +1266,7 @@ footer{
           </p>
         </label>
 
-        <label style="cursor:pointer;width:100%;display:block;margin-top:12px">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="race-shifter" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
           <strong>RACING: GEARSHIFT MOUNT — $140</strong>
           <p style="margin-top:6px">
@@ -1228,12 +1275,14 @@ footer{
         </label>
       </div>
 
-      <!-- Stream / Creator -->
-      <div class="card" style="border-style:dashed;border-color:rgba(0,198,255,.3);">
-        <h3>Creator / Stream Setup</h3>
-        <p class="lede">Camera, lighting, and control arms for content work.</p>
+      <!-- CREATOR / STREAM GROUP -->
+      <div class="config-group config-group--stream">
+        <div class="card" style="grid-column:1/-1">
+          <h3>Creator / Stream Setup</h3>
+          <p class="lede">Camera, lighting, and control arms for content work.</p>
+        </div>
 
-        <label style="cursor:pointer;width:100%;display:block">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="stream-cam" data-price="100" data-label="STREAM: CAMERA ARM">
           <strong>STREAM: CAMERA ARM — $100</strong>
           <p style="margin-top:6px">
@@ -1241,7 +1290,7 @@ footer{
           </p>
         </label>
 
-        <label style="cursor:pointer;width:100%;display:block;margin-top:12px">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="stream-light" data-price="120" data-label="STREAM: KEY LIGHT ARM">
           <strong>STREAM: KEY LIGHT ARM — $120</strong>
           <p style="margin-top:6px">
@@ -1249,7 +1298,7 @@ footer{
           </p>
         </label>
 
-        <label style="cursor:pointer;width:100%;display:block;margin-top:12px">
+        <label class="card" style="cursor:pointer;width:100%;display:block">
           <input type="checkbox" data-key="stream-deck" data-price="90" data-label="STREAM: STREAM DECK ARM">
           <strong>STREAM: STREAM DECK ARM — $90</strong>
           <p style="margin-top:6px">
@@ -1257,6 +1306,7 @@ footer{
           </p>
         </label>
       </div>
+
     </div>
 
     <!-- RIGHT: SUMMARY -->
