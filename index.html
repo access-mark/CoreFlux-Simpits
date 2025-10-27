@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — Nav v5 Tall Hero / Bare Logo ===== */
+/* ===== CoreFlux Simpit — Nav v6 Neon Mock Glow / Centered Brand ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -28,7 +28,9 @@
   --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
   --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
   --logo-h:54px;
-  --nav-h:160px; /* tall nav hero */
+  --nav-h:160px;
+  --glow-red:rgba(255,0,60,.55);     /* neon red core */
+  --glow-red-soft:rgba(255,0,60,0);  /* fade out */
 }
 
 /* ---- Base ---- */
@@ -52,8 +54,18 @@ body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .wrap{width:min(1200px,92vw);margin:0 auto}
-.lede{color:var(--muted);font-size:clamp(15px,1.25vw,18px);line-height:1.5;font-weight:500;max-width:640px}
-section{padding:48px 0;position:relative;z-index:1}
+.lede{
+  color:var(--muted);
+  font-size:clamp(15px,1.25vw,18px);
+  line-height:1.5;
+  font-weight:500;
+  max-width:640px
+}
+section{
+  padding:48px 0;
+  position:relative;
+  z-index:1
+}
 
 /* Global AI particles canvas – fixed brightness */
 #aiCanvas{
@@ -66,7 +78,7 @@ section{padding:48px 0;position:relative;z-index:1}
 }
 
 /* =========================================================
-   NAV (tall hero header with AI glow, bare logo)
+   NAV (centered brand in tall header)
    ========================================================= */
 .nav{
   position:sticky;
@@ -86,25 +98,28 @@ section{padding:48px 0;position:relative;z-index:1}
     0 1px 0 rgba(255,255,255,.08) inset;
 }
 
-/* layout: top row (logo + tagline), bottom row (links) */
+/* Make nav__inner a 2-row grid so we can center row 1 in the banner space */
 .nav__inner{
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  display:grid;
+  grid-template-rows:1fr auto;  /* row1 flexes, row2 hugs content */
   height:100%;
-  padding:16px 0 14px;
+  padding:0 0 14px;
 }
 
+/* Row 1 = brand block. We now center it vertically using flex */
 .nav__top{
   display:flex;
   align-items:center;
+  /* center this row's content vertically by giving it min-height
+     close to the header height minus links rail height (~40px) */
+  min-height:120px; /* pulls brand down into middle visually */
+  padding-top:8px;
+  padding-bottom:8px;
   justify-content:space-between;
   gap:20px;
-  flex:1;
-  min-height:0;
 }
 
-/* brand block row: huge logo + tagline */
+/* brand group: logo + tagline */
 .brand{
   display:flex;
   align-items:center;
@@ -112,19 +127,23 @@ section{padding:48px 0;position:relative;z-index:1}
   min-width:0;
 }
 
-/* bare logo, no border/no card */
+/* bare logo, no card */
 .brand__logo-img{
-  height:140px;          /* ~2x previous size */
+  height:140px;
   width:auto;
   max-height:140px;
   object-fit:contain;
   flex-shrink:0;
-  image-rendering:auto;
   display:block;
-  filter:drop-shadow(0 20px 40px rgba(0,198,255,.4));
+  image-rendering:auto;
+
+  /* keep subtle cyan depth but let red mock glow take stage */
+  filter:
+    drop-shadow(0 20px 40px rgba(0,198,255,.4))
+    drop-shadow(0 0 20px rgba(0,198,255,.6));
 }
 
-/* tagline next to it */
+/* tagline */
 .brand__text{
   display:flex;
   flex-direction:column;
@@ -154,7 +173,7 @@ section{padding:48px 0;position:relative;z-index:1}
     0 0 60px rgba(255,210,63,.28);
 }
 
-/* link rail under it */
+/* Row 2 = nav links rail */
 .nav__links-row{
   display:flex;
   justify-content:flex-end;
@@ -163,7 +182,8 @@ section{padding:48px 0;position:relative;z-index:1}
   column-gap:14px;
   font-size:.8rem;
   line-height:1.2;
-  margin-top:16px;
+  padding:0 0 14px;
+  margin-top:0; /* was 16px, not needed now */
 }
 
 /* link pills */
@@ -259,12 +279,36 @@ section{padding:48px 0;position:relative;z-index:1}
 /* ---- HERO MOCK ---- */
 .mock{
   position:relative;
-  border:1px solid var(--border);border-radius:20px;
+  border:1px solid var(--border);
+  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 0 60px rgba(0,198,255,.25);
   background:#0b1020;
-  height:625px; max-height:640px;
+  height:625px;
+  max-height:640px;
+  /* enhanced glow stack: cyan + neon red */
+  box-shadow:
+    0 0 60px rgba(0,198,255,.25),
+    0 0 120px rgba(255,0,60,.4),
+    0 40px 120px rgba(255,0,60,.35);
 }
+
+/* neon red aura layer behind the mock */
+.mock::before{
+  content:"";
+  position:absolute;
+  inset:-40px; /* bleed outside card edges */
+  z-index:-1;
+  background:radial-gradient(
+    circle at 50% 50%,
+    var(--glow-red) 0%,
+    rgba(255,0,40,.25) 35%,
+    var(--glow-red-soft) 70%
+  );
+  filter:blur(40px);
+  pointer-events:none;
+}
+
+/* slides */
 .mock__slide{
   position:absolute; inset:0; width:100%; height:100%;
   object-fit:cover; opacity:0; transform:scale(1.03);
@@ -412,12 +456,10 @@ footer{
   .brand{
     gap:16px;
   }
-
   .brand__logo-img{
     height:110px;
     max-height:110px;
   }
-
   .brand__tagline{
     font-size:1.8rem;
     line-height:1.1;
@@ -450,12 +492,10 @@ footer{
     align-items:flex-start;
     gap:8px;
   }
-
   .brand__logo-img{
     height:90px;
     max-height:90px;
   }
-
   .brand__tagline{
     font-size:1.4rem;
     line-height:1.15;
@@ -480,7 +520,7 @@ footer{
 
     <div class="nav__top">
       <div class="brand" aria-label="CoreFlux">
-        <!-- bare logo, doubled -->
+        <!-- bare logo -->
         <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
 
         <div class="brand__text">
