@@ -4,17 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CoreFlux Simpit — One Rig. Infinite Worlds.</title>
-<meta name="description" content="One Rig. All Roles. Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. No drilling. Apartment safe." />
+<meta name="description" content="One Rig. All Roles. Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. No drilling. Apartment safe." />
 <link rel="icon" href="assets/images/coreflux-logo.png" />
 <link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CoreFlux Simpit — One Rig. Infinite Worlds." />
-<meta property="og:description" content="Transform in minutes from workstation to FPS, racing sim, or flight cockpit. Precision aluminium. No drilling. Living-room ready." />
+<meta property="og:description" content="Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. Precision aluminium. No drilling. Living-room ready." />
 <meta property="og:image" content="assets/images/frame-left.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — v16 (pullout keyboard tray added) ===== */
+/* ===== CoreFlux Simpit — v17 (Static vs Dynamic chassis) ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -357,9 +357,7 @@ section{
 }
 
 /* HERO MOCK */
-.mock-wrap{
-  position:relative;
-}
+.mock-wrap{position:relative;}
 .mock-glow{
   position:absolute;
   inset:-60px;
@@ -746,14 +744,32 @@ section{
 
 /* ================= CONFIGURATOR GROUPS ================= */
 
-/* big wrapper */
 #moduleList{
   display:grid;
   gap:24px;
   align-content:start;
 }
 
-/* group card base */
+/* section labels above groups */
+.group-head{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.group-head h3{
+  margin:0;
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+}
+.group-head .lede{
+  font-size:.8rem;
+  line-height:1.4;
+  max-width:none;
+}
+
+/* outer group shell base */
 .config-group{
   border-radius:20px;
   padding:20px;
@@ -839,6 +855,45 @@ section{
     0 0 40px var(--group-shadow1),
     0 40px 120px rgba(255,0,200,.18),
     0 60px 160px var(--group-shadow2);
+}
+
+/* choice cards inside config groups */
+.config-card{
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--steel-grad);
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--text);
+}
+.config-card strong{
+  font-size:.9rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+  display:block;
+}
+.config-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+}
+
+.config-card input{
+  display:none;
+}
+
+/* summary / aside */
+aside.panel{
+  position:sticky;
+  top:100px;
+  padding:20px;
 }
 
 /* Footer */
@@ -940,7 +995,7 @@ footer{
         <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
         <div class="brand__text">
           <span class="brand__tagline">One Rig. All Roles.</span>
-          <span class="brand__sub">Workstation. Racing. Flight. FPS. Stream-ready. One physical footprint.</span>
+          <span class="brand__sub">Static or motion-capable frame. Workstation by day, full sim by night.</span>
         </div>
       </div>
     </div>
@@ -951,6 +1006,7 @@ footer{
       <a class="chip" href="#frame-pre">Why&nbsp;Not</a>
       <a class="chip" href="#frame">Frame</a>
       <a class="chip" href="#force">Force</a>
+      <a class="chip" href="#chassis">Chassis</a>
       <a class="chip" href="#kits">Kits</a>
       <a class="chip" href="#configurator">Build</a>
       <a class="chip" href="#games">Games</a>
@@ -969,19 +1025,20 @@ footer{
   <div>
     <h1 class="h1">One Rig. Infinite Worlds.</h1>
 
-    <p class="hero__claim">Not “a sim cockpit.” A controlled environment you can live in.
-    Work at 09:00. FPS at lunch. ACC stint at 20:00. Carrier ops in DCS at 23:30.
-    Same seat. Same footprint. Zero rebuild.</p>
+    <p class="hero__claim">
+      Static or motion-capable. Work at 09:00. FPS at lunch. ACC stint at 20:00.
+      Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.
+    </p>
 
     <p class="lede">
       The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat,
       to race chassis, to full-flight cockpit — in minutes, not hours.
-      No drilling. No cable mess. No “I’ll fix it this weekend.”
+      Your call: rock-solid static frame, or actuator-ready motion platform.
     </p>
 
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
       <a href="#configurator" class="btn btn--primary">Configure My Build</a>
-      <a href="#kits" class="btn btn--ghost">See Starter Kits</a>
+      <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
     </div>
 
     <div class="hero__trustline">
@@ -998,7 +1055,7 @@ footer{
 
     <div class="scrollhint">
       <div class="scrollhint__dot"></div>
-      <div>Scroll to see it switch roles →</div>
+      <div>Scroll to pick your chassis →</div>
     </div>
   </div>
 
@@ -1026,7 +1083,7 @@ footer{
   </div>
   <p class="lede">
     I needed one place to do it all. Head-down productivity at 09:00, a quick FPS session at lunch,
-    racing after hours, and a full flight at night — without rebuilding a room or wrecking my posture.
+    racing after hours, and full flight at night — without rebuilding a room or wrecking my posture.
     CoreFlux is that one-stop rig: fast to re-configure, comfortable all day, and clean enough for the living room.
   </p>
 
@@ -1034,23 +1091,18 @@ footer{
     <article class="card">
       <h3>Focus without friction</h3>
       <p class="lede">Work like it’s a dedicated workstation.</p>
-      <p>Keyboard, mouse, mic, and camera live where they should. Cable runs stay tidy. Nothing rattles, nothing wobbles — so deep work stays deep.</p>
+      <p>Keyboard, mouse, mic, camera, Stream Deck — all mounted. Cable runs stay tidy. Nothing rattles, nothing wobbles.</p>
     </article>
     <article class="card">
       <h3>Flow, not setup</h3>
       <p class="lede">Mode-switching takes minutes, not hours.</p>
-      <p>Quick-plates and indexed geometry lock controls into repeatable positions. Swap from keyboard to wheel, from yoke to HOTAS, without re-measuring.</p>
+      <p>Indexed geometry locks controls into repeatable positions. Swap from keyboard to wheel, from yoke to HOTAS, without re-measuring.</p>
     </article>
     <article class="card">
       <h3>Comfort that lasts</h3>
       <p class="lede">All-day ergonomics, all-night sessions.</p>
       <p>Seat rails, reach, and angles dial in precisely. The frame absorbs load; your body doesn’t.</p>
     </article>
-  </div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-    <a href="#kits" class="btn btn--primary">Pick a Loadout</a>
-    <a href="#story" class="btn btn--ghost">See The Switch</a>
   </div>
 </section>
 
@@ -1063,7 +1115,7 @@ footer{
   <div class="cards">
     <article class="card">
       <h3>Workstation → FPS</h3>
-      <p class="lede">Sit-stand posture dialed. Keyboard clears, peripherals lock in.</p>
+      <p class="lede">Sit-stand posture dialed. Keyboard clears, sticks come in.</p>
       <p>Rigid extrusion, zero flex, cable runs that don’t snag. You focus on the shot — the rig disappears.</p>
     </article>
     <article class="card">
@@ -1073,8 +1125,8 @@ footer{
     </article>
     <article class="card">
       <h3>Racing → Flight</h3>
-      <p class="lede">Yoke/HOTAS? Center-stick or dual-stick? Swap without chaos.</p>
-      <p>Throttle, trim, and cams sit exactly where they should. You’re airborne in minutes.</p>
+      <p class="lede">Center-stick or dual-stick? Yoke and throttle? Swap without chaos.</p>
+      <p>Avionics and throttle sit exactly where they should. You’re airborne in minutes.</p>
     </article>
   </div>
 </section>
@@ -1083,7 +1135,7 @@ footer{
 <section id="frame-pre" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Why normal setups don't work</h2>
-    <span class="pill">You're already fighting gear</span>
+    <span class="pill">You’re already fighting the gear</span>
   </div>
 
   <div class="band">
@@ -1092,17 +1144,17 @@ footer{
       <div class="timeline-col">
         <div class="timeline-time">Desk Clamp</div>
         <div class="timeline-headline">Your desk flexes. Your aim drifts.</div>
-        <div class="timeline-copy">Monitors are too high. Wheel shakes the whole table. Mic arm wobbles on stream.</div>
+        <div class="timeline-copy">Monitors too high. Wheel shakes the table. Mic arm wobbles on stream.</div>
       </div>
       <div class="timeline-col">
         <div class="timeline-time">Wheel Stand</div>
         <div class="timeline-headline">Trip hazard. Cable spaghetti.</div>
-        <div class="timeline-copy">Pedals walk under braking. Angle never feels the same twice. Living room looks like a pit lane exploded.</div>
+        <div class="timeline-copy">Pedals walk under braking. Angle never matches twice. Living room looks exploded.</div>
       </div>
       <div class="timeline-col">
         <div class="timeline-time">PVC Cockpit</div>
         <div class="timeline-headline">Great for racing. Useless for work.</div>
-        <div class="timeline-copy">No camera arm, no keyboard plate worth using, zero respect for posture. You're not doing an 8-hour day in that thing.</div>
+        <div class="timeline-copy">No camera arm, no keyboard tray, trash posture. You can’t do 8-hour days in that thing.</div>
       </div>
     </div>
   </div>
@@ -1146,14 +1198,14 @@ footer{
 <section id="force" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Force Handling</h2>
-    <span class="pill">Direct drive. Loadcell. Full pull.</span>
+    <span class="pill">Direct drive. Loadcell. Motion load.</span>
   </div>
 
   <div class="proof-strip">
     <div class="proof-cell">
       <div class="proof-head">Torque</div>
       <div class="proof-metric">> 15 Nm wheel bases</div>
-      <div class="proof-desc">Steering mount is tied into a reinforced cross member. No twist under load.</div>
+      <div class="proof-desc">Steering mount ties into a reinforced cross member. No twist under load.</div>
     </div>
     <div class="proof-cell">
       <div class="proof-head">Brake</div>
@@ -1161,10 +1213,46 @@ footer{
       <div class="proof-desc">Pedal tray locks off indexed rails. You can lean on the brake and it won't walk forward.</div>
     </div>
     <div class="proof-cell">
-      <div class="proof-head">Flight Inputs</div>
-      <div class="proof-metric">No flex on long throw</div>
-      <div class="proof-desc">Stick / throttle arms don't sag when you’re fully deflected. You trim, not fight chassis bounce.</div>
+      <div class="proof-head">Motion Shock</div>
+      <div class="proof-metric">Actuator bracing</div>
+      <div class="proof-desc">Dynamic chassis is pre-braced for heave/surge cues so nothing flexes when you throw the rig.</div>
     </div>
+  </div>
+</section>
+
+<!-- CHASSIS TIER -->
+<section id="chassis" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Pick Your Chassis</h2>
+    <span class="pill">Static vs Dynamic</span>
+  </div>
+
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
+      <h3>Static Frame</h3>
+      <p class="lede">Locked. Silent. Apartment-safe.</p>
+      <p>Zero actuators. Zero motion. Still supports direct drive, loadcell, HOTAS, pedals, Stream Deck, quad display. Ideal if you share walls, rent, or don't want the seat to move under you mid-FPS.</p>
+      <p><strong>Why:</strong> Cheaper entry. No floor drama. Feels like a pro workstation that can also lap Spa.</p>
+    </article>
+
+    <article class="card">
+      <h3>Dynamic Frame</h3>
+      <p class="lede">Motion-capable. Built to take hits.</p>
+      <p>Actuator-ready bracing, reinforced crossmembers, mounting points for surge/heave/sway kits. Designed to translate telemetry into motion without twisting or blowing out alignment.</p>
+      <p><strong>Why:</strong> Full-body race/flight cues. Physical G onset. You feel yaw, pitch, brake load, touchdown.</p>
+    </article>
+
+    <article class="card">
+      <h3>Upgrade Path</h3>
+      <p class="lede">Static today → Dynamic later.</p>
+      <p>You're not locked out. The geometry is shared. You can start on Static (clean, quiet, affordable) and step up to Dynamic hardware when you're ready for motion systems.</p>
+      <p><strong>No rebuild.</strong> Your controls, screens, mounts all carry forward.</p>
+    </article>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+    <a href="#configurator" class="btn btn--primary">Spec My Chassis</a>
+    <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
   </div>
 </section>
 
@@ -1179,19 +1267,19 @@ footer{
     <article class="card">
       <h3>Work + FPS</h3>
       <p class="lede">Keyboard/mouse stability, single monitor, low-latency posture.</p>
-      <p>Core frame + desk tray + single-stick/HOTAS or dual-stick for space/FPS hybrids.</p>
+      <p>Static chassis + desk tray + single-stick/HOTAS or dual-stick for space/FPS hybrids.</p>
     </article>
 
     <article class="card">
       <h3>Race Spec</h3>
       <p class="lede">Direct-drive wheel, loadcell brake, triple or quad display.</p>
-      <p>Indexed pedal mount, wheel arm, optional shifter/handbrake mount. Same footprint as your desk setup.</p>
+      <p>Dynamic chassis, indexed pedal mount, wheel arm, optional shifter/handbrake. Feels like you're in the car, not at a desk.</p>
     </article>
 
     <article class="card">
       <h3>Flight / Space</h3>
       <p class="lede">Center-stick. Dual-stick. Or full HOTAS + pedals.</p>
-      <p>Throttle and avionics sit exactly where muscle memory expects. Overhead HUD display locks in nav, MFD, chat, etc.</p>
+      <p>Dynamic chassis with overhead HUD display and pedal base so yaw stays planted. Night carrier landings feel like night carrier landings.</p>
     </article>
   </div>
 
@@ -1207,7 +1295,7 @@ footer{
     <h2 class="section__title">Configurator</h2>
     <span class="pill">Live total · Real modules</span>
   </div>
-  <p class="lede">Pick the physical hardware you actually need. Total updates live.</p>
+  <p class="lede">Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.</p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
@@ -1215,175 +1303,168 @@ footer{
 
       <!-- CORE SYSTEM GROUP -->
       <div class="config-group config-group--core">
-        <div class="card" style="grid-column:1/-1">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Core System</h3>
-          <p class="lede">This is the chassis. Everything else snaps to this.</p>
+          <p class="lede">This is the chassis. Everything else mounts to this geometry.</p>
         </div>
 
-        <label class="card" data-key="base" style="cursor:pointer">
-          <input type="checkbox" data-price="1000" data-label="BASE FRAME">
-          <strong>BASE FRAME — $1,000</strong>
-          <p>4080 aluminium main structure, pre-cut and anodized. No drilling.</p>
+        <!-- Static vs Dynamic are radio now -->
+        <label class="config-card" data-group="baseframe" data-key="base-static">
+          <input type="radio" name="baseframe" data-price="1000" data-label="STATIC BASE FRAME">
+          <strong>STATIC BASE FRAME — $1,000</strong>
+          <p>Motionless, silent platform. Apartment / shared-wall friendly. Still handles direct drive, loadcell pedals, flight gear.</p>
         </label>
 
-        <label class="card" data-key="pedaltray" style="cursor:pointer">
+        <label class="config-card" data-group="baseframe" data-key="base-dynamic">
+          <input type="radio" name="baseframe" data-price="1450" data-label="DYNAMIC BASE FRAME">
+          <strong>DYNAMIC BASE FRAME — $1,450</strong>
+          <p>Reinforced, actuator-ready. Braced for surge / heave / sway without twisting the rig or kicking your monitor out of alignment.</p>
+        </label>
+
+        <label class="config-card" data-key="pedaltray">
           <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
           <strong>PEDAL TRAY / PLATE — $300</strong>
-          <p>Rigid pedal mount with indexed position. Locks brake load without walking.</p>
+          <p>Rigid pedal mount with indexed position. Locks brake load without walking forward.</p>
         </label>
 
-        <label class="card" data-key="stand" style="cursor:pointer">
+        <label class="config-card" data-key="stand">
           <input type="checkbox" data-price="500" data-label="MONITOR STAND">
           <strong>MONITOR STAND — $500</strong>
-          <p>Primary display stand (VESA 75/100). Steady under racing or work use.</p>
+          <p>Primary display stand (VESA 75/100). Rock-solid under steering torque or work typing.</p>
         </label>
 
-        <label class="card" data-key="deskpad" style="cursor:pointer">
+        <label class="config-card" data-key="deskpad">
           <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
           <strong>MOUSE PAD BASE — $120</strong>
-          <p>Keyboard and mouse tray. Converts rig into a full workstation.</p>
+          <p>Keyboard + mouse tray. Locks you into real desk posture for work and FPS aim.</p>
         </label>
 
-        <!-- NEW: pullout keyboard tray -->
-        <label class="card" data-key="pulloutkb" style="cursor:pointer">
+        <label class="config-card" data-key="pulloutkb">
           <input type="checkbox" data-price="160" data-label="PULLOUT KEYBOARD TRAY">
           <strong>PULLOUT KEYBOARD TRAY — $160</strong>
-          <p>Slide-out typing surface with wrist support. Retracts clean for racing / flight so nothing hits your wheel, throttle or stick.</p>
+          <p>Slide-out typing surface with wrist support. Retracts for racing / flight so nothing collides with wheel or throttle.</p>
         </label>
       </div>
 
       <!-- MONITOR SYSTEM GROUP -->
       <div class="config-group config-group--monitor">
-        <div class="card" style="grid-column:1/-1">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Monitor System</h3>
-          <p class="lede">Pick your view. You can always re-arm later.</p>
+          <p class="lede">Pick your viewport. You can re-arm later.</p>
         </div>
 
-        <label class="card" data-group="monitor" data-key="single" style="cursor:pointer">
+        <label class="config-card" data-group="monitor" data-key="single">
           <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
           <strong>SINGLE MONITOR ARM — $150</strong>
-          <p>One display arm (24–34″). Ideal for workstation or FPS setup.</p>
+          <p>One display arm (24–34″). Ideal for workstation / FPS.</p>
         </label>
 
-        <label class="card" data-group="monitor" data-key="triple" style="cursor:pointer">
+        <label class="config-card" data-group="monitor" data-key="triple">
           <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
           <strong>TRIPLE MONITOR ARM — $400</strong>
-          <p>Three-arm configuration for immersive racing / sim environment.</p>
+          <p>Three-arm racing/flight wrap. Angled side panels lock in FOV.</p>
         </label>
 
-        <label class="card" data-group="monitor" data-key="quad" style="cursor:pointer">
+        <label class="config-card" data-group="monitor" data-key="quad">
           <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
           <strong>QUAD MONITOR SETUP — $450</strong>
-          <p>Triple base monitors plus overhead HUD/top display for flight gauges, telemetry, or chat.</p>
+          <p>Triple horizon plus overhead HUD/telemetry/chat. Your “glass cockpit.”</p>
         </label>
       </div>
 
       <!-- FLIGHT CONTROLS GROUP -->
       <div class="config-group config-group--flight">
-        <div class="card" style="grid-column:1/-1">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Flight Controls</h3>
-          <p class="lede">HOTAS / dual-stick / throttle. Lock-in repeatable reach.</p>
+          <p class="lede">HOTAS / dual-stick / throttle. Repeatable reach every time.</p>
         </div>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="flight-single" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
+        <label class="config-card" data-key="flight-single">
+          <input type="checkbox" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
           <strong>FLIGHT: STICK + THROTTLE — $220</strong>
-          <p style="margin-top:6px">
-            Single-stick and throttle setup for HOTAS / miljet profile.
-          </p>
+          <p>Single-stick and throttle setup for HOTAS / miljet profile.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="flight-dual" data-price="240" data-label="FLIGHT: DUAL STICK">
+        <label class="config-card" data-key="flight-dual">
+          <input type="checkbox" data-price="240" data-label="FLIGHT: DUAL STICK">
           <strong>FLIGHT: DUAL STICK — $240</strong>
-          <p style="margin-top:6px">
-            Mirrored dual-stick arms. Perfect for helos and space sims.
-          </p>
+          <p>Mirrored dual-stick arms. Perfect for helos and space sims.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="flight-pedal" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
+        <label class="config-card" data-key="flight-pedal">
+          <input type="checkbox" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
           <strong>FLIGHT: PEDAL MOUNT — $180</strong>
-          <p style="margin-top:6px">
-            Adjustable rudder pedal base.
-            Keeps yaw input stable, clears seat rails, zero floor creep.
-          </p>
+          <p>Adjustable rudder pedal base. Stable yaw input, clears seat rails, zero floor creep.</p>
         </label>
       </div>
 
       <!-- RACING CONTROLS GROUP -->
       <div class="config-group config-group--racing">
-        <div class="card" style="grid-column:1/-1">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Racing Controls</h3>
-          <p class="lede">Steering, pedals, shifting — under real torque load.</p>
+          <p class="lede">Steering, pedals, shifting — under real torque.</p>
         </div>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="race-wheel" data-price="250" data-label="RACING: WHEEL ARM">
+        <label class="config-card" data-key="race-wheel">
+          <input type="checkbox" data-price="250" data-label="RACING: WHEEL ARM">
           <strong>RACING: WHEEL ARM — $250</strong>
-          <p style="margin-top:6px">
-            Direct-drive capable mount. Zero flex steering.
-          </p>
+          <p>Direct-drive capable steering mount. Zero flex at 15+ Nm.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="race-pedal" data-price="180" data-label="RACING: PEDAL MOUNT">
+        <label class="config-card" data-key="race-pedal">
+          <input type="checkbox" data-price="180" data-label="RACING: PEDAL MOUNT">
           <strong>RACING: PEDAL MOUNT — $180</strong>
-          <p style="margin-top:6px">
-            Indexed pedal base. Locks down under full brake force.
-          </p>
+          <p>Indexed pedal base. Holds under full brake force. Repeatable seat-to-pedal distance.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="race-shifter" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
+        <label class="config-card" data-key="race-shifter">
+          <input type="checkbox" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
           <strong>RACING: GEARSHIFT MOUNT — $140</strong>
-          <p style="margin-top:6px">
-            Side-mounted shifter / handbrake plate. Adjustable reach.
-          </p>
+          <p>Side-mounted shifter / handbrake plate. Adjustable height / reach.</p>
         </label>
       </div>
 
       <!-- CREATOR / STREAM GROUP -->
       <div class="config-group config-group--stream">
-        <div class="card" style="grid-column:1/-1">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Creator / Stream Setup</h3>
-          <p class="lede">Camera, lighting, and control arms for content work.</p>
+          <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
         </div>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="stream-cam" data-price="100" data-label="STREAM: CAMERA ARM">
+        <label class="config-card" data-key="stream-cam">
+          <input type="checkbox" data-price="100" data-label="STREAM: CAMERA ARM">
           <strong>STREAM: CAMERA ARM — $100</strong>
-          <p style="margin-top:6px">
-            Low-vibration arm for webcam or overhead camera.
-          </p>
+          <p>Low-vibration arm for webcam or overhead camera angles.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="stream-light" data-price="120" data-label="STREAM: KEY LIGHT ARM">
+        <label class="config-card" data-key="stream-light">
+          <input type="checkbox" data-price="120" data-label="STREAM: KEY LIGHT ARM">
           <strong>STREAM: KEY LIGHT ARM — $120</strong>
-          <p style="margin-top:6px">
-            Stable light mounts off-frame for clean face lighting.
-          </p>
+          <p>Stable light mount off-frame so your lighting doesn’t shake when you drive or dogfight.</p>
         </label>
 
-        <label class="card" style="cursor:pointer;width:100%;display:block">
-          <input type="checkbox" data-key="stream-deck" data-price="90" data-label="STREAM: STREAM DECK ARM">
+        <label class="config-card" data-key="stream-deck">
+          <input type="checkbox" data-price="90" data-label="STREAM: STREAM DECK ARM">
           <strong>STREAM: STREAM DECK ARM — $90</strong>
-          <p style="margin-top:6px">
-            Dedicated arm for Stream Deck / Loupedeck control surfaces.
-            Keeps desk clear and inputs fast.
-          </p>
+          <p>Dedicated arm for Stream Deck / Loupedeck. Macros at hand without eating desk space.</p>
         </label>
       </div>
 
     </div>
 
     <!-- RIGHT: SUMMARY -->
-    <aside class="panel" style="position:sticky;top:100px;padding:20px">
+    <aside class="panel">
       <h3>Your Build</h3>
+
       <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
+
       <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
+
+      <div style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);margin-bottom:12px">
+        Static = planted + quiet. Dynamic = actuator-ready. You can upgrade Static later.
+      </div>
+
       <a href="#reserve" class="btn btn--primary" style="width:100%;justify-content:center">Reserve My Slot</a>
     </aside>
   </div>
@@ -1528,9 +1609,9 @@ footer{
       <h3>Star Citizen</h3>
       <p class="lede">Dual-stick or HOTAS with pedal rudder.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Stick</em> or <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
+        <li>Chassis: Dynamic.</li>
+        <li>Loadout: <strong>Flight</strong> → add <em>Dual Stick</em> or <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
         <li>Curves: start 20–25; deadzone 2–3%.</li>
-        <li>View: overhead monitor for chat/nav; main at eye height.</li>
         <li>Stream: camera arm + Stream Deck arm for comms / binds.</li>
       </ol>
     </article>
@@ -1539,9 +1620,10 @@ footer{
       <h3>DCS</h3>
       <p class="lede">Center-stick HOTAS + pedals.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em> for gauges/MFD.</li>
+        <li>Chassis: Dynamic or Static (Static if neighbors).</li>
+        <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em> for gauges/MFD.</li>
         <li>Curves: pitch/roll 20–30; rudder 10–20.</li>
-        <li>Seat: elbows ~90°, wrists neutral; trim so stick centers hands-off.</li>
+        <li>Trim: stick should sit neutral, elbows ~90°.</li>
       </ol>
     </article>
 
@@ -1549,17 +1631,12 @@ footer{
       <h3>iRacing / ACC</h3>
       <p class="lede">Wheel + pedals; triples or quad.</p>
       <ol>
-        <li>Loadout: <strong>Racing</strong> preset → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple</em> or <em>Quad Monitor Setup</em>.</li>
-        <li>Seat: knee 110–120°, rim just below shoulders; relaxed shoulders.</li>
-        <li>Brake: preload you can hold for 60s without shake.</li>
+        <li>Chassis: Dynamic if you want motion, Static if you just want planted torque.</li>
+        <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple</em> or <em>Quad Monitor Setup</em>.</li>
+        <li>Brake: preload you can hold for 60s without shaking.</li>
         <li>FOV: use in-game calc; aim for true scale.</li>
       </ol>
     </article>
-  </div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-    <a href="#configurator" class="btn btn--primary">Apply A Preset</a>
-    <a href="#tuning" class="btn btn--ghost">Tune Ergonomics</a>
   </div>
 </section>
 
@@ -1630,12 +1707,12 @@ footer{
       <div class="stepbox">
         <div class="stepbox__num">Step 1</div>
         <div class="stepbox__title">You spec the rig</div>
-        <div class="stepbox__copy">Tell us what you actually run: HOTAS? Direct drive? Triple monitors? Stream setup?</div>
+        <div class="stepbox__copy">Tell us Static or Dynamic, racing / flight / creator gear, and your monitor layout.</div>
       </div>
       <div class="stepbox">
         <div class="stepbox__num">Step 2</div>
         <div class="stepbox__title">We confirm fit + layout</div>
-        <div class="stepbox__copy">We sanity-check clearances, angles, reach, cable routing. You get a parts list.</div>
+        <div class="stepbox__copy">We sanity-check clearances, reach, posture, cable routing. You get a parts list.</div>
       </div>
       <div class="stepbox">
         <div class="stepbox__num">Step 3</div>
@@ -1653,24 +1730,28 @@ footer{
     <span class="pill">Straight answers</span>
   </div>
   <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
+    <p>Dynamic is actuator-ready, but travel is tuned for cues — heave, surge, yaw onset — not theme-park throw. It's built to feel like seat-of-the-pants force, not bounce furniture across the floor.</p>
+  </details>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
+    <p>Yes. Static → Dynamic is a supported path. You keep your controls, screens, mounts, Stream Deck arm — you’re not re-buying the whole rig.</p>
+  </details>
+  <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
     <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
   </details>
   <details class="panel" style="margin:10px 0;">
-    <summary style="font-weight:800;cursor:pointer;">Will it fit my chair?</summary>
-    <p>Standard office/recliner shells fit the rails; bucket seats need side mounts.</p>
-  </details>
-  <details class="panel" style="margin:10px 0;">
-    <summary style="font-weight:800;cursor:pointer;">Quad monitor really stable?</summary>
-    <p>Yes. The overhead arm keys into the frame, not a wobbly desk arm. It’s built for avionics, telemetry, chat, etc.</p>
+    <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
+    <p>Yes. Arms mount into frame structure, not a wobbly desk post. The overhead HUD stays where you put it, even under braking or pitch.</p>
   </details>
 </section>
 
 <footer>
   © <span id="year"></span> CoreFlux Simpit
   <div class="footer-note">
-    Frame geometry, mount indexing, and module tolerances are under active iteration with pilot builders.
-    You aren’t “preordering a box.” You’re helping shape final spec.
+    Frame geometry, actuator bracing, and module tolerances are being dialed with pilot builders.
+    You’re not “preordering a box.” You’re helping shape final spec.
   </div>
 </footer>
 
@@ -1747,7 +1828,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   );
 
   function parsePriceFromCardOrLabel(input){
-    const card = input.closest('label') || input.closest('.card') || input.parentElement;
+    const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
     if(!card) return 0;
     const strong = card.querySelector('strong');
     const src = (strong ? strong.textContent : card.textContent) || '';
@@ -1760,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function resolveLabel(input){
     if (input.dataset.label) return input.dataset.label;
-    const card = input.closest('label') || input.closest('.card') || input.parentElement;
+    const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
     const strong = card ? card.querySelector('strong') : null;
     if (strong){
       return strong.textContent
@@ -1813,8 +1894,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
-  // click whole card / block
-  root.querySelectorAll('.card, .card label').forEach(block=>{
+  // card-wide click
+  root.querySelectorAll('.config-card').forEach(block=>{
     block.addEventListener('click',(e)=>{
       const input = block.querySelector('input');
       if(!input) return;
