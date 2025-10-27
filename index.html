@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — Nav v6 Neon Mock Glow / Centered Brand ===== */
+/* ===== CoreFlux Simpit — Nav v7 Cyan Glow Unified ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -29,8 +29,10 @@
   --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
   --logo-h:54px;
   --nav-h:160px;
-  --glow-red:rgba(255,0,60,.55);     /* neon red core */
-  --glow-red-soft:rgba(255,0,60,0);  /* fade out */
+
+  --glow-cyan-main: rgba(0,198,255,.45);   /* bright cyan core */
+  --glow-cyan-soft: rgba(0,198,255,0);     /* fade out */
+  --glow-teal-halo: rgba(75,227,209,.28);  /* softer teal halo */
 }
 
 /* ---- Base ---- */
@@ -98,28 +100,26 @@ section{
     0 1px 0 rgba(255,255,255,.08) inset;
 }
 
-/* Make nav__inner a 2-row grid so we can center row 1 in the banner space */
+/* 2-row grid so we can center row 1 vertically */
 .nav__inner{
   display:grid;
-  grid-template-rows:1fr auto;  /* row1 flexes, row2 hugs content */
+  grid-template-rows:1fr auto;  /* brand row flexes, links row hugs content */
   height:100%;
   padding:0 0 14px;
 }
 
-/* Row 1 = brand block. We now center it vertically using flex */
+/* Row 1 = brand block. Give it min-height and flex-align center so logo sits middle of banner */
 .nav__top{
   display:flex;
   align-items:center;
-  /* center this row's content vertically by giving it min-height
-     close to the header height minus links rail height (~40px) */
-  min-height:120px; /* pulls brand down into middle visually */
+  min-height:120px; /* pulls it into middle of 160px band */
   padding-top:8px;
   padding-bottom:8px;
   justify-content:space-between;
   gap:20px;
 }
 
-/* brand group: logo + tagline */
+/* brand: logo + tagline */
 .brand{
   display:flex;
   align-items:center;
@@ -127,7 +127,7 @@ section{
   min-width:0;
 }
 
-/* bare logo, no card */
+/* bare logo, no border */
 .brand__logo-img{
   height:140px;
   width:auto;
@@ -137,7 +137,6 @@ section{
   display:block;
   image-rendering:auto;
 
-  /* keep subtle cyan depth but let red mock glow take stage */
   filter:
     drop-shadow(0 20px 40px rgba(0,198,255,.4))
     drop-shadow(0 0 20px rgba(0,198,255,.6));
@@ -183,7 +182,7 @@ section{
   font-size:.8rem;
   line-height:1.2;
   padding:0 0 14px;
-  margin-top:0; /* was 16px, not needed now */
+  margin-top:0;
 }
 
 /* link pills */
@@ -285,25 +284,26 @@ section{
   background:#0b1020;
   height:625px;
   max-height:640px;
-  /* enhanced glow stack: cyan + neon red */
+
+  /* cyan / teal glow (unified with nav) */
   box-shadow:
-    0 0 60px rgba(0,198,255,.25),
-    0 0 120px rgba(255,0,60,.4),
-    0 40px 120px rgba(255,0,60,.35);
+    0 0 80px rgba(0,198,255,.45),
+    0 40px 140px rgba(75,227,209,.28);
 }
 
-/* neon red aura layer behind the mock */
+/* aura behind the mock */
 .mock::before{
   content:"";
   position:absolute;
-  inset:-40px; /* bleed outside card edges */
+  inset:-40px;
   z-index:-1;
-  background:radial-gradient(
-    circle at 50% 50%,
-    var(--glow-red) 0%,
-    rgba(255,0,40,.25) 35%,
-    var(--glow-red-soft) 70%
-  );
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      var(--glow-cyan-main) 0%,
+      rgba(75,227,209,.22) 35%,
+      var(--glow-cyan-soft) 70%
+    );
   filter:blur(40px);
   pointer-events:none;
 }
@@ -520,9 +520,7 @@ footer{
 
     <div class="nav__top">
       <div class="brand" aria-label="CoreFlux">
-        <!-- bare logo -->
         <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
-
         <div class="brand__text">
           <span class="brand__tagline">Dynamic Simpits. Brought to Life.</span>
         </div>
