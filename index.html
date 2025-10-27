@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — v18 (Actuator Kits: motion-aware) ===== */
+/* ===== CoreFlux Simpit — v19 (auto-upgrade to Dynamic) ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -40,13 +40,18 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--text);
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  color:var(--text);
   background-color:var(--bg);
   background-image:
     radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
     radial-gradient(900px 600px at 10% 20%, rgba(255,210,63,.07) 0%, transparent 60%),
     radial-gradient(circle at 50% 120%, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 70%);
-  background-repeat:no-repeat; background-attachment:fixed; overflow-x:hidden; scroll-behavior:smooth;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -55,7 +60,10 @@ img{max-width:100%;display:block}
 section{padding:48px 0;position:relative;z-index:1}
 
 /* Global AI particles canvas – fixed brightness */
-#aiCanvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;transition:none}
+#aiCanvas{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:.55;transition:none
+}
 
 /* NAV */
 .nav{
@@ -65,198 +73,850 @@ section{padding:48px 0;position:relative;z-index:1}
   border-bottom:1px solid rgba(0,198,255,.4);
   box-shadow:0 1px 0 rgba(255,255,255,.08) inset, 0 30px 60px rgba(0,0,0,.9);
 }
-.nav__inner{display:grid;grid-template-rows:1fr auto;height:100%;padding:0 0 14px}
-.nav__top{display:flex;align-items:center;min-height:120px;padding:8px 0;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:24px;min-width:0}
-.brand__logo-img{height:140px;width:auto;max-height:140px;object-fit:contain;flex-shrink:0;display:block;image-rendering:auto;filter:drop-shadow(0 20px 40px rgba(0,198,255,.4)) drop-shadow(0 0 20px rgba(0,198,255,.6))}
-.brand__text{display:flex;flex-direction:column;line-height:1.05}
-.brand__tagline{
-  font-weight:800;font-size:2.2rem;line-height:1.05;letter-spacing:-.03em;white-space:nowrap;
-  background:linear-gradient(90deg,#cfffff 0%,#7fd3ff 40%,#00c6ff 60%,#ffe189 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 16px rgba(0,198,255,.7),0 0 36px rgba(0,198,255,.45),0 0 60px rgba(255,210,63,.28)
+.nav__inner{
+  display:grid;
+  grid-template-rows:1fr auto;
+  height:100%;
+  padding:0 0 14px
 }
-.brand__sub{font-size:.7rem;line-height:1.4;font-weight:600;color:var(--muted);max-width:260px}
+.nav__top{
+  display:flex;
+  align-items:center;
+  min-height:120px;
+  padding:8px 0;
+  justify-content:space-between;
+  gap:20px
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  min-width:0
+}
+.brand__logo-img{
+  height:140px;
+  width:auto;
+  max-height:140px;
+  object-fit:contain;
+  flex-shrink:0;
+  display:block;
+  image-rendering:auto;
+  filter:drop-shadow(0 20px 40px rgba(0,198,255,.4))
+         drop-shadow(0 0 20px rgba(0,198,255,.6))
+}
+.brand__text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05
+}
+.brand__tagline{
+  font-weight:800;
+  font-size:2.2rem;
+  line-height:1.05;
+  letter-spacing:-.03em;
+  white-space:nowrap;
+  background:linear-gradient(90deg,#cfffff 0%,#7fd3ff 40%,#00c6ff 60%,#ffe189 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 0 16px rgba(0,198,255,.7),
+              0 0 36px rgba(0,198,255,.45),
+              0 0 60px rgba(255,210,63,.28)
+}
+.brand__sub{
+  font-size:.7rem;
+  line-height:1.4;
+  font-weight:600;
+  color:var(--muted);
+  max-width:260px
+}
 
 /* nav links */
-.nav__links-row{display:flex;justify-content:flex-end;flex-wrap:wrap;row-gap:10px;column-gap:14px;font-size:.8rem;line-height:1.2;padding:0 0 14px;margin-top:0}
+.nav__links-row{
+  display:flex;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+  row-gap:10px;
+  column-gap:14px;
+  font-size:.8rem;
+  line-height:1.2;
+  padding:0 0 14px;
+  margin-top:0
+}
 .chip{
-  padding:6px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted);
-  background:rgba(0,0,0,.2);font-weight:600;font-size:.8rem;line-height:1.2;transition:120ms ease;box-shadow:0 10px 20px rgba(0,0,0,.6)
+  padding:6px 12px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  color:var(--muted);
+  background:rgba(0,0,0,.2);
+  font-weight:600;
+  font-size:.8rem;
+  line-height:1.2;
+  transition:120ms ease;
+  box-shadow:0 10px 20px rgba(0,0,0,.6)
 }
-.chip:hover{color:var(--text);border-color:rgba(0,198,255,.6);box-shadow:0 0 16px rgba(0,198,255,.8),0 0 48px rgba(0,198,255,.45),0 12px 24px rgba(0,198,255,.35);text-shadow:0 0 8px rgba(0,198,255,.8)}
+.chip:hover{
+  color:var(--text);
+  border-color:rgba(0,198,255,.6);
+  box-shadow:
+    0 0 16px rgba(0,198,255,.8),
+    0 0 48px rgba(0,198,255,.45),
+    0 12px 24px rgba(0,198,255,.35);
+  text-shadow:0 0 8px rgba(0,198,255,.8)
+}
 .cta{
-  padding:8px 14px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;font-weight:800;font-size:.8rem;line-height:1.2;border:none;cursor:pointer;box-shadow:0 10px 20px rgba(0,0,0,.8);transition:120ms ease
+  padding:8px 14px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.8rem;
+  line-height:1.2;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,.8);
+  transition:120ms ease
 }
-.cta:hover{box-shadow:0 0 16px rgba(0,198,255,.9),0 0 60px rgba(0,198,255,.55),0 24px 40px rgba(0,198,255,.4);text-shadow:0 0 8px rgba(0,0,0,.8)}
+.cta:hover{
+  box-shadow:
+    0 0 16px rgba(0,198,255,.9),
+    0 0 60px rgba(0,198,255,.55),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9);
+  text-shadow:0 0 8px rgba(0,0,0,.8)
+}
 
 /* sticky bottom CTA */
 #stickyCTA{
-  position:fixed;right:16px;bottom:16px;z-index:50;display:none;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;font-weight:800;font-size:.8rem;line-height:1.2;
-  padding:12px 16px;border-radius:12px;box-shadow:0 0 16px rgba(0,198,255,.7),0 24px 40px rgba(0,198,255,.4),0 10px 30px rgba(0,0,0,.9);border:none;cursor:pointer
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:50;
+  display:none;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.8rem;
+  line-height:1.2;
+  padding:12px 16px;
+  border-radius:12px;
+  box-shadow:
+    0 0 16px rgba(0,198,255,.7),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9);
+  border:none;
+  cursor:pointer
 }
 
 /* HERO */
-.hero{position:relative;padding:100px 0 64px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.h1{font-size:clamp(32px,3.4vw,56px);line-height:1.04;margin:0 0 10px;letter-spacing:-.5px;background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);-webkit-background-clip:text;color:transparent;font-weight:800}
-.hero__claim{font-size:1rem;font-weight:700;line-height:1.4;color:var(--text);text-shadow:0 0 16px rgba(0,198,255,.6),0 0 42px rgba(0,198,255,.35);max-width:640px;margin:0 0 16px}
-.hero__trustline{margin-top:16px;font-size:.8rem;line-height:1.5;font-weight:600;color:var(--muted);max-width:640px}
-.hero__trustline b{color:var(--text);font-weight:700}
+.hero{
+  position:relative;
+  padding:100px 0 64px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center
+}
+.h1{
+  font-size:clamp(32px,3.4vw,56px);
+  line-height:1.04;
+  margin:0 0 10px;
+  letter-spacing:-.5px;
+  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);
+  -webkit-background-clip:text;
+  color:transparent;
+  font-weight:800
+}
+.hero__claim{
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.4;
+  color:var(--text);
+  text-shadow:0 0 16px rgba(0,198,255,.6),
+              0 0 42px rgba(0,198,255,.35);
+  max-width:640px;
+  margin:0 0 16px
+}
+.hero__trustline{
+  margin-top:16px;
+  font-size:.8rem;
+  line-height:1.5;
+  font-weight:600;
+  color:var(--muted);
+  max-width:640px
+}
+.hero__trustline b{
+  color:var(--text);
+  font-weight:700
+}
 
 /* scroll hint */
-.scrollhint{display:flex;align-items:center;gap:8px;margin-top:24px;font-size:.75rem;font-weight:600;color:var(--muted);line-height:1.2;user-select:none;opacity:.75}
-.scrollhint__dot{width:6px;height:18px;border-radius:3px;background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%);box-shadow:0 0 10px rgba(0,198,255,.9),0 0 40px rgba(0,198,255,.5);animation:scrollpulse 1.8s infinite}
-@keyframes scrollpulse{0%{opacity:1;transform:translateY(0)}50%{opacity:.2;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+.scrollhint{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:24px;
+  font-size:.75rem;
+  font-weight:600;
+  color:var(--muted);
+  line-height:1.2;
+  user-select:none;
+  opacity:.75
+}
+.scrollhint__dot{
+  width:6px;
+  height:18px;
+  border-radius:3px;
+  background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%);
+  box-shadow:0 0 10px rgba(0,198,255,.9),
+             0 0 40px rgba(0,198,255,.5);
+  animation:scrollpulse 1.8s infinite
+}
+@keyframes scrollpulse{
+  0%{opacity:1;transform:translateY(0)}
+  50%{opacity:.2;transform:translateY(6px)}
+  100%{opacity:1;transform:translateY(0)}
+}
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);font-weight:800;font-size:.9rem;line-height:1.2;cursor:pointer}
-.btn--primary,.btn.primary{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;border:none;box-shadow:0 10px 22px rgba(0,198,255,.25)}
-.btn--ghost,.btn.ghost{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));color:var(--text)}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  font-weight:800;
+  font-size:.9rem;
+  line-height:1.2;
+  cursor:pointer
+}
+.btn--primary,.btn.primary{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  border:none;
+  box-shadow:0 10px 22px rgba(0,198,255,.25)
+}
+.btn--ghost,.btn.ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  color:var(--text)
+}
 
 /* Stats */
-.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
-.stat{background:var(--steel-grad);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.8)}
-.stat .v{font-weight:800;font-size:18px;line-height:1.2;color:var(--text)}
-.stat .k{color:var(--muted);font-size:12px;line-height:1.2;font-weight:500}
+.statbar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px
+}
+.stat{
+  background:var(--steel-grad);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  text-align:center;
+  box-shadow:0 24px 60px rgba(0,0,0,.8)
+}
+.stat .v{
+  font-weight:800;
+  font-size:18px;
+  line-height:1.2;
+  color:var(--text)
+}
+.stat .k{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.2;
+  font-weight:500
+}
 
 /* HERO MOCK */
 .mock-wrap{position:relative}
-.mock-glow{position:absolute;inset:-60px;z-index:0;pointer-events:none;filter:blur(40px);background:
-  radial-gradient(circle at var(--gx,50%) var(--gy,50%), var(--glow-cyan-main) 0%, rgba(75,227,209,.22) 35%, var(--glow-cyan-soft) 70%)}
-.mock{position:relative;border:1px solid var(--border);border-radius:20px;overflow:hidden;background:#0b1020;height:625px;max-height:640px;
-  box-shadow:0 0 80px rgba(0,198,255,.45), 0 40px 140px rgba(75,227,209,.28);z-index:1}
-.mock__slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity 1s ease, transform 9s ease}
-.mock__slide.active{opacity:1;transform:scale(1.08)}
-.mock__nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.32);cursor:pointer;transition:transform .2s,background .2s}
-.dot.active{background:linear-gradient(135deg,var(--accent),#4be3d1);transform:scale(1.2)}
-.mock__toggle{position:absolute;top:12px;right:12px;z-index:2;padding:7px 10px;border-radius:10px;border:1px solid var(--border);
-  background:rgba(255,255,255,.06);backdrop-filter:blur(8px);font-weight:900;font-size:12px;line-height:1.2;color:var(--text);cursor:pointer}
-.mock.fit .mock__slide{object-fit:contain;transform:scale(1)!important;background:#0b1020}
+#mockGlow.mock-glow{
+  position:absolute;
+  inset:-60px;
+  z-index:0;
+  pointer-events:none;
+  filter:blur(40px);
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%), var(--glow-cyan-main) 0%, rgba(75,227,209,.22) 35%, var(--glow-cyan-soft) 70%)
+}
+.mock{
+  position:relative;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  background:#0b1020;
+  height:625px;
+  max-height:640px;
+  box-shadow:0 0 80px rgba(0,198,255,.45),
+             0 40px 140px rgba(75,227,209,.28);
+  z-index:1
+}
+.mock__slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.03);
+  transition:opacity 1s ease, transform 9s ease
+}
+.mock__slide.active{
+  opacity:1;
+  transform:scale(1.08)
+}
+.mock__nav{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:2
+}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.32);
+  cursor:pointer;
+  transition:transform .2s,background .2s
+}
+.dot.active{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  transform:scale(1.2)
+}
+.mock__toggle{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  padding:7px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);
+  font-weight:900;
+  font-size:12px;
+  line-height:1.2;
+  color:var(--text);
+  cursor:pointer
+}
+.mock.fit .mock__slide{
+  object-fit:contain;
+  transform:scale(1)!important;
+  background:#0b1020
+}
 
 /* Sections / Panels */
-.section__head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}
-.section__title{font-size:clamp(22px,2.2vw,34px);letter-spacing:-.2px;font-weight:700;color:var(--text)}
-.pill{font-size:12px;color:#06142b;background:linear-gradient(135deg,var(--accent-2),#ffe39a);border-radius:999px;padding:6px 10px;font-weight:800;line-height:1.2}
-.panel{background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:12px 16px;line-height:1.5;color:var(--text);font-size:.9rem;font-weight:500}
+.section__head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:18px
+}
+.section__title{
+  font-size:clamp(22px,2.2vw,34px);
+  letter-spacing:-.2px;
+  font-weight:700;
+  color:var(--text)
+}
+.pill{
+  font-size:12px;
+  color:#06142b;
+  background:linear-gradient(135deg,var(--accent-2),#ffe39a);
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:800;
+  line-height:1.2
+}
+.panel{
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  padding:12px 16px;
+  line-height:1.5;
+  color:var(--text);
+  font-size:.9rem;
+  font-weight:500
+}
 
 /* Cards / blocks */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{padding:18px;border-radius:16px;border:1px solid var(--border);background:var(--steel-grad);box-shadow:var(--shadow-soft);
-  display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:space-between;min-height:100%;color:var(--text)}
-.card h3{margin:0;font-weight:700;color:var(--text);line-height:1.3;font-size:1rem}
-.card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.4;font-weight:500}
-.card ul,.card ol{margin:0 0 0 18px;padding:0;color:var(--muted);font-size:.9rem;line-height:1.4;font-weight:500}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+.card{
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--steel-grad);
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  min-height:100%;
+  color:var(--text)
+}
+.card h3{
+  margin:0;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+  font-size:1rem
+}
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.4;
+  font-weight:500
+}
+.card ul,.card ol{
+  margin:0 0 0 18px;
+  padding:0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.4;
+  font-weight:500
+}
 .card li{margin:4px 0}
 
 /* band / timeline */
-.band{background:rgba(4,8,18,.6);border:1px solid rgba(0,198,255,.25);box-shadow:0 30px 80px rgba(0,198,255,.15),0 60px 160px rgba(0,0,0,.9);
-  border-radius:var(--radius-lg);padding:20px;margin-top:28px}
-.band__title{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3;margin-bottom:10px}
-.timeline-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.timeline-col{background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
-.timeline-time{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;line-height:1.3}
-.timeline-headline{color:var(--text);font-weight:700;font-size:.95rem;line-height:1.4;margin-bottom:4px}
-.timeline-copy{color:var(--muted);font-size:.8rem;line-height:1.4;font-weight:500}
+.band{
+  background:rgba(4,8,18,.6);
+  border:1px solid rgba(0,198,255,.25);
+  box-shadow:0 30px 80px rgba(0,198,255,.15),
+             0 60px 160px rgba(0,0,0,.9);
+  border-radius:var(--radius-lg);
+  padding:20px;
+  margin-top:28px
+}
+.band__title{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.3;
+  margin-bottom:10px
+}
+.timeline-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px
+}
+.timeline-col{
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:14px;
+  box-shadow:var(--shadow)
+}
+.timeline-time{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:6px;
+  line-height:1.3
+}
+.timeline-headline{
+  color:var(--text);
+  font-weight:700;
+  font-size:.95rem;
+  line-height:1.4;
+  margin-bottom:4px
+}
+.timeline-copy{
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500
+}
 
 /* spec grid */
-.specgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.specbox{background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:16px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
-.specbox__head{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3;margin-bottom:8px}
-.specbox__metric{font-size:1.1rem;font-weight:800;line-height:1.3;color:var(--text);margin-bottom:6px}
-.specbox__desc{font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)}
+.specgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px
+}
+.specbox{
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:16px;
+  min-height:160px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between
+}
+.specbox__head{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.3;
+  margin-bottom:8px
+}
+.specbox__metric{
+  font-size:1.1rem;
+  font-weight:800;
+  line-height:1.3;
+  color:var(--text);
+  margin-bottom:6px
+}
+.specbox__desc{
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+  color:var(--muted)
+}
 
 /* proof strip */
-.proof-strip{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.proof-cell{background:rgba(0,0,0,.4);border:1px solid rgba(0,198,255,.4);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);
-  padding:16px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text)}
-.proof-head{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--accent);margin-bottom:4px}
-.proof-metric{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px}
-.proof-desc{color:var(--muted);font-size:.8rem;line-height:1.4;font-weight:500}
+.proof-strip{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:12px
+}
+.proof-cell{
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(0,198,255,.4);
+  border-radius:14px;
+  box-shadow:0 24px 60px rgba(0,0,0,.8),
+             0 0 60px rgba(0,198,255,.18);
+  padding:16px;
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+  color:var(--text)
+}
+.proof-head{
+  font-size:.7rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  color:var(--accent);
+  margin-bottom:4px
+}
+.proof-metric{
+  font-size:.9rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:4px
+}
+.proof-desc{
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500
+}
 
 /* Reserve */
-.reserve-card{display:grid;gap:12px;background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow);
-  padding:20px;max-width:400px}
-.reserve-introline{font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
-.reserve-card label{font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px}
-.reserve-card input,.reserve-card select,.reserve-card button{
-  border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);
-  font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none
+.reserve-card{
+  display:grid;
+  gap:12px;
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  padding:20px;
+  max-width:400px
 }
-.reserve-card button{background:linear-gradient(135deg,var(--accent),#4be3d1);color:#041221;font-weight:800;cursor:pointer;border:none;
-  box-shadow:0 0 16px rgba(0,198,255,.7),0 24px 40px rgba(0,198,255,.4),0 10px 30px rgba(0,0,0,.9)}
-.reserve-steps{display:grid;gap:12px;max-width:360px}
-.stepbox{background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:16px}
-.stepbox__num{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3;margin-bottom:6px}
-.stepbox__title{font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text);margin-bottom:4px}
-.stepbox__copy{font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500}
+.reserve-introline{
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.4;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:8px
+}
+.reserve-card label{
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  gap:6px
+}
+.reserve-card input,
+.reserve-card select,
+.reserve-card button{
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.4);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.9rem;
+  line-height:1.3;
+  padding:10px 12px;
+  font-weight:600;
+  outline:none
+}
+.reserve-card button{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  cursor:pointer;
+  border:none;
+  box-shadow:
+    0 0 16px rgba(0,198,255,.7),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9)
+}
+.reserve-steps{
+  display:grid;
+  gap:12px;
+  max-width:360px
+}
+.stepbox{
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:16px
+}
+.stepbox__num{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.3;
+  margin-bottom:6px
+}
+.stepbox__title{
+  font-size:.95rem;
+  line-height:1.3;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:4px
+}
+.stepbox__copy{
+  font-size:.8rem;
+  line-height:1.4;
+  color:var(--muted);
+  font-weight:500
+}
 
 /* proof list */
-.proof-list{list-style:none;padding:0;margin:24px auto 0;max-width:700px;display:grid;gap:12px}
-.proof-item{background:rgba(17,22,38,.7);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:14px 16px;text-align:left;
-  font-size:.9rem;line-height:1.4;color:var(--text);font-weight:500}
-.proof-item strong{display:block;font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.proof-list{
+  list-style:none;
+  padding:0;
+  margin:24px auto 0;
+  max-width:700px;
+  display:grid;
+  gap:12px
+}
+.proof-item{
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:14px 16px;
+  text-align:left;
+  font-size:.9rem;
+  line-height:1.4;
+  color:var(--text);
+  font-weight:500
+}
+.proof-item strong{
+  display:block;
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  margin-bottom:4px;
+  text-transform:uppercase;
+  letter-spacing:.03em
+}
 
 /* ================= CONFIGURATOR ================= */
 
-#moduleList{display:grid;gap:24px;align-content:start}
+#moduleList{
+  display:grid;
+  gap:24px;
+  align-content:start
+}
 
 /* section labels */
-.group-head{display:flex;flex-direction:column;gap:6px}
-.group-head h3{margin:0;font-size:1rem;font-weight:700;line-height:1.3;color:var(--text)}
-.group-head .lede{font-size:.8rem;line-height:1.4;max-width:none}
+.group-head{
+  display:flex;
+  flex-direction:column;
+  gap:6px
+}
+.group-head h3{
+  margin:0;
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text)
+}
+.group-head .lede{
+  font-size:.8rem;
+  line-height:1.4;
+  max-width:none
+}
 
 /* group shells */
-.config-group{border-radius:20px;padding:20px;background:rgba(10,14,30,.6);box-shadow:0 30px 80px rgba(0,0,0,.8);border:1px solid var(--border);display:grid;gap:12px;position:relative}
+.config-group{
+  border-radius:20px;
+  padding:20px;
+  background:rgba(10,14,30,.6);
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+  border:1px solid var(--border);
+  display:grid;
+  gap:12px;
+  position:relative
+}
 .config-group--core{
-  background:radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%), rgba(20,24,40,.6);
-  border:1px solid rgba(255,255,255,.18); box-shadow:0 0 30px rgba(255,255,255,.08),0 30px 80px rgba(0,0,0,.9)
+  background:
+    radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%),
+    rgba(20,24,40,.6);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 0 30px rgba(255,255,255,.08),
+    0 30px 80px rgba(0,0,0,.9)
 }
 .config-group--monitor{
-  background:radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%), rgba(0,30,45,.55);
-  border:1px solid rgba(0,198,255,.6); box-shadow:0 0 40px rgba(0,198,255,.45),0 40px 120px rgba(0,198,255,.16),0 60px 160px rgba(0,0,0,.9)
+  background:
+    radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%),
+    rgba(0,30,45,.55);
+  border:1px solid rgba(0,198,255,.6);
+  box-shadow:
+    0 0 40px rgba(0,198,255,.45),
+    0 40px 120px rgba(0,198,255,.16),
+    0 60px 160px rgba(0,0,0,.9)
 }
 .config-group--flight{
-  background:radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%), rgba(0,40,35,.55);
-  border:1px solid rgba(75,227,209,.6); box-shadow:0 0 40px rgba(75,227,209,.4),0 40px 120px rgba(75,227,209,.18),0 60px 160px rgba(0,0,0,.9)
+  background:
+    radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%),
+    rgba(0,40,35,.55);
+  border:1px solid rgba(75,227,209,.6);
+  box-shadow:
+    0 0 40px rgba(75,227,209,.4),
+    0 40px 120px rgba(75,227,209,.18),
+    0 60px 160px rgba(0,0,0,.9)
 }
 .config-group--racing{
-  background:radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%), rgba(40,30,0,.5);
-  border:1px solid rgba(255,210,63,.6); box-shadow:0 0 40px rgba(255,210,63,.4),0 40px 120px rgba(255,210,63,.16),0 60px 160px rgba(0,0,0,.9)
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%),
+    rgba(40,30,0,.5);
+  border:1px solid rgba(255,210,63,.6);
+  box-shadow:
+    0 0 40px rgba(255,210,63,.4),
+    0 40px 120px rgba(255,210,63,.16),
+    0 60px 160px rgba(0,0,0,.9)
 }
 .config-group--stream{
-  background:radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%), rgba(40,0,35,.5);
-  border:1px solid rgba(255,0,200,.5); box-shadow:0 0 40px rgba(255,0,200,.4),0 40px 120px rgba(255,0,200,.18),0 60px 160px rgba(0,0,0,.9)
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%),
+    rgba(40,0,35,.5);
+  border:1px solid rgba(255,0,200,.5);
+  box-shadow:
+    0 0 40px rgba(255,0,200,.4),
+    0 40px 120px rgba(255,0,200,.18),
+    0 60px 160px rgba(0,0,0,.9)
 }
 
 /* choice cards */
-.config-card{padding:18px;border-radius:16px;border:1px solid var(--border);background:var(--steel-grad);box-shadow:var(--shadow-soft);cursor:pointer;display:flex;flex-direction:column;gap:8px;color:var(--text);position:relative}
-.config-card strong{font-size:.9rem;font-weight:700;line-height:1.3;color:var(--text);display:block}
-.config-card p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.4;font-weight:500}
+.config-card{
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--steel-grad);
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--text);
+  position:relative
+}
+.config-card strong{
+  font-size:.9rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+  display:block
+}
+.config-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500
+}
 .config-card input{display:none}
 
 /* motion requirement lock */
-.requires-dynamic.locked{opacity:.45;filter:saturate(70%) grayscale(20%)}
+.requires-dynamic.locked{
+  opacity:.45;
+  filter:saturate(70%) grayscale(20%)
+}
 .req-note{
-  display:none;margin-top:6px;font-size:.7rem;font-weight:700;color:var(--accent);
-  background:rgba(0,198,255,.08);border:1px dashed rgba(0,198,255,.4);padding:6px 8px;border-radius:8px
+  display:none;
+  margin-top:6px;
+  font-size:.7rem;
+  font-weight:700;
+  color:var(--accent);
+  background:rgba(0,198,255,.08);
+  border:1px dashed rgba(0,198,255,.4);
+  padding:6px 8px;
+  border-radius:8px
 }
 .requires-dynamic.locked .req-note{display:block}
-.req-note a{font-weight:800;color:var(--text);text-decoration:underline}
 
 /* summary */
-aside.panel{position:sticky;top:100px;padding:20px}
+aside.panel{
+  position:sticky;
+  top:100px;
+  padding:20px
+}
 
 /* Footer */
-footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border);background:rgba(6,10,24,.55);margin-top:40px;font-size:.85rem;line-height:1.4;text-align:center}
-.footer-note{font-size:.7rem;line-height:1.4;color:var(--muted);max-width:600px;margin:12px auto 0;font-weight:500}
+footer{
+  padding:40px 0 60px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  background:rgba(6,10,24,.55);
+  margin-top:40px;
+  font-size:.85rem;
+  line-height:1.4;
+  text-align:center
+}
+.footer-note{
+  font-size:.7rem;
+  line-height:1.4;
+  color:var(--muted);
+  max-width:600px;
+  margin:12px auto 0;
+  font-weight:500
+}
 
 /* Responsive */
-@media (max-width:1080px){.hero{grid-template-columns:1fr}.mock{height:480px}}
+@media (max-width:1080px){
+  .hero{grid-template-columns:1fr}
+  .mock{height:480px}
+}
 @media (max-width:980px){
-  .statbar{grid-template-columns:repeat(2,1fr)} .cards{grid-template-columns:1fr} .timeline-row{grid-template-columns:1fr 1fr}
-  :root{--logo-h:46px} .brand{gap:16px} .brand__logo-img{height:110px;max-height:110px}
+  .statbar{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:1fr}
+  .timeline-row{grid-template-columns:1fr 1fr}
+  :root{--logo-h:46px}
+  .brand{gap:16px}
+  .brand__logo-img{height:110px;max-height:110px}
   .brand__tagline{font-size:1.8rem;line-height:1.1;white-space:nowrap}
   .brand__sub{font-size:.7rem;max-width:240px}
   .nav__links-row{justify-content:flex-start;column-gap:10px;font-size:.75rem}
@@ -349,65 +1009,166 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
 
 <!-- PROLOGUE -->
 <section id="prologue" class="wrap">
-  <div class="section__head"><h2 class="section__title">Built for Workdays, Wired for Play</h2><span class="pill">One stop. No compromise.</span></div>
-  <p class="lede">Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, clean enough for the living room.</p>
+  <div class="section__head">
+    <h2 class="section__title">Built for Workdays, Wired for Play</h2>
+    <span class="pill">One stop. No compromise.</span>
+  </div>
+  <p class="lede">
+    Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, clean enough for the living room.
+  </p>
   <div class="cards" style="margin-top:16px">
-    <article class="card"><h3>Focus without friction</h3><p class="lede">Work like it’s a dedicated workstation.</p><p>Keyboard, mouse, mic, camera, Stream Deck — frame mounted. Cable runs are tidy. Nothing wobbles.</p></article>
-    <article class="card"><h3>Flow, not setup</h3><p class="lede">Mode-switching takes minutes, not hours.</p><p>Indexed geometry locks angles and reach. Swap without re-measuring.</p></article>
-    <article class="card"><h3>Comfort that lasts</h3><p class="lede">All-day ergonomics, all-night sessions.</p><p>Seat rails, reach, angles dial in precisely. The frame absorbs load; your body doesn’t.</p></article>
+    <article class="card">
+      <h3>Focus without friction</h3>
+      <p class="lede">Work like it’s a dedicated workstation.</p>
+      <p>Keyboard, mouse, mic, camera, Stream Deck — frame mounted. Cable runs are tidy. Nothing wobbles.</p>
+    </article>
+    <article class="card">
+      <h3>Flow, not setup</h3>
+      <p class="lede">Mode-switching takes minutes, not hours.</p>
+      <p>Indexed geometry locks angles and reach. Swap without re-measuring.</p>
+    </article>
+    <article class="card">
+      <h3>Comfort that lasts</h3>
+      <p class="lede">All-day ergonomics, all-night sessions.</p>
+      <p>Seat rails, reach, angles dial in precisely. The frame absorbs load; your body doesn’t.</p>
+    </article>
   </div>
 </section>
 
 <!-- SWITCH STORY -->
 <section id="story" class="wrap">
-  <div class="section__head"><h2 class="section__title">The Switch</h2><span class="pill">Work → FPS → Racing → Flight</span></div>
+  <div class="section__head">
+    <h2 class="section__title">The Switch</h2>
+    <span class="pill">Work → FPS → Racing → Flight</span>
+  </div>
   <div class="cards">
-    <article class="card"><h3>Workstation → FPS</h3><p class="lede">Sit-stand posture dialed. Keyboard clears, sticks come in.</p><p>Rigid extrusion, zero flex, cables that don’t snag. The rig disappears.</p></article>
-    <article class="card"><h3>FPS → Racing</h3><p class="lede">Wheel on, pedals aligned, rails snap to your mark.</p><p>Angles and reach lock with repeatable stops. Muscle memory holds.</p></article>
-    <article class="card"><h3>Racing → Flight</h3><p class="lede">Center-stick / dual-stick / yoke. Swap without chaos.</p><p>Avionics and throttle sit exactly where they should.</p></article>
+    <article class="card">
+      <h3>Workstation → FPS</h3>
+      <p class="lede">Sit-stand posture dialed. Keyboard clears, sticks come in.</p>
+      <p>Rigid extrusion, zero flex, cables that don’t snag. The rig disappears.</p>
+    </article>
+    <article class="card">
+      <h3>FPS → Racing</h3>
+      <p class="lede">Wheel on, pedals aligned, rails snap to your mark.</p>
+      <p>Angles and reach lock with repeatable stops. Muscle memory holds.</p>
+    </article>
+    <article class="card">
+      <h3>Racing → Flight</h3>
+      <p class="lede">Center-stick / dual-stick / yoke. Swap without chaos.</p>
+      <p>Avionics and throttle sit exactly where they should.</p>
+    </article>
   </div>
 </section>
 
 <!-- WHY NOT -->
 <section id="frame-pre" class="wrap">
-  <div class="section__head"><h2 class="section__title">Why normal setups don't work</h2><span class="pill">You’re already fighting the gear</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Why normal setups don't work</h2>
+    <span class="pill">You’re already fighting the gear</span>
+  </div>
   <div class="band">
     <div class="band__title">The usual pain</div>
     <div class="timeline-row">
-      <div class="timeline-col"><div class="timeline-time">Desk Clamp</div><div class="timeline-headline">Desk flex = aim drift.</div><div class="timeline-copy">Monitors too high. Wheel shakes the table. Mic arm wobbles on stream.</div></div>
-      <div class="timeline-col"><div class="timeline-time">Wheel Stand</div><div class="timeline-headline">Trip hazard. Spaghetti.</div><div class="timeline-copy">Pedals walk. Angles never match twice. Living room exploded.</div></div>
-      <div class="timeline-col"><div class="timeline-time">PVC Cockpit</div><div class="timeline-headline">Great racer. Bad desk.</div><div class="timeline-copy">No camera arm, no keyboard tray, trash posture. You can’t do 8-hour days there.</div></div>
+      <div class="timeline-col">
+        <div class="timeline-time">Desk Clamp</div>
+        <div class="timeline-headline">Desk flex = aim drift.</div>
+        <div class="timeline-copy">Monitors too high. Wheel shakes the table. Mic arm wobbles on stream.</div>
+      </div>
+      <div class="timeline-col">
+        <div class="timeline-time">Wheel Stand</div>
+        <div class="timeline-headline">Trip hazard. Spaghetti.</div>
+        <div class="timeline-copy">Pedals walk. Angles never match twice. Living room exploded.</div>
+      </div>
+      <div class="timeline-col">
+        <div class="timeline-time">PVC Cockpit</div>
+        <div class="timeline-headline">Great racer. Bad desk.</div>
+        <div class="timeline-copy">No camera arm, no keyboard tray, trash posture. You can’t do 8-hour days there.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FRAME -->
 <section id="frame" class="wrap">
-  <div class="section__head"><h2 class="section__title">The Frame</h2><span class="pill">4080 aluminium / indexed geometry</span></div>
+  <div class="section__head">
+    <h2 class="section__title">The Frame</h2>
+    <span class="pill">4080 aluminium / indexed geometry</span>
+  </div>
   <div class="specgrid">
-    <div class="specbox"><div><div class="specbox__head">Structure</div><div class="specbox__metric">4080 anodized extrusion</div><div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling.</div></div></div>
-    <div class="specbox"><div><div class="specbox__head">Repeatability</div><div class="specbox__metric">Indexed mount points</div><div class="specbox__desc">Angles + reach return to exact marks. Muscle memory survives swaps.</div></div></div>
-    <div class="specbox"><div><div class="specbox__head">Cable sanity</div><div class="specbox__metric">Internal routing</div><div class="specbox__desc">Tie-down channels and pass-throughs keep USB/power out of your feet.</div></div></div>
+    <div class="specbox">
+      <div>
+        <div class="specbox__head">Structure</div>
+        <div class="specbox__metric">4080 anodized extrusion</div>
+        <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling.</div>
+      </div>
+    </div>
+    <div class="specbox">
+      <div>
+        <div class="specbox__head">Repeatability</div>
+        <div class="specbox__metric">Indexed mount points</div>
+        <div class="specbox__desc">Angles + reach return to exact marks. Muscle memory survives swaps.</div>
+      </div>
+    </div>
+    <div class="specbox">
+      <div>
+        <div class="specbox__head">Cable sanity</div>
+        <div class="specbox__metric">Internal routing</div>
+        <div class="specbox__desc">Tie-down channels and pass-throughs keep USB/power out of your feet.</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FORCE -->
 <section id="force" class="wrap">
-  <div class="section__head"><h2 class="section__title">Force Handling</h2><span class="pill">Direct drive. Loadcell. Motion load.</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Force Handling</h2>
+    <span class="pill">Direct drive. Loadcell. Motion load.</span>
+  </div>
   <div class="proof-strip">
-    <div class="proof-cell"><div class="proof-head">Torque</div><div class="proof-metric">> 15 Nm wheel bases</div><div class="proof-desc">Steering ties into a reinforced cross member. No twist under load.</div></div>
-    <div class="proof-cell"><div class="proof-head">Brake</div><div class="proof-metric">Loadcell stability</div><div class="proof-desc">Pedal tray locks off indexed rails. Full brake without walking.</div></div>
-    <div class="proof-cell"><div class="proof-head">Motion Shock</div><div class="proof-metric">Actuator bracing</div><div class="proof-desc">Dynamic chassis resists heave/surge cues so alignment stays true.</div></div>
+    <div class="proof-cell">
+      <div class="proof-head">Torque</div>
+      <div class="proof-metric">> 15 Nm wheel bases</div>
+      <div class="proof-desc">Steering ties into a reinforced cross member. No twist under load.</div>
+    </div>
+    <div class="proof-cell">
+      <div class="proof-head">Brake</div>
+      <div class="proof-metric">Loadcell stability</div>
+      <div class="proof-desc">Pedal tray locks off indexed rails. Full brake without walking.</div>
+    </div>
+    <div class="proof-cell">
+      <div class="proof-head">Motion Shock</div>
+      <div class="proof-metric">Actuator bracing</div>
+      <div class="proof-desc">Dynamic chassis resists heave/surge cues so alignment stays true.</div>
+    </div>
   </div>
 </section>
 
 <!-- CHASSIS -->
 <section id="chassis" class="wrap">
-  <div class="section__head"><h2 class="section__title">Pick Your Chassis</h2><span class="pill">Static vs Dynamic</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Pick Your Chassis</h2>
+    <span class="pill">Static vs Dynamic</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Static Frame</h3><p class="lede">Locked. Silent. Apartment-safe.</p><p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p><p><strong>Why:</strong> Cheaper entry, no floor drama.</p></article>
-    <article class="card"><h3>Dynamic Frame</h3><p class="lede">Motion-capable. Built to take hits.</p><p>Reinforced members and actuator points translate telemetry into cues without twisting.</p><p><strong>Why:</strong> Race/flight cues you can feel.</p></article>
-    <article class="card"><h3>Upgrade Path</h3><p class="lede">Static today → Dynamic later.</p><p>Shared geometry. Controls and mounts carry forward.</p><p><strong>No rebuild.</strong></p></article>
+    <article class="card">
+      <h3>Static Frame</h3>
+      <p class="lede">Locked. Silent. Apartment-safe.</p>
+      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
+      <p><strong>Why:</strong> Cheaper entry, no floor drama.</p>
+    </article>
+    <article class="card">
+      <h3>Dynamic Frame</h3>
+      <p class="lede">Motion-capable. Built to take hits.</p>
+      <p>Reinforced members and actuator points translate telemetry into cues without twisting.</p>
+      <p><strong>Why:</strong> Race/flight cues you can feel.</p>
+    </article>
+    <article class="card">
+      <h3>Upgrade Path</h3>
+      <p class="lede">Static today → Dynamic later.</p>
+      <p>Shared geometry. Controls and mounts carry forward.</p>
+      <p><strong>No rebuild.</strong></p>
+    </article>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Spec My Chassis</a>
@@ -417,11 +1178,26 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
 
 <!-- KITS -->
 <section id="kits" class="wrap">
-  <div class="section__head"><h2 class="section__title">Starter Kits</h2><span class="pill">Fast path in</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Starter Kits</h2>
+    <span class="pill">Fast path in</span>
+  </div>
   <div class="cards">
-    <article class="card"><h3>Work + FPS</h3><p class="lede">Single monitor, low-latency posture.</p><p>Static chassis + desk tray + single/dual-stick as needed.</p></article>
-    <article class="card"><h3>Race Spec</h3><p class="lede">Direct-drive + loadcell + triples/quad.</p><p>Dynamic chassis, indexed pedal mount, wheel arm, shifter/handbrake.</p></article>
-    <article class="card"><h3>Flight / Space</h3><p class="lede">Center-stick, dual-stick, or HOTAS.</p><p>Dynamic chassis with overhead HUD and pedal base for planted yaw.</p></article>
+    <article class="card">
+      <h3>Work + FPS</h3>
+      <p class="lede">Single monitor, low-latency posture.</p>
+      <p>Static chassis + desk tray + single/dual-stick as needed.</p>
+    </article>
+    <article class="card">
+      <h3>Race Spec</h3>
+      <p class="lede">Direct-drive + loadcell + triples/quad.</p>
+      <p>Dynamic chassis, indexed pedal mount, wheel arm, shifter/handbrake.</p>
+    </article>
+    <article class="card">
+      <h3>Flight / Space</h3>
+      <p class="lede">Center-stick, dual-stick, or HOTAS.</p>
+      <p>Dynamic chassis with overhead HUD and pedal base for planted yaw.</p>
+    </article>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Build Mine</a>
@@ -431,7 +1207,10 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
 
 <!-- CONFIGURATOR -->
 <section id="configurator" class="wrap">
-  <div class="section__head"><h2 class="section__title">Configurator</h2><span class="pill">Live total · Real modules</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Configurator</h2>
+    <span class="pill">Live total · Real modules</span>
+  </div>
   <p class="lede">Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.</p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
@@ -533,12 +1312,11 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
           <p>Adjustable rudder pedal base. Stable yaw; zero floor creep.</p>
         </label>
 
-        <!-- NEW: Flight Actuator Kit (requires Dynamic) -->
         <label class="config-card requires-dynamic" data-key="flight-actuator">
           <input type="checkbox" data-price="380" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>FLIGHT: ACTUATOR MOUNT KIT — $380</strong>
           <p>Dedicated actuator hardpoints + reinforcement plates for heave/surge cues.</p>
-          <div class="req-note">Requires Dynamic Base Frame. <a href="#" class="unlock" data-target="dynamic">Switch to Dynamic</a></div>
+          <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
       </div>
 
@@ -567,12 +1345,11 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
           <p>Side-mounted shifter/handbrake plate. Adjustable height/reach.</p>
         </label>
 
-        <!-- NEW: Racing Actuator Kit (requires Dynamic) -->
         <label class="config-card requires-dynamic" data-key="race-actuator">
           <input type="checkbox" data-price="420" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>RACING: ACTUATOR MOUNT KIT — $420</strong>
           <p>Actuator crossmembers + gussets to carry surge/heave loads without alignment drift.</p>
-          <div class="req-note">Requires Dynamic Base Frame. <a href="#" class="unlock" data-target="dynamic">Switch to Dynamic</a></div>
+          <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
       </div>
 
@@ -620,68 +1397,150 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
 
 <!-- GAMES -->
 <section id="games" class="wrap">
-  <div class="section__head"><h2 class="section__title">Games & Sims</h2><span class="pill">Dialed for today’s titles</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Games & Sims</h2>
+    <span class="pill">Dialed for today’s titles</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Flight</h3><p class="lede">MSFS • DCS • X-Plane • IL-2</p><p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control.</p></article>
-    <article class="card"><h3>Racing</h3><p class="lede">iRacing • ACC • Assetto • Forza</p><p>Wheel mounts with rigid clamping and repeatable seating marks.</p></article>
-    <article class="card"><h3>FPS / Tactical</h3><p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p><p>Keyboard clearance, clean cable routes, quick swap to sticks or throttle.</p></article>
+    <article class="card">
+      <h3>Flight</h3>
+      <p class="lede">MSFS • DCS • X-Plane • IL-2</p>
+      <p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control.</p>
+    </article>
+    <article class="card">
+      <h3>Racing</h3>
+      <p class="lede">iRacing • ACC • Assetto • Forza</p>
+      <p>Wheel mounts with rigid clamping and repeatable seating marks.</p>
+    </article>
+    <article class="card">
+      <h3>FPS / Tactical</h3>
+      <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
+      <p>Keyboard clearance, clean cable routes, quick swap to sticks or throttle.</p>
+    </article>
   </div>
 </section>
 
 <!-- COMPAT -->
 <section id="compat" class="wrap">
-  <div class="section__head"><h2 class="section__title">Your Gear Fits</h2><span class="pill">No drilling</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Your Gear Fits</h2>
+    <span class="pill">No drilling</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Flight Sticks / HOTAS</h3>
-      <ul><li>Virpil / Winwing / Thrustmaster / VKB</li><li>Center-stick, dual-stick, or throttle patterns.</li><li>Pedal tray clears common rudder sets.</li></ul>
+    <article class="card">
+      <h3>Flight Sticks / HOTAS</h3>
+      <ul>
+        <li>Virpil / Winwing / Thrustmaster / VKB</li>
+        <li>Center-stick, dual-stick, or throttle patterns.</li>
+        <li>Pedal tray clears common rudder sets.</li>
+      </ul>
     </article>
-    <article class="card"><h3>Racing Hardware</h3>
-      <ul><li>Fanatec / Moza / Simagic / Logitech DD</li><li>Loadcell bases & handbrake / shifter side-mounts.</li><li>Torque braced into frame, not desk.</li></ul>
+    <article class="card">
+      <h3>Racing Hardware</h3>
+      <ul>
+        <li>Fanatec / Moza / Simagic / Logitech DD</li>
+        <li>Loadcell bases & handbrake / shifter side-mounts.</li>
+        <li>Torque braced into frame, not desk.</li>
+      </ul>
     </article>
-    <article class="card"><h3>Streaming / Creator</h3>
-      <ul><li>Camera arm for face/overhead.</li><li>Key/fill light arms for consistency.</li><li>Stream Deck arm where your hand lives.</li></ul>
+    <article class="card">
+      <h3>Streaming / Creator</h3>
+      <ul>
+        <li>Camera arm for face/overhead.</li>
+        <li>Key/fill light arms for consistency.</li>
+        <li>Stream Deck arm where your hand lives.</li>
+      </ul>
     </article>
   </div>
 </section>
 
 <!-- TUNING -->
 <section id="tuning" class="wrap">
-  <div class="section__head"><h2 class="section__title">Performance Tuning</h2><span class="pill">Lock comfort, unlock pace</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Performance Tuning</h2>
+    <span class="pill">Lock comfort, unlock pace</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Seat & Reach</h3><p class="lede">Posture that lasts all night.</p>
-      <ul><li>Seat back: 95–105°; hips slightly below knees.</li><li>Knees: ~110° racing; ~100–110° flight.</li><li>Arms: 15–30° bend at full lock/stick deflection.</li></ul></article>
-    <article class="card"><h3>Wheel / Yoke / Stick</h3><p class="lede">Precision beats strength.</p>
-      <ul><li>Wheel/yoke top ≈ at or just below shoulder height.</li><li>Center-stick between knees; elbow ≈ 90° at neutral.</li></ul></article>
-    <article class="card"><h3>Pedals</h3><p class="lede">Control without cramp.</p>
-      <ul><li>Racing: knee 110–120°, ankle 15–30° at rest.</li><li>Flight: heels supported; avoid toe-only posture.</li></ul></article>
-    <article class="card"><h3>Screen & FOV</h3><p class="lede">Clarity without motion sickness.</p>
-      <ul><li>Top bezel ≈ eye height; center ~15° below.</li><li>Triples 45–60°; true scale over “wide”.</li></ul></article>
-    <article class="card"><h3>Input Curves</h3><p class="lede">Smooth center, control at edge.</p>
-      <ul><li>Flight: curve 15–25; deadzone 2–3%.</li><li>Brake: linear or mild progressive.</li></ul></article>
-    <article class="card"><h3>VR Notes</h3><p class="lede">Comfort first, frames second.</p>
-      <ul><li>Dial IPD physically, then software.</li><li>Enable reprojection if FPS dips.</li></ul></article>
+    <article class="card">
+      <h3>Seat & Reach</h3>
+      <p class="lede">Posture that lasts all night.</p>
+      <ul>
+        <li>Seat back: 95–105°; hips slightly below knees.</li>
+        <li>Knees: ~110° racing; ~100–110° flight.</li>
+        <li>Arms: 15–30° bend at full lock/stick deflection.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Wheel / Yoke / Stick</h3>
+      <p class="lede">Precision beats strength.</p>
+      <ul>
+        <li>Wheel/yoke top ≈ at or just below shoulder height.</li>
+        <li>Center-stick between knees; elbow ≈ 90° at neutral.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Pedals</h3>
+      <p class="lede">Control without cramp.</p>
+      <ul>
+        <li>Racing: knee 110–120°, ankle 15–30° at rest.</li>
+        <li>Flight: heels supported; avoid toe-only posture.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Screen & FOV</h3>
+      <p class="lede">Clarity without motion sickness.</p>
+      <ul>
+        <li>Top bezel ≈ eye height; center ~15° below.</li>
+        <li>Triples 45–60°; true scale over “wide”.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Input Curves</h3>
+      <p class="lede">Smooth center, control at edge.</p>
+      <ul>
+        <li>Flight: curve 15–25; deadzone 2–3%.</li>
+        <li>Brake: linear or mild progressive.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>VR Notes</h3>
+      <p class="lede">Comfort first, frames second.</p>
+      <ul>
+        <li>Dial IPD physically, then software.</li>
+        <li>Enable reprojection if FPS dips.</li>
+      </ul>
+    </article>
   </div>
 </section>
 
 <!-- QUICK-START -->
 <section id="quickstart" class="wrap">
-  <div class="section__head"><h2 class="section__title">Quick-Start</h2><span class="pill">Pick a title, get dialed</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Quick-Start</h2>
+    <span class="pill">Pick a title, get dialed</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Star Citizen</h3><p class="lede">Dual-stick or HOTAS + pedals.</p>
+    <article class="card">
+      <h3>Star Citizen</h3>
+      <p class="lede">Dual-stick or HOTAS + pedals.</p>
       <ol>
         <li>Chassis: Dynamic.</li>
         <li>Loadout: <strong>Flight</strong> → <em>Dual Stick</em> / <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
         <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
       </ol>
     </article>
-    <article class="card"><h3>DCS</h3><p class="lede">Center-stick HOTAS + pedals.</p>
+    <article class="card">
+      <h3>DCS</h3>
+      <p class="lede">Center-stick HOTAS + pedals.</p>
       <ol>
         <li>Chassis: Dynamic or Static (neighbors → Static).</li>
         <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>.</li>
         <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
       </ol>
     </article>
-    <article class="card"><h3>iRacing / ACC</h3><p class="lede">Wheel + pedals; triples or quad.</p>
+    <article class="card">
+      <h3>iRacing / ACC</h3>
+      <p class="lede">Wheel + pedals; triples or quad.</p>
       <ol>
         <li>Chassis: Dynamic for motion; Static for planted torque only.</li>
         <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple/Quad</em>.</li>
@@ -693,50 +1552,109 @@ footer{padding:40px 0 60px;color:var(--muted);border-top:1px solid var(--border)
 
 <!-- FIT -->
 <section id="fit" class="wrap">
-  <div class="section__head"><h2 class="section__title">Fit Check</h2><span class="pill">Real posture, not cosplay</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Fit Check</h2>
+    <span class="pill">Real posture, not cosplay</span>
+  </div>
   <div class="cards" style="margin-top:14px">
-    <article class="card"><h3>Long-session comfort</h3><p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it.</p></article>
-    <article class="card"><h3>Low visual noise</h3><p>Clean in a living room or office. Cables disappear. Lighting’s on-frame.</p></article>
-    <article class="card"><h3>72-hour test</h3><p>Workday + game sessions + late flight ops without teardown.</p></article>
+    <article class="card">
+      <h3>Long-session comfort</h3>
+      <p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it.</p>
+    </article>
+    <article class="card">
+      <h3>Low visual noise</h3>
+      <p>Clean in a living room or office. Cables disappear. Lighting’s on-frame.</p>
+    </article>
+    <article class="card">
+      <h3>72-hour test</h3>
+      <p>Workday + game sessions + late flight ops without teardown.</p>
+    </article>
   </div>
 </section>
 
 <!-- RESERVE -->
 <section id="reserve" class="wrap">
-  <div class="section__head"><h2 class="section__title">Reserve Your Slot</h2><span class="pill">Pilot batch</span></div>
+  <div class="section__head">
+    <h2 class="section__title">Reserve Your Slot</h2>
+    <span class="pill">Pilot batch</span>
+  </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
     <div class="reserve-card">
       <div class="reserve-introline">We're building with early adopters</div>
-      <label>Email<input id="rEmail" type="email" placeholder="you@email.com"></label>
+      <label>Email
+        <input id="rEmail" type="email" placeholder="you@email.com">
+      </label>
       <label>Region
-        <select id="rRegion"><option value="">Select...</option><option>US / Canada</option><option>EU / UK</option><option>AU / NZ</option><option>South Africa</option><option>Other</option></select>
+        <select id="rRegion">
+          <option value="">Select...</option>
+          <option>US / Canada</option>
+          <option>EU / UK</option>
+          <option>AU / NZ</option>
+          <option>South Africa</option>
+          <option>Other</option>
+        </select>
       </label>
       <label>Primary Mode
-        <select id="rMode"><option value="">Select...</option><option>Racing / ACC / iRacing</option><option>Flight / DCS / MSFS</option><option>FPS / Space Sim / Star Citizen</option><option>Creator / Stream Desk + Simpit</option></select>
+        <select id="rMode">
+          <option value="">Select...</option>
+          <option>Racing / ACC / iRacing</option>
+          <option>Flight / DCS / MSFS</option>
+          <option>FPS / Space Sim / Star Citizen</option>
+          <option>Creator / Stream Desk + Simpit</option>
+        </select>
       </label>
       <button id="reserveBtn" type="button">Reserve My Spot</button>
       <div id="reserveNote" style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em"></div>
     </div>
     <div class="reserve-steps">
-      <div class="stepbox"><div class="stepbox__num">Step 1</div><div class="stepbox__title">You spec the rig</div><div class="stepbox__copy">Static or Dynamic, racing / flight / creator gear, monitor layout.</div></div>
-      <div class="stepbox"><div class="stepbox__num">Step 2</div><div class="stepbox__title">We confirm fit + layout</div><div class="stepbox__copy">Clearances, posture, cable routing sanity-check. Parts list delivered.</div></div>
-      <div class="stepbox"><div class="stepbox__num">Step 3</div><div class="stepbox__title">You're in the pilot batch</div><div class="stepbox__copy">Early frames, tuning notes, priority on extra mounts.</div></div>
+      <div class="stepbox">
+        <div class="stepbox__num">Step 1</div>
+        <div class="stepbox__title">You spec the rig</div>
+        <div class="stepbox__copy">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
+      </div>
+      <div class="stepbox">
+        <div class="stepbox__num">Step 2</div>
+        <div class="stepbox__title">We confirm fit + layout</div>
+        <div class="stepbox__copy">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
+      </div>
+      <div class="stepbox">
+        <div class="stepbox__num">Step 3</div>
+        <div class="stepbox__title">You're in the pilot batch</div>
+        <div class="stepbox__copy">Early frames, tuning notes, priority on extra mounts.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
 <section id="faq" class="wrap">
-  <div class="section__head"><h2 class="section__title">FAQ</h2><span class="pill">Straight answers</span></div>
-  <details class="panel" style="margin:10px 0;"><summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary><p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, yaw onset — not theme-park throw.</p></details>
-  <details class="panel" style="margin:10px 0;"><summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary><p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward.</p></details>
-  <details class="panel" style="margin:10px 0;"><summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary><p>About 2 hours with a hex set. Modules click in — no drilling.</p></details>
-  <details class="panel" style="margin:10px 0;"><summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary><p>Yes — arms mount into frame structure, not a wobbly desk post.</p></details>
+  <div class="section__head">
+    <h2 class="section__title">FAQ</h2>
+    <span class="pill">Straight answers</span>
+  </div>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
+    <p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, yaw onset — not theme-park throw.</p>
+  </details>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
+    <p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward.</p>
+  </details>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
+    <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
+  </details>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
+    <p>Yes — arms mount into frame structure, not a wobbly desk post.</p>
+  </details>
 </section>
 
 <footer>
   © <span id="year"></span> CoreFlux Simpit
-  <div class="footer-note">Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.</div>
+  <div class="footer-note">
+    Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
+  </div>
 </footer>
 
 <script>
@@ -750,11 +1668,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const mock=document.getElementById('mock');
   const fitBtn=document.getElementById('fitToggle');
   let i=0,timer;
-  function show(n){ i=(n+slides.length)%slides.length; slides.forEach((s,k)=>s.classList.toggle('active',k===i)); dots.forEach((d,k)=>d.classList.toggle('active',k===i)); }
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('active',k===i));
+  }
   function play(){ timer=setInterval(()=>show(i+1), 5200); }
   function stop(){ clearInterval(timer); }
   dots.forEach((d,idx)=>d.addEventListener('click',()=>{ stop(); show(idx); play(); }));
-  if (mock){ mock.addEventListener('mouseenter',stop); mock.addEventListener('mouseleave',play); }
+  if (mock){
+    mock.addEventListener('mouseenter',stop);
+    mock.addEventListener('mouseleave',play);
+  }
   if (fitBtn && mock){
     fitBtn.addEventListener('click',()=>{
       mock.classList.toggle('fit');
@@ -773,13 +1698,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('pointermove', e=>{
     const rect = glow.getBoundingClientRect();
     const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
-    const dx = (e.clientX - cx) / rect.width, dy = (e.clientY - cy) / rect.height;
+    const dx = (e.clientX - cx) / rect.width;
+    const dy = (e.clientY - cy) / rect.height;
     glow.style.setProperty('--gx', (50 + dx*10)+'%');
     glow.style.setProperty('--gy', (50 + dy*10)+'%');
   });
 })();
 
-/* Configurator logic (with motion locks) */
+/* Configurator logic (auto-upgrade to Dynamic for motion kits) */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -788,14 +1714,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  const radioGroups = Array.from(new Set([...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name)));
+  const radioGroups = Array.from(new Set(
+    [...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name)
+  ));
 
   const $ = (sel, ctx=document) => ctx.querySelector(sel);
   const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
-  const baseStatic = $('input[name="baseframe"][data-label="STATIC BASE FRAME"]');
+
+  const baseStatic  = $('input[name="baseframe"][data-label="STATIC BASE FRAME"]');
   const baseDynamic = $('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
 
-  function isDynamic(){ return baseDynamic && baseDynamic.checked; }
+  function isDynamic(){
+    return baseDynamic && baseDynamic.checked;
+  }
 
   function parsePrice(input){
     const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
@@ -852,7 +1783,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     // checkboxes
     $$('input[type="checkbox"]', root).forEach(ch=>{
-      if(ch.disabled) return; // ignore locked
+      if(ch.disabled) return;
       if(ch.checked){
         const price = parsePrice(ch);
         total += price;
@@ -867,32 +1798,52 @@ document.addEventListener('DOMContentLoaded', ()=>{
       picked.push(`${labelFor(r)} — $${price}`);
     });
 
-    if(linesEl){ linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join(''); }
-    if(countEl){ countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`; }
-    if(totalEl){ totalEl.textContent = `$${total}`; }
+    if(linesEl){
+      linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
+    }
+    if(countEl){
+      countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
+    }
+    if(totalEl){
+      totalEl.textContent = `$${total}`;
+    }
   }
 
-  // card click behavior
+  // card click behavior w/ auto-upgrade
   $$('.config-card', root).forEach(card=>{
     card.addEventListener('click',(e)=>{
       const input = card.querySelector('input');
       if(!input) return;
 
-      // If locked motion item, ignore clicks on the card unless the user hits the unlock link
-      if(card.classList.contains('requires-dynamic') && card.classList.contains('locked')){
-        if(e.target && e.target.classList.contains('unlock')){
-          e.preventDefault();
-          if(baseDynamic){
-            baseDynamic.checked = true;
-            baseDynamic.dispatchEvent(new Event('change',{bubbles:true}));
-          }
+      // if this card requires dynamic and we're not dynamic yet:
+      if(card.classList.contains('requires-dynamic') && !isDynamic()){
+        if(baseDynamic){
+          // flip base to Dynamic
+          baseDynamic.checked = true;
+          baseDynamic.dispatchEvent(new Event('change',{bubbles:true}));
+          // after flip, now it's unlocked, so continue and select it
         }
-        return; // block normal toggle while locked
       }
 
-      if(e.target === input) return; // default checkbox click
-      if(input.type==='checkbox'){ input.checked = !input.checked; input.dispatchEvent(new Event('change',{bubbles:true})); }
-      if(input.type==='radio'){ input.checked = true; input.dispatchEvent(new Event('change',{bubbles:true})); }
+      // after potential flip, re-eval lock state
+      updateDynamicLocks();
+
+      // now normal toggle logic
+      if(input.disabled) {
+        // still disabled? then do nothing.
+        return;
+      }
+
+      if(e.target !== input){
+        if(input.type==='checkbox'){
+          input.checked = !input.checked;
+          input.dispatchEvent(new Event('change',{bubbles:true}));
+        }
+        if(input.type==='radio'){
+          input.checked = true;
+          input.dispatchEvent(new Event('change',{bubbles:true}));
+        }
+      }
     });
   });
 
@@ -906,7 +1857,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })();
 
   // listen for changes
-  $$('input', root).forEach(i=> i.addEventListener('change', ()=>{ updateDynamicLocks(); recalc(); }));
+  $$('input', root).forEach(i=> i.addEventListener('change', ()=>{
+    updateDynamicLocks();
+    recalc();
+  }));
 
   // init
   updateDynamicLocks();
@@ -919,7 +1873,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const hero = document.querySelector('.hero');
   if(!cta || !hero) return;
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=> cta.style.display = entry.isIntersecting ? 'none' : 'block');
+    entries.forEach(entry=>{
+      cta.style.display = entry.isIntersecting ? 'none' : 'block';
+    });
   }, {threshold:0.2});
   io.observe(hero);
 })();
@@ -935,9 +1891,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   btn.addEventListener('click',()=>{
     const e=email.value.trim(), rg=region.value.trim(), md=mode.value.trim();
-    if(!e){ note.textContent="Add an email so we can reach you."; note.style.color="var(--accent)"; return; }
-    if(!rg||!md){ note.textContent="Tell us where you are and what you fly/drive."; note.style.color="var(--accent)"; return; }
-    note.textContent="Locked. We'll reach out with pilot batch details."; note.style.color="var(--text)";
+    if(!e){
+      note.textContent="Add an email so we can reach you.";
+      note.style.color="var(--accent)";
+      return;
+    }
+    if(!rg||!md){
+      note.textContent="Tell us where you are and what you fly/drive.";
+      note.style.color="var(--accent)";
+      return;
+    }
+    note.textContent="Locked. We'll reach out with pilot batch details.";
+    note.style.color="var(--text)";
     console.log("[RESERVE]", {email:e,region:rg,mode:md});
   });
 })();
@@ -949,18 +1914,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const ctx = c.getContext('2d');
 
   let w, h, pts = [];
-  const DENSITY = 0.00012, LINK_DIST = 140, MAX_LINKS = 3;
+  const DENSITY = 0.00012;
+  const LINK_DIST = 140;
+  const MAX_LINKS = 3;
 
   function resize(){
-    w = c.width = window.innerWidth; h = c.height = window.innerHeight;
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
     const count = Math.max(90, Math.floor(w*h*DENSITY));
-    pts = Array.from({length:count},()=>({ x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-.5)*0.35, vy: (Math.random()-.5)*0.35, r: Math.random()*1.6 + 0.7 }));
+    pts = Array.from({length:count},()=>({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-.5)*0.35,
+      vy: (Math.random()-.5)*0.35,
+      r: Math.random()*1.6 + 0.7
+    }));
   }
-  resize(); window.addEventListener('resize', resize);
+  resize();
+  window.addEventListener('resize', resize);
 
   let pmx = 0, pmy = 0;
   window.addEventListener('pointermove', e=>{
-    pmx = (e.clientX - w/2) * 0.02; pmy = (e.clientY - h/2) * 0.02;
+    pmx = (e.clientX - w/2) * 0.02;
+    pmy = (e.clientY - h/2) * 0.02;
     const glow = document.getElementById('mockGlow');
     if(glow){
       glow.style.setProperty('--gx', (50 + pmx*0.5)+'%');
@@ -970,37 +1946,50 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function tick(){
     ctx.clearRect(0,0,w,h);
+
+    // fixed brightness
     c.style.opacity = '0.55';
 
+    // move
     for(const p of pts){
       p.x += p.vx; p.y += p.vy;
       if(p.x<0||p.x>w) p.vx*=-1;
       if(p.y<0||p.y>h) p.vy*=-1;
     }
 
+    // links
     for(let i=0;i<pts.length;i++){
       const a = pts[i]; let links = 0;
       for(let j=i+1;j<pts.length;j++){
         const b = pts[j];
         const dx = a.x - b.x, dy = a.y - b.y, d2 = dx*dx + dy*dy;
         if(d2 < LINK_DIST*LINK_DIST){
-          const d = Math.sqrt(d2), alpha = 1 - d / LINK_DIST;
+          const d = Math.sqrt(d2);
+          const alpha = 1 - d / LINK_DIST;
           ctx.globalAlpha = alpha * 0.25;
           ctx.beginPath();
           ctx.moveTo(a.x+pmx*alpha, a.y+pmy*alpha);
           ctx.lineTo(b.x+pmx*alpha, b.y+pmy*alpha);
-          ctx.strokeStyle = 'rgba(0,198,255,1)'; ctx.lineWidth = 1; ctx.stroke();
+          ctx.strokeStyle = 'rgba(0,198,255,1)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
           if(++links >= MAX_LINKS) break;
         }
       }
     }
     ctx.globalAlpha = 1;
 
+    // dots (glow)
     for(const p of pts){
       const gx = p.x + pmx*0.3, gy = p.y + pmy*0.3;
       const g = ctx.createRadialGradient(gx,gy,0, gx,gy, p.r*6);
-      g.addColorStop(0,'rgba(0,198,255,.75)'); g.addColorStop(0.7,'rgba(0,198,255,.12)'); g.addColorStop(1,'rgba(255,210,63,0)');
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      g.addColorStop(0,'rgba(0,198,255,.75)');
+      g.addColorStop(0.7,'rgba(0,198,255,.12)');
+      g.addColorStop(1,'rgba(255,210,63,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
     }
     requestAnimationFrame(tick);
   }
