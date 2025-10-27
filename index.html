@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — v14 (group borders in configurator) ===== */
+/* ===== CoreFlux Simpit — v15 (distinct config colours + flight pedal mount) ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -744,7 +744,16 @@ section{
   letter-spacing:.03em;
 }
 
-/* Configurator group wrapper */
+/* ================= CONFIGURATOR GROUPS ================= */
+
+/* big wrapper */
+#moduleList{
+  display:grid;
+  gap:24px;
+  align-content:start;
+}
+
+/* group card base */
 .config-group{
   border-radius:20px;
   padding:20px;
@@ -753,40 +762,83 @@ section{
   border:1px solid var(--border);
   display:grid;
   gap:12px;
+  position:relative;
 }
-.config-group--core{ /* neutral steel edge */
-  border:1px solid rgba(255,255,255,.15);
+
+/* CORE SYSTEM = cool steel / neutral */
+.config-group--core{
+  --group-bg:rgba(20,24,40,.6);
+  --group-border:rgba(255,255,255,.18);
+  --group-shadow1:rgba(255,255,255,.08);
+  --group-shadow2:rgba(0,0,0,.9);
+
+  background:radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%), var(--group-bg);
+  border:1px solid var(--group-border);
   box-shadow:
-    0 0 30px rgba(255,255,255,.07),
-    0 30px 80px rgba(0,0,0,.9);
+    0 0 30px var(--group-shadow1),
+    0 30px 80px var(--group-shadow2);
 }
-.config-group--monitor{ /* soft cyan edge */
-  border:1px solid rgba(0,198,255,.45);
+
+/* MONITOR SYSTEM = cyan/blue */
+.config-group--monitor{
+  --group-bg:rgba(0,30,45,.55);
+  --group-border:rgba(0,198,255,.6);
+  --group-shadow1:rgba(0,198,255,.45);
+  --group-shadow2:rgba(0,0,0,.9);
+
+  background:radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%), var(--group-bg);
+  border:1px solid var(--group-border);
   box-shadow:
-    0 0 40px rgba(0,198,255,.4),
-    0 40px 120px rgba(0,198,255,.12),
-    0 60px 160px rgba(0,0,0,.9);
-}
-.config-group--flight{ /* cyan glow */
-  border:1px solid rgba(0,198,255,.6);
-  box-shadow:
-    0 0 40px rgba(0,198,255,.5),
-    0 40px 120px rgba(0,198,255,.18),
-    0 60px 160px rgba(0,0,0,.9);
-}
-.config-group--racing{ /* gold glow */
-  border:1px solid rgba(255,210,63,.6);
-  box-shadow:
-    0 0 40px rgba(255,210,63,.4),
-    0 40px 120px rgba(255,210,63,.14),
-    0 60px 160px rgba(0,0,0,.9);
-}
-.config-group--stream{ /* teal/cyan mix */
-  border:1px solid rgba(0,198,255,.45);
-  box-shadow:
-    0 0 40px rgba(75,227,209,.4),
+    0 0 40px var(--group-shadow1),
     0 40px 120px rgba(0,198,255,.16),
-    0 60px 160px rgba(0,0,0,.9);
+    0 60px 160px var(--group-shadow2);
+}
+
+/* FLIGHT CONTROLS = teal/green */
+.config-group--flight{
+  --group-bg:rgba(0,40,35,.55);
+  --group-border:rgba(75,227,209,.6);
+  --group-shadow1:rgba(75,227,209,.4);
+  --group-shadow2:rgba(0,0,0,.9);
+
+  background:radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%), var(--group-bg);
+  border:1px solid var(--group-border);
+  box-shadow:
+    0 0 40px var(--group-shadow1),
+    0 40px 120px rgba(75,227,209,.18),
+    0 60px 160px var(--group-shadow2);
+}
+
+/* RACING CONTROLS = gold/amber */
+.config-group--racing{
+  --group-bg:rgba(40,30,0,.5);
+  --group-border:rgba(255,210,63,.6);
+  --group-shadow1:rgba(255,210,63,.4);
+  --group-shadow2:rgba(0,0,0,.9);
+
+  background:radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%), var(--group-bg);
+  border:1px solid var(--group-border);
+  box-shadow:
+    0 0 40px var(--group-shadow1),
+    0 40px 120px rgba(255,210,63,.16),
+    0 60px 160px var(--group-shadow2);
+}
+
+/* CREATOR / STREAM = magenta/pink */
+.config-group--stream{
+  --group-bg:rgba(40,0,35,.5);
+  --group-border:rgba(255,0,200,.5);
+  --group-shadow1:rgba(255,0,200,.4);
+  --group-shadow2:rgba(0,0,0,.9);
+
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%),
+    var(--group-bg);
+  border:1px solid var(--group-border);
+  box-shadow:
+    0 0 40px var(--group-shadow1),
+    0 40px 120px rgba(255,0,200,.18),
+    0 60px 160px var(--group-shadow2);
 }
 
 /* Footer */
@@ -1159,7 +1211,7 @@ footer{
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
-    <div id="moduleList" style="display:grid;gap:24px;align-content:start">
+    <div id="moduleList">
 
       <!-- CORE SYSTEM GROUP -->
       <div class="config-group config-group--core">
@@ -1197,7 +1249,7 @@ footer{
       <div class="config-group config-group--monitor">
         <div class="card" style="grid-column:1/-1">
           <h3>Monitor System</h3>
-          <p class="lede">Choose one display layout — you can swap arms later.</p>
+          <p class="lede">Pick your view. You can always re-arm later.</p>
         </div>
 
         <label class="card" data-group="monitor" data-key="single" style="cursor:pointer">
@@ -1215,7 +1267,7 @@ footer{
         <label class="card" data-group="monitor" data-key="quad" style="cursor:pointer">
           <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
           <strong>QUAD MONITOR SETUP — $450</strong>
-          <p>Triple base monitors plus 4th overhead HUD/top display for flight, telemetry, or chat.</p>
+          <p>Triple base monitors plus overhead HUD/top display for flight gauges, telemetry, or chat.</p>
         </label>
       </div>
 
@@ -1239,6 +1291,15 @@ footer{
           <strong>FLIGHT: DUAL STICK — $240</strong>
           <p style="margin-top:6px">
             Mirrored dual-stick arms. Perfect for helos and space sims.
+          </p>
+        </label>
+
+        <label class="card" style="cursor:pointer;width:100%;display:block">
+          <input type="checkbox" data-key="flight-pedal" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
+          <strong>FLIGHT: PEDAL MOUNT — $180</strong>
+          <p style="margin-top:6px">
+            Adjustable rudder pedal base.
+            Keeps yaw input stable, clears seat rails, zero floor creep.
           </p>
         </label>
       </div>
@@ -1302,7 +1363,8 @@ footer{
           <input type="checkbox" data-key="stream-deck" data-price="90" data-label="STREAM: STREAM DECK ARM">
           <strong>STREAM: STREAM DECK ARM — $90</strong>
           <p style="margin-top:6px">
-            Dedicated arm for Stream Deck / Loupedeck control surfaces. Keeps desk clear and inputs fast.
+            Dedicated arm for Stream Deck / Loupedeck control surfaces.
+            Keeps desk clear and inputs fast.
           </p>
         </label>
       </div>
@@ -1459,7 +1521,7 @@ footer{
       <h3>Star Citizen</h3>
       <p class="lede">Dual-stick or HOTAS with pedal rudder.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Stick</em> or <em>Stick + Throttle</em>, <em>Pedal Tray</em>, <em>Quad Monitor Setup (HUD)</em>.</li>
+        <li>Loadout: <strong>Flight</strong> preset → add <em>Dual Stick</em> or <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
         <li>Curves: start 20–25; deadzone 2–3%.</li>
         <li>View: overhead monitor for chat/nav; main at eye height.</li>
         <li>Stream: camera arm + Stream Deck arm for comms / binds.</li>
@@ -1470,7 +1532,7 @@ footer{
       <h3>DCS</h3>
       <p class="lede">Center-stick HOTAS + pedals.</p>
       <ol>
-        <li>Loadout: <strong>Flight</strong> preset → <em>Stick + Throttle</em>, <em>Pedal Tray</em>, <em>Quad Monitor Setup</em> for gauges/MFD.</li>
+        <li>Loadout: <strong>Flight</strong> preset → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em> for gauges/MFD.</li>
         <li>Curves: pitch/roll 20–30; rudder 10–20.</li>
         <li>Seat: elbows ~90°, wrists neutral; trim so stick centers hands-off.</li>
       </ol>
@@ -1480,7 +1542,7 @@ footer{
       <h3>iRacing / ACC</h3>
       <p class="lede">Wheel + pedals; triples or quad.</p>
       <ol>
-        <li>Loadout: <strong>Racing</strong> preset → <em>Wheel Arm</em>, <em>Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple</em> or <em>Quad Monitor Setup</em>.</li>
+        <li>Loadout: <strong>Racing</strong> preset → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple</em> or <em>Quad Monitor Setup</em>.</li>
         <li>Seat: knee 110–120°, rim just below shoulders; relaxed shoulders.</li>
         <li>Brake: preload you can hold for 60s without shake.</li>
         <li>FOV: use in-game calc; aim for true scale.</li>
