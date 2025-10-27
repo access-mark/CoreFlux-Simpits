@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-/* ===== CoreFlux Simpit — Nav v4 Tall Hero / No Scroll Lighting ===== */
+/* ===== CoreFlux Simpit — Nav v5 Tall Hero / Bare Logo ===== */
 
 /* ---- Tokens ---- */
 :root{
@@ -28,7 +28,7 @@
   --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
   --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
   --logo-h:54px;
-  --nav-h:160px; /* MASSIVE nav hero bar */
+  --nav-h:160px; /* tall nav hero */
 }
 
 /* ---- Base ---- */
@@ -66,7 +66,7 @@ section{padding:48px 0;position:relative;z-index:1}
 }
 
 /* =========================================================
-   NAV (tall hero header with AI glow)
+   NAV (tall hero header with AI glow, bare logo)
    ========================================================= */
 .nav{
   position:sticky;
@@ -86,9 +86,7 @@ section{padding:48px 0;position:relative;z-index:1}
     0 1px 0 rgba(255,255,255,.08) inset;
 }
 
-/* we split nav content vertically:
-   top row = brand hero
-   bottom row = links rail */
+/* layout: top row (logo + tagline), bottom row (links) */
 .nav__inner{
   display:flex;
   flex-direction:column;
@@ -97,47 +95,36 @@ section{padding:48px 0;position:relative;z-index:1}
   padding:16px 0 14px;
 }
 
-/* top row: brand */
 .nav__top{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
-  min-width:0;
   flex:1;
+  min-height:0;
 }
 
-/* brand block */
+/* brand block row: huge logo + tagline */
 .brand{
   display:flex;
   align-items:center;
-  gap:20px;
+  gap:24px;
   min-width:0;
 }
 
-/* logo puck - larger to sit nicely in 160px bar */
-.brand__logo-wrap{
-  width:88px;
-  height:88px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.12);
-  box-shadow:
-    0 16px 40px rgba(0,198,255,.45),
-    0 0 24px rgba(0,198,255,.7) inset;
-  flex:0 0 auto;
-}
+/* bare logo, no border/no card */
 .brand__logo-img{
-  height:100%;
+  height:140px;          /* ~2x previous size */
   width:auto;
-  max-height:64px;
+  max-height:140px;
   object-fit:contain;
+  flex-shrink:0;
+  image-rendering:auto;
   display:block;
+  filter:drop-shadow(0 20px 40px rgba(0,198,255,.4));
 }
 
-/* tagline as the hero statement */
+/* tagline next to it */
 .brand__text{
   display:flex;
   flex-direction:column;
@@ -145,7 +132,7 @@ section{padding:48px 0;position:relative;z-index:1}
 }
 .brand__tagline{
   font-weight:800;
-  font-size:2.2rem;     /* larger than last (1.8rem) */
+  font-size:2.2rem;
   line-height:1.05;
   letter-spacing:-.03em;
   white-space:nowrap;
@@ -167,7 +154,7 @@ section{padding:48px 0;position:relative;z-index:1}
     0 0 60px rgba(255,210,63,.28);
 }
 
-/* bottom row: nav links rail */
+/* link rail under it */
 .nav__links-row{
   display:flex;
   justify-content:flex-end;
@@ -179,7 +166,7 @@ section{padding:48px 0;position:relative;z-index:1}
   margin-top:16px;
 }
 
-/* pills */
+/* link pills */
 .chip{
   padding:6px 12px;
   border:1px solid var(--border);
@@ -422,17 +409,19 @@ footer{
   .g--w3{grid-column:span 3}
   :root{ --logo-h:46px; }
 
-  .brand__logo-wrap{
-    width:72px;
-    height:72px;
-    border-radius:14px;
+  .brand{
+    gap:16px;
   }
+
   .brand__logo-img{
-    max-height:54px;
+    height:110px;
+    max-height:110px;
   }
+
   .brand__tagline{
     font-size:1.8rem;
     line-height:1.1;
+    white-space:nowrap;
   }
 
   .nav__links-row{
@@ -456,13 +445,15 @@ footer{
   .entry .t{order:2}
   .entry .b{order:1}
 
-  .brand__logo-wrap{
-    width:60px;
-    height:60px;
-    border-radius:10px;
+  .brand{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
   }
+
   .brand__logo-img{
-    max-height:46px;
+    height:90px;
+    max-height:90px;
   }
 
   .brand__tagline{
@@ -489,9 +480,9 @@ footer{
 
     <div class="nav__top">
       <div class="brand" aria-label="CoreFlux">
-        <div class="brand__logo-wrap">
-          <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
-        </div>
+        <!-- bare logo, doubled -->
+        <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
+
         <div class="brand__text">
           <span class="brand__tagline">Dynamic Simpits. Brought to Life.</span>
         </div>
