@@ -16,30 +16,42 @@
 <style>
 /* ======================================================
    CoreFlux Simpit — Production CSS (Stable Canvas)
-   Fixed background (no per-section glow), sticky glass nav,
-   tighter hero, Static vs Dynamic visuals, proof photos.
+   - Single-page nav (no pills)
+   - Bigger logo
+   - Consistent dark canvas
+   - Hero + mock carousel
+   - Configurator
+   - Image blocks default fill
    ====================================================== */
 
 /* ---- Tokens ---- */
 :root{
-  --bg:#0b1020; --bg-2:#0a0f1e; --bg-3:#090e1a;
+  --bg:#0b1020;
+  --bg-2:#0a0f1e;
+  --bg-3:#090e1a;
 
-  --panel:#111831; --panel-2:#0f152b;
+  --panel:#111831;
+  --panel-2:#0f152b;
 
-  --text:#e6eefc; --muted:#a6b0cf;
+  --text:#e6eefc;
+  --muted:#a6b0cf;
 
-  --accent:#00c6ff;          /* CoreFlux cyan */
-  --accent-2:#ffd23f;        /* soft gold */
+  --accent:#00c6ff;
+  --accent-2:#ffd23f;
 
   --border:rgba(255,255,255,.08);
   --blur:14px;
-  --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+  --shadow:
+    0 10px 30px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04);
 
-  --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
+  --radius-xl:24px;
+  --radius-lg:18px;
+  --radius-md:14px;
 
-  --logo-h:54px;             /* partner logos height */
+  --logo-h:54px;
 
-  --nav-h:120px;             /* reduced so content hits faster */
+  --nav-h:96px;
   --content-max:1200px;
 }
 
@@ -50,8 +62,6 @@ body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
-
-  /* SINGLE consistent canvas background */
   background-color:var(--bg);
   background-image:
     radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
@@ -59,7 +69,6 @@ body{
     radial-gradient(circle at 50% 120%, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 70%);
   background-repeat:no-repeat;
   background-attachment:fixed;
-
   overflow-x:hidden;
   scroll-behavior:smooth;
 }
@@ -67,8 +76,10 @@ body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
-/* wrapper */
-.wrap{ width:min(var(--content-max),92vw); margin:0 auto; }
+.wrap{
+  width:min(var(--content-max),92vw);
+  margin:0 auto;
+}
 
 .lede{
   color:var(--muted);
@@ -76,22 +87,33 @@ img{max-width:100%;display:block}
   line-height:1.5;
   font-weight:500;
   max-width:680px;
+  margin:0;
 }
 
-section{ padding:48px 0; position:relative; z-index:1; }
+section{
+  padding:48px 0;
+  position:relative;
+  z-index:1;
+}
 
-/* ---- Global particles canvas (fixed brightness) ---- */
+/* canvas bg layer */
 #aiCanvas{
-  position:fixed; inset:0; z-index:-1; pointer-events:none;
-  opacity:.55; transition:none;
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.55;
+  transition:none;
 }
 
 /* ======================================================
-   NAV
+   NAV (single page, no pills)
    ====================================================== */
-
 .nav{
-  position:sticky; top:0; z-index:40; height:var(--nav-h);
+  position:sticky;
+  top:0;
+  z-index:40;
+  height:var(--nav-h);
   backdrop-filter:saturate(140%) blur(var(--blur));
   background:rgba(8,12,26,.72);
   border-bottom:1px solid var(--border);
@@ -102,7 +124,6 @@ section{ padding:48px 0; position:relative; z-index:1; }
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 0; /* wrap handles horizontal */
 }
 
 .brand{
@@ -111,227 +132,826 @@ section{ padding:48px 0; position:relative; z-index:1; }
   gap:16px;
   min-width:0;
 }
+
 .brand__logo-img{
-  height:90px;
+  height:110px;            /* bigger logo */
   width:auto;
-  max-height:90px;
+  max-height:110px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
 }
-.brand__text{ display:flex; flex-direction:column; line-height:1.05; }
+
+.brand__text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+}
+
 .brand__name{
-  font-weight:800; letter-spacing:.5px; font-size:1.2rem; line-height:1; color:var(--text);
+  font-weight:800;
+  letter-spacing:.5px;
+  font-size:1rem;
+  line-height:1;
+  color:var(--text);
+  opacity:.7;
 }
+
 .brand__tagline{
-  font-weight:800; font-size:1.25rem; letter-spacing:-.02em;
+  font-weight:800;
+  font-size:1.25rem;
+  letter-spacing:-.02em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  text-shadow:0 0 16px rgba(0,198,255,.4), 0 0 36px rgba(0,198,255,.25), 0 0 60px rgba(255,210,63,.18);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:
+    0 0 16px rgba(0,198,255,.4),
+    0 0 36px rgba(0,198,255,.25),
+    0 0 60px rgba(255,210,63,.18);
 }
 
-/* desktop links */
-.nav__links{
-  display:flex; gap:14px; align-items:center; flex-wrap:wrap;
-}
-.chip{
-  padding:8px 14px; border:1px solid var(--border); border-radius:999px;
-  color:var(--muted); transition:120ms ease; font-weight:600; font-size:.85rem; line-height:1.2;
-  background:rgba(255,255,255,.02);
-}
-.chip:hover{ color:var(--text); border-color:rgba(255,255,255,.18); }
-.cta{
-  padding:10px 16px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221; font-weight:800; font-size:.9rem; line-height:1.2; box-shadow:0 12px 28px rgba(0,198,255,.28); border:none; cursor:pointer;
+/* we removed nav__links pills completely */
+
+/* sticky CTA button bottom right */
+#stickyCTA{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:50;
+  display:none;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.8rem;
+  line-height:1.2;
+  padding:12px 16px;
+  border-radius:12px;
+  box-shadow:
+    0 0 16px rgba(0,198,255,.7),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9);
+  border:none;
+  cursor:pointer;
 }
 
-/* burger (hidden desktop) */
-.nav__burger{ display:none; }
+/* generic button styles */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  font-weight:800;
+  font-size:.9rem;
+  line-height:1.2;
+  cursor:pointer;
+}
+.btn--primary{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  border:none;
+  box-shadow:0 10px 22px rgba(0,198,255,.25);
+}
+.btn--ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  color:var(--text);
+}
 
 /* ======================================================
    HERO
    ====================================================== */
-
 .hero{
   position:relative;
   padding:96px 0 48px;
-  display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
 }
+
 .h1{
-  font-size:clamp(32px,3.4vw,56px); line-height:1.04; margin:0 0 14px; letter-spacing:-.5px;
-  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%); -webkit-background-clip:text; color:transparent; font-weight:800;
+  font-size:clamp(32px,3.4vw,56px);
+  line-height:1.04;
+  margin:0 0 14px;
+  letter-spacing:-.5px;
+  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);
+  -webkit-background-clip:text;
+  color:transparent;
+  font-weight:800;
 }
+
 .hero__claim{
-  font-size:1rem; font-weight:700; line-height:1.4; color:var(--text); max-width:640px; margin:0 0 14px;
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.4;
+  color:var(--text);
+  max-width:640px;
+  margin:0 0 14px;
 }
-.hero__trustline{ margin-top:16px; font-size:.8rem; line-height:1.5; font-weight:600; color:var(--muted); max-width:640px; }
-.hero__trustline b{ color:var(--text); font-weight:700; }
 
-/* scroll hint */
-.scrollhint{ display:flex; align-items:center; gap:8px; margin-top:20px; font-size:.75rem; font-weight:600; color:var(--muted); line-height:1.2; user-select:none; opacity:.75 }
-.scrollhint__dot{ width:6px; height:18px; border-radius:3px; background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%); box-shadow:0 0 10px rgba(0,198,255,.9), 0 0 40px rgba(0,198,255,.5); animation:scrollpulse 1.8s infinite }
-@keyframes scrollpulse{ 0%{opacity:1;transform:translateY(0)} 50%{opacity:.2;transform:translateY(6px)} 100%{opacity:1;transform:translateY(0)} }
+.hero__trustline{
+  margin-top:16px;
+  font-size:.8rem;
+  line-height:1.5;
+  font-weight:600;
+  color:var(--muted);
+  max-width:640px;
+}
+.hero__trustline b{
+  color:var(--text);
+  font-weight:700;
+}
 
-/* buttons */
-.btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid var(--border); font-weight:800; font-size:.9rem; line-height:1.2; cursor:pointer }
-.btn--primary{ background:linear-gradient(135deg,var(--accent),#4be3d1); color:#041221; border:none; box-shadow:0 10px 22px rgba(0,198,255,.25) }
-.btn--ghost{ background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); color:var(--text) }
+.hero__cta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+}
 
-/* stats */
-.statbar{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:18px }
-.stat{ background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); border:1px solid var(--border); border-radius:16px; padding:14px; text-align:center; box-shadow:var(--shadow) }
-.stat .v{ font-weight:800; font-size:18px; line-height:1.2; color:var(--text) }
-.stat .k{ color:var(--muted); font-size:12px; line-height:1.2; font-weight:500 }
+/* scroll hint pulse */
+.scrollhint{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:20px;
+  font-size:.75rem;
+  font-weight:600;
+  color:var(--muted);
+  line-height:1.2;
+  user-select:none;
+  opacity:.75;
+}
+.scrollhint__dot{
+  width:6px;
+  height:18px;
+  border-radius:3px;
+  background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%);
+  box-shadow:
+    0 0 10px rgba(0,198,255,.9),
+    0 0 40px rgba(0,198,255,.5);
+  animation:scrollpulse 1.8s infinite;
+}
+@keyframes scrollpulse{
+  0%{opacity:1;transform:translateY(0)}
+  50%{opacity:.2;transform:translateY(6px)}
+  100%{opacity:1;transform:translateY(0)}
+}
 
-/* HERO MOCK (carousel) */
-.mock-wrap{ position:relative }
-#mockGlow.mock-glow{ position:absolute; inset:-60px; z-index:0; pointer-events:none; filter:blur(40px); background:radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(0,198,255,.45) 0%, rgba(75,227,209,.22) 35%, rgba(0,198,255,0) 70%) }
+/* quick stats row */
+.statbar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.stat{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+.stat .v{
+  font-weight:800;
+  font-size:18px;
+  line-height:1.2;
+  color:var(--text);
+}
+.stat .k{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.2;
+  font-weight:500;
+}
+
+/* HERO MOCK / carousel */
+.mock-wrap{
+  position:relative;
+}
+.mock-glow{
+  position:absolute;
+  inset:-60px;
+  z-index:0;
+  pointer-events:none;
+  filter:blur(40px);
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
+    rgba(0,198,255,.45) 0%,
+    rgba(75,227,209,.22) 35%,
+    rgba(0,198,255,0) 70%);
+}
 .mock{
-  position:relative; border:1px solid var(--border); border-radius:20px; overflow:hidden; background:#0b1020;
-  height:540px; max-height:540px; box-shadow:0 0 80px rgba(0,198,255,.35), 0 40px 120px rgba(0,0,0,.6); z-index:1
+  position:relative;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  background:#0b1020;
+  height:540px;
+  max-height:540px;
+  box-shadow:
+    0 0 80px rgba(0,198,255,.35),
+    0 40px 120px rgba(0,0,0,.6);
+  z-index:1;
 }
-.mock__slide{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.03); transition:opacity 1s ease, transform 9s ease }
-.mock__slide.active{ opacity:1; transform:scale(1.08) }
-.mock.fit .mock__slide{ object-fit:contain; transform:scale(1)!important; background:#0b1020 }
+
+/* slides default FILL */
+.mock__slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#0b1020;
+  opacity:0;
+  transform:scale(1.03);
+  transition:opacity 1s ease, transform 9s ease;
+}
+.mock__slide.active{
+  opacity:1;
+  transform:scale(1.08);
+}
+
+/* when toggled fit */
+.mock.fit .mock__slide{
+  object-fit:contain;
+  transform:scale(1)!important;
+  background:#0b1020;
+}
 
 /* dots + toggle */
-.mock__nav{ position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:2 }
-.dot{ width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.32); cursor:pointer; transition:transform .2s,background .2s }
-.dot.active{ background:linear-gradient(135deg,var(--accent),#4be3d1); transform:scale(1.2) }
-.mock__toggle{ position:absolute; top:12px; right:12px; z-index:2; padding:7px 10px; border-radius:10px; border:1px solid var(--border); background:rgba(255,255,255,.06); backdrop-filter:blur(8px); font-weight:900; font-size:12px; line-height:1.2; color:var(--text); cursor:pointer }
+.mock__nav{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:2;
+}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.32);
+  cursor:pointer;
+  transition:transform .2s,background .2s;
+}
+.dot.active{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  transform:scale(1.2);
+}
+.mock__toggle{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:2;
+  padding:7px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);
+  font-weight:900;
+  font-size:12px;
+  line-height:1.2;
+  color:var(--text);
+  cursor:pointer;
+}
 
 /* ======================================================
-   SECTION HEAD / PANELS
+   SECTION HEAD / PANEL / CARDS
    ====================================================== */
-
 .section__head{
-  display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:18px;
 }
-.section__title{ font-size:clamp(22px,2.2vw,34px); letter-spacing:-.2px; font-weight:700; color:var(--text) }
-.pill{ font-size:12px; color:#06142b; background:linear-gradient(135deg,var(--accent-2),#ffe39a); border-radius:999px; padding:6px 10px; font-weight:800; line-height:1.2 }
-.panel{ background:rgba(14,20,42,.66); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:16px 16px; line-height:1.5; color:var(--text) }
+.section__title{
+  font-size:clamp(22px,2.2vw,34px);
+  letter-spacing:-.2px;
+  font-weight:700;
+  color:var(--text);
+}
+.pill{
+  font-size:12px;
+  color:#06142b;
+  background:linear-gradient(135deg,var(--accent-2),#ffe39a);
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:800;
+  line-height:1.2;
+}
 
-/* ======================================================
-   CARDS / GRIDS
-   ====================================================== */
+.panel{
+  background:rgba(14,20,42,.66);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  padding:20px 24px;
+  line-height:1.5;
+  color:var(--text);
+}
 
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px }
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
 .card{
-  padding:18px; border-radius:16px; border:1px solid var(--border);
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--border);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  display:flex; flex-direction:column; gap:12px; align-items:flex-start; justify-content:space-between; box-shadow:var(--shadow); min-height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+  box-shadow:var(--shadow);
+  min-height:100%;
 }
-.card h3{ margin:0; font-weight:700; color:var(--text); line-height:1.3; font-size:1rem }
-.card p{ margin:0; color:var(--muted); font-size:.9rem; line-height:1.4; font-weight:500 }
-.card ul,.card ol{ margin:0 0 0 18px; padding:0; color:var(--muted); font-size:.9rem; line-height:1.4; font-weight:500 }
-.card li{ margin:4px 0 }
-
-/* chassis photo row */
-.chassis-vis{ display:flex; flex-wrap:wrap; gap:16px; margin-top:16px }
-.chassis-vis__item{
-  flex:1 1 260px; background:rgba(17,22,38,.7); border:1px solid var(--border);
-  border-radius:14px; box-shadow:var(--shadow); padding:16px; text-align:center;
+.card h3{
+  margin:0;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+  font-size:1rem;
 }
-.chassis-vis__img{ width:100%; max-width:320px; margin:0 auto 12px; height:auto }
-.chassis-vis__label{ font-size:.8rem; font-weight:700; line-height:1.3; color:var(--text) }
-.chassis-vis__note{ font-size:.75rem; font-weight:500; line-height:1.4; color:var(--muted) }
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.4;
+  font-weight:500;
+}
+.card ul,
+.card ol{
+  margin:0 0 0 18px;
+  padding:0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.4;
+  font-weight:500;
+}
+.card li{
+  margin:4px 0;
+}
 
-/* proof strip + force sidebar */
-.proof-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px }
+/* proof-strip / force */
+.proof-strip{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:12px;
+}
 .proof-cell{
-  background:rgba(0,0,0,.4); border:1px solid rgba(0,198,255,.4); border-radius:14px;
-  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
-  padding:16px; font-size:.8rem; line-height:1.4; font-weight:500; color:var(--text)
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(0,198,255,.4);
+  border-radius:14px;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.8),
+    0 0 60px rgba(0,198,255,.18);
+  padding:16px;
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+  color:var(--text);
 }
-.proof-head{ font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--accent); margin-bottom:4px }
-.proof-metric{ font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:4px }
-.proof-desc{ color:var(--muted); font-size:.8rem; line-height:1.4; font-weight:500 }
+.proof-head{
+  font-size:.7rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.proof-metric{
+  font-size:.9rem;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.proof-desc{
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+}
 
-.force-flex{ display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start }
-.force-vis{
-  flex:1 1 260px; max-width:360px; background:rgba(0,0,0,.4); border:1px solid rgba(0,198,255,.4);
-  border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
-  padding:16px; text-align:center; font-size:.75rem; line-height:1.4; font-weight:500; color:var(--muted)
+.force-flex{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  align-items:flex-start;
 }
-.force-vis img{ width:100%; height:auto; display:block; margin:0 auto 12px }
+.force-vis{
+  flex:1 1 260px;
+  max-width:360px;
+  background:rgba(0,0,0,.4);
+  border:1px solid rgba(0,198,255,.4);
+  border-radius:14px;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.8),
+    0 0 60px rgba(0,198,255,.18);
+  padding:16px;
+  text-align:center;
+  font-size:.75rem;
+  line-height:1.4;
+  font-weight:500;
+  color:var(--muted);
+}
+.force-vis__img-frame{
+  width:100%;
+  margin:0 auto 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  background:#000;
+  overflow:hidden;
+}
+.force-vis__img-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.force-vis__title{
+  color:var(--text);
+  font-weight:700;
+  font-size:.8rem;
+  line-height:1.3;
+  margin-bottom:4px;
+}
+
+/* chassis compare */
+.chassis-vis{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:16px;
+}
+.chassis-vis__item{
+  flex:1 1 260px;
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:16px;
+  text-align:center;
+}
+.chassis-vis__img{
+  width:100%;
+  max-width:320px;
+  margin:0 auto 12px;
+  height:auto;
+}
+.chassis-vis__label{
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+}
+.chassis-vis__note{
+  font-size:.75rem;
+  font-weight:500;
+  line-height:1.4;
+  color:var(--muted);
+}
 
 /* spec grid */
-.specgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px }
+.specgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
 .specbox{
-  background:rgba(17,22,38,.7); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow);
-  padding:16px; min-height:160px; display:flex; flex-direction:column; justify-content:space-between
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:16px;
+  min-height:160px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
-.specbox__head{ font-size:.8rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.03em; line-height:1.3; margin-bottom:8px }
-.specbox__metric{ font-size:1.05rem; font-weight:800; line-height:1.3; color:var(--text); margin-bottom:6px }
-.specbox__desc{ font-size:.8rem; line-height:1.4; font-weight:500; color:var(--muted) }
+.specbox__head{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.3;
+  margin-bottom:8px;
+}
+.specbox__metric{
+  font-size:1.05rem;
+  font-weight:800;
+  line-height:1.3;
+  color:var(--text);
+  margin-bottom:6px;
+}
+.specbox__desc{
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+  color:var(--muted);
+}
 
-/* config summary */
+/* config summary bar (not sticky footer, inside kits) */
 .config-summary{
-  margin-top:16px; border:1px solid var(--border); border-radius:var(--radius-md);
-  background:rgba(14,20,42,.66); box-shadow:var(--shadow);
-  padding:16px 20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;
-  font-size:.9rem; line-height:1.4; color:var(--text); font-weight:600;
+  margin-top:16px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  background:rgba(14,20,42,.66);
+  box-shadow:var(--shadow);
+  padding:16px 20px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  font-size:.9rem;
+  line-height:1.4;
+  color:var(--text);
+  font-weight:600;
 }
-.config-summary .total{ font-weight:800; font-size:1rem; color:var(--accent) }
-.config-summary .small{ color:var(--muted); font-weight:500; font-size:.8rem; line-height:1.3 }
+.config-summary .total{
+  font-weight:800;
+  font-size:1rem;
+  color:var(--accent);
+}
+.config-summary .small{
+  color:var(--muted);
+  font-weight:500;
+  font-size:.8rem;
+  line-height:1.3;
+}
 
-/* logo strip (if needed later) */
-.logo-strip{ display:flex; justify-content:center; flex-wrap:wrap; gap:40px; padding:24px 0 }
-.logo-strip img, .logo-strip svg{ height:var(--logo-h); max-height:var(--logo-h); width:auto; opacity:.8; transition:opacity .25s ease, transform .25s ease, filter .25s ease; filter:drop-shadow(0 6px 14px rgba(0,198,255,.12)) }
-.logo-strip img:hover, .logo-strip svg:hover{ opacity:1; transform:translateY(-2px) scale(1.04); filter:drop-shadow(0 8px 18px rgba(0,198,255,.18)) }
+/* configurator groups */
+#moduleList{
+  display:grid;
+  gap:24px;
+  align-content:start;
+}
 
-/* sticky CTA */
-#stickyCTA{
-  position:fixed; right:16px; bottom:16px; z-index:50; display:none;
-  background:linear-gradient(135deg,var(--accent),#4be3d1); color:#041221; font-weight:800; font-size:.8rem; line-height:1.2;
-  padding:12px 16px; border-radius:12px; box-shadow:0 0 16px rgba(0,198,255,.7), 0 24px 40px rgba(0,198,255,.4), 0 10px 30px rgba(0,0,0,.9);
-  border:none; cursor:pointer
+.group-head{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.group-head h3{
+  margin:0;
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+}
+
+.config-group{
+  border-radius:20px;
+  padding:20px;
+  background:rgba(10,14,30,.6);
+  box-shadow:0 30px 80px rgba(0,0,0,.8);
+  border:1px solid var(--border);
+  display:grid;
+  gap:12px;
+  position:relative;
+}
+.config-group--core{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%),
+    rgba(20,24,40,.6);
+  border:1px solid rgba(255,255,255,.18);
+}
+.config-group--monitor{
+  background:
+    radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%),
+    rgba(0,30,45,.55);
+  border:1px solid rgba(0,198,255,.6);
+}
+.config-group--flight{
+  background:
+    radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%),
+    rgba(0,40,35,.55);
+  border:1px solid rgba(75,227,209,.6);
+}
+.config-group--racing{
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%),
+    rgba(40,30,0,.5);
+  border:1px solid rgba(255,210,63,.6);
+}
+.config-group--stream{
+  background:
+    radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%),
+    rgba(40,0,35,.5);
+  border:1px solid rgba(255,0,200,.5);
+}
+
+.config-card{
+  padding:18px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  color:var(--text);
+  position:relative;
+}
+.config-card strong{
+  font-size:.9rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text);
+  display:block;
+}
+.config-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+}
+.config-card input{
+  display:none;
+}
+
+.requires-dynamic.locked{
+  opacity:.45;
+  filter:saturate(70%) grayscale(20%);
+}
+.req-note{
+  display:none;
+  margin-top:6px;
+  font-size:.7rem;
+  font-weight:700;
+  color:var(--accent);
+  background:rgba(0,198,255,.08);
+  border:1px dashed rgba(0,198,255,.4);
+  padding:6px 8px;
+  border-radius:8px;
+}
+.requires-dynamic.locked .req-note{
+  display:block;
+}
+
+/* summary (right column in configurator) */
+aside.panel{
+  position:sticky;
+  top:100px;
+}
+
+/* reserve form inputs */
+.reserve__grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:start;
+}
+.reserve__form,
+.reserve__steps{
+  display:grid;
+  gap:12px;
+  max-width:420px;
+}
+.reserve__label{
+  font-size:.8rem;
+  font-weight:600;
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.reserve__input,
+.reserve__select{
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(0,0,0,.4);
+  color:var(--text);
+  font-family:inherit;
+  font-size:.9rem;
+  line-height:1.3;
+  padding:10px 12px;
+  font-weight:600;
+  outline:none;
+}
+.reserve__note{
+  font-size:.75rem;
+  line-height:1.4;
+  font-weight:600;
+  color:var(--muted);
+  min-height:1.4em;
+}
+.reserve__step-num{
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  line-height:1.3;
+}
+.reserve__step-title{
+  font-size:.95rem;
+  line-height:1.3;
+  font-weight:700;
+  color:var(--text);
+}
+.reserve__step-copy{
+  font-size:.8rem;
+  line-height:1.4;
+  color:var(--muted);
+  font-weight:500;
+  margin-bottom:8px;
+}
+
+/* helper image frame (for standalone proof shots) */
+.img-frame{
+  border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  background:#000;
+  overflow:hidden;
+}
+.img-frame img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  background:#000;
 }
 
 /* footer */
-footer{ padding:40px 0 60px; color:var(--muted); border-top:1px solid var(--border); background:rgba(6,10,24,.55); margin-top:40px; font-size:.85rem; line-height:1.4; text-align:center }
-.footer-note{ font-size:.7rem; line-height:1.4; color:var(--muted); max-width:600px; margin:12px auto 0; font-weight:500 }
-
-/* ================= CONFIGURATOR basics ================= */
-#moduleList{ display:grid; gap:24px; align-content:start }
-.group-head{ display:flex; flex-direction:column; gap:6px }
-.group-head h3{ margin:0; font-size:1rem; font-weight:700; line-height:1.3; color:var(--text) }
-.group-head .lede{ font-size:.8rem; line-height:1.4; max-width:none }
-.config-group{ border-radius:20px; padding:20px; background:rgba(10,14,30,.6); box-shadow:0 30px 80px rgba(0,0,0,.8); border:1px solid var(--border); display:grid; gap:12px; position:relative }
-.config-group--core{ background:radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%), rgba(20,24,40,.6); border:1px solid rgba(255,255,255,.18) }
-.config-group--monitor{ background:radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%), rgba(0,30,45,.55); border:1px solid rgba(0,198,255,.6) }
-.config-group--flight{ background:radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%), rgba(0,40,35,.55); border:1px solid rgba(75,227,209,.6) }
-.config-group--racing{ background:radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%), rgba(40,30,0,.5); border:1px solid rgba(255,210,63,.6) }
-.config-group--stream{ background:radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%), rgba(40,0,35,.5); border:1px solid rgba(255,0,200,.5) }
-
-.config-card{ padding:18px; border-radius:16px; border:1px solid var(--border); background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); box-shadow:var(--shadow); cursor:pointer; display:flex; flex-direction:column; gap:8px; color:var(--text); position:relative }
-.config-card strong{ font-size:.9rem; font-weight:700; line-height:1.3; color:var(--text); display:block }
-.config-card p{ margin:0; color:var(--muted); font-size:.8rem; line-height:1.4; font-weight:500 }
-.config-card input{ display:none }
-.requires-dynamic.locked{ opacity:.45; filter:saturate(70%) grayscale(20%) }
-.req-note{ display:none; margin-top:6px; font-size:.7rem; font-weight:700; color:var(--accent); background:rgba(0,198,255,.08); border:1px dashed rgba(0,198,255,.4); padding:6px 8px; border-radius:8px }
-.requires-dynamic.locked .req-note{ display:block }
-aside.panel{ position:sticky; top:100px; padding:20px }
+footer{
+  padding:40px 0 60px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  background:rgba(6,10,24,.55);
+  margin-top:40px;
+  font-size:.85rem;
+  line-height:1.4;
+  text-align:center;
+}
+.footer-note{
+  font-size:.7rem;
+  line-height:1.4;
+  color:var(--muted);
+  max-width:600px;
+  margin:12px auto 0;
+  font-weight:500;
+}
 
 /* ======================================================
    RESPONSIVE
    ====================================================== */
-
 @media (max-width:1080px){
-  .hero{ grid-template-columns:1fr }
-  .mock{ height:400px; max-height:400px }
+  .hero{
+    grid-template-columns:1fr;
+  }
+  .mock{
+    height:400px;
+    max-height:400px;
+  }
 }
+
 @media (max-width:980px){
-  .statbar{ grid-template-columns:repeat(2,1fr) }
-  .cards{ grid-template-columns:1fr }
-  :root{ --logo-h:46px }
-  .nav__links{ display:none }  /* collapse links, keep brand */
+  .statbar{
+    grid-template-columns:repeat(2,1fr);
+  }
+  .cards{
+    grid-template-columns:1fr;
+  }
+  :root{
+    --logo-h:46px;
+  }
+  /* sticky nav still shows brand only */
 }
+
 @media (max-width:520px){
-  .brand__logo-img{ height:74px; max-height:74px }
-  .brand__tagline{ font-size:1.05rem; line-height:1.15 }
-  :root{ --logo-h:40px }
-  .config-summary{ flex-direction:column; align-items:flex-start }
+  .brand__logo-img{
+    height:90px;
+    max-height:90px;
+  }
+  .brand__tagline{
+    font-size:1.05rem;
+    line-height:1.15;
+  }
+  :root{
+    --logo-h:40px;
+  }
+  .config-summary{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .reserve__grid{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -341,7 +961,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 
 <button id="stickyCTA" onclick="document.querySelector('#configurator').scrollIntoView({behavior:'smooth'})">Build Now</button>
 
-<nav class="nav" aria-label="Primary">
+<header class="nav" aria-label="Primary">
   <div class="wrap nav__inner">
     <div class="brand" aria-label="CoreFlux">
       <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
@@ -350,54 +970,60 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <span class="brand__tagline">One Rig. All Roles.</span>
       </div>
     </div>
-
-    <div class="nav__links">
-      <a class="chip" href="#prologue">About</a>
-      <a class="chip" href="#story">Switch</a>
-      <a class="chip" href="#frame-pre">Why&nbsp;Not</a>
-      <a class="chip" href="#frame">Frame</a>
-      <a class="chip" href="#force">Force</a>
-      <a class="chip" href="#chassis">Chassis</a>
-      <a class="chip" href="#kits">Kits</a>
-      <a class="chip" href="#configurator">Build</a>
-      <a class="chip" href="#games">Games</a>
-      <a class="chip" href="#compat">Gear</a>
-      <a class="chip" href="#vendors">Vendors</a>
-      <a class="chip" href="#tuning">Tuning</a>
-      <a class="chip" href="#quickstart">Quick</a>
-      <a class="chip" href="#fit">Fit</a>
-      <a class="chip" href="#reserve">Reserve</a>
-      <a class="cta"  href="#configurator">Build Now</a>
-    </div>
   </div>
-</nav>
+</header>
 
 <!-- HERO -->
 <section class="hero wrap">
   <div>
     <h1 class="h1">One Rig. Infinite Worlds.</h1>
-    <p class="hero__claim">Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.</p>
-    <p class="lede">The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis, to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+    <p class="hero__claim">
+      Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.
+    </p>
+    <p class="lede">
+      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis, to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.
+    </p>
+
+    <div class="hero__cta-row">
       <a href="#configurator" class="btn btn--primary">Configure My Build</a>
       <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
     </div>
-    <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.</div>
-    <div class="statbar">
-      <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
-      <div class="stat"><div class="v">4080</div><div class="k">Aluminium</div></div>
-      <div class="stat"><div class="v">VESA</div><div class="k">75/100</div></div>
-      <div class="stat"><div class="v">Zero</div><div class="k">Drilling</div></div>
+
+    <div class="hero__trustline">
+      <b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.
     </div>
-    <div class="scrollhint"><div class="scrollhint__dot"></div><div>Scroll to pick your chassis →</div></div>
+
+    <div class="statbar">
+      <div class="stat">
+        <div class="v">≤ 5 min</div>
+        <div class="k">Mode switch</div>
+      </div>
+      <div class="stat">
+        <div class="v">4080</div>
+        <div class="k">Aluminium</div>
+      </div>
+      <div class="stat">
+        <div class="v">VESA</div>
+        <div class="k">75/100</div>
+      </div>
+      <div class="stat">
+        <div class="v">Zero</div>
+        <div class="k">Drilling</div>
+      </div>
+    </div>
+
+    <div class="scrollhint">
+      <div class="scrollhint__dot"></div>
+      <div>Scroll to pick your chassis →</div>
+    </div>
   </div>
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <div class="mock fit" id="mock" aria-label="Rig views">
-      <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
+    <!-- default NOT .fit => we start in FILL mode -->
+    <div class="mock" id="mock" aria-label="Rig views">
+      <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="false">Fit</button>
 
-      <!-- slides updated to real renders/photos -->
       <img class="mock__slide active" src="assets/images/Iso%20View.png" alt="CoreFlux Dynamic frame with actuator hardpoints and mounts">
       <img class="mock__slide" src="assets/images/Quad%20Monitor%20Stand.jpg" alt="CoreFlux frame running triple curved monitors plus overhead HUD">
       <img class="mock__slide" src="assets/images/Top%20View.png" alt="Top-down view showing seating position, pedal base, and monitor arc">
@@ -412,14 +1038,16 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- PROLOGUE -->
-<section id="prologue" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Built for Workdays, Wired for Play</h2>
     <span class="pill">One stop. No compromise.</span>
   </div>
+
   <p class="lede">
     Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, clean enough for the living room.
   </p>
+
   <div class="cards" style="margin-top:16px">
     <article class="card">
       <h3>Focus without friction</h3>
@@ -440,11 +1068,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- SWITCH STORY -->
-<section id="story" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">The Switch</h2>
     <span class="pill">Work → FPS → Racing → Flight</span>
   </div>
+
   <div class="cards">
     <article class="card">
       <h3>Workstation → FPS</h3>
@@ -465,11 +1094,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- WHY NOT -->
-<section id="frame-pre" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Why normal setups don't work</h2>
     <span class="pill">You’re already fighting the gear</span>
   </div>
+
   <div class="panel">
     <div class="proof-strip">
       <div class="proof-cell">
@@ -492,11 +1122,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- FRAME -->
-<section id="frame" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">The Frame</h2>
     <span class="pill">4080 aluminium / indexed geometry</span>
   </div>
+
   <div class="specgrid">
     <div class="specbox">
       <div>
@@ -505,6 +1136,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling.</div>
       </div>
     </div>
+
     <div class="specbox">
       <div>
         <div class="specbox__head">Repeatability</div>
@@ -512,6 +1144,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <div class="specbox__desc">Angles + reach return to exact marks. Muscle memory survives swaps.</div>
       </div>
     </div>
+
     <div class="specbox">
       <div>
         <div class="specbox__head">Cable sanity</div>
@@ -523,11 +1156,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- FORCE -->
-<section id="force" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Force Handling</h2>
     <span class="pill">Direct drive. Loadcell. Motion load.</span>
   </div>
+
   <div class="force-flex">
     <div class="proof-strip">
       <div class="proof-cell">
@@ -546,28 +1180,31 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <div class="proof-desc">Dynamic chassis resists heave/surge cues so alignment stays true.</div>
       </div>
     </div>
+
     <aside class="force-vis">
-      <img src="assets/images/Left%20View.png" alt="Reinforced members and actuator-ready bracing">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">Braced Under Load</div>
+      <div class="force-vis__img-frame">
+        <img src="assets/images/Left%20View.png" alt="Reinforced members and actuator-ready bracing">
+      </div>
+      <div class="force-vis__title">Braced Under Load</div>
       Holds DD torque, loadcell brake force, and motion shock without walking or twist.
     </aside>
   </div>
 </section>
 
 <!-- CHASSIS -->
-<section id="chassis" class="wrap">
+<section class="wrap" id="chassis">
   <div class="section__head">
     <h2 class="section__title">Pick Your Chassis</h2>
     <span class="pill">Static vs Dynamic</span>
   </div>
 
-  <!-- Visual comparison -->
   <div class="chassis-vis">
     <div class="chassis-vis__item">
       <img class="chassis-vis__img" src="assets/images/Iso%20View%202.png" alt="Static CoreFlux chassis - silver extrusion frame">
       <div class="chassis-vis__label">Static Frame</div>
       <div class="chassis-vis__note">Planted. Quiet. Apartment-safe.</div>
     </div>
+
     <div class="chassis-vis__item">
       <img class="chassis-vis__img" src="assets/images/Iso%20View.png" alt="Dynamic CoreFlux chassis with actuator hardpoints">
       <div class="chassis-vis__label">Dynamic Frame</div>
@@ -582,12 +1219,14 @@ aside.panel{ position:sticky; top:100px; padding:20px }
       <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
       <p><strong>Why:</strong> Cheaper entry, no floor drama.</p>
     </article>
+
     <article class="card">
       <h3>Dynamic Frame</h3>
       <p class="lede">Motion-capable. Built to take hits.</p>
       <p>Reinforced members and actuator points translate telemetry into cues without twisting.</p>
       <p><strong>Why:</strong> Race/flight cues you can feel.</p>
     </article>
+
     <article class="card">
       <h3>Upgrade Path</h3>
       <p class="lede">Static today → Dynamic later.</p>
@@ -595,56 +1234,63 @@ aside.panel{ position:sticky; top:100px; padding:20px }
       <p><strong>No rebuild.</strong></p>
     </article>
   </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+
+  <div class="hero__cta-row" style="margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Spec My Chassis</a>
     <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
   </div>
 </section>
 
 <!-- KITS -->
-<section id="kits" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Starter Kits</h2>
     <span class="pill">Fast path in</span>
   </div>
+
   <div class="cards">
     <article class="card">
       <h3>Work + FPS</h3>
       <p class="lede">Single monitor, low-latency posture.</p>
       <p>Static chassis + desk tray + single/dual-stick as needed.</p>
     </article>
+
     <article class="card">
       <h3>Race Spec</h3>
       <p class="lede">Direct-drive + loadcell + triples/quad.</p>
       <p>Dynamic chassis, indexed pedal mount, wheel arm, shifter/handbrake.</p>
     </article>
+
     <article class="card">
       <h3>Flight / Space</h3>
       <p class="lede">Center-stick, dual-stick, or HOTAS.</p>
       <p>Dynamic chassis with overhead HUD and pedal base for planted yaw.</p>
     </article>
   </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+
+  <div class="hero__cta-row" style="margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Build Mine</a>
     <a href="#quickstart" class="btn btn--ghost">Game Tuning</a>
   </div>
 </section>
 
 <!-- CONFIGURATOR -->
-<section id="configurator" class="wrap">
+<section class="wrap" id="configurator">
   <div class="section__head">
     <h2 class="section__title">Configurator</h2>
     <span class="pill">Live total · Real modules</span>
   </div>
-  <p class="lede">Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.</p>
+
+  <p class="lede">
+    Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.
+  </p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
     <div id="moduleList">
-
       <!-- CORE SYSTEM -->
       <div class="config-group config-group--core">
-        <div class="group-head" style="grid-column:1/-1">
+        <div class="group-head">
           <h3>Core System</h3>
           <p class="lede">This is the chassis. Everything mounts to this geometry.</p>
         </div>
@@ -688,7 +1334,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 
       <!-- MONITOR SYSTEM -->
       <div class="config-group config-group--monitor">
-        <div class="group-head" style="grid-column:1/-1">
+        <div class="group-head">
           <h3>Monitor System</h3>
           <p class="lede">Pick your viewport. Re-arm later anytime.</p>
         </div>
@@ -714,7 +1360,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 
       <!-- FLIGHT CONTROLS -->
       <div class="config-group config-group--flight">
-        <div class="group-head" style="grid-column:1/-1">
+        <div class="group-head">
           <h3>Flight Controls</h3>
           <p class="lede">HOTAS / dual-stick / throttle. Repeatable reach every time.</p>
         </div>
@@ -747,7 +1393,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 
       <!-- RACING CONTROLS -->
       <div class="config-group config-group--racing">
-        <div class="group-head" style="grid-column:1/-1">
+        <div class="group-head">
           <h3>Racing Controls</h3>
           <p class="lede">Steering, pedals, shifting — under real torque.</p>
         </div>
@@ -780,7 +1426,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 
       <!-- CREATOR / STREAM -->
       <div class="config-group config-group--stream">
-        <div class="group-head" style="grid-column:1/-1">
+        <div class="group-head">
           <h3>Creator / Stream Setup</h3>
           <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
         </div>
@@ -803,10 +1449,9 @@ aside.panel{ position:sticky; top:100px; padding:20px }
           <p>Dedicated arm for Stream Deck / Loupedeck.</p>
         </label>
       </div>
-
     </div>
 
-    <!-- RIGHT: SUMMARY -->
+    <!-- RIGHT -->
     <aside class="panel">
       <h3>Your Build</h3>
       <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
@@ -821,22 +1466,25 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- GAMES -->
-<section id="games" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Games & Sims</h2>
     <span class="pill">Dialed for today’s titles</span>
   </div>
+
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Flight</h3>
       <p class="lede">MSFS • DCS • X-Plane • IL-2</p>
       <p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control.</p>
     </article>
+
     <article class="card">
       <h3>Racing</h3>
       <p class="lede">iRacing • ACC • Assetto • Forza</p>
       <p>Wheel mounts with rigid clamping and repeatable seating marks.</p>
     </article>
+
     <article class="card">
       <h3>FPS / Tactical</h3>
       <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
@@ -844,10 +1492,11 @@ aside.panel{ position:sticky; top:100px; padding:20px }
     </article>
   </div>
 
-  <!-- real photo proof -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+      <div class="img-frame">
+        <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor">
+      </div>
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
@@ -857,11 +1506,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- COMPAT -->
-<section id="compat" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Your Gear Fits</h2>
     <span class="pill">No drilling</span>
   </div>
+
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Flight Sticks / HOTAS</h3>
@@ -871,6 +1521,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Pedal tray clears common rudder sets.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Racing Hardware</h3>
       <ul>
@@ -879,6 +1530,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Torque braced into frame, not desk.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Streaming / Creator</h3>
       <ul>
@@ -891,14 +1543,16 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- VENDORS -->
-<section id="vendors" class="wrap">
+<section class="wrap">
   <div class="section__head">
     <h2 class="section__title">Preferred Control Vendors</h2>
     <span class="pill">We plate for these out of the box</span>
   </div>
+
   <p class="lede" style="max-width:800px">
     We ship pre-drilled plates to match these ecosystems. No adapters. No guesswork. Bolt it on, tighten it down, fly / drive.
   </p>
+
   <div class="cards" style="margin-top:14px">
     <article class="card" style="border:1px solid rgba(0,198,255,.45);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.2)">
       <h3>Virpil Controls</h3>
@@ -909,6 +1563,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Ready for dual-stick space / heli layouts</li>
       </ul>
     </article>
+
     <article class="card" style="border:1px solid rgba(255,210,63,.45);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>VKB Controllers</h3>
       <p class="lede">Gladiator / NXT / EVO • STECS throttle</p>
@@ -918,6 +1573,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Swaps from “desk height” to “cockpit height” fast</li>
       </ul>
     </article>
+
     <article class="card" style="border:1px solid rgba(0,198,255,.4);box-shadow:0 24px 60px rgba(0,198,255,.22),0 0 60px rgba(0,198,255,.18)">
       <h3>Moza Racing</h3>
       <p class="lede">R-series direct drive bases • QR hubs</p>
@@ -927,6 +1583,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Pedal base braced for full loadcell pressure</li>
       </ul>
     </article>
+
     <article class="card" style="border:1px solid rgba(255,210,63,.4);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>Fanatec</h3>
       <p class="lede">Podium / ClubSport / CSL DD • QR2 ecosystem</p>
@@ -937,6 +1594,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
       </ul>
     </article>
   </div>
+
   <div class="panel" style="margin-top:24px;text-align:center">
     <div style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--text)">
       Running something else?<br>We cut customs. Send your bolt pattern in Reserve and we’ll plate it.
@@ -945,11 +1603,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- TUNING -->
-<section id="tuning" class="wrap">
+<section class="wrap" id="tuning">
   <div class="section__head">
     <h2 class="section__title">Performance Tuning</h2>
     <span class="pill">Lock comfort, unlock pace</span>
   </div>
+
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Seat & Reach</h3>
@@ -960,6 +1619,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Arms: 15–30° bend at full lock/stick deflection.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Wheel / Yoke / Stick</h3>
       <p class="lede">Precision beats strength.</p>
@@ -968,6 +1628,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Center-stick between knees; elbow ≈ 90° at neutral.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Pedals</h3>
       <p class="lede">Control without cramp.</p>
@@ -976,6 +1637,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Flight: heels supported; avoid toe-only posture.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Screen & FOV</h3>
       <p class="lede">Clarity without motion sickness.</p>
@@ -984,6 +1646,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Triples 45–60°; true scale over “wide”.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>Input Curves</h3>
       <p class="lede">Smooth center, control at edge.</p>
@@ -992,6 +1655,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Brake: linear or mild progressive.</li>
       </ul>
     </article>
+
     <article class="card">
       <h3>VR Notes</h3>
       <p class="lede">Comfort first, frames second.</p>
@@ -1003,12 +1667,13 @@ aside.panel{ position:sticky; top:100px; padding:20px }
   </div>
 </section>
 
-<!-- QUICK-START -->
-<section id="quickstart" class="wrap">
+<!-- QUICK START -->
+<section class="wrap" id="quickstart">
   <div class="section__head">
     <h2 class="section__title">Quick-Start</h2>
     <span class="pill">Pick a title, get dialed</span>
   </div>
+
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Star Citizen</h3>
@@ -1019,6 +1684,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
       </ol>
     </article>
+
     <article class="card">
       <h3>DCS</h3>
       <p class="lede">Center-stick HOTAS + pedals.</p>
@@ -1028,6 +1694,7 @@ aside.panel{ position:sticky; top:100px; padding:20px }
         <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
       </ol>
     </article>
+
     <article class="card">
       <h3>iRacing / ACC</h3>
       <p class="lede">Wheel + pedals; triples or quad.</p>
@@ -1041,11 +1708,12 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- FIT -->
-<section id="fit" class="wrap">
+<section class="wrap" id="fit">
   <div class="section__head">
     <h2 class="section__title">Fit Check</h2>
     <span class="pill">Real posture, not cosplay</span>
   </div>
+
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Long-session comfort</h3>
@@ -1062,7 +1730,9 @@ aside.panel{ position:sticky; top:100px; padding:20px }
   </div>
 
   <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+    <div class="img-frame" style="max-width:480px;margin:0 auto 12px;">
+      <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts">
+    </div>
     <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
       Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
     </div>
@@ -1070,19 +1740,24 @@ aside.panel{ position:sticky; top:100px; padding:20px }
 </section>
 
 <!-- RESERVE -->
-<section id="reserve" class="wrap">
+<section class="wrap" id="reserve">
   <div class="section__head">
     <h2 class="section__title">Reserve Your Slot</h2>
     <span class="pill">Pilot batch</span>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
-    <div class="panel" style="display:grid;gap:12px;max-width:420px">
-      <div class="reserve-introline" style="font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em">We're building with early adopters</div>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Email
-        <input id="rEmail" type="email" placeholder="you@email.com" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+
+  <div class="reserve__grid">
+    <div class="panel reserve__form">
+      <div class="reserve__introline" style="font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em">
+        We're building with early adopters
+      </div>
+
+      <label class="reserve__label">Email
+        <input id="rEmail" type="email" class="reserve__input" placeholder="you@email.com">
       </label>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Region
-        <select id="rRegion" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+
+      <label class="reserve__label">Region
+        <select id="rRegion" class="reserve__select">
           <option value="">Select...</option>
           <option>US / Canada</option>
           <option>EU / UK</option>
@@ -1091,8 +1766,9 @@ aside.panel{ position:sticky; top:100px; padding:20px }
           <option>Other</option>
         </select>
       </label>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Primary Mode
-        <select id="rMode" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+
+      <label class="reserve__label">Primary Mode
+        <select id="rMode" class="reserve__select">
           <option value="">Select...</option>
           <option>Racing / ACC / iRacing</option>
           <option>Flight / DCS / MSFS</option>
@@ -1100,41 +1776,49 @@ aside.panel{ position:sticky; top:100px; padding:20px }
           <option>Creator / Stream Desk + Simpit</option>
         </select>
       </label>
+
       <button id="reserveBtn" type="button" class="btn btn--primary" style="justify-content:center">Reserve My Spot</button>
-      <div id="reserveNote" style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em"></div>
+      <div id="reserveNote" class="reserve__note"></div>
     </div>
-    <div class="panel" style="display:grid;gap:12px">
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 1</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You spec the rig</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 2</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">We confirm fit + layout</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 3</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You're in the pilot batch</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early frames, tuning notes, priority on extra mounts.</div>
+
+    <div class="panel reserve__steps">
+      <div class="reserve__step-num">Step 1</div>
+      <div class="reserve__step-title">You spec the rig</div>
+      <div class="reserve__step-copy">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
+
+      <div class="reserve__step-num">Step 2</div>
+      <div class="reserve__step-title">We confirm fit + layout</div>
+      <div class="reserve__step-copy">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
+
+      <div class="reserve__step-num">Step 3</div>
+      <div class="reserve__step-title">You're in the pilot batch</div>
+      <div class="reserve__step-copy">Early frames, tuning notes, priority on extra mounts.</div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="wrap">
+<section class="wrap" id="faq">
   <div class="section__head">
     <h2 class="section__title">FAQ</h2>
     <span class="pill">Straight answers</span>
   </div>
+
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
     <p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, yaw onset — not theme-park throw.</p>
   </details>
+
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
     <p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward.</p>
   </details>
+
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
     <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
   </details>
+
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
     <p>Yes — arms mount into frame structure, not a wobbly desk post.</p>
@@ -1174,8 +1858,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     mock.addEventListener('mouseenter',stop);
     mock.addEventListener('mouseleave',play);
   }
+
   if (fitBtn && mock){
-    // mock starts in 'fit' mode for safe mobile framing
+    // default mode is FILL (mock does NOT start with .fit)
     fitBtn.addEventListener('click',()=>{
       mock.classList.toggle('fit');
       const pressed = mock.classList.contains('fit');
@@ -1183,7 +1868,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
       fitBtn.setAttribute('aria-pressed', String(pressed));
     });
   }
-  show(0); play();
+
+  show(0);
+  play();
 });
 
 /* Mock glow parallax */
@@ -1200,7 +1887,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 })();
 
-/* Configurator logic (auto-upgrade to Dynamic for motion kits) */
+/* Configurator logic */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -1288,9 +1975,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
       picked.push(`${labelFor(r)} — $${price}`);
     });
 
-    if(linesEl){ linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join(''); }
-    if(countEl){ countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`; }
-    if(totalEl){ totalEl.textContent = `$${total}`; }
+    if(linesEl){
+      linesEl.innerHTML = picked
+        .map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`)
+        .join('');
+    }
+    if(countEl){
+      countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
+    }
+    if(totalEl){
+      totalEl.textContent = `$${total}`;
+    }
   }
 
   $$('.config-card', root).forEach(card=>{
@@ -1322,6 +2017,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
+  // normalise data-price / data-label on load
   (function syncOnce(){
     $$('input', root).forEach(i=>{
       const p = parsePrice(i);
@@ -1330,24 +2026,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   })();
 
-  $$('input', root).forEach(i=> i.addEventListener('change', ()=>{ updateDynamicLocks(); recalc(); }));
+  $$('input', root).forEach(i=> i.addEventListener('change', ()=>{
+    updateDynamicLocks();
+    recalc();
+  }));
 
   updateDynamicLocks();
   recalc();
 })();
 
-/* Sticky CTA show/hide */
+/* Sticky CTA visibility */
 (function(){
   const cta = document.getElementById('stickyCTA');
   const hero = document.querySelector('.hero');
   if(!cta || !hero) return;
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{ cta.style.display = entry.isIntersecting ? 'none' : 'block'; });
+    entries.forEach(entry=>{
+      cta.style.display = entry.isIntersecting ? 'none' : 'block';
+    });
   }, {threshold:0.2});
   io.observe(hero);
 })();
 
-/* Reserve form handling */
+/* Reserve form */
 (function(){
   const email = document.getElementById('rEmail');
   const region = document.getElementById('rRegion');
@@ -1358,8 +2059,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   btn.addEventListener('click',()=>{
     const e=email.value.trim(), rg=region.value.trim(), md=mode.value.trim();
-    if(!e){ note.textContent="Add an email so we can reach you."; note.style.color="var(--accent)"; return; }
-    if(!rg||!md){ note.textContent="Tell us where you are and what you fly/drive."; note.style.color="var(--accent)"; return; }
+    if(!e){
+      note.textContent="Add an email so we can reach you.";
+      note.style.color="var(--accent)";
+      return;
+    }
+    if(!rg||!md){
+      note.textContent="Tell us where you are and what you fly/drive.";
+      note.style.color="var(--accent)";
+      return;
+    }
     note.textContent="Locked. We'll reach out with pilot batch details.";
     note.style.color="var(--text)";
     console.log("[RESERVE]", {email:e,region:rg,mode:md});
