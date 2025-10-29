@@ -205,7 +205,11 @@ section{ padding:48px 0; position:relative; z-index:1; }
 .card li{ margin:4px 0 }
 
 /* Proof strip */
-.proof-strip{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px }
+.proof-strip{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px
+}
 .proof-cell{
   background:rgba(0,0,0,.4); border:1px solid rgba(0,198,255,.4); border-radius:14px;
   box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
@@ -216,7 +220,12 @@ section{ padding:48px 0; position:relative; z-index:1; }
 .proof-desc{ color:var(--muted); font-size:.8rem; line-height:1.4; font-weight:500 }
 
 /* Force/aside visual */
-.force-flex{ display:grid; grid-template-columns:2fr 1fr; gap:20px; align-items:start }
+.force-flex{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+  align-items:start
+}
 .force-vis{
   flex:0 0 auto; max-width:360px; background:rgba(0,0,0,.4); border:1px solid rgba(0,198,255,.4); border-radius:14px;
   box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
@@ -299,7 +308,9 @@ footer{
   .brand__center{ max-width:100%; }
 }
 @media (max-width:800px){
-  #force .force-flex{ grid-template-columns:1fr; }
+  #force .force-flex{
+    grid-template-columns:1fr;
+  }
 }
 @media (max-width:520px){
   .brand__logo-img{ height:80px; max-height:80px; }
@@ -450,7 +461,7 @@ footer{
     <span class="pill">You’re already fighting the gear</span>
   </div>
   <div class="panel">
-    <div class="proof-strip">
+    <div class="proof-strip" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
       <div class="proof-cell">
         <div class="proof-head">Desk Clamp</div>
         <div class="proof-metric">Desk flex = aim drift</div>
@@ -509,8 +520,8 @@ footer{
   </div>
 
   <div class="force-flex">
-    <!-- LEFT: 3 cards -->
-    <div class="proof-strip">
+    <!-- LEFT: now stacked vertically (one column) -->
+    <div class="proof-strip" style="grid-template-columns:1fr">
       <div class="proof-cell">
         <div class="proof-head">Torque</div>
         <div class="proof-metric">&gt; 15 Nm wheel bases</div>
