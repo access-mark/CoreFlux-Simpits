@@ -1,12 +1,10 @@
 /* ======================================================
    CoreFlux Simpits — Production CSS (Next Level)
-   - Global dark canvas
-   - Tall glass nav with centered lockup
-   - Hero scarcity
-   - Configurator pricing clarity
-   - Sticky CTA -> Reserve
-   - No nav pills
-   - Mobile safe
+   - Constant dark background (single canvas)
+   - Sticky glass nav (center lockup, aligned rails)
+   - Bigger headline lockup in nav
+   - Hero mock locked to Fill
+   - Cards / grids / configurator
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -36,7 +34,7 @@
 
   --logo-h:54px;             /* partner logos height */
 
-  --nav-h:160px;             /* taller header banner */
+  --nav-h:180px;             /* taller nav bar */
   --content-max:1200px;
 }
 
@@ -95,7 +93,7 @@ section{
 }
 
 /* ======================================================
-   NAV (tall glass banner with centered lockup)
+   NAV
    ====================================================== */
 
 .nav{
@@ -112,32 +110,38 @@ section{
   display:flex;
   align-items:center;
 }
+
 .nav__inner{
-  height:100%;
-  display:flex;
+  width:min(var(--content-max),92vw);
+  margin:0 auto;
+
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
-  justify-content:space-between;
-  width:100%;
+  justify-items:center;
+  height:100%;
+  column-gap:24px;
   padding:0;
 }
 
-/* LEFT: logo */
+/* LEFT: LOGO */
 .brand{
   display:flex;
   align-items:center;
   gap:16px;
   min-width:0;
+  justify-self:start;
 }
 .brand__logo-img{
-  height:110px;
+  height:120px;
   width:auto;
-  max-height:110px;
+  max-height:120px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
 }
 
-/* CENTER: tagline block */
+/* CENTER: LOCKUP */
 .brand__center{
   text-align:center;
   line-height:1.05;
@@ -149,8 +153,8 @@ section{
 }
 .brand__tagline{
   font-weight:800;
-  font-size:2rem;
-  line-height:1.1;
+  font-size:2.4rem; /* ~2x previous visual */
+  line-height:1.05;
   letter-spacing:-.03em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
   -webkit-background-clip:text;
@@ -161,18 +165,16 @@ section{
     0 0 48px rgba(0,198,255,.25),
     0 0 80px rgba(255,210,63,.18);
 }
-
 .brand__name{
   font-weight:900;
-  font-size:2rem;
-  line-height:1.1;
+  font-size:2.4rem; /* match tagline scale */
+  line-height:1.05;
   color:var(--text);
   letter-spacing:-.03em;
-  margin-top:4px;
+  margin-top:6px;
 }
-
 .brand__subline{
-  margin-top:8px;
+  margin-top:10px;
   font-size:.8rem;
   font-weight:700;
   line-height:1.3;
@@ -188,8 +190,9 @@ section{
     0 24px 60px rgba(0,0,0,.9);
 }
 
-/* RIGHT: CTA in nav */
+/* RIGHT CTA */
 .nav__cta-wrap{
+  justify-self:end;
   display:flex;
   align-items:center;
 }
@@ -207,9 +210,32 @@ section{
   text-decoration:none;
 }
 
-/* kill old nav pills / burger */
+/* kill nav links/burger */
 .nav__links{display:none!important;}
 .nav__burger{display:none!important;}
+
+/* Responsive tweaks for nav */
+@media (max-width:600px){
+  :root{
+    --nav-h:160px;
+  }
+  .nav__inner{
+    grid-template-columns:auto 1fr auto;
+    column-gap:12px;
+  }
+  .brand__logo-img{
+    height:90px;
+    max-height:90px;
+  }
+  .brand__tagline,
+  .brand__name{
+    font-size:1.6rem;
+    line-height:1.1;
+  }
+  .brand__subline{
+    font-size:.7rem;
+  }
+}
 
 /* ======================================================
    HERO
@@ -233,22 +259,6 @@ section{
   -webkit-background-clip:text;
   color:transparent;
   font-weight:800;
-}
-
-.hero__scarcity{
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--accent);
-  background:rgba(0,198,255,.08);
-  border:1px solid rgba(0,198,255,.4);
-  border-radius:8px;
-  display:inline-block;
-  padding:6px 8px;
-  box-shadow:
-    0 0 24px rgba(0,198,255,.4),
-    0 24px 60px rgba(0,0,0,.9);
-  margin-bottom:12px;
 }
 
 .hero__claim{
@@ -284,7 +294,7 @@ section{
   color:var(--muted);
   line-height:1.2;
   user-select:none;
-  opacity:.75;
+  opacity:.75
 }
 .scrollhint__dot{
   width:6px;
@@ -354,8 +364,14 @@ section{
   font-weight:500
 }
 
-/* HERO MOCK (carousel) */
-.mock-wrap{ position:relative }
+/* ======================================================
+   HERO MOCK (carousel block) - FILL LOCKED
+   ====================================================== */
+
+.mock-wrap{
+  position:relative;
+}
+
 #mockGlow.mock-glow{
   position:absolute;
   inset:-60px;
@@ -367,6 +383,8 @@ section{
     rgba(75,227,209,.22) 35%,
     rgba(0,198,255,0) 70%);
 }
+
+/* frame */
 .mock{
   position:relative;
   border:1px solid var(--border);
@@ -378,45 +396,36 @@ section{
   box-shadow:
     0 0 80px rgba(0,198,255,.35),
     0 40px 120px rgba(0,0,0,.6);
-  z-index:1
+  z-index:1;
 }
+
+/* slides */
 .mock__slide{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover;        /* always fill the frame */
   opacity:0;
   transform:scale(1.03);
-  transition:opacity 1s ease, transform 9s ease
+  transition:opacity 1s ease, transform 9s ease;
 }
 .mock__slide.active{
   opacity:1;
-  transform:scale(1.08)
+  transform:scale(1.08);
 }
 
-/* fit/fill toggle */
-.mock.fit .mock__slide{
-  object-fit:contain;
-  transform:scale(1)!important;
-  background:#0b1020
-}
+/* lock Fill mode: we hide toggle and ignore .fit rules */
 .mock__toggle{
-  position:absolute;
-  top:12px;
-  right:12px;
-  z-index:2;
-  padding:7px 10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.06);
-  backdrop-filter:blur(8px);
-  font-weight:900;
-  font-size:12px;
-  line-height:1.2;
-  color:var(--text);
-  cursor:pointer
+  display:none !important;
 }
+.mock.fit .mock__slide{
+  object-fit:cover !important; /* force fill */
+  transform:scale(1.03)!important;
+  background:#0b1020;
+}
+
+/* dots */
 .mock__nav{
   position:absolute;
   bottom:12px;
@@ -424,7 +433,7 @@ section{
   transform:translateX(-50%);
   display:flex;
   gap:8px;
-  z-index:2
+  z-index:2;
 }
 .dot{
   width:10px;
@@ -432,11 +441,11 @@ section{
   border-radius:50%;
   background:rgba(255,255,255,.32);
   cursor:pointer;
-  transition:transform .2s,background .2s
+  transition:transform .2s,background .2s;
 }
 .dot.active{
   background:linear-gradient(135deg,var(--accent),#4be3d1);
-  transform:scale(1.2)
+  transform:scale(1.2);
 }
 
 /* ======================================================
@@ -451,14 +460,12 @@ section{
   gap:12px;
   margin-bottom:18px;
 }
-
 .section__title{
   font-size:clamp(22px,2.2vw,34px);
   letter-spacing:-.2px;
   font-weight:700;
-  color:var(--text)
+  color:var(--text);
 }
-
 .pill{
   font-size:12px;
   color:#06142b;
@@ -466,9 +473,8 @@ section{
   border-radius:999px;
   padding:6px 10px;
   font-weight:800;
-  line-height:1.2
+  line-height:1.2;
 }
-
 .panel{
   background:rgba(14,20,42,.66);
   border:1px solid var(--border);
@@ -476,17 +482,17 @@ section{
   box-shadow:var(--shadow);
   padding:16px 16px;
   line-height:1.5;
-  color:var(--text)
+  color:var(--text);
 }
 
 /* ======================================================
-   CARDS / GRIDS / IMAGERY
+   CARDS / GRIDS
    ====================================================== */
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px
+  gap:12px;
 }
 .card{
   padding:18px;
@@ -507,14 +513,14 @@ section{
   font-weight:700;
   color:var(--text);
   line-height:1.3;
-  font-size:1rem
+  font-size:1rem;
 }
 .card p{
   margin:0;
   color:var(--muted);
   font-size:.9rem;
   line-height:1.4;
-  font-weight:500
+  font-weight:500;
 }
 .card ul,
 .card ol{
@@ -523,16 +529,18 @@ section{
   color:var(--muted);
   font-size:.9rem;
   line-height:1.4;
-  font-weight:500
+  font-weight:500;
 }
-.card li{ margin:4px 0 }
+.card li{
+  margin:4px 0;
+}
 
 /* chassis photo row */
 .chassis-vis{
   display:flex;
   flex-wrap:wrap;
   gap:16px;
-  margin-top:16px
+  margin-top:16px;
 }
 .chassis-vis__item{
   flex:1 1 260px;
@@ -542,32 +550,35 @@ section{
   box-shadow:var(--shadow);
   padding:16px;
   text-align:center;
+  position:relative;
+  overflow:hidden;
 }
 .chassis-vis__img{
   width:100%;
   max-width:320px;
   margin:0 auto 12px;
   height:auto;
+  display:block;
   object-fit:cover;
 }
 .chassis-vis__label{
   font-size:.8rem;
   font-weight:700;
   line-height:1.3;
-  color:var(--text)
+  color:var(--text);
 }
 .chassis-vis__note{
   font-size:.75rem;
   font-weight:500;
   line-height:1.4;
-  color:var(--muted)
+  color:var(--muted);
 }
 
 /* proof strip + force sidebar */
 .proof-strip{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:12px
+  gap:12px;
 }
 .proof-cell{
   background:rgba(0,0,0,.4);
@@ -607,7 +618,7 @@ section{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
-  align-items:flex-start
+  align-items:flex-start;
 }
 .force-vis{
   flex:1 1 260px;
@@ -637,7 +648,7 @@ section{
 .specgrid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:12px
+  gap:12px;
 }
 .specbox{
   background:rgba(17,22,38,.7);
@@ -673,7 +684,7 @@ section{
   color:var(--muted)
 }
 
-/* config summary bar (right column card etc.) */
+/* config summary */
 .config-summary{
   margin-top:16px;
   border:1px solid var(--border);
@@ -703,7 +714,7 @@ section{
   line-height:1.3
 }
 
-/* logo strip (if used) */
+/* logo strip */
 .logo-strip{
   display:flex;
   justify-content:center;
@@ -727,9 +738,49 @@ section{
   filter:drop-shadow(0 8px 18px rgba(0,198,255,.18))
 }
 
-/* ======================================================
-   CONFIGURATOR basics
-   ====================================================== */
+/* sticky CTA */
+#stickyCTA{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:50;
+  display:none;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.8rem;
+  line-height:1.2;
+  padding:12px 16px;
+  border-radius:12px;
+  box-shadow:
+    0 0 16px rgba(0,198,255,.7),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9);
+  border:none;
+  cursor:pointer
+}
+
+/* footer */
+footer{
+  padding:40px 0 60px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  background:rgba(6,10,24,.55);
+  margin-top:40px;
+  font-size:.85rem;
+  line-height:1.4;
+  text-align:center
+}
+.footer-note{
+  font-size:.7rem;
+  line-height:1.4;
+  color:var(--muted);
+  max-width:600px;
+  margin:12px auto 0;
+  font-weight:500
+}
+
+/* ================= CONFIGURATOR basics ================= */
 
 #moduleList{
   display:grid;
@@ -753,6 +804,7 @@ section{
   line-height:1.4;
   max-width:none
 }
+
 .config-group{
   border-radius:20px;
   padding:20px;
@@ -849,48 +901,6 @@ aside.panel{
   padding:20px
 }
 
-/* sticky CTA bottom-right -> Reserve */
-#stickyCTA{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:50;
-  display:none;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  font-weight:800;
-  font-size:.8rem;
-  line-height:1.2;
-  padding:12px 16px;
-  border-radius:12px;
-  box-shadow:
-    0 0 16px rgba(0,198,255,.7),
-    0 24px 40px rgba(0,198,255,.4),
-    0 10px 30px rgba(0,0,0,.9);
-  border:none;
-  cursor:pointer
-}
-
-/* footer */
-footer{
-  padding:40px 0 60px;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-  background:rgba(6,10,24,.55);
-  margin-top:40px;
-  font-size:.85rem;
-  line-height:1.4;
-  text-align:center
-}
-.footer-note{
-  font-size:.7rem;
-  line-height:1.4;
-  color:var(--muted);
-  max-width:600px;
-  margin:12px auto 0;
-  font-weight:500
-}
-
 /* ======================================================
    RESPONSIVE
    ====================================================== */
@@ -915,27 +925,30 @@ footer{
   :root{
     --logo-h:46px;
   }
+  /* nav links already hidden */
+}
+
+@media (max-width:600px){
+  .brand__tagline,
+  .brand__name{
+    font-size:1.6rem;
+    line-height:1.1;
+  }
 }
 
 @media (max-width:520px){
-  .brand__logo-img{
-    height:80px;
-    max-height:80px;
+  .chassis-vis__img{
+    max-width:100%;
   }
-  .brand__tagline,
-  .brand__name{
-    font-size:1.4rem;
-    line-height:1.15;
+  :root{
+    --logo-h:40px;
   }
-  .brand__subline{
-    font-size:.7rem;
-  }
-  .nav{
-    --nav-h:140px;
-  }
-
   .config-summary{
     flex-direction:column;
     align-items:flex-start;
   }
+  .nav{
+    --nav-h:160px;
+  }
 }
+/* end */
