@@ -4,1759 +4,268 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>CoreFlux Simpits — Motion-Ready Racing & Flight Cockpit | One Rig. All Roles.</title>
-
-<meta name="description" content="CoreFlux Simpits: one rig that converts from work setup to racing cockpit, HOTAS flight sim, and space sim in minutes. Static or actuator-ready Dynamic frame. Direct drive steering, loadcell pedals, HOTAS, Qubic System motion compatibility. No drilling. Apartment safe." />
-
-<meta name="keywords" content="simpit, sim rig, racing cockpit, flight simpit, HOTAS mount, direct drive wheel mount, loadcell pedal mount, motion platform frame, Qubic System compatible, DCS setup, iRacing cockpit, ACC rig, Star Citizen dual stick, actuator-ready sim rig, 4080 aluminium extrusion cockpit, South Africa sim rig, CoreFlux Simpits" />
-
+<title>CoreFlux Simpits × FIGHT3RPHOENIX — Phoenix Primus Limited Edition</title>
+<meta name="description" content="Announcing the CoreFlux × FIGHT3RPHOENIX partnership. Phoenix Primus — a boutique Star Citizen rig co-designed with Star Citizen Stream and tuned with FIGHT3RPHOENIX, a highly rated PvP pilot and creator." />
+<link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/ambassador-fighterphoenix.html" />
 <link rel="icon" href="assets/images/coreflux-logo.png" />
-<link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/" />
 
-<!-- Open Graph / social preview -->
+<!-- Social -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="CoreFlux Simpits — One Rig. Infinite Worlds." />
-<meta property="og:description" content="Swap from work to FPS to iRacing to full HOTAS flight without rebuilding your room. Static or actuator-ready Dynamic frame. Pilot Batch #1 now forming." />
-<meta property="og:image" content="assets/images/frame-left.png" />
+<meta property="og:title" content="CoreFlux × FIGHT3RPHOENIX — Phoenix Primus Limited Edition" />
+<meta property="og:description" content="A boutique Star Citizen rig, co-designed with Star Citizen Stream and tuned with FIGHT3RPHOENIX." />
+<meta property="og:image" content="assets/images/fighterphoenix-logo.png" />
 <meta property="og:site_name" content="CoreFlux Simpits" />
 
-<!-- preload critical assets (helps LCP) -->
-<link rel="preload" as="image" href="assets/images/frame-left.png" />
-<link rel="preload" as="image" href="assets/images/frame-right.png" />
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" as="style" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" as="style" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* ======================================================
-   CoreFlux Simpits — Launch Build
-   - Motion / Qubic System section
-   - Force & Motion layout polish
-   - Mobile nav tightened
-   - SEO tweaks baked in via content
-   ====================================================== */
-
-/* ---- Tokens ---- */
+/* =========================
+   CoreFlux — Ambassador Page
+   ========================= */
 :root{
-  --bg:#0b1020; --bg-2:#0a0f1e; --bg-3:#090e1a;
-
-  --panel:#111831; --panel-2:#0f152b;
-
+  --bg:#0b1020; --bg-2:#0a0f1e;
+  --panel:#111831;
   --text:#e6eefc; --muted:#a6b0cf;
-
-  --accent:#00c6ff;          /* CoreFlux cyan */
-  --accent-2:#ffd23f;        /* soft gold */
-
+  --accent:#00c6ff; --accent-2:#ffd23f;
   --border:rgba(255,255,255,.08);
-  --blur:14px;
-  --shadow:
-    0 10px 30px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.04);
-
+  --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
   --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
-
-  --logo-h:54px;             /* partner logos height */
-
-  --nav-h:160px;
-  --content-max:1200px;
+  --content-max:1100px;
 }
 
-/* ---- Base ---- */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
-
-  background-color:var(--bg);
-  background-image:
-    radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
-    radial-gradient(900px 600px at 10% 20%, rgba(255,210,63,.08) 0%, transparent 60%),
-    radial-gradient(circle at 50% 120%, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 70%);
-  background-repeat:no-repeat;
+  background:
+    radial-gradient(1200px 800px at 80% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
+    radial-gradient(900px 600px at 10% 30%, rgba(255,210,63,.08) 0%, transparent 60%),
+    #0b1020;
   background-attachment:fixed;
-
-  overflow-x:hidden;
-  scroll-behavior:smooth;
 }
 
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
-/* wrapper */
 .wrap{ width:min(var(--content-max),92vw); margin:0 auto; }
 
-.lede{
-  color:var(--muted);
-  font-size:clamp(15px,1.25vw,18px);
-  line-height:1.5;
-  font-weight:500;
-  max-width:680px;
-}
-
-section{ padding:48px 0; position:relative; z-index:1; }
-
-/* ---- Global particles canvas ---- */
-#aiCanvas{
-  position:fixed; inset:0; z-index:-1; pointer-events:none;
-  opacity:.55; transition:none;
-}
-
-/* ======================================================
-   NAV
-   ====================================================== */
-
 .nav{
-  position:sticky;
-  top:0;
-  z-index:40;
-  height:var(--nav-h);
-
-  backdrop-filter:saturate(140%) blur(var(--blur));
+  position:sticky; top:0; z-index:40;
+  height:120px;
+  backdrop-filter:saturate(140%) blur(14px);
   background:rgba(8,12,26,.8);
   border-bottom:1px solid var(--border);
   box-shadow:0 30px 60px rgba(0,0,0,.9);
-
-  display:flex;
-  align-items:center;
+  display:flex; align-items:center;
 }
-.nav__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:min(var(--content-max),92vw);
-  margin:0 auto;
-  height:100%;
-  padding:0;
-  flex-wrap:wrap;
-}
-
-/* LEFT: LOGO */
-.brand{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  min-width:0;
-}
-.brand__logo-img{
-  height:110px;
-  width:auto;
-  max-height:110px;
-  max-width:300px;
-  object-fit:contain;
-  image-rendering:auto;
-  display:block;
-}
-
-/* CENTER: LOCKUP */
-.brand__center{
-  text-align:center;
-  line-height:1.05;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-width:0;
-  max-width:60%;
-}
-.brand__tagline{
-  font-weight:800;
-  font-size:2.5rem;
-  line-height:1.1;
-  letter-spacing:-.03em;
-  background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:
-    0 0 24px rgba(0,198,255,.4),
-    0 0 48px rgba(0,198,255,.25),
-    0 0 80px rgba(255,210,63,.18);
-}
-.brand__name{
-  font-weight:900;
-  font-size:2.5rem;
-  line-height:1.1;
-  color:var(--text);
-  letter-spacing:-.03em;
-  margin-top:6px;
-}
-.brand__subline{
-  margin-top:10px;
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-  background:rgba(0,198,255,.08);
-  border:1px solid rgba(0,198,255,.4);
-  border-radius:999px;
-  padding:4px 10px;
-  box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);
-  white-space:nowrap;
-}
-
-/* RIGHT CTA */
-.nav__cta-wrap{
-  display:flex;
-  align-items:center;
-}
-.cta{
-  padding:12px 16px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  font-weight:800;
-  font-size:.9rem;
-  line-height:1.2;
-  box-shadow:0 12px 28px rgba(0,198,255,.28);
-  border:none;
-  cursor:pointer;
-  text-decoration:none;
-}
-
-/* ======================================================
-   HERO
-   ====================================================== */
+.nav__inner{ display:flex; align-items:center; justify-content:space-between; width:min(var(--content-max),92vw); margin:0 auto; }
+.brand{ display:flex; align-items:center; gap:14px; }
+.brand img{ height:64px; width:auto; }
+.nav__cta a{ padding:10px 14px; border-radius:12px; font-weight:800; background:linear-gradient(135deg,var(--accent),#4be3d1); color:#041221; box-shadow:0 12px 28px rgba(0,198,255,.28); }
 
 .hero{
-  position:relative;
-  padding:120px 0 64px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-  align-items:center;
+  padding:80px 0 36px;
+  display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center;
 }
 .h1{
-  font-size:clamp(32px,3.4vw,56px);
-  line-height:1.04;
-  margin:0 0 14px;
-  letter-spacing:-.5px;
-  background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);
-  -webkit-background-clip:text;
-  color:transparent;
-  font-weight:800;
+  font-size:clamp(30px,3.2vw,56px);
+  line-height:1.05; letter-spacing:-.02em; margin:0 0 10px;
+  background:linear-gradient(90deg,#ffffff 0%, #9ad6ff 60%, #ffe189 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:900;
 }
-.hero__scarcity{
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--accent);
-  background:rgba(0,198,255,.08);
-  border:1px solid rgba(0,198,255,.4);
-  border-radius:8px;
-  display:inline-block;
-  padding:6px 8px;
-  box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);
-  margin-bottom:12px;
+.tag{
+  display:inline-block; margin:0 0 10px; font-size:.8rem; font-weight:800; color:var(--accent);
+  background:rgba(0,198,255,.08); border:1px solid rgba(0,198,255,.42);
+  padding:6px 10px; border-radius:999px; box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);
 }
-.hero__claim{
-  font-size:1rem;
-  font-weight:700;
-  line-height:1.4;
-  color:var(--text);
-  max-width:640px;
-  margin:0 0 14px;
-}
-.hero__trustline{
-  margin-top:16px;
-  font-size:.8rem;
-  line-height:1.5;
-  font-weight:600;
-  color:var(--muted);
-  max-width:640px;
-}
-.hero__trustline b{
-  color:var(--text);
-  font-weight:700;
-}
-
-/* scroll hint */
-.scrollhint{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-top:20px;
-  font-size:.75rem;
-  font-weight:600;
-  color:var(--muted);
-  line-height:1.2;
-  user-select:none;
-  opacity:.75
-}
-.scrollhint__dot{
-  width:6px;
-  height:18px;
-  border-radius:3px;
-  background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%);
-  box-shadow:0 0 10px rgba(0,198,255,.9), 0 0 40px rgba(0,198,255,.5);
-  animation:scrollpulse 1.8s infinite
-}
-@keyframes scrollpulse{
-  0%{opacity:1;transform:translateY(0)}
-  50%{opacity:.2;transform:translateY(6px)}
-  100%{opacity:1;transform:translateY(0)}
-}
-
-/* buttons */
+.lede{ color:var(--muted); font-weight:600; line-height:1.5; font-size:clamp(15px,1.2vw,18px); max-width:720px; }
+.btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
 .btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 16px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  font-weight:800;
-  font-size:.9rem;
-  line-height:1.2;
-  cursor:pointer
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:12px 16px; border-radius:12px; border:1px solid var(--border); cursor:pointer; font-weight:900; font-size:.95rem;
 }
-.btn--primary{
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  border:none;
-  box-shadow:0 10px 22px rgba(0,198,255,.25)
-}
-.btn--ghost{
-  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-  color:var(--text)
-}
+.btn--primary{ background:linear-gradient(135deg,var(--accent),#4be3d1); color:#041221; border:none; box-shadow:0 10px 22px rgba(0,198,255,.25); }
+.btn--ghost{ background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); color:var(--text); }
 
-/* stats */
-.statbar{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-  margin-top:18px
-}
-.stat{
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px;
-  text-align:center;
-  box-shadow:var(--shadow)
-}
-.stat .v{
-  font-weight:800;
-  font-size:18px;
-  line-height:1.2;
-  color:var(--text)
-}
-.stat .k{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.2;
-  font-weight:500
-}
-
-/* ======================================================
-   HERO MOCK (2 slides, always cover)
-   ====================================================== */
-.mock-wrap{ position:relative }
-#mockGlow.mock-glow{
-  position:absolute;
-  inset:-60px;
-  z-index:0;
-  pointer-events:none;
-  filter:blur(40px);
-  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
-    rgba(0,198,255,.45) 0%,
-    rgba(75,227,209,.22) 35%,
-    rgba(0,198,255,0) 70%);
-}
-.mock{
-  position:relative;
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  background:#0b1020;
-  height:540px;
-  max-height:540px;
+.hero__art{
+  background:rgba(255,255,255,.03); border:1px solid var(--border); border-radius:20px; padding:18px;
   box-shadow:0 0 80px rgba(0,198,255,.35), 0 40px 120px rgba(0,0,0,.6);
-  z-index:1;
-}
-/* always cover */
-.mock__slide{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transform:scale(1.03);
-  transition:opacity 1s ease, transform 9s ease;
-}
-.mock__slide.active{
-  opacity:1;
-  transform:scale(1.08);
-}
-/* dots */
-.mock__nav{
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:8px;
-  z-index:2;
-}
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:rgba(255,255,255,.32);
-  cursor:pointer;
-  transition:transform .2s,background .2s;
-}
-.dot.active{
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  transform:scale(1.2);
-}
-/* toggle cosmetic */
-.mock__toggle{
-  position:absolute;
-  top:12px;
-  right:12px;
-  z-index:2;
-  padding:7px 10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.06);
-  backdrop-filter:blur(8px);
-  font-weight:900;
-  font-size:12px;
-  line-height:1.2;
-  color:var(--text);
-  cursor:pointer;
+  text-align:center;
 }
 
-/* ======================================================
-   SECTION HEAD / PANELS
-   ====================================================== */
-.section__head{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:18px;
-}
-.section__title{
-  font-size:clamp(22px,2.2vw,34px);
-  letter-spacing:-.2px;
-  font-weight:700;
-  color:var(--text)
-}
-.pill{
-  font-size:12px;
-  color:#06142b;
-  background:linear-gradient(135deg,var(--accent-2),#ffe39a);
-  border-radius:999px;
-  padding:6px 10px;
-  font-weight:800;
-  line-height:1.2
-}
-.panel{
-  background:rgba(14,20,42,.66);
-  border:1px solid var(--border);
-  border-radius:var(--radius-lg);
-  box-shadow:var(--shadow);
-  padding:16px 16px;
-  line-height:1.5;
-  color:var(--text)
-}
+.section{ padding:40px 0; }
+.section__head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.section__title{ font-size:clamp(22px,2vw,34px); font-weight:800; }
+.pill{ font-size:12px; color:#06142b; background:linear-gradient(135deg,var(--accent-2),#ffe39a); border-radius:999px; padding:6px 10px; font-weight:800; }
 
-/* ======================================================
-   CARDS / GRIDS
-   ====================================================== */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px
-}
+.cards{ display:grid; gap:12px; grid-template-columns:repeat(3,1fr); }
 .card{
-  padding:18px;
-  border-radius:16px;
-  border:1px solid var(--border);
+  padding:18px; border-radius:16px; border:1px solid var(--border);
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  align-items:flex-start;
-  justify-content:space-between;
-  box-shadow:var(--shadow);
-  min-height:100%;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px; min-height:100%;
 }
-.card h3{
-  margin:0;
-  font-weight:700;
-  color:var(--text);
-  line-height:1.3;
-  font-size:1rem
-}
-.card p{
-  margin:0;
-  color:var(--muted);
-  font-size:.9rem;
-  line-height:1.4;
-  font-weight:500
-}
-.card ul,.card ol{
-  margin:0 0 0 18px;
-  padding:0;
-  color:var(--muted);
-  font-size:.9rem;
-  line-height:1.4;
-  font-weight:500
-}
-.card li{
-  margin:4px 0
+.card h3{ margin:0; font-size:1rem; }
+.card p{ margin:0; color:var(--muted); font-weight:500; font-size:.92rem; }
+
+.highlight{
+  border:1px solid rgba(255,210,63,.5);
+  box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18);
 }
 
-/* Chassis visuals */
-.chassis-vis{
-  display:flex;
-  flex-wrap:wrap;
-  gap:16px;
-  margin-top:16px
+.partner{
+  display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:center;
+  background:rgba(14,20,42,.66); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px; box-shadow:var(--shadow);
 }
-.chassis-vis__item{
-  flex:1 1 260px;
-  background:rgba(17,22,38,.7);
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  padding:16px;
-  text-align:center;
+.partner__logo{
+  background:#000; border:1px solid var(--border); border-radius:14px; padding:16px; text-align:center;
 }
-.chassis-vis__img{
-  width:100%;
-  max-width:320px;
-  margin:0 auto 12px;
-  height:auto
-}
-.chassis-vis__label{
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--text)
-}
-.chassis-vis__note{
-  font-size:.75rem;
-  font-weight:500;
-  line-height:1.4;
-  color:var(--muted)
-}
+.partner__logo img{ width:220px; max-width:100%; height:auto; margin:0 auto; }
+.partner__copy{ font-size:.95rem; line-height:1.5; color:var(--muted); font-weight:600; }
 
-/* --- FORCE & MOTION GRID --- */
-.force-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  align-items:flex-start;
-}
-.force-vis{
-  background:rgba(0,0,0,.4);
-  border:1px solid rgba(0,198,255,.4);
-  border-radius:14px;
-  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
-  padding:16px;
-  text-align:center;
-  font-size:.75rem;
-  line-height:1.4;
-  font-weight:500;
-  color:var(--muted)
-}
-.force-vis img{
-  width:100%;
-  height:auto;
-  display:block;
-  margin:0 auto 12px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
-  background:#000;
-}
-.force-cards{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.proof-cell{
-  background:rgba(0,0,0,.4);
-  border:1px solid rgba(0,198,255,.4);
-  border-radius:14px;
-  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
-  padding:16px;
-  font-size:.8rem;
-  line-height:1.4;
-  font-weight:500;
-  color:var(--text);
-  transition:box-shadow .25s,transform .25s;
-}
-.proof-cell:hover{
-  box-shadow:0 32px 80px rgba(0,0,0,.9),0 0 80px rgba(0,198,255,.28);
-  transform:translateY(-2px);
-}
-.proof-head{
-  font-size:.7rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.03em;
-  color:var(--accent);
-  margin-bottom:4px
-}
-.proof-metric{
-  font-size:.9rem;
-  font-weight:700;
-  color:var(--text);
-  margin-bottom:4px
-}
-.proof-desc{
-  color:var(--muted);
-  font-size:.8rem;
-  line-height:1.4;
-  font-weight:500
-}
-
-/* spec grid */
-.specgrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:12px
-}
-.specbox{
-  background:rgba(17,22,38,.7);
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  padding:16px;
-  min-height:160px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between
-}
-.specbox__head{
-  font-size:.8rem;
-  font-weight:700;
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:.03em;
-  line-height:1.3;
-  margin-bottom:8px
-}
-.specbox__metric{
-  font-size:1.05rem;
-  font-weight:800;
-  line-height:1.3;
-  color:var(--text);
-  margin-bottom:6px
-}
-.specbox__desc{
-  font-size:.8rem;
-  line-height:1.4;
-  font-weight:500;
-  color:var(--muted)
-}
-
-/* config summary */
-.config-summary{
-  margin-top:16px;
-  border:1px solid var(--border);
-  border-radius:var(--radius-md);
-  background:rgba(14,20,42,.66);
-  box-shadow:var(--shadow);
-  padding:16px 20px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  font-size:.9rem;
-  line-height:1.4;
-  color:var(--text);
-  font-weight:600;
-}
-.config-summary .total{
-  font-weight:800;
-  font-size:1rem;
-  color:var(--accent)
-}
-.config-summary .small{
-  color:var(--muted);
-  font-weight:500;
-  font-size:.8rem;
-  line-height:1.3
-}
-
-/* sticky CTA */
-#stickyCTA{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:50;
-  display:none;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  font-weight:800;
-  font-size:.8rem;
-  line-height:1.2;
-  padding:12px 16px;
-  border-radius:12px;
-  box-shadow:
-    0 0 16px rgba(0,198,255,.7),
-    0 24px 40px rgba(0,198,255,.4),
-    0 10px 30px rgba(0,0,0,.9);
-  border:none;
-  cursor:pointer
-}
-
-/* footer */
-footer{
-  padding:40px 0 60px;
-  color:var(--muted);
+.footer{
+  margin-top:44px; padding:36px 0 56px; text-align:center; color:var(--muted);
   border-top:1px solid var(--border);
   background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(6,10,24,.55) 60%);
-  margin-top:40px;
   font-size:.85rem;
-  line-height:1.4;
-  text-align:center
-}
-.footer-note{
-  font-size:.7rem;
-  line-height:1.4;
-  color:var(--muted);
-  max-width:600px;
-  margin:12px auto 0;
-  font-weight:500
-}
-
-/* ================= CONFIGURATOR basics ================= */
-#moduleList{
-  display:grid;
-  gap:24px;
-  align-content:start
-}
-.group-head{
-  display:flex;
-  flex-direction:column;
-  gap:6px
-}
-.group-head h3{
-  margin:0;
-  font-size:1rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--text)
-}
-.group-head .lede{
-  font-size:.8rem;
-  line-height:1.4;
-  max-width:none
-}
-.config-group{
-  border-radius:20px;
-  padding:20px;
-  background:rgba(10,14,30,.6);
-  box-shadow:0 30px 80px rgba(0,0,0,.8);
-  border:1px solid var(--border);
-  display:grid;
-  gap:12px;
-  position:relative
-}
-.config-group--core{
-  background:radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%), rgba(20,24,40,.6);
-  border:1px solid rgba(255,255,255,.18)
-}
-.config-group--monitor{
-  background:radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%), rgba(0,30,45,.55);
-  border:1px solid rgba(0,198,255,.6)
-}
-.config-group--flight{
-  background:radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%), rgba(0,40,35,.55);
-  border:1px solid rgba(75,227,209,.6)
-}
-.config-group--racing{
-  background:radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%), rgba(40,30,0,.5);
-  border:1px solid rgba(255,210,63,.6)
-}
-.config-group--stream{
-  background:radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%), rgba(40,0,35,.5);
-  border:1px solid rgba(255,0,200,.5)
-}
-.config-card{
-  padding:18px;
-  border-radius:16px;
-  border:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
-  box-shadow:var(--shadow);
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  color:var(--text);
-  position:relative
-}
-.config-card strong{
-  font-size:.9rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--text);
-  display:block
-}
-.config-card p{
-  margin:0;
-  color:var(--muted);
-  font-size:.8rem;
-  line-height:1.4;
-  font-weight:500
-}
-.config-card input{
-  display:none
-}
-.requires-dynamic.locked{
-  opacity:.45;
-  filter:saturate(70%) grayscale(20%)
-}
-.req-note{
-  display:none;
-  margin-top:6px;
-  font-size:.7rem;
-  font-weight:700;
-  color:var(--accent);
-  background:rgba(0,198,255,.08);
-  border:1px dashed rgba(0,198,255,.4);
-  padding:6px 8px;
-  border-radius:8px
-}
-.requires-dynamic.locked .req-note{
-  display:block
-}
-
-aside.panel{
-  position:sticky;
-  top:100px;
-  padding:20px
-}
-
-/* ======================================================
-   RESPONSIVE
-   ====================================================== */
-
-@media (max-width:1080px){
-  .hero{ grid-template-columns:1fr }
-  .mock{ height:400px; max-height:400px }
-  .brand__center{
-    order:2;
-    flex:1 1 100%;
-    max-width:100%;
-    margin-top:12px;
-  }
-  .nav__cta-wrap{ order:3; margin-left:auto; }
 }
 
 @media (max-width:980px){
-  .statbar{ grid-template-columns:repeat(2,1fr) }
-  .cards{ grid-template-columns:1fr }
-  :root{ --logo-h:46px }
-  .force-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media (max-width:520px){
-  .nav{
-    --nav-h:180px;
-  }
-  .brand{
-    flex:0 0 auto;
-  }
-  .brand__logo-img{
-    height:72px;
-    max-height:72px;
-  }
-  .brand__tagline,
-  .brand__name{
-    font-size:1.6rem;
-    line-height:1.15;
-  }
-  .brand__subline{
-    font-size:.7rem;
-  }
-  .hero{
-    padding-top:100px;
-  }
-  .config-summary{
-    flex-direction:column;
-    align-items:flex-start
-  }
+  .hero{ grid-template-columns:1fr; }
+  .cards{ grid-template-columns:1fr; }
+  .partner{ grid-template-columns:1fr; }
 }
 </style>
 </head>
-
 <body>
-<canvas id="aiCanvas"></canvas>
 
-<button id="stickyCTA" onclick="document.querySelector('#reserve').scrollIntoView({behavior:'smooth'})">
-  Reserve / Ask
-</button>
-
+<!-- NAV -->
 <nav class="nav" aria-label="Primary">
   <div class="nav__inner">
-    <!-- left: logo -->
-    <div class="brand" aria-label="CoreFlux">
-      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo - precision aluminium cockpit systems, South Africa">
+    <div class="brand">
+      <img src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo" />
+      <div style="display:flex;flex-direction:column;line-height:1.1">
+        <div style="font-weight:900">CoreFlux Simpits</div>
+        <div style="font-weight:700;color:var(--muted);font-size:.85rem">One Rig. All Roles.</div>
+      </div>
     </div>
-
-    <!-- center: main lockup (stays visible in banner) -->
-    <div class="brand__center">
-      <div class="brand__tagline">One Rig. All Roles.</div>
-      <div class="brand__name">CoreFlux Simpits</div>
-      <div class="brand__subline">Pilot Batch #1 now forming</div>
-    </div>
-
-    <!-- right: CTA -->
-    <div class="nav__cta-wrap">
-      <a class="cta" href="#reserve">Reserve Access</a>
+    <div class="nav__cta">
+      <a href="#reserve">Reserve Pilot Batch</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero wrap">
+<header class="hero wrap">
   <div>
-    <h1 class="h1">One Rig. Infinite Worlds.</h1>
-
-    <div class="hero__scarcity">Pilot Batch #1 is filling now.</div>
-
-    <p class="hero__claim">
-      Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30.
-      Same seat. Same footprint. No teardown.
-    </p>
-
+    <span class="tag">Brand Ambassador</span>
+    <h1 class="h1">FIGHT3RPHOENIX × CoreFlux — Phoenix Primus</h1>
     <p class="lede">
-      The CoreFlux Dynamic Simpit converts from deep-focus workstation to FPS gunner seat, to race chassis,
-      to full HOTAS/dual-stick flight cockpit — in minutes. Your call: planted Static frame, or
-      actuator-ready Dynamic frame designed around Qubic System motion hardware.
+      We’re teaming up with <strong>FIGHT3RPHOENIX</strong>, a highly rated Star Citizen PvP pilot and creator.
+      Together with <strong>Star Citizen Stream</strong>, we co-designed and dialed the
+      <strong>Phoenix Primus</strong> — a boutique Star Citizen simpit based on the exact geometry he flies.
     </p>
-
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-      <a href="#reserve" class="btn btn--primary">Reserve My Slot</a>
-      <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
+    <div class="btnrow">
+      <a class="btn btn--primary" href="https://www.twitch.tv/FIGHT3RPHOENIX" target="_blank" rel="noopener">Watch on Twitch</a>
+      <a class="btn btn--ghost" href="#primus">See Phoenix Primus</a>
+      <a class="btn btn--ghost" href="#reserve">Join Pilot Batch</a>
     </div>
-
-    <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force + actuator load.</div>
-
-    <div class="statbar">
-      <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
-      <div class="stat"><div class="v">4080</div><div class="k">Aluminium</div></div>
-      <div class="stat"><div class="v">VESA</div><div class="k">75/100</div></div>
-      <div class="stat"><div class="v">Zero</div><div class="k">Drilling</div></div>
-    </div>
-
-    <div class="scrollhint"><div class="scrollhint__dot"></div><div>Scroll to pick your chassis →</div></div>
   </div>
+  <div class="hero__art" aria-label="FIGHT3RPHOENIX logo">
+    <picture>
+      <source srcset="assets/images/fighterphoenix-logo.webp" type="image/webp" />
+      <img src="assets/images/fighterphoenix-logo.png" alt="FIGHT3RPHOENIX phoenix mark" style="margin:0 auto; width:min(380px,90%);" />
+    </picture>
+    <div style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--muted);margin-top:10px">
+      Official partner mark — used with permission.
+    </div>
+  </div>
+</header>
 
-  <div class="mock-wrap">
-    <div class="mock-glow" id="mockGlow"></div>
-    <div class="mock" id="mock" aria-label="CoreFlux Simpits dynamic cockpit views">
-      <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
-
-      <!-- 2 SLIDES -->
-      <img class="mock__slide active" src="assets/images/frame-left.png" alt="CoreFlux Dynamic simpit frame left view with racing wheel mount, HOTAS stations, motion-ready brace points">
-      <img class="mock__slide" src="assets/images/frame-right.png" alt="CoreFlux Dynamic sim rig frame right view showing seat rails, pedal base, actuator gussets">
-
-      <div class="mock__nav" role="tablist" aria-label="Rig images">
-        <span class="dot active" role="tab" aria-selected="true" aria-label="Left side cockpit frame view"></span>
-        <span class="dot" role="tab" aria-selected="false" aria-label="Right side cockpit frame view"></span>
-      </div>
+<!-- PARTNER BLURB -->
+<section class="wrap section">
+  <div class="partner">
+    <div class="partner__logo">
+      <picture>
+        <source srcset="assets/images/fighterphoenix-logo.webp" type="image/webp" />
+        <img src="assets/images/fighterphoenix-logo.png" alt="FIGHT3RPHOENIX logo" />
+      </picture>
+    </div>
+    <div class="partner__copy">
+      <strong style="color:var(--text)">Creator-led tuning.</strong> Phoenix flies hard, streams harder, and expects cockpit geometry to hold under pressure.
+      The Primus spec locks stick/throttle reach, rudder travel, quad-screen sightlines, and cable routes for clean POV capture —
+      all within the CoreFlux Dynamic frame that’s actuator-ready when you want motion cues.
     </div>
   </div>
 </section>
 
-<!-- PROLOGUE -->
-<section id="prologue" class="wrap">
+<!-- PRIMUS SPEC -->
+<section id="primus" class="wrap section">
   <div class="section__head">
-    <h2 class="section__title">Built for Workdays, Wired for Play</h2>
-    <span class="pill">One stop. No compromise.</span>
+    <h2 class="section__title">Phoenix Primus — Limited Edition</h2>
+    <span class="pill">Co-designed with Star Citizen Stream</span>
   </div>
-  <p class="lede">
-    Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, and clean enough for the living room or office. This is not PVC cosplay. It’s hardware.
-  </p>
-  <div class="cards" style="margin-top:16px">
-    <article class="card">
-      <h3>Focus without friction</h3>
-      <p class="lede">It feels like a proper workstation, because it is.</p>
-      <p>Keyboard, mouse, mic, camera, Stream Deck — all frame-mounted. Cable runs are tidy. Nothing wobbles on stream.</p>
-    </article>
-    <article class="card">
-      <h3>Flow, not setup</h3>
-      <p class="lede">Mode-switching in minutes, not hours.</p>
-      <p>Indexed geometry locks angles and reach. Swap HOTAS, wheel, shifter, pedals without re-measuring or guessing your posture again.</p>
-    </article>
-    <article class="card">
-      <h3>Comfort that lasts</h3>
-      <p class="lede">All-day ergonomics, all-night sessions.</p>
-      <p>Seat rails, pedal reach, arm support, and monitor height all dial in. The frame absorbs the torque and brake force — you don’t.</p>
-    </article>
-  </div>
-</section>
 
-<!-- SWITCH STORY -->
-<section id="story" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">The Switch</h2>
-    <span class="pill">Work → FPS → Racing → Flight</span>
-  </div>
   <div class="cards">
-    <article class="card">
-      <h3>Workstation → FPS</h3>
-      <p class="lede">Sit-stand posture dialed. Keyboard clears, sticks come in.</p>
-      <p>Rigid 4080 extrusion, zero flex, clean cable routing. You’re not fighting your desk anymore.</p>
+    <article class="card highlight">
+      <h3>Flight Geometry</h3>
+      <p>Center-stick or dual-stick positions with indexed rails, throttle sweep clearance, and an adjustable rudder base that doesn’t creep on tile or wood.</p>
     </article>
     <article class="card">
-      <h3>FPS → Racing</h3>
-      <p class="lede">Wheel on, pedals locked, muscle memory intact.</p>
-      <p>Pedal rails snap to your indexed marks. Loadcell brake doesn’t kick the frame forward.</p>
+      <h3>Creator POV</h3>
+      <p>Frame-mounted camera and key-light arms for stable cockpit and hand views. Cable runs vanish. Stream looks pro under high-G dogfights.</p>
     </article>
     <article class="card">
-      <h3>Racing → Flight</h3>
-      <p class="lede">Center-stick / dual-stick / yoke. Swap without chaos.</p>
-      <p>Avionics, throttle, and rudder pedal base move into true aircraft geometry instead of “good enough.”</p>
-    </article>
-  </div>
-</section>
-
-<!-- WHY NORMAL SETUPS FAIL -->
-<section id="frame-pre" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Why normal setups don't work</h2>
-    <span class="pill">You’re already fighting the gear</span>
-  </div>
-  <div class="panel">
-    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:0;">
-      <article class="proof-cell">
-        <div class="proof-head">Desk Clamp</div>
-        <div class="proof-metric">Desk flex = aim drift</div>
-        <div class="proof-desc">Monitors too high. Wheel shakes the table. Mic arm wobbles every time you fire.</div>
-      </article>
-      <article class="proof-cell">
-        <div class="proof-head">Wheel Stand</div>
-        <div class="proof-metric">Trip hazard. Spaghetti.</div>
-        <div class="proof-desc">Pedals walk forward on braking. Angles never match twice. Living room looks wrecked.</div>
-      </article>
-      <article class="proof-cell">
-        <div class="proof-head">PVC Cockpit</div>
-        <div class="proof-metric">Great racer. Bad desk.</div>
-        <div class="proof-desc">No keyboard tray, no camera arm, trash posture. You can’t work 8 hours a day in that thing.</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- THE FRAME -->
-<section id="frame" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">The Frame</h2>
-    <span class="pill">4080 aluminium / indexed geometry</span>
-  </div>
-  <div class="specgrid">
-    <div class="specbox">
-      <div>
-        <div class="specbox__head">Structure</div>
-        <div class="specbox__metric">4080 anodized extrusion</div>
-        <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling. Apartment safe.</div>
-      </div>
-    </div>
-    <div class="specbox">
-      <div>
-        <div class="specbox__head">Repeatability</div>
-        <div class="specbox__metric">Indexed mount points</div>
-        <div class="specbox__desc">Angles and reach return to the exact same marks every time. Your posture survives swaps.</div>
-      </div>
-    </div>
-    <div class="specbox">
-      <div>
-        <div class="specbox__head">Cable sanity</div>
-        <div class="specbox__metric">Internal routing</div>
-        <div class="specbox__desc">Tie-down channels and pass-throughs keep USB and power out of your feet and out of camera frame.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORCE / MOTION -->
-<section id="force" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Force & Motion Handling</h2>
-    <span class="pill">Direct drive. Loadcell. Actuator load.</span>
-  </div>
-
-  <div class="force-grid">
-    <!-- visual -->
-    <aside class="force-vis">
-      <img src="assets/images/frame-left.png" loading="lazy" alt="CoreFlux Dynamic actuator-ready cockpit frame with reinforced cross members for DD wheel torque and motion load">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">Braced Under Load</div>
-      Holds DD wheel torque, full loadcell brake force, and motion shock from actuators without walking or twisting.
-    </aside>
-
-    <!-- stacked cards -->
-    <div class="force-cards">
-      <article class="proof-cell">
-        <div class="proof-head">Torque</div>
-        <div class="proof-metric">> 15 Nm wheel bases</div>
-        <div class="proof-desc">Steering ties into a reinforced cross member. The column doesn’t yaw under force, so you’re not countersteering flex.</div>
-      </article>
-
-      <article class="proof-cell">
-        <div class="proof-head">Brake</div>
-        <div class="proof-metric">Loadcell stability</div>
-        <div class="proof-desc">Pedal tray locks into indexed rails. You can stand on the brake and the pedal base doesn’t creep forward on tile or wood.</div>
-      </article>
-
-      <article class="proof-cell">
-        <div class="proof-head">Motion Shock</div>
-        <div class="proof-metric">Actuator bracing</div>
-        <div class="proof-desc">Dynamic chassis is gusseted for heave / surge cues. Geometry holds alignment under motion so your seated position stays true lap to lap.</div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ACTUATOR ECOSYSTEM / QUBIC SYSTEM -->
-<section id="motion" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Actuator Ecosystem</h2>
-    <span class="pill">Qubic System compatible</span>
-  </div>
-
-  <div class="panel" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
-    <div style="font-size:.9rem;line-height:1.5;font-weight:500;color:var(--muted);">
-      <p style="color:var(--text);font-weight:700;margin-top:0;font-size:1rem;line-height:1.4;">
-        Motion-ready out of the box.
-      </p>
-      <p style="margin-top:0;">
-        The Dynamic CoreFlux frame is designed around popular high-end actuator platforms like
-        <strong>Qubic System</strong> (3DoF/4DoF), so you can run heave, surge, traction loss and more.
-      </p>
-      <ul style="margin:0 0 16px 18px;padding:0;font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;">
-        <li>Pre-braced mounting points for Qubic System style actuator stacks</li>
-        <li>Crossmembers gusseted to resist shock load without knocking alignment out</li>
-        <li>Upgrade path: start Static today, bolt motion on later</li>
-      </ul>
-      <p style="margin-top:0;font-size:.8rem;line-height:1.4;color:var(--muted);">
-        Want D-Box / PT-Actuator / other motion kits? We’ll plate it. Send bolt pattern in the reserve form.
-      </p>
-    </div>
-
-    <div style="background:rgba(0,0,0,.4);border:1px solid rgba(0,198,255,.4);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);padding:16px;text-align:center;">
-      <img src="assets/images/qubic-actuators.jpg" loading="lazy" alt="High-end motion simulator actuator stack similar to Qubic System mounted to a reinforced simpit frame" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);background:#000;">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-top:12px;">
-        Dynamic Frame + Motion
-      </div>
-      <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);">
-        Built to take actuator load. You feel the car/airframe — not the chassis twisting.
-      </div>
-    </div>
-  </div>
-
-  <div class="panel" style="margin-top:16px;">
-    <div style="font-size:.8rem;line-height:1.5;font-weight:600;color:var(--text);">
-      Pilot Feedback
-    </div>
-    <blockquote style="margin:8px 0 0 0;font-size:.8rem;line-height:1.5;font-weight:500;color:var(--muted);border-left:2px solid var(--accent);padding-left:10px;">
-      “I went from office mode to ACC with traction loss and surge cues in under two minutes. It doesn’t feel like a DIY rig. It feels like hardware.”
-    </blockquote>
-  </div>
-</section>
-
-<!-- CHASSIS -->
-<section id="chassis" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Pick Your Chassis</h2>
-    <span class="pill">Static vs Dynamic</span>
-  </div>
-
-  <div class="chassis-vis">
-    <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View%202.png" loading="lazy" alt="Static CoreFlux chassis, planted aluminium sim cockpit without actuators">
-      <div class="chassis-vis__label">Static Frame</div>
-      <div class="chassis-vis__note">Planted. Quiet. Apartment-safe.</div>
-    </div>
-    <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View.png" loading="lazy" alt="Dynamic CoreFlux chassis, actuator-ready motion capable simpit frame">
-      <div class="chassis-vis__label">Dynamic Frame</div>
-      <div class="chassis-vis__note">Actuator-ready. Braced for motion load.</div>
-    </div>
-  </div>
-
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Static Frame</h3>
-      <p class="lede">Locked. Silent. Apartment-safe.</p>
-      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
-      <p><strong>Why:</strong> Cheaper entry, no floor drama with neighbors or landlord.</p>
+      <h3>HUD & Quad</h3>
+      <p>Triple + overhead telemetry/HUD mount points tuned for Star Citizen overlays and Tobii sightline height.</p>
     </article>
     <article class="card">
-      <h3>Dynamic Frame</h3>
-      <p class="lede">Motion-capable. Built to take hits.</p>
-      <p>Reinforced members and actuator points translate telemetry into heave/surge/traction loss cues without twisting the cockpit.</p>
-      <p><strong>Why:</strong> Race/flight cues you can feel in your body instead of just on-screen.</p>
-      <p style="font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:500">
-        Motion hardware is third-party. We build the geometry, bracing, and mounting pattern, not a theme-park ride.
-      </p>
+      <h3>Motion-Ready</h3>
+      <p>Dynamic chassis gusseted for actuator load (Qubic System style). Adds heave/surge cues later without re-building your pit.</p>
     </article>
     <article class="card">
       <h3>Upgrade Path</h3>
-      <p class="lede">Static today → Dynamic later.</p>
-      <p>Shared geometry. Controls and mounts carry forward.</p>
-      <p><strong>No rebuild.</strong> You don’t have to “buy twice.”</p>
+      <p>Start Static today. Every control plate and monitor arm carries forward when you step up to motion — no “buy twice.”</p>
+    </article>
+    <article class="card">
+      <h3>Boutique Finish</h3>
+      <p>Primus plates and highlights in a Phoenix finish pack. Limited production, numbered units for early supporters.</p>
     </article>
   </div>
 
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-    <a href="#reserve" class="btn btn--primary">Spec My Chassis</a>
-    <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
+  <div class="btnrow" style="margin-top:16px">
+    <a class="btn btn--primary" href="#reserve">Reserve Phoenix Primus</a>
+    <a class="btn btn--ghost" href="index.html#configurator">Build My Rig</a>
   </div>
 </section>
 
-<!-- KITS -->
-<section id="kits" class="wrap">
+<!-- QUOTE / SOCIAL PROOF -->
+<section class="wrap section">
   <div class="section__head">
-    <h2 class="section__title">Starter Kits</h2>
-    <span class="pill">One frame. Your loadout.</span>
+    <h2 class="section__title">Field Notes</h2>
+    <span class="pill">From live ops</span>
   </div>
-
-  <p class="lede" style="margin-bottom:16px;max-width:800px">
-    Every CoreFlux Simpit is modular. Add racing controls, HOTAS, pedals, triples/quad screens, camera arms,
-    streaming deck, even motion actuation. Start lean or go full send. This is not “a cockpit.”
-    This is your command seat.
-  </p>
-
-  <div class="cards">
-    <!-- ALL-IN-ONE -->
-    <article class="card" style="border:1px solid rgba(0,198,255,.5);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.18)">
-      <h3>All-In-One Simpit</h3>
-      <p class="lede">Workstation • FPS • Racing • Flight • Stream • Motion-ready.</p>
-      <p>
-        Dynamic chassis with actuator hardpoints, direct-drive wheel mount, loadcell pedal tray,
-        dual-stick / HOTAS / throttle rails, shifter &amp; handbrake plate, Stream Deck + camera/light arms,
-        and triple+overhead monitor stack with Tobii eye-tracking sightline.
-      </p>
-      <p><strong>Why:</strong> One rig that replaces your desk, race cockpit, flight pit, and streaming setup —
-      and can take motion actuators (Qubic System style telemetry-based surge / heave cues) without twisting.</p>
-      <p style="font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:500">
-        This is the “I do everything” build. Sit down, pick mode, go.
-      </p>
-    </article>
-
-    <!-- Work + FPS -->
-    <article class="card">
-      <h3>Work + FPS</h3>
-      <p class="lede">Tuned for mouse control and aim stability.</p>
-      <p>
-        Static chassis + keyboard/mouse tray + single or dual-stick mounts. Camera and mic arms for calls/stream.
-        Zero desk wobble, cables managed.
-      </p>
-      <p><strong>Why:</strong> Office by day, tac shooter at night, no rebuild and no “gaming desk” flex.
-      </p>
-    </article>
-
-    <!-- Race Spec -->
-    <article class="card">
-      <h3>Race Spec</h3>
-      <p class="lede">Direct-drive torque. Loadcell brake. Triple wrap.</p>
-      <p>
-        Dynamic chassis, indexed pedal mount, reinforced DD wheel arm (Simucube / Fanatec / Moza / Simagic),
-        shifter / handbrake plate, plus triple or triple+HUD screens mounted to the frame.
-      </p>
-      <p><strong>Why:</strong> Repeatable seating geometry, no pedal walk, motion-capable later.
-      </p>
-    </article>
-
-    <!-- Flight / Space -->
-    <article class="card">
-      <h3>Flight / Space</h3>
-      <p class="lede">HOTAS, dual-stick, or center-stick — your airframe, your posture.</p>
-      <p>
-        Dynamic chassis with center-stick or dual-stick arms, throttle rails, adjustable rudder pedal base,
-        overhead HUD / quad screen arc, and Tobii-ready line-of-sight for head/eye tracking.
-      </p>
-      <p><strong>Why:</strong> DCS, MSFS, Star Citizen with believable reach and zero cable mess.
-      </p>
-    </article>
-  </div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-    <a href="#reserve" class="btn btn--primary">Spec My All-In-One Simpit</a>
-    <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
-  </div>
-</section>
-
-<!-- PHOENIX PRIMUS (NEW) -->
-<section id="phoenix" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Phoenix Primus — Limited Edition</h2>
-    <span class="pill">Designed with FIGHT3RPHOENIX · Top 5% Star Citizen</span>
-  </div>
-
-  <div class="panel" style="display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:start;">
-    <div style="font-size:.9rem;line-height:1.5;font-weight:500;color:var(--muted);">
-      <p style="color:var(--text);font-weight:800;margin:0 0 8px 0;font-size:1rem;line-height:1.35;">
-        Built and dialled with <a href="https://www.twitch.tv/FIGHT3RPHOENIX" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">FIGHT3RPHOENIX</a> — a top 5% Star Citizen&nbsp;player.
-      </p>
-      <p style="margin:0 0 10px 0;">
-        The <strong>Phoenix Primus</strong> is a boutique Star Citizen rig: same geometry, mounts, and monitor stack he flies on stream — created and tuned during his Star Citizen streams.
-      </p>
-      <ul style="margin:0 0 14px 18px;padding:0;font-size:.85rem;line-height:1.4;color:var(--muted);font-weight:500;">
-        <li>Dual-stick / HOTAS layouts with indexed reach</li>
-        <li>Quad + overhead HUD line-of-sight; Tobii mount point</li>
-        <li>Dynamic frame with actuator bracing (motion-ready)</li>
-        <li>Clean cable paths for stream-grade stability</li>
-      </ul>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="#reserve" class="btn btn--primary">Reserve Phoenix Primus</a>
-        <a href="https://www.twitch.tv/FIGHT3RPHOENIX" target="_blank" rel="noopener" class="btn btn--ghost">Watch the Rig in Action</a>
-      </div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:10px;">
-        Star Citizen® and related marks are owned by Cloud Imperium Group. CoreFlux is not affiliated with or endorsed by them.
-      </div>
-    </div>
-
-    <div style="background:rgba(0,0,0,.4);border:1px solid rgba(0,198,255,.4);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);padding:16px;">
-      <img src="assets/images/frame-right.png" loading="lazy" alt="Phoenix Primus limited edition layout based on the same model flown on stream by FIGHT3RPHOENIX" style="width:100%;height:auto;border-radius:10px;border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);background:#000;">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-top:10px;text-align:center;">
-        Phoenix Primus Layout — same model flown on stream
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONFIGURATOR -->
-<section id="configurator" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Configurator</h2>
-    <span class="pill">Live total · Real modules</span>
-  </div>
-  <p class="lede">
-    Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.<br><br>
-    Typical Static builds land around $1.8k–$2.5k with controls. Dynamic motion-ready builds land around
-    $2.8k–$3.6k before actuators. You can start Static and upgrade later — mounts carry forward.
-  </p>
-
-  <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
-    <!-- LEFT -->
-    <div id="moduleList">
-
-      <!-- CORE SYSTEM -->
-      <div class="config-group config-group--core">
-        <div class="group-head" style="grid-column:1/-1">
-          <h3>Core System</h3>
-          <p class="lede">This is the chassis. Everything mounts to this geometry.</p>
-        </div>
-
-        <label class="config-card" data-group="baseframe" data-key="base-static">
-          <input type="radio" name="baseframe" data-price="1000" data-label="STATIC BASE FRAME">
-          <strong>STATIC BASE FRAME — $1,000</strong>
-          <p>Motionless, silent platform. Apartment / shared-wall friendly.</p>
-        </label>
-
-        <label class="config-card" data-group="baseframe" data-key="base-dynamic">
-          <input type="radio" name="baseframe" data-price="1450" data-label="DYNAMIC BASE FRAME">
-          <strong>DYNAMIC BASE FRAME — $1,450</strong>
-          <p>Reinforced, actuator-ready. Braced for surge / heave / traction loss.</p>
-        </label>
-
-        <label class="config-card" data-key="pedaltray">
-          <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
-          <strong>PEDAL TRAY / PLATE — $300</strong>
-          <p>Rigid pedal mount with indexed position. No forward walk.</p>
-        </label>
-
-        <label class="config-card" data-key="stand">
-          <input type="checkbox" data-price="500" data-label="MONITOR STAND">
-          <strong>MONITOR STAND — $500</strong>
-          <p>Primary display stand (VESA 75/100). Rock-solid.</p>
-        </label>
-
-        <label class="config-card" data-key="deskpad">
-          <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
-          <strong>MOUSE PAD BASE — $120</strong>
-          <p>Keyboard + mouse tray for true desk posture even in cockpit mode.</p>
-        </label>
-
-        <label class="config-card" data-key="pulloutkb">
-          <input type="checkbox" data-price="160" data-label="PULLOUT KEYBOARD TRAY">
-          <strong>PULLOUT KEYBOARD TRAY — $160</strong>
-          <p>Slide-out typing surface. Retracts instantly for racing/flight.</p>
-        </label>
-      </div>
-
-      <!-- MONITOR SYSTEM -->
-      <div class="config-group config-group--monitor">
-        <div class="group-head" style="grid-column:1/-1">
-          <h3>Monitor System</h3>
-          <p class="lede">Pick your viewport. Re-arm later anytime.</p>
-        </div>
-
-        <label class="config-card" data-group="monitor" data-key="single">
-          <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
-          <strong>SINGLE MONITOR ARM — $150</strong>
-          <p>One display arm (24–34″). Ideal for workstation / FPS.</p>
-        </label>
-
-        <label class="config-card" data-group="monitor" data-key="triple">
-          <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
-          <strong>TRIPLE MONITOR ARM — $400</strong>
-          <p>Three-arm racing/flight wrap. Angled side panels keep bezels tight.</p>
-        </label>
-
-        <label class="config-card" data-group="monitor" data-key="quad">
-          <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
-          <strong>QUAD MONITOR SETUP — $450</strong>
-          <p>Triple horizon + overhead HUD/telemetry/chat. Classic simpit stack.</p>
-        </label>
-      </div>
-
-      <!-- FLIGHT CONTROLS -->
-      <div class="config-group config-group--flight">
-        <div class="group-head" style="grid-column:1/-1">
-          <h3>Flight Controls</h3>
-          <p class="lede">HOTAS / dual-stick / throttle. Repeatable reach every time.</p>
-        </div>
-
-        <label class="config-card" data-key="flight-single">
-          <input type="checkbox" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
-          <strong>FLIGHT: STICK + THROTTLE — $220</strong>
-          <p>Single-stick and throttle setup for MSFS / DCS fixed-wing.</p>
-        </label>
-
-        <label class="config-card" data-key="flight-dual">
-          <input type="checkbox" data-price="240" data-label="FLIGHT: DUAL STICK">
-          <strong>FLIGHT: DUAL STICK — $240</strong>
-          <p>Mirrored dual-stick arms. Helo / space sim / Star Citizen ready.</p>
-        </label>
-
-        <label class="config-card" data-key="flight-pedal">
-          <input type="checkbox" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
-          <strong>FLIGHT: PEDAL MOUNT — $180</strong>
-          <p>Adjustable rudder pedal base. Stable yaw; zero floor creep.</p>
-        </label>
-
-        <label class="config-card requires-dynamic" data-key="flight-actuator">
-          <input type="checkbox" data-price="380" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
-          <strong>FLIGHT: ACTUATOR MOUNT KIT — $380</strong>
-          <p>Dedicated actuator hardpoints + reinforcement plates for heave/surge cues (Qubic System style kits).</p>
-          <div class="req-note">Requires Dynamic Base Frame.</div>
-        </label>
-      </div>
-
-      <!-- RACING CONTROLS -->
-      <div class="config-group config-group--racing">
-        <div class="group-head" style="grid-column:1/-1">
-          <h3>Racing Controls</h3>
-          <p class="lede">Steering, pedals, shifting — under real torque.</p>
-        </div>
-
-        <label class="config-card" data-key="race-wheel">
-          <input type="checkbox" data-price="250" data-label="RACING: WHEEL ARM">
-          <strong>RACING: WHEEL ARM — $250</strong>
-          <p>Direct-drive capable mount. Zero flex at 15+ Nm. No desk shake on stream.</p>
-        </label>
-
-        <label class="config-card" data-key="race-pedal">
-          <input type="checkbox" data-price="180" data-label="RACING: PEDAL MOUNT">
-          <strong>RACING: PEDAL MOUNT — $180</strong>
-          <p>Indexed pedal base. Holds under full loadcell brake force.</p>
-        </label>
-
-        <label class="config-card" data-key="race-shifter">
-          <input type="checkbox" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
-          <strong>RACING: GEARSHIFT MOUNT — $140</strong>
-          <p>Side-mounted shifter/handbrake plate. Adjustable height/reach.</p>
-        </label>
-
-        <label class="config-card requires-dynamic" data-key="race-actuator">
-          <input type="checkbox" data-price="420" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
-          <strong>RACING: ACTUATOR MOUNT KIT — $420</strong>
-          <p>Actuator crossmembers + gussets to carry surge/heave/traction loss loads without alignment drift.</p>
-          <div class="req-note">Requires Dynamic Base Frame.</div>
-        </label>
-      </div>
-
-      <!-- CREATOR / STREAM -->
-      <div class="config-group config-group--stream">
-        <div class="group-head" style="grid-column:1/-1">
-          <h3>Creator / Stream Setup</h3>
-          <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
-        </div>
-
-        <label class="config-card" data-key="stream-cam">
-          <input type="checkbox" data-price="100" data-label="STREAM: CAMERA ARM">
-          <strong>STREAM: CAMERA ARM — $100</strong>
-          <p>Low-vibration arm for webcam or overhead build shots / cockpit POV.</p>
-        </label>
-
-        <label class="config-card" data-key="stream-light">
-          <input type="checkbox" data-price="120" data-label="STREAM: KEY LIGHT ARM">
-          <strong>STREAM: KEY LIGHT ARM — $120</strong>
-          <p>Stable key/fill light mount off-frame so lighting doesn’t shake mid-race.</p>
-        </label>
-
-        <label class="config-card" data-key="stream-deck">
-          <input type="checkbox" data-price="90" data-label="STREAM: STREAM DECK ARM">
-          <strong>STREAM: STREAM DECK ARM — $90</strong>
-          <p>Dedicated arm for Stream Deck / Loupedeck. Muscle-memory placement.</p>
-        </label>
-      </div>
-
-    </div>
-
-    <!-- RIGHT: SUMMARY -->
-    <aside class="panel">
-      <h3>Your Build</h3>
-      <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
-      <p id="selectedCount" class="lede">0 modules selected</p>
-      <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
-      <div style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);margin-bottom:12px">
-        Static = planted and quiet. Dynamic = actuator-ready, braced for motion. You can upgrade Static later without buying a whole new rig.
-      </div>
-      <a href="#reserve" class="btn btn--primary" style="width:100%;justify-content:center">Reserve My Slot</a>
-    </aside>
-  </div>
-</section>
-
-<!-- GAMES -->
-<section id="games" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Games & Sims</h2>
-    <span class="pill">Dialed for today’s titles</span>
-  </div>
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Flight</h3>
-      <p class="lede">MSFS • DCS • X-Plane • IL-2</p>
-      <p>Center-stick, dual-stick or yoke. Pedal tray alignment gives smooth rudder control without ankle strain.</p>
-    </article>
-    <article class="card">
-      <h3>Racing</h3>
-      <p class="lede">iRacing • ACC • Assetto • Forza</p>
-      <p>Wheel mount clamps DD torque straight into the frame. Pedal rails hold under max loadcell brake hit.</p>
-    </article>
-    <article class="card">
-      <h3>FPS / Tactical / Space Sim</h3>
-      <p class="lede">CS • Valorant • Tarkov • Star Citizen</p>
-      <p>Keyboard clearance, clean cable routes, and fast swap to dual-stick HOTAS / space controls for Star Citizen style flight-combat.</p>
-    </article>
-  </div>
-
-  <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
-    <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" loading="lazy" alt="Triple racing monitor wrap with overhead HUD and chat display mounted to CoreFlux simpit frame" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
-    </div>
-    <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
-      That’s curved triples for race/FPS peripheral vision and an elevated HUD / maps / chat display — all mounted to the frame, not a wobbly desk arm.
-    </div>
-  </div>
-</section>
-
-<!-- COMPAT -->
-<section id="compat" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Your Gear Fits</h2>
-    <span class="pill">No drilling</span>
-  </div>
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Flight Sticks / HOTAS</h3>
-      <ul>
-        <li>Virpil / Winwing / Thrustmaster / VKB</li>
-        <li>Center-stick, dual-stick, or throttle patterns.</li>
-        <li>Pedal tray clears common rudder sets.</li>
-      </ul>
-    </article>
-    <article class="card">
-      <h3>Racing Hardware</h3>
-      <ul>
-        <li>Fanatec / Moza / Simagic / Logitech DD</li>
-        <li>Loadcell pedals, handbrake, H-pattern / sequential shifters.</li>
-        <li>Torque goes into frame, not your desk.</li>
-      </ul>
-    </article>
-    <article class="card">
-      <h3>Streaming / Creator</h3>
-      <ul>
-        <li>Camera arm for face/overhead angles.</li>
-        <li>Key/fill light arms for consistent lighting.</li>
-        <li>Stream Deck arm where your hand already lives.</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-<!-- VENDORS -->
-<section id="vendors" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Preferred Control Vendors</h2>
-    <span class="pill">We plate for these out of the box</span>
-  </div>
-  <p class="lede" style="max-width:800px">
-    We ship pre-drilled plates to match these ecosystems. No adapters. No guesswork. Bolt it on, tighten it down, fly / drive.
-  </p>
-
-  <div class="cards" style="margin-top:14px">
-    <article class="card" style="border:1px solid rgba(0,198,255,.45);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.2)">
-      <h3>Virpil Controls</h3>
-      <p class="lede">Constellation Alpha / Prime • MongoosT-50CM • VMAX Prime • ACE pedals</p>
-      <ul>
-        <li>Plates include stick + throttle + pedal patterns</li>
-        <li>Clamp-free HOTAS — zero flex under pull</li>
-        <li>Ready for dual-stick space / heli layouts</li>
-      </ul>
-    </article>
-
-    <article class="card" style="border:1px solid rgba(255,210,63,.45);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
-      <h3>VKB Controllers</h3>
-      <p class="lede">Gladiator / NXT / EVO • STECS throttle</p>
-      <ul>
-        <li>Side-stick and center-stick geometry supported</li>
-        <li>Repeatable wrist-neutral positioning</li>
-        <li>Swaps from “desk height” to “cockpit height” fast</li>
-      </ul>
-    </article>
-
-    <article class="card" style="border:1px solid rgba(0,198,255,.4);box-shadow:0 24px 60px rgba(0,198,255,.22),0 0 60px rgba(0,198,255,.18)">
-      <h3>Thrustmaster</h3>
-      <p class="lede">Warthog • TCA Airbus / Boeing • TPR pedals • T818 DD wheel base</p>
-      <ul>
-        <li>Support for HOTAS, yokes, throttles, rudder pedals</li>
-        <li>Mounting for flight and racing hardware in the same footprint</li>
-        <li>Pre-drilled plates = no desk clamps, no flex</li>
-      </ul>
-    </article>
-
-    <article class="card" style="border:1px solid rgba(0,198,255,.4);box-shadow:0 24px 60px rgba(0,198,255,.22),0 0 60px rgba(0,198,255,.18)">
-      <h3>Moza Racing</h3>
-      <p class="lede">R-series direct drive bases • QR hubs</p>
-      <ul>
-        <li>4-bolt DD pattern captured in reinforced wheel arm</li>
-        <li>Holds torque without column wobble</li>
-        <li>Pedal base braced for full loadcell pressure</li>
-      </ul>
-    </article>
-
-    <article class="card" style="border:1px solid rgba(255,210,63,.4);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
-      <h3>Fanatec</h3>
-      <p class="lede">Podium / ClubSport / CSL DD • QR2 ecosystem</p>
-      <ul>
-        <li>160×160 underside mount locked into frame rails</li>
-        <li>Shifter / handbrake arm with indexed reach</li>
-        <li>Stays aligned even under actuator surge</li>
-      </ul>
-    </article>
-
-    <article class="card" style="border:1px solid rgba(0,198,255,.45);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.2)">
-      <h3>Tobii Eye Tracking</h3>
-      <p class="lede">Tobii Eye Tracker 5 / Horizon</p>
-      <ul>
-        <li>Mount point for Tobii at correct sightline height</li>
-        <li>Natural head/eye aim in flight and space sim cockpits</li>
-        <li>Hands stay on HOTAS / wheel — camera follows you</li>
-      </ul>
-    </article>
-  </div>
-
-  <div class="panel" style="margin-top:24px;text-align:center">
-    <div style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--text)">
-      Running something else?<br>
-      We cut customs. Send your bolt pattern in Reserve and we’ll plate it.
-    </div>
-  </div>
-</section>
-
-<!-- QUICK-START -->
-<section id="quickstart" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Quick-Start</h2>
-    <span class="pill">Pick a title, get dialed</span>
-  </div>
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Star Citizen</h3>
-      <p class="lede">Dual-stick or HOTAS + pedals.</p>
-      <ol>
-        <li>Chassis: Dynamic.</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Dual Stick</em> / <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
-        <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
-      </ol>
-    </article>
-    <article class="card">
-      <h3>DCS / MSFS</h3>
-      <p class="lede">Center-stick HOTAS + pedals.</p>
-      <ol>
-        <li>Chassis: Dynamic or Static (neighbors? choose Static first).</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>.</li>
-        <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
-      </ol>
-    </article>
-    <article class="card">
-      <h3>iRacing / ACC</h3>
-      <p class="lede">Wheel + pedals; triples or quad.</p>
-      <ol>
-        <li>Chassis: Dynamic for motion; Static for planted torque only.</li>
-        <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple/Quad</em>.</li>
-        <li>Option: <em>Racing Actuator Kit</em> for heave/brake surge / traction loss.</li>
-      </ol>
-    </article>
-  </div>
-</section>
-
-<!-- FIT -->
-<section id="fit" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Fit Check</h2>
-    <span class="pill">Real posture, not cosplay</span>
-  </div>
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Long-session comfort</h3>
-      <p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it — workday to midnight race stint.</p>
-    </article>
-    <article class="card">
-      <h3>Low visual noise</h3>
-      <p>Clean enough for a living room or office. Cables disappear. Lighting’s mounted to frame, not tripods all over your floor.</p>
-    </article>
-    <article class="card">
-      <h3>72-hour test</h3>
-      <p>Workday + game sessions + late flight ops without teardown. You stop choosing between “my desk” and “my simpit.” It’s just one rig.</p>
-    </article>
-  </div>
-
-  <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" loading="lazy" alt="Back view of CoreFlux cockpit frame showing seat rails, pedal base, HOTAS mounts, monitor stack in one footprint" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
-    <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
-      Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
-    </div>
+  <div class="card" style="border:1px solid rgba(0,198,255,.45);">
+    <p style="margin:0;font-weight:600;color:var(--text)">“The Primus holds posture in a fight. Swap from desk to dual-stick in under two minutes. It feels like hardware, not a compromise.”</p>
+    <p style="margin:6px 0 0 0;color:var(--muted);font-size:.9rem">— FIGHT3RPHOENIX</p>
   </div>
 </section>
 
 <!-- RESERVE -->
-<section id="reserve" class="wrap">
+<section id="reserve" class="wrap section">
   <div class="section__head">
     <h2 class="section__title">Reserve Your Slot</h2>
     <span class="pill">Pilot batch</span>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
-    <div class="panel" style="display:grid;gap:12px;max-width:420px">
-      <div class="reserve-introline" style="font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em">We're building with early adopters</div>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Email
-        <input id="rEmail" type="email" placeholder="you@email.com" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+  <div class="card" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:.9rem">Email
+        <input id="rEmail" type="email" placeholder="you@email.com" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);padding:10px 12px;font-weight:600;outline:none">
       </label>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Region
-        <select id="rRegion" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+      <label style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font-weight:700;font-size:.9rem">Region
+        <select id="rRegion" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);padding:10px 12px;font-weight:600;outline:none">
           <option value="">Select...</option>
           <option>US / Canada</option>
           <option>EU / UK</option>
@@ -1765,481 +274,92 @@ aside.panel{
           <option>Other</option>
         </select>
       </label>
-      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Primary Mode
-        <select id="rMode" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
+      <label style="display:flex;flex-direction:column;gap:6px;margin-top:10px;font-weight:700;font-size:.9rem">Rig Interest
+        <select id="rRig" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);padding:10px 12px;font-weight:600;outline:none">
           <option value="">Select...</option>
-          <option>Racing / ACC / iRacing</option>
-          <option>Flight / DCS / MSFS</option>
-          <option>FPS / Space Sim / Star Citizen</option>
-          <option>Creator / Stream Desk + Simpit</option>
+          <option>Phoenix Primus (Limited)</option>
+          <option>Dynamic Flight (Custom)</option>
+          <option>Static Flight</option>
+          <option>All-In-One</option>
         </select>
       </label>
-      <button id="reserveBtn" type="button" class="btn btn--primary" style="justify-content:center">Reserve My Spot</button>
-      <div id="reserveNote" style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em"></div>
+      <button id="reserveBtn" type="button" class="btn btn--primary" style="margin-top:12px;width:100%">Reserve</button>
+      <div id="reserveNote" style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em;margin-top:6px"></div>
     </div>
-    <div class="panel" style="display:grid;gap:12px">
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 1</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You spec the rig</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Static or Dynamic, racing / flight / creator gear, monitor layout, actuator interest.</div>
-
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 2</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">We confirm fit + layout</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">We sanity-check clearances, posture, cable routing, DD torque, and actuator bracing. We kick back a tuned parts list.</div>
-
-      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 3</div>
-      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You're in the pilot batch</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early chassis access, tuning notes, and priority for specialty mounts / actuator plates.</div>
+    <div style="font-size:.9rem;line-height:1.5;color:var(--muted);font-weight:600">
+      <strong style="color:var(--text)">What happens next?</strong><br>
+      We confirm fit (stick/throttle reach, pedal alignment, quad-screen sightlines) and send a tuned parts list.
+      Phoenix Primus spots are limited; early reserves get numbered units and build guidance.
+      <div class="btnrow" style="margin-top:12px">
+        <a class="btn btn--ghost" href="https://www.twitch.tv/FIGHT3RPHOENIX" target="_blank" rel="noopener">Follow FIGHT3RPHOENIX</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">FAQ</h2>
-    <span class="pill">Straight answers</span>
-  </div>
-
-  <details class="panel" style="margin:10px 0;">
-    <summary style="font-weight:800;cursor:pointer;">Is it compatible with Qubic System actuators?</summary>
-    <p>Yes. The Dynamic frame geometry is braced around popular Qubic System-style actuator layouts for heave / surge / traction loss. We’ll confirm exact pattern when you reserve.</p>
-  </details>
-
-  <details class="panel" style="margin:10px 0;">
-    <summary style="font-weight:800;cursor:pointer;">Can I run D-Box / PT-Actuator / other motion kits?</summary>
-    <p>Usually yes. We can plate or adapt most actuator stacks. Send us your bolt pattern in Reserve and we’ll tell you if it’s drop-in or needs an adapter gusset.</p>
-  </details>
-
-  <details class="panel" style="margin:10px 0%;">
-    <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
-    <p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, yaw onset, traction loss — not theme-park throw. It’s meant for sim feel, not drywall damage.</p>
-  </details>
-
-  <details class="panel" style="margin:10px 0%;">
-    <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
-    <p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward. You don’t lose your setup.</p>
-  </details>
-
-  <details class="panel" style="margin:10px 0%;">
-    <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
-    <p>About 2 hours with a hex set. All modules are pre-cut and indexed. No drilling required.</p>
-  </details>
-
-  <details class="panel" style="margin:10px 0%;">
-    <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
-    <p>Yes — arms mount into the simpit frame structure, not a wobbly desk post. Overhead HUD and chat screen also mount to the frame for VR / cockpit overlays.</p>
-  </details>
-</section>
-
-<footer>
-  © <span id="year"></span> CoreFlux Simpits
-  <div class="footer-note" style="margin-top:16px; line-height:1.6;">
-    <strong>CoreFlux (Pty) Ltd</strong><br>
-    Sandton<br>
-    Johannesburg<br>
-    South Africa
-  </div>
-  <div class="footer-note" style="margin-top:10px; line-height:1.6;">
-    <strong>Contact</strong><br>
-    Email: <a href="mailto:sales@coreflux.co.za" style="color:var(--accent);text-decoration:none;">sales@coreflux.co.za</a><br>
-    Phone: <a href="tel:+27115688667" style="color:var(--accent);text-decoration:none;">+27 11 568 8667</a>
-  </div>
-  <div class="footer-note" style="margin-top:12px;">
-    Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec for a South African-built multi-role simpit platform.
-  </div>
+<!-- FOOTER -->
+<footer class="footer">
+  © <span id="year"></span> CoreFlux Simpits · Sandton, Johannesburg · <a href="mailto:sales@coreflux.co.za" style="color:var(--accent)">sales@coreflux.co.za</a>
 </footer>
 
 <script>
-/* Footer year */
+// Year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Hero carousel (2-slide, always fill) */
-document.addEventListener('DOMContentLoaded', ()=>{
-  const slides=[...document.querySelectorAll('.mock__slide')];
-  const dots=[...document.querySelectorAll('.dot')];
-  const mock=document.getElementById('mock');
-  const fitBtn=document.getElementById('fitToggle');
-  let i=0,timer;
-
-  function show(n){
-    i=(n+slides.length)%slides.length;
-    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-    dots.forEach((d,k)=>d.classList.toggle('active',k===i));
-  }
-
-  function play(){ timer=setInterval(()=>show(i+1), 5200); }
-  function stop(){ clearInterval(timer); }
-
-  dots.forEach((d,idx)=>d.addEventListener('click',()=>{
-    stop();
-    show(idx);
-    play();
-  }));
-
-  if (mock){
-    mock.addEventListener('mouseenter',stop);
-    mock.addEventListener('mouseleave',play);
-  }
-
-  if (fitBtn){
-    // cosmetic only; always cover
-    fitBtn.textContent = "Fill";
-    fitBtn.setAttribute('aria-pressed', 'true');
-    fitBtn.addEventListener('click', (e)=>{ e.preventDefault(); });
-  }
-
-  show(0);
-  play();
-});
-
-/* Mock glow parallax */
+// Reserve mailto prefill
 (function(){
-  const glow = document.getElementById('mockGlow');
-  if(!glow) return;
-  window.addEventListener('pointermove', e=>{
-    const rect = glow.getBoundingClientRect();
-    const cx = rect.left + rect.width/2, cy = rect.top + rect.height/2;
-    const dx = (e.clientX - cx) / rect.width;
-    const dy = (e.clientY - cy) / rect.height;
-    glow.style.setProperty('--gx', (50 + dx*10)+'%');
-    glow.style.setProperty('--gy', (50 + dy*10)+'%');
-  });
-})();
-
-/* Configurator logic (auto-upgrade to Dynamic for motion kits) */
-(function(){
-  const root = document.getElementById('moduleList');
-  if(!root) return;
-
-  const totalEl = document.getElementById('totalPrice');
-  const countEl = document.getElementById('selectedCount');
-  const linesEl = document.getElementById('buildLines');
-
-  const radioGroups = Array.from(new Set(
-    [...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name)
-  ));
-
-  const $ = (sel, ctx=document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
-
-  const baseStatic  = $('input[name="baseframe"][data-label="STATIC BASE FRAME"]');
-  const baseDynamic = $('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
-
-  function isDynamic(){ return baseDynamic && baseDynamic.checked; }
-
-  function parsePrice(input){
-    const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
-    if(!card) return 0;
-    const strong = card.querySelector('strong');
-    const src = (strong ? strong.textContent : card.textContent) || '';
-    const matches = [...src.matchAll(/\$\s*([\d][\d,\s]*(?:\.\d+)?)/g)];
-    if(!matches.length) return 0;
-    const raw = matches[matches.length - 1][1].replace(/[,\s]/g,'');
-    const n = Number(raw);
-    return isNaN(n) ? 0 : n;
-  }
-
-  function labelFor(input){
-    if (input.dataset.label) return input.dataset.label;
-    const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
-    const strong = card ? card.querySelector('strong') : null;
-    if (strong) return strong.textContent.replace(/\s*[–—-]\s*\$.*$/,'').trim();
-    return input.name || 'Item';
-  }
-
-  function selectedRadios(){
-    const sel=[];
-    for(const g of radioGroups){
-      const r = root.querySelector(`input[type="radio"][name="${g}"]:checked`);
-      if(r) sel.push(r);
-    }
-    return sel;
-  }
-
-  function updateDynamicLocks(){
-    const reqCards = $$('.requires-dynamic', root);
-    const dynamic = isDynamic();
-    reqCards.forEach(card=>{
-      const input = $('input', card);
-      if(!input) return;
-      if(dynamic){
-        card.classList.remove('locked');
-        card.setAttribute('aria-disabled','false');
-        input.disabled = false;
-      }else{
-        input.checked = false;
-        input.disabled = true;
-        card.classList.add('locked');
-        card.setAttribute('aria-disabled','true');
-      }
-    });
-  }
-
-  function recalc(){
-    let total = 0;
-    const picked = [];
-
-    $$('input[type="checkbox"]', root).forEach(ch=>{
-      if(ch.disabled) return;
-      if(ch.checked){
-        const price = parsePrice(ch);
-        total += price;
-        picked.push(`${labelFor(ch)} — $${price}`);
-      }
-    });
-
-    selectedRadios().forEach(r=>{
-      const price = parsePrice(r);
-      total += price;
-      picked.push(`${labelFor(r)} — $${price}`);
-    });
-
-    if(linesEl){
-      linesEl.innerHTML = picked
-        .map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`)
-        .join('');
-    }
-    if(countEl){
-      countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
-    }
-    if(totalEl){
-      totalEl.textContent = `$${total}`;
-    }
-  }
-
-  $$('.config-card', root).forEach(card=>{
-    card.addEventListener('click',(e)=>{
-      const input = card.querySelector('input');
-      if(!input) return;
-
-      // auto-pick Dynamic if they click an actuator kit while Static is selected
-      if(card.classList.contains('requires-dynamic') && !isDynamic()){
-        if(baseDynamic){
-          baseDynamic.checked = true;
-          baseDynamic.dispatchEvent(new Event('change',{bubbles:true}));
-        }
-      }
-
-      updateDynamicLocks();
-
-      if(input.disabled) return;
-
-      if(e.target !== input){
-        if(input.type==='checkbox'){
-          input.checked = !input.checked;
-          input.dispatchEvent(new Event('change',{bubbles:true}));
-        }
-        if(input.type==='radio'){
-          input.checked = true;
-          input.dispatchEvent(new Event('change',{bubbles:true}));
-        }
-      }
-    });
-  });
-
-  // sync dataset price/label once
-  (function syncOnce(){
-    $$('input', root).forEach(i=>{
-      const p = parsePrice(i);
-      if(p>0) i.dataset.price = String(p);
-      if(!i.dataset.label) i.dataset.label = labelFor(i);
-    });
-  })();
-
-  $$('input', root).forEach(i=> i.addEventListener('change', ()=>{
-    updateDynamicLocks();
-    recalc();
-  }));
-
-  updateDynamicLocks();
-  recalc();
-})();
-
-/* Sticky CTA show/hide */
-(function(){
-  const cta = document.getElementById('stickyCTA');
-  const hero = document.querySelector('.hero');
-  if(!cta || !hero) return;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      cta.style.display = entry.isIntersecting ? 'none' : 'block';
-    });
-  }, {threshold:0.2});
-  io.observe(hero);
-})();
-
-/* Reserve form handling (mailto capture) */
-(function(){
-  const email  = document.getElementById('rEmail');
-  const region = document.getElementById('rRegion');
-  const mode   = document.getElementById('rMode');
-  const btn    = document.getElementById('reserveBtn');
-  const note   = document.getElementById('reserveNote');
+  const email = document.getElementById('rEmail');
+  const region= document.getElementById('rRegion');
+  const rig   = document.getElementById('rRig');
+  const btn   = document.getElementById('reserveBtn');
+  const note  = document.getElementById('reserveNote');
   if(!btn) return;
 
-  btn.addEventListener('click',()=>{
-    const e  = email.value.trim();
-    const rg = region.value.trim();
-    const md = mode.value.trim();
+  btn.addEventListener('click', ()=>{
+    const e = (email.value||'').trim();
+    const rg= (region.value||'').trim();
+    const r = (rig.value||'').trim();
+    if(!e){ note.textContent='Add an email so we can reach you.'; note.style.color='var(--accent)'; return; }
+    if(!rg || !r){ note.textContent='Select region and rig interest.'; note.style.color='var(--accent)'; return; }
 
-    if(!e){
-      note.textContent="Add an email so we can reach you.";
-      note.style.color="var(--accent)";
-      return;
-    }
-    if(!rg || !md){
-      note.textContent="Tell us where you are and what you fly/drive.";
-      note.style.color="var(--accent)";
-      return;
-    }
-
-    // Prefill email draft so you get the lead from static hosting
-    const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
-    const body = encodeURIComponent(
+    const dest='sales@coreflux.co.za';
+    const subject=encodeURIComponent('Reserve — Phoenix Primus / Ambassador Page');
+    const body=encodeURIComponent(
 `Email: ${e}
 Region: ${rg}
-Primary Mode: ${md}
+Rig: ${r}
 
-Setup notes / hardware (optional, fill in before send):
-- Wheel base / HOTAS / pedals:
-- Triple / quad / VR:
-- Static or Dynamic interest:
-- Motion / actuator interest (Qubic, D-Box etc.):
-- Anything we should know (desk space, neighbors, etc.):`
-    );
+Notes:
+- Current controls (sticks/throttle/pedals):
+- Display layout (triple/quad/VR):
+- Static now or Dynamic (motion-ready):
+- Anything else:`);
 
-    // CHANGE THIS TO YOUR REAL INBOX
-    const dest = "sales@coreflux.co.za";
-
-    window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
-
-    note.textContent="Locked. We'll reach out with pilot batch details.";
-    note.style.color="var(--text)";
+    window.location.href=`mailto:${dest}?subject=${subject}&body=${body}`;
+    note.textContent='Thanks — we’ll follow up with build details.';
+    note.style.color='var(--text)';
   });
 })();
+</script>
 
-/* Background particles */
-(function(){
-  const c = document.getElementById('aiCanvas');
-  if(!c) return;
-  const ctx = c.getContext('2d');
-
-  let w, h, pts = [];
-  const DENSITY = 0.00012;
-  const LINK_DIST = 140;
-  const MAX_LINKS = 3;
-
-  function resize(){
-    w = c.width = window.innerWidth;
-    h = c.height = window.innerHeight;
-    const count = Math.max(90, Math.floor(w*h*DENSITY));
-    pts = Array.from({length:count},()=>({
-      x: Math.random()*w,
-      y: Math.random()*h,
-      vx: (Math.random()-.5)*0.35,
-      vy: (Math.random()-.5)*0.35,
-      r: Math.random()*1.6 + 0.7
-    })); 
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Product",
+  "name":"Phoenix Primus — CoreFlux × FIGHT3RPHOENIX",
+  "brand":{"@type":"Brand","name":"CoreFlux Simpits"},
+  "description":"A boutique Star Citizen rig, co-designed with Star Citizen Stream and tuned with FIGHT3RPHOENIX, a highly rated PvP pilot and creator.",
+  "category":"Flight Simpit / Creator Rig",
+  "material":"4080 anodized aluminium extrusion",
+  "offers":{
+    "@type":"Offer",
+    "priceCurrency":"USD",
+    "price":"0",
+    "availability":"https://schema.org/PreOrder",
+    "url":"https://access-mark.github.io/CoreFlux-Simpits/ambassador-fighterphoenix.html#reserve"
   }
-  resize();
-  window.addEventListener('resize', resize);
-
-  let pmx = 0, pmy = 0;
-  window.addEventListener('pointermove', e=>{
-    pmx = (e.clientX - w/2) * 0.02;
-    pmy = (e.clientY - h/2) * 0.02;
-    const glow = document.getElementById('mockGlow');
-    if(glow){
-      glow.style.setProperty('--gx', (50 + pmx*0.5)+'%');
-      glow.style.setProperty('--gy', (50 + pmy*0.5)+'%');
-    }
-  });
-
-  function tick(){
-    ctx.clearRect(0,0,w,h);
-    c.style.opacity = '0.55';
-
-    for(const p of pts){
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<0||p.x>w) p.vx*=-1;
-      if(p.y<0||p.y>h) p.vy*=-1;
-    }
-
-    for(let i=0;i<pts.length;i++){
-      const a = pts[i]; let links = 0;
-      for(let j=i+1;j<pts.length;j++){
-        const b = pts[j];
-        const dx = a.x - b.x, dy = a.y - b.y, d2 = dx*dx + dy*dy;
-        if(d2 < LINK_DIST*LINK_DIST){
-          const d = Math.sqrt(d2);
-          const alpha = 1 - d / LINK_DIST;
-          ctx.globalAlpha = alpha * 0.25;
-          ctx.beginPath();
-          ctx.moveTo(a.x+pmx*alpha, a.y+pmy*alpha);
-          ctx.lineTo(b.x+pmx*alpha, b.y+pmy*alpha);
-          ctx.strokeStyle = 'rgba(0,198,255,1)';
-          ctx.lineWidth = 1;
-          ctx.stroke();
-          if(++links >= MAX_LINKS) break;
-        }
-      }
-    }
-    ctx.globalAlpha = 1;
-
-    for(const p of pts){
-      const gx = p.x + pmx*0.3, gy = p.y + pmy*0.3;
-      const g = ctx.createRadialGradient(gx,gy,0, gx,gy, p.r*6);
-      g.addColorStop(0,'rgba(0,198,255,.75)');
-      g.addColorStop(0.7,'rgba(0,198,255,.12)');
-      g.addColorStop(1,'rgba(255,210,63,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fill();
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-
-/* -------- Structured Data for SEO (Product + Review) -------- */
-(function(){
-  const schema = {
-    "@context":"https://schema.org",
-    "@type":"Product",
-    "name":"CoreFlux Simpits Dynamic Frame",
-    "brand":{"@type":"Brand","name":"CoreFlux Simpits"},
-    "description":"Actuator-ready aluminium simpit chassis that transforms between racing cockpit, HOTAS flight sim, dual-stick space sim, and full workstation. Built to handle direct-drive steering torque, loadcell brake force, and Qubic System style motion actuators without flex.",
-    "category":"Racing Simulator Cockpit / Flight Simpit / Motion Platform Frame",
-    "material":"4080 anodized aluminium extrusion",
-    "offers":{
-      "@type":"Offer",
-      "priceCurrency":"USD",
-      "price":"1450",
-      "availability":"https://schema.org/PreOrder",
-      "url":"https://access-mark.github.io/CoreFlux-Simpits/#reserve"
-    },
-    "review":[
-      {
-        "@type":"Review",
-        "reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},
-        "author":{"@type":"Person","name":"Pilot Batch Tester"},
-        "reviewBody":"I went from office mode to ACC with traction loss and surge cues in under two minutes. It doesn’t feel like a DIY rig. It feels like hardware."
-      },
-      {
-        "@type":"Review",
-        "reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},
-        "author":{"@type":"Person","name":"FIGHT3RPHOENIX","sameAs":"https://www.twitch.tv/FIGHT3RPHOENIX"},
-        "reviewBody":"We created and dialled in the Phoenix Primus — the same model I currently fly on stream. Mode swaps are minutes; geometry holds under motion."
-      }
-    ]
-  };
-
-  const scriptTag = document.createElement('script');
-  scriptTag.type = 'application/ld+json';
-  scriptTag.textContent = JSON.stringify(schema);
-  document.head.appendChild(scriptTag);
-})();
+}
 </script>
 
 </body>
