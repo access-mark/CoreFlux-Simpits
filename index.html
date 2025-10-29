@@ -15,11 +15,12 @@
 
 <style>
 /* ======================================================
-   CoreFlux Simpits — Production CSS (Stable Canvas)
-   - Logo pinned left
-   - Center hero headline in header (2-line lockup)
-   - Larger tagline/name
-   - Plural: Simpits
+   CoreFlux Simpits — Production CSS
+   - Global dark field + cyan/gold bloom
+   - Sticky glass nav
+   - Big brand block centered
+   - Proof/social
+   - Reserve clarity
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -34,8 +35,8 @@
   --text:#e6eefc;
   --muted:#a6b0cf;
 
-  --accent:#00c6ff;
-  --accent-2:#ffd23f;
+  --accent:#00c6ff;          /* CoreFlux cyan */
+  --accent-2:#ffd23f;        /* soft gold */
 
   --border:rgba(255,255,255,.08);
   --blur:14px;
@@ -49,7 +50,7 @@
 
   --logo-h:54px;
 
-  --nav-h:160px; /* taller to handle centered text stack */
+  --nav-h:140px;             /* taller hero banner */
   --content-max:1200px;
 }
 
@@ -60,6 +61,7 @@ body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
+
   background-color:var(--bg);
   background-image:
     radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
@@ -67,6 +69,7 @@ body{
     radial-gradient(circle at 50% 120%, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 70%);
   background-repeat:no-repeat;
   background-attachment:fixed;
+
   overflow-x:hidden;
   scroll-behavior:smooth;
 }
@@ -74,6 +77,7 @@ body{
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
+/* wrapper */
 .wrap{
   width:min(var(--content-max),92vw);
   margin:0 auto;
@@ -85,7 +89,6 @@ img{max-width:100%;display:block}
   line-height:1.5;
   font-weight:500;
   max-width:680px;
-  margin:0;
 }
 
 section{
@@ -94,7 +97,7 @@ section{
   z-index:1;
 }
 
-/* particles bg */
+/* ---- Global particles canvas ---- */
 #aiCanvas{
   position:fixed;
   inset:0;
@@ -105,7 +108,7 @@ section{
 }
 
 /* ======================================================
-   HEADER
+   NAV
    ====================================================== */
 
 .nav{
@@ -113,137 +116,121 @@ section{
   top:0;
   z-index:40;
   height:var(--nav-h);
+
   backdrop-filter:saturate(140%) blur(var(--blur));
   background:rgba(8,12,26,.72);
   border-bottom:1px solid var(--border);
   box-shadow:0 20px 40px rgba(0,0,0,.8);
-
-  display:flex;
-  align-items:center;
 }
 
 .nav__inner{
-  width:100%;
-  max-width:var(--content-max);
-  padding:0 4vw;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
+  height:100%;
+  display:flex;
   align-items:center;
+  justify-content:center; /* center the block */
+  padding:0;
   position:relative;
 }
 
-/* left: logo */
-.brand-left{
+/* brand block */
+.brand-shell{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  line-height:1.05;
+  max-width:90%;
+}
+
+/* logo stays left edge of nav visually but inside layout we keep it inline;
+   so we fake "left" with absolute logo for desktop */
+.brand-shell__row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  position:relative;
+  padding-left:120px; /* reserve space for left-fixed logo */
+}
+
+/* left logo */
+.brand__logo-outer{
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
   display:flex;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center;
+  width:110px;
+  height:110px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.8),
+    0 0 80px rgba(0,198,255,.4);
 }
-.brand-left__logo-img{
-  height:140px;
-  max-height:140px;
+
+.brand__logo-img{
+  height:96px;
   width:auto;
+  max-height:96px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
 }
 
-/* center: text lockup */
-.brand-center{
-  text-align:center;
+/* headline + subhead */
+.brand__stack{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  line-height:1.05;
-  min-width:0;
-  pointer-events:none;
-  user-select:none;
-  margin:0 auto;
 }
 
-.brand-center__tagline{
+.brand__tagline{
   font-weight:800;
-  font-size:clamp(1.6rem,2.2vw,2.2rem); /* bigger */
-  line-height:1.1;
-  letter-spacing:-.035em;
+  letter-spacing:-.02em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
   text-shadow:
-    0 0 24px rgba(0,198,255,.45),
-    0 0 48px rgba(0,198,255,.28),
-    0 0 80px rgba(255,210,63,.22);
+    0 0 16px rgba(0,198,255,.4),
+    0 0 36px rgba(0,198,255,.25),
+    0 0 60px rgba(255,210,63,.18);
+  font-size:clamp(1.4rem,1.2vw,1.6rem);
+  line-height:1.1;
   white-space:nowrap;
 }
 
-.brand-center__name{
-  font-weight:700;
-  font-size:clamp(1rem,1.6vw,1.4rem); /* ~2x previous .8rem */
-  line-height:1.2;
-  letter-spacing:.05em;
+/* doubled scale main name */
+.brand__name{
+  font-weight:800;
+  letter-spacing:-.03em;
   color:var(--text);
-  opacity:.9;
-  text-transform:uppercase;
+  line-height:1.05;
+  text-align:center;
+  font-size:clamp(2.2rem,2.2vw,2.6rem);
   white-space:nowrap;
 }
 
-/* right side empty spacer for now (keeps center actually centered) */
-.brand-right{
-  min-width:140px; /* roughly match logo width to balance grid */
-  height:1px;
-}
-
-/* sticky CTA */
-#stickyCTA{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:50;
+/* kill nav link pills on desktop entirely */
+.nav__links{
   display:none;
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  font-weight:800;
-  font-size:.8rem;
-  line-height:1.2;
-  padding:12px 16px;
-  border-radius:12px;
-  box-shadow:
-    0 0 16px rgba(0,198,255,.7),
-    0 24px 40px rgba(0,198,255,.4),
-    0 10px 30px rgba(0,0,0,.9);
-  border:none;
-  cursor:pointer;
 }
 
-/* buttons */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 16px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  font-weight:800;
-  font-size:.9rem;
-  line-height:1.2;
-  cursor:pointer;
-}
-.btn--primary{
-  background:linear-gradient(135deg,var(--accent),#4be3d1);
-  color:#041221;
-  border:none;
-  box-shadow:0 10px 22px rgba(0,198,255,.25);
-}
-.btn--ghost{
-  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
-  color:var(--text);
+/* burger never shown now */
+.nav__burger{
+  display:none;
 }
 
 /* ======================================================
    HERO
    ====================================================== */
+
 .hero{
   position:relative;
   padding:96px 0 48px;
@@ -286,6 +273,7 @@ section{
   font-weight:700;
 }
 
+/* CTA row w/ Reserve Spot */
 .hero__cta-row{
   display:flex;
   flex-wrap:wrap;
@@ -293,7 +281,7 @@ section{
   margin-top:10px;
 }
 
-/* scroll hint pulse */
+/* scroll hint */
 .scrollhint{
   display:flex;
   align-items:center;
@@ -304,7 +292,7 @@ section{
   color:var(--muted);
   line-height:1.2;
   user-select:none;
-  opacity:.75;
+  opacity:.75
 }
 .scrollhint__dot{
   width:6px;
@@ -314,7 +302,7 @@ section{
   box-shadow:
     0 0 10px rgba(0,198,255,.9),
     0 0 40px rgba(0,198,255,.5);
-  animation:scrollpulse 1.8s infinite;
+  animation:scrollpulse 1.8s infinite
 }
 @keyframes scrollpulse{
   0%{opacity:1;transform:translateY(0)}
@@ -322,12 +310,36 @@ section{
   100%{opacity:1;transform:translateY(0)}
 }
 
-/* stat bar */
+/* buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  font-weight:800;
+  font-size:.9rem;
+  line-height:1.2;
+  cursor:pointer
+}
+.btn--primary{
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  border:none;
+  box-shadow:0 10px 22px rgba(0,198,255,.25)
+}
+.btn--ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+  color:var(--text)
+}
+
+/* stats */
 .statbar{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
-  margin-top:18px;
+  margin-top:18px
 }
 .stat{
   background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
@@ -335,26 +347,26 @@ section{
   border-radius:16px;
   padding:14px;
   text-align:center;
-  box-shadow:var(--shadow);
+  box-shadow:var(--shadow)
 }
 .stat .v{
   font-weight:800;
   font-size:18px;
   line-height:1.2;
-  color:var(--text);
+  color:var(--text)
 }
 .stat .k{
   color:var(--muted);
   font-size:12px;
   line-height:1.2;
-  font-weight:500;
+  font-weight:500
 }
 
-/* HERO carousel */
+/* HERO MOCK (carousel) */
 .mock-wrap{
-  position:relative;
+  position:relative
 }
-.mock-glow{
+#mockGlow.mock-glow{
   position:absolute;
   inset:-60px;
   z-index:0;
@@ -363,7 +375,7 @@ section{
   background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
     rgba(0,198,255,.45) 0%,
     rgba(75,227,209,.22) 35%,
-    rgba(0,198,255,0) 70%);
+    rgba(0,198,255,0) 70%)
 }
 .mock{
   position:relative;
@@ -376,32 +388,29 @@ section{
   box-shadow:
     0 0 80px rgba(0,198,255,.35),
     0 40px 120px rgba(0,0,0,.6);
-  z-index:1;
+  z-index:1
 }
-
-/* default is FILL (cover) */
 .mock__slide{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
-  background:#0b1020;
   opacity:0;
   transform:scale(1.03);
-  transition:opacity 1s ease, transform 9s ease;
+  transition:opacity 1s ease, transform 9s ease
 }
 .mock__slide.active{
   opacity:1;
-  transform:scale(1.08);
+  transform:scale(1.08)
 }
-/* FIT mode override */
 .mock.fit .mock__slide{
   object-fit:contain;
   transform:scale(1)!important;
-  background:#0b1020;
+  background:#0b1020
 }
 
+/* dots + toggle */
 .mock__nav{
   position:absolute;
   bottom:12px;
@@ -409,7 +418,7 @@ section{
   transform:translateX(-50%);
   display:flex;
   gap:8px;
-  z-index:2;
+  z-index:2
 }
 .dot{
   width:10px;
@@ -417,11 +426,11 @@ section{
   border-radius:50%;
   background:rgba(255,255,255,.32);
   cursor:pointer;
-  transition:transform .2s,background .2s;
+  transition:transform .2s,background .2s
 }
 .dot.active{
   background:linear-gradient(135deg,var(--accent),#4be3d1);
-  transform:scale(1.2);
+  transform:scale(1.2)
 }
 .mock__toggle{
   position:absolute;
@@ -437,12 +446,13 @@ section{
   font-size:12px;
   line-height:1.2;
   color:var(--text);
-  cursor:pointer;
+  cursor:pointer
 }
 
 /* ======================================================
-   SECTIONS / CARDS / PANELS
+   SECTION HEAD / PANELS
    ====================================================== */
+
 .section__head{
   display:flex;
   align-items:baseline;
@@ -455,7 +465,7 @@ section{
   font-size:clamp(22px,2.2vw,34px);
   letter-spacing:-.2px;
   font-weight:700;
-  color:var(--text);
+  color:var(--text)
 }
 .pill{
   font-size:12px;
@@ -464,23 +474,26 @@ section{
   border-radius:999px;
   padding:6px 10px;
   font-weight:800;
-  line-height:1.2;
+  line-height:1.2
 }
-
 .panel{
   background:rgba(14,20,42,.66);
   border:1px solid var(--border);
   border-radius:var(--radius-lg);
   box-shadow:var(--shadow);
-  padding:20px 24px;
+  padding:16px 16px;
   line-height:1.5;
-  color:var(--text);
+  color:var(--text)
 }
+
+/* ======================================================
+   CARDS / GRIDS
+   ====================================================== */
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:12px
 }
 .card{
   padding:18px;
@@ -500,33 +513,30 @@ section{
   font-weight:700;
   color:var(--text);
   line-height:1.3;
-  font-size:1rem;
+  font-size:1rem
 }
 .card p{
   margin:0;
   color:var(--muted);
   font-size:.9rem;
   line-height:1.4;
-  font-weight:500;
+  font-weight:500
 }
-.card ul,
-.card ol{
+.card ul,.card ol{
   margin:0 0 0 18px;
   padding:0;
   color:var(--muted);
   font-size:.9rem;
   line-height:1.4;
-  font-weight:500;
+  font-weight:500
 }
-.card li{
-  margin:4px 0;
-}
+.card li{ margin:4px 0 }
 
-/* proof strip / force */
+/* proof strip + force sidebar */
 .proof-strip{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:12px;
+  gap:12px
 }
 .proof-cell{
   background:rgba(0,0,0,.4);
@@ -539,7 +549,7 @@ section{
   font-size:.8rem;
   line-height:1.4;
   font-weight:500;
-  color:var(--text);
+  color:var(--text)
 }
 .proof-head{
   font-size:.7rem;
@@ -547,26 +557,26 @@ section{
   text-transform:uppercase;
   letter-spacing:.03em;
   color:var(--accent);
-  margin-bottom:4px;
+  margin-bottom:4px
 }
 .proof-metric{
   font-size:.9rem;
   font-weight:700;
   color:var(--text);
-  margin-bottom:4px;
+  margin-bottom:4px
 }
 .proof-desc{
   color:var(--muted);
   font-size:.8rem;
   line-height:1.4;
-  font-weight:500;
+  font-weight:500
 }
 
 .force-flex{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
-  align-items:flex-start;
+  align-items:flex-start
 }
 .force-vis{
   flex:1 1 260px;
@@ -582,38 +592,21 @@ section{
   font-size:.75rem;
   line-height:1.4;
   font-weight:500;
-  color:var(--muted);
+  color:var(--muted)
 }
-.force-vis__img-frame{
-  width:100%;
-  margin:0 auto 12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  background:#000;
-  overflow:hidden;
-}
-.force-vis__img-frame img{
+.force-vis img{
   width:100%;
   height:auto;
   display:block;
-  object-fit:cover;
-  background:#000;
-}
-.force-vis__title{
-  color:var(--text);
-  font-weight:700;
-  font-size:.8rem;
-  line-height:1.3;
-  margin-bottom:4px;
+  margin:0 auto 12px;
 }
 
-/* chassis compare */
+/* chassis photo row */
 .chassis-vis{
   display:flex;
   flex-wrap:wrap;
   gap:16px;
-  margin-top:16px;
+  margin-top:16px
 }
 .chassis-vis__item{
   flex:1 1 260px;
@@ -629,25 +622,28 @@ section{
   max-width:320px;
   margin:0 auto 12px;
   height:auto;
+  object-fit:cover; /* force fill behavior */
+  border-radius:12px;
+  background:#000;
 }
 .chassis-vis__label{
   font-size:.8rem;
   font-weight:700;
   line-height:1.3;
-  color:var(--text);
+  color:var(--text)
 }
 .chassis-vis__note{
   font-size:.75rem;
   font-weight:500;
   line-height:1.4;
-  color:var(--muted);
+  color:var(--muted)
 }
 
 /* spec grid */
 .specgrid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:12px;
+  gap:12px
 }
 .specbox{
   background:rgba(17,22,38,.7);
@@ -658,7 +654,7 @@ section{
   min-height:160px;
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
+  justify-content:space-between
 }
 .specbox__head{
   font-size:.8rem;
@@ -667,23 +663,23 @@ section{
   text-transform:uppercase;
   letter-spacing:.03em;
   line-height:1.3;
-  margin-bottom:8px;
+  margin-bottom:8px
 }
 .specbox__metric{
   font-size:1.05rem;
   font-weight:800;
   line-height:1.3;
   color:var(--text);
-  margin-bottom:6px;
+  margin-bottom:6px
 }
 .specbox__desc{
   font-size:.8rem;
   line-height:1.4;
   font-weight:500;
-  color:var(--muted);
+  color:var(--muted)
 }
 
-/* config summary blurb */
+/* config summary */
 .config-summary{
   margin-top:16px;
   border:1px solid var(--border);
@@ -704,35 +700,80 @@ section{
 .config-summary .total{
   font-weight:800;
   font-size:1rem;
-  color:var(--accent);
+  color:var(--accent)
 }
 .config-summary .small{
   color:var(--muted);
   font-weight:500;
   font-size:.8rem;
-  line-height:1.3;
+  line-height:1.3
 }
 
-/* configurator groups */
+/* sticky CTA */
+#stickyCTA{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:50;
+  display:none;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.8rem;
+  line-height:1.2;
+  padding:12px 16px;
+  border-radius:12px;
+  box-shadow:
+    0 0 16px rgba(0,198,255,.7),
+    0 24px 40px rgba(0,198,255,.4),
+    0 10px 30px rgba(0,0,0,.9);
+  border:none;
+  cursor:pointer
+}
+
+/* footer */
+footer{
+  padding:40px 0 60px;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+  background:rgba(6,10,24,.55);
+  margin-top:40px;
+  font-size:.85rem;
+  line-height:1.4;
+  text-align:center
+}
+.footer-note{
+  font-size:.7rem;
+  line-height:1.4;
+  color:var(--muted);
+  max-width:600px;
+  margin:12px auto 0;
+  font-weight:500
+}
+
+/* ================= CONFIGURATOR basics ================= */
 #moduleList{
   display:grid;
   gap:24px;
-  align-content:start;
+  align-content:start
 }
-
 .group-head{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:6px
 }
 .group-head h3{
   margin:0;
   font-size:1rem;
   font-weight:700;
   line-height:1.3;
-  color:var(--text);
+  color:var(--text)
 }
-
+.group-head .lede{
+  font-size:.8rem;
+  line-height:1.4;
+  max-width:none
+}
 .config-group{
   border-radius:20px;
   padding:20px;
@@ -741,37 +782,37 @@ section{
   border:1px solid var(--border);
   display:grid;
   gap:12px;
-  position:relative;
+  position:relative
 }
 .config-group--core{
   background:
     radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%),
     rgba(20,24,40,.6);
-  border:1px solid rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.18)
 }
 .config-group--monitor{
   background:
     radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%),
     rgba(0,30,45,.55);
-  border:1px solid rgba(0,198,255,.6);
+  border:1px solid rgba(0,198,255,.6)
 }
 .config-group--flight{
   background:
     radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%),
     rgba(0,40,35,.55);
-  border:1px solid rgba(75,227,209,.6);
+  border:1px solid rgba(75,227,209,.6)
 }
 .config-group--racing{
   background:
     radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%),
     rgba(40,30,0,.5);
-  border:1px solid rgba(255,210,63,.6);
+  border:1px solid rgba(255,210,63,.6)
 }
 .config-group--stream{
   background:
     radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%),
     rgba(40,0,35,.5);
-  border:1px solid rgba(255,0,200,.5);
+  border:1px solid rgba(255,0,200,.5)
 }
 
 .config-card{
@@ -785,29 +826,28 @@ section{
   flex-direction:column;
   gap:8px;
   color:var(--text);
-  position:relative;
+  position:relative
 }
 .config-card strong{
   font-size:.9rem;
   font-weight:700;
   line-height:1.3;
   color:var(--text);
-  display:block;
+  display:block
 }
 .config-card p{
   margin:0;
   color:var(--muted);
   font-size:.8rem;
   line-height:1.4;
-  font-weight:500;
+  font-weight:500
 }
 .config-card input{
-  display:none;
+  display:none
 }
-
 .requires-dynamic.locked{
   opacity:.45;
-  filter:saturate(70%) grayscale(20%);
+  filter:saturate(70%) grayscale(20%)
 }
 .req-note{
   display:none;
@@ -818,115 +858,15 @@ section{
   background:rgba(0,198,255,.08);
   border:1px dashed rgba(0,198,255,.4);
   padding:6px 8px;
-  border-radius:8px;
+  border-radius:8px
 }
 .requires-dynamic.locked .req-note{
-  display:block;
+  display:block
 }
-
-/* summary side panel */
 aside.panel{
   position:sticky;
   top:100px;
-}
-
-/* reserve grid */
-.reserve__grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-  align-items:start;
-}
-.reserve__form,
-.reserve__steps{
-  display:grid;
-  gap:12px;
-  max-width:420px;
-}
-.reserve__label{
-  font-size:.8rem;
-  font-weight:600;
-  color:var(--text);
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-.reserve__input,
-.reserve__select{
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:rgba(0,0,0,.4);
-  color:var(--text);
-  font-family:inherit;
-  font-size:.9rem;
-  line-height:1.3;
-  padding:10px 12px;
-  font-weight:600;
-  outline:none;
-}
-.reserve__note{
-  font-size:.75rem;
-  line-height:1.4;
-  font-weight:600;
-  color:var(--muted);
-  min-height:1.4em;
-}
-.reserve__step-num{
-  font-size:.8rem;
-  font-weight:700;
-  color:var(--accent);
-  text-transform:uppercase;
-  letter-spacing:.03em;
-  line-height:1.3;
-}
-.reserve__step-title{
-  font-size:.95rem;
-  line-height:1.3;
-  font-weight:700;
-  color:var(--text);
-}
-.reserve__step-copy{
-  font-size:.8rem;
-  line-height:1.4;
-  color:var(--muted);
-  font-weight:500;
-  margin-bottom:8px;
-}
-
-/* helper img frame */
-.img-frame{
-  border-radius:12px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  background:#000;
-  overflow:hidden;
-}
-.img-frame img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:cover;
-  background:#000;
-}
-
-/* footer */
-footer{
-  padding:40px 0 60px;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-  background:rgba(6,10,24,.55);
-  margin-top:40px;
-  font-size:.85rem;
-  line-height:1.4;
-  text-align:center;
-}
-.footer-note{
-  font-size:.7rem;
-  line-height:1.4;
-  color:var(--muted);
-  max-width:600px;
-  margin:12px auto 0;
-  font-weight:500;
+  padding:20px
 }
 
 /* ======================================================
@@ -935,65 +875,63 @@ footer{
 
 @media (max-width:1080px){
   .hero{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
   .mock{
     height:400px;
-    max-height:400px;
+    max-height:400px
   }
 }
 
 @media (max-width:980px){
   .statbar{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr)
   }
   .cards{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
   :root{
-    --logo-h:46px;
+    --logo-h:46px
   }
-  /* header grid: keep 3 cols but shrink right spacer */
-  .brand-right{
-    min-width:100px;
-  }
-}
 
-@media (max-width:640px){
-  :root{
-    --nav-h:180px;
+  /* brand shell: collapse the left-logo padding */
+  .brand-shell__row{
+    padding-left:0;
+  }
+  .brand__logo-outer{
+    position:static;
+    transform:none;
+    width:96px;
+    height:96px;
+    margin-bottom:8px;
   }
   .nav__inner{
-    grid-template-columns:auto 1fr auto;
-    row-gap:12px;
-  }
-  .brand-left__logo-img{
-    height:110px;
-    max-height:110px;
-  }
-  .brand-center__tagline{
-    font-size:1.5rem;
-    line-height:1.15;
-    white-space:normal;
-    text-align:center;
-  }
-  .brand-center__name{
-    font-size:1rem;
-    line-height:1.2;
-    text-align:center;
-  }
-  .brand-right{
-    min-width:60px;
+    justify-content:center;
   }
 }
 
 @media (max-width:520px){
+  .brand__logo-outer{
+    width:84px;
+    height:84px;
+  }
+  .brand__logo-img{
+    height:72px;
+    max-height:72px;
+  }
+  :root{
+    --logo-h:40px
+  }
   .config-summary{
     flex-direction:column;
-    align-items:flex-start;
+    align-items:flex-start
   }
-  .reserve__grid{
-    grid-template-columns:1fr;
+  .brand__tagline{
+    font-size:1.2rem;
+    line-height:1.15;
+  }
+  .brand__name{
+    font-size:2rem;
   }
 }
 </style>
@@ -1004,75 +942,59 @@ footer{
 
 <button id="stickyCTA" onclick="document.querySelector('#configurator').scrollIntoView({behavior:'smooth'})">Build Now</button>
 
-<header class="nav" aria-label="Primary">
-  <div class="nav__inner">
-    <!-- left logo -->
-    <div class="brand-left" aria-label="CoreFlux">
-      <img class="brand-left__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
+<nav class="nav" aria-label="Primary">
+  <div class="wrap nav__inner">
+
+    <div class="brand-shell">
+      <div class="brand-shell__row">
+        <div class="brand__logo-outer">
+          <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo">
+        </div>
+
+        <div class="brand__stack">
+          <span class="brand__tagline">One Rig. All Roles.</span>
+          <span class="brand__name">CoreFlux Simpits</span>
+        </div>
+      </div>
     </div>
 
-    <!-- centered lockup -->
-    <div class="brand-center">
-      <div class="brand-center__tagline">One Rig. All Roles.</div>
-      <div class="brand-center__name">CoreFlux Simpits</div>
-    </div>
-
-    <!-- right spacer for balance -->
-    <div class="brand-right" aria-hidden="true"></div>
+    <!-- nav__links intentionally removed -->
   </div>
-</header>
+</nav>
 
 <!-- HERO -->
 <section class="hero wrap">
   <div>
     <h1 class="h1">One Rig. Infinite Worlds.</h1>
-    <p class="hero__claim">
-      Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.
-    </p>
+    <p class="hero__claim">Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.</p>
     <p class="lede">
-      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis, to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.
+      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis, to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform. Mount a proper mic, camera, key light and ship clean video/audio to clients. This is not cosplay furniture.
     </p>
 
     <div class="hero__cta-row">
       <a href="#configurator" class="btn btn--primary">Configure My Build</a>
       <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
+      <a href="#reserve" class="btn btn--ghost">Reserve Spot</a>
     </div>
 
-    <div class="hero__trustline">
-      <b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.
-    </div>
+    <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.</div>
 
     <div class="statbar">
-      <div class="stat">
-        <div class="v">≤ 5 min</div>
-        <div class="k">Mode switch</div>
-      </div>
-      <div class="stat">
-        <div class="v">4080</div>
-        <div class="k">Aluminium</div>
-      </div>
-      <div class="stat">
-        <div class="v">VESA</div>
-        <div class="k">75/100</div>
-      </div>
-      <div class="stat">
-        <div class="v">Zero</div>
-        <div class="k">Drilling</div>
-      </div>
+      <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
+      <div class="stat"><div class="v">4080</div><div class="k">Aluminium</div></div>
+      <div class="stat"><div class="v">VESA</div><div class="k">75/100</div></div>
+      <div class="stat"><div class="v">Zero</div><div class="k">Drilling</div></div>
     </div>
 
-    <div class="scrollhint">
-      <div class="scrollhint__dot"></div>
-      <div>Scroll to pick your chassis →</div>
-    </div>
+    <div class="scrollhint"><div class="scrollhint__dot"></div><div>Scroll to pick your chassis →</div></div>
   </div>
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <!-- default is FILL (cover) -->
-    <div class="mock" id="mock" aria-label="Rig views">
-      <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="false">Fit</button>
+    <div class="mock fit" id="mock" aria-label="Rig views">
+      <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
 
+      <!-- slides -->
       <img class="mock__slide active" src="assets/images/Iso%20View.png" alt="CoreFlux Dynamic frame with actuator hardpoints and mounts">
       <img class="mock__slide" src="assets/images/Quad%20Monitor%20Stand.jpg" alt="CoreFlux frame running triple curved monitors plus overhead HUD">
       <img class="mock__slide" src="assets/images/Top%20View.png" alt="Top-down view showing seating position, pedal base, and monitor arc">
@@ -1087,16 +1009,14 @@ footer{
 </section>
 
 <!-- PROLOGUE -->
-<section class="wrap">
+<section id="prologue" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Built for Workdays, Wired for Play</h2>
     <span class="pill">One stop. No compromise.</span>
   </div>
-
   <p class="lede">
     Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, clean enough for the living room.
   </p>
-
   <div class="cards" style="margin-top:16px">
     <article class="card">
       <h3>Focus without friction</h3>
@@ -1117,12 +1037,11 @@ footer{
 </section>
 
 <!-- SWITCH STORY -->
-<section class="wrap">
+<section id="story" class="wrap">
   <div class="section__head">
     <h2 class="section__title">The Switch</h2>
     <span class="pill">Work → FPS → Racing → Flight</span>
   </div>
-
   <div class="cards">
     <article class="card">
       <h3>Workstation → FPS</h3>
@@ -1143,12 +1062,11 @@ footer{
 </section>
 
 <!-- WHY NOT -->
-<section class="wrap">
+<section id="frame-pre" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Why normal setups don't work</h2>
     <span class="pill">You’re already fighting the gear</span>
   </div>
-
   <div class="panel">
     <div class="proof-strip">
       <div class="proof-cell">
@@ -1171,12 +1089,11 @@ footer{
 </section>
 
 <!-- FRAME -->
-<section class="wrap">
+<section id="frame" class="wrap">
   <div class="section__head">
     <h2 class="section__title">The Frame</h2>
     <span class="pill">4080 aluminium / indexed geometry</span>
   </div>
-
   <div class="specgrid">
     <div class="specbox">
       <div>
@@ -1185,7 +1102,6 @@ footer{
         <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling.</div>
       </div>
     </div>
-
     <div class="specbox">
       <div>
         <div class="specbox__head">Repeatability</div>
@@ -1193,7 +1109,6 @@ footer{
         <div class="specbox__desc">Angles + reach return to exact marks. Muscle memory survives swaps.</div>
       </div>
     </div>
-
     <div class="specbox">
       <div>
         <div class="specbox__head">Cable sanity</div>
@@ -1205,12 +1120,11 @@ footer{
 </section>
 
 <!-- FORCE -->
-<section class="wrap">
+<section id="force" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Force Handling</h2>
     <span class="pill">Direct drive. Loadcell. Motion load.</span>
   </div>
-
   <div class="force-flex">
     <div class="proof-strip">
       <div class="proof-cell">
@@ -1229,31 +1143,28 @@ footer{
         <div class="proof-desc">Dynamic chassis resists heave/surge cues so alignment stays true.</div>
       </div>
     </div>
-
     <aside class="force-vis">
-      <div class="force-vis__img-frame">
-        <img src="assets/images/Left%20View.png" alt="Reinforced members and actuator-ready bracing">
-      </div>
-      <div class="force-vis__title">Braced Under Load</div>
+      <img src="assets/images/Left%20View.png" alt="Reinforced members and actuator-ready bracing">
+      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">Braced Under Load</div>
       Holds DD torque, loadcell brake force, and motion shock without walking or twist.
     </aside>
   </div>
 </section>
 
 <!-- CHASSIS -->
-<section class="wrap" id="chassis">
+<section id="chassis" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Pick Your Chassis</h2>
     <span class="pill">Static vs Dynamic</span>
   </div>
 
+  <!-- Visual comparison -->
   <div class="chassis-vis">
     <div class="chassis-vis__item">
       <img class="chassis-vis__img" src="assets/images/Iso%20View%202.png" alt="Static CoreFlux chassis - silver extrusion frame">
       <div class="chassis-vis__label">Static Frame</div>
       <div class="chassis-vis__note">Planted. Quiet. Apartment-safe.</div>
     </div>
-
     <div class="chassis-vis__item">
       <img class="chassis-vis__img" src="assets/images/Iso%20View.png" alt="Dynamic CoreFlux chassis with actuator hardpoints">
       <div class="chassis-vis__label">Dynamic Frame</div>
@@ -1265,81 +1176,79 @@ footer{
     <article class="card">
       <h3>Static Frame</h3>
       <p class="lede">Locked. Silent. Apartment-safe.</p>
-      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
-      <p><strong>Why:</strong> Cheaper entry, no floor drama.</p>
+      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.<br><strong>Why:</strong> Cheaper entry, no floor drama.<br><strong>Noise:</strong> Low mechanical noise. No shock through the floor.</p>
     </article>
-
     <article class="card">
       <h3>Dynamic Frame</h3>
       <p class="lede">Motion-capable. Built to take hits.</p>
-      <p>Reinforced members and actuator points translate telemetry into cues without twisting.</p>
-      <p><strong>Why:</strong> Race/flight cues you can feel.</p>
+      <p>Reinforced members and actuator points translate telemetry into cues without twisting.<br><strong>Why:</strong> Race/flight cues you can feel.<br><strong>Note:</strong> Motion kit adds physical movement. Check neighbors below you.</p>
     </article>
-
     <article class="card">
       <h3>Upgrade Path</h3>
       <p class="lede">Static today → Dynamic later.</p>
-      <p>Shared geometry. Controls and mounts carry forward.</p>
-      <p><strong>No rebuild.</strong></p>
+      <p>Shared geometry. Controls and mounts carry forward.<br><strong>No rebuild.</strong></p>
     </article>
   </div>
-
-  <div class="hero__cta-row" style="margin-top:16px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Spec My Chassis</a>
     <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
   </div>
 </section>
 
 <!-- KITS -->
-<section class="wrap">
+<section id="kits" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Starter Kits</h2>
     <span class="pill">Fast path in</span>
   </div>
-
   <div class="cards">
     <article class="card">
       <h3>Work + FPS</h3>
       <p class="lede">Single monitor, low-latency posture.</p>
       <p>Static chassis + desk tray + single/dual-stick as needed.</p>
     </article>
-
     <article class="card">
       <h3>Race Spec</h3>
       <p class="lede">Direct-drive + loadcell + triples/quad.</p>
       <p>Dynamic chassis, indexed pedal mount, wheel arm, shifter/handbrake.</p>
     </article>
-
     <article class="card">
       <h3>Flight / Space</h3>
       <p class="lede">Center-stick, dual-stick, or HOTAS.</p>
       <p>Dynamic chassis with overhead HUD and pedal base for planted yaw.</p>
     </article>
   </div>
-
-  <div class="hero__cta-row" style="margin-top:16px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
     <a href="#configurator" class="btn btn--primary">Build Mine</a>
     <a href="#quickstart" class="btn btn--ghost">Game Tuning</a>
   </div>
 </section>
 
+<!-- SOCIAL PROOF -->
+<section class="wrap" id="pilot-proof">
+  <div class="panel" style="display:grid;gap:8px;max-width:600px;margin:0 auto 24px;text-align:left">
+    <div style="font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;">Pilot feedback</div>
+    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“Static frame held my DD wheel at 15 Nm. Didn’t walk. Didn’t twist.”</div>
+    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“Assembly was two hours, not a weekend project.”</div>
+    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“I work in it all day and still want to sit in it at night.”</div>
+  </div>
+</section>
+
 <!-- CONFIGURATOR -->
-<section class="wrap" id="configurator">
+<section id="configurator" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Configurator</h2>
     <span class="pill">Live total · Real modules</span>
   </div>
-
-  <p class="lede">
-    Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.
-  </p>
+  <p class="lede">Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.</p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
     <div id="moduleList">
+
       <!-- CORE SYSTEM -->
       <div class="config-group config-group--core">
-        <div class="group-head">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Core System</h3>
           <p class="lede">This is the chassis. Everything mounts to this geometry.</p>
         </div>
@@ -1383,7 +1292,7 @@ footer{
 
       <!-- MONITOR SYSTEM -->
       <div class="config-group config-group--monitor">
-        <div class="group-head">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Monitor System</h3>
           <p class="lede">Pick your viewport. Re-arm later anytime.</p>
         </div>
@@ -1409,7 +1318,7 @@ footer{
 
       <!-- FLIGHT CONTROLS -->
       <div class="config-group config-group--flight">
-        <div class="group-head">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Flight Controls</h3>
           <p class="lede">HOTAS / dual-stick / throttle. Repeatable reach every time.</p>
         </div>
@@ -1442,7 +1351,7 @@ footer{
 
       <!-- RACING CONTROLS -->
       <div class="config-group config-group--racing">
-        <div class="group-head">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Racing Controls</h3>
           <p class="lede">Steering, pedals, shifting — under real torque.</p>
         </div>
@@ -1475,7 +1384,7 @@ footer{
 
       <!-- CREATOR / STREAM -->
       <div class="config-group config-group--stream">
-        <div class="group-head">
+        <div class="group-head" style="grid-column:1/-1">
           <h3>Creator / Stream Setup</h3>
           <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
         </div>
@@ -1498,9 +1407,10 @@ footer{
           <p>Dedicated arm for Stream Deck / Loupedeck.</p>
         </label>
       </div>
+
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT: SUMMARY -->
     <aside class="panel">
       <h3>Your Build</h3>
       <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
@@ -1515,25 +1425,22 @@ footer{
 </section>
 
 <!-- GAMES -->
-<section class="wrap">
+<section id="games" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Games & Sims</h2>
     <span class="pill">Dialed for today’s titles</span>
   </div>
-
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Flight</h3>
       <p class="lede">MSFS • DCS • X-Plane • IL-2</p>
       <p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control.</p>
     </article>
-
     <article class="card">
       <h3>Racing</h3>
       <p class="lede">iRacing • ACC • Assetto • Forza</p>
       <p>Wheel mounts with rigid clamping and repeatable seating marks.</p>
     </article>
-
     <article class="card">
       <h3>FPS / Tactical</h3>
       <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
@@ -1541,11 +1448,10 @@ footer{
     </article>
   </div>
 
+  <!-- real photo proof -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <div class="img-frame">
-        <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor">
-      </div>
+      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:cover;">
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
@@ -1555,12 +1461,11 @@ footer{
 </section>
 
 <!-- COMPAT -->
-<section class="wrap">
+<section id="compat" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Your Gear Fits</h2>
     <span class="pill">No drilling</span>
   </div>
-
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Flight Sticks / HOTAS</h3>
@@ -1570,7 +1475,6 @@ footer{
         <li>Pedal tray clears common rudder sets.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Racing Hardware</h3>
       <ul>
@@ -1579,7 +1483,6 @@ footer{
         <li>Torque braced into frame, not desk.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Streaming / Creator</h3>
       <ul>
@@ -1592,16 +1495,14 @@ footer{
 </section>
 
 <!-- VENDORS -->
-<section class="wrap">
+<section id="vendors" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Preferred Control Vendors</h2>
     <span class="pill">We plate for these out of the box</span>
   </div>
-
   <p class="lede" style="max-width:800px">
     We ship pre-drilled plates to match these ecosystems. No adapters. No guesswork. Bolt it on, tighten it down, fly / drive.
   </p>
-
   <div class="cards" style="margin-top:14px">
     <article class="card" style="border:1px solid rgba(0,198,255,.45);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.2)">
       <h3>Virpil Controls</h3>
@@ -1612,7 +1513,6 @@ footer{
         <li>Ready for dual-stick space / heli layouts</li>
       </ul>
     </article>
-
     <article class="card" style="border:1px solid rgba(255,210,63,.45);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>VKB Controllers</h3>
       <p class="lede">Gladiator / NXT / EVO • STECS throttle</p>
@@ -1622,7 +1522,6 @@ footer{
         <li>Swaps from “desk height” to “cockpit height” fast</li>
       </ul>
     </article>
-
     <article class="card" style="border:1px solid rgba(0,198,255,.4);box-shadow:0 24px 60px rgba(0,198,255,.22),0 0 60px rgba(0,198,255,.18)">
       <h3>Moza Racing</h3>
       <p class="lede">R-series direct drive bases • QR hubs</p>
@@ -1632,7 +1531,6 @@ footer{
         <li>Pedal base braced for full loadcell pressure</li>
       </ul>
     </article>
-
     <article class="card" style="border:1px solid rgba(255,210,63,.4);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>Fanatec</h3>
       <p class="lede">Podium / ClubSport / CSL DD • QR2 ecosystem</p>
@@ -1643,7 +1541,6 @@ footer{
       </ul>
     </article>
   </div>
-
   <div class="panel" style="margin-top:24px;text-align:center">
     <div style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--text)">
       Running something else?<br>We cut customs. Send your bolt pattern in Reserve and we’ll plate it.
@@ -1652,12 +1549,11 @@ footer{
 </section>
 
 <!-- TUNING -->
-<section class="wrap" id="tuning">
+<section id="tuning" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Performance Tuning</h2>
     <span class="pill">Lock comfort, unlock pace</span>
   </div>
-
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Seat & Reach</h3>
@@ -1668,7 +1564,6 @@ footer{
         <li>Arms: 15–30° bend at full lock/stick deflection.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Wheel / Yoke / Stick</h3>
       <p class="lede">Precision beats strength.</p>
@@ -1677,7 +1572,6 @@ footer{
         <li>Center-stick between knees; elbow ≈ 90° at neutral.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Pedals</h3>
       <p class="lede">Control without cramp.</p>
@@ -1686,7 +1580,6 @@ footer{
         <li>Flight: heels supported; avoid toe-only posture.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Screen & FOV</h3>
       <p class="lede">Clarity without motion sickness.</p>
@@ -1695,7 +1588,6 @@ footer{
         <li>Triples 45–60°; true scale over “wide”.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>Input Curves</h3>
       <p class="lede">Smooth center, control at edge.</p>
@@ -1704,7 +1596,6 @@ footer{
         <li>Brake: linear or mild progressive.</li>
       </ul>
     </article>
-
     <article class="card">
       <h3>VR Notes</h3>
       <p class="lede">Comfort first, frames second.</p>
@@ -1716,53 +1607,12 @@ footer{
   </div>
 </section>
 
-<!-- QUICK START -->
-<section class="wrap" id="quickstart">
-  <div class="section__head">
-    <h2 class="section__title">Quick-Start</h2>
-    <span class="pill">Pick a title, get dialed</span>
-  </div>
-
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Star Citizen</h3>
-      <p class="lede">Dual-stick or HOTAS + pedals.</p>
-      <ol>
-        <li>Chassis: Dynamic.</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Dual Stick</em> / <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
-        <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
-      </ol>
-    </article>
-
-    <article class="card">
-      <h3>DCS</h3>
-      <p class="lede">Center-stick HOTAS + pedals.</p>
-      <ol>
-        <li>Chassis: Dynamic or Static (neighbors → Static).</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>.</li>
-        <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
-      </ol>
-    </article>
-
-    <article class="card">
-      <h3>iRacing / ACC</h3>
-      <p class="lede">Wheel + pedals; triples or quad.</p>
-      <ol>
-        <li>Chassis: Dynamic for motion; Static for planted torque only.</li>
-        <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple/Quad</em>.</li>
-        <li>Option: <em>Racing Actuator Kit</em> for heave/brake surge.</li>
-      </ol>
-    </article>
-  </div>
-</section>
-
 <!-- FIT -->
-<section class="wrap" id="fit">
+<section id="fit" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Fit Check</h2>
     <span class="pill">Real posture, not cosplay</span>
   </div>
-
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Long-session comfort</h3>
@@ -1779,34 +1629,67 @@ footer{
   </div>
 
   <div class="panel" style="margin-top:16px;text-align:center">
-    <div class="img-frame" style="max-width:480px;margin:0 auto 12px;">
-      <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts">
-    </div>
+    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:cover;">
     <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
       Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
+    </div>
+    <div style="font-size:.7rem;color:var(--muted);margin-top:8px;font-weight:600;max-width:520px;margin-left:auto;margin-right:auto;">
+      Broad fit range from shorter pilots to tall drivers — we confirm during Reserve.
     </div>
   </div>
 </section>
 
+<!-- QUICK-START -->
+<section id="quickstart" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Quick-Start</h2>
+    <span class="pill">Pick a title, get dialed</span>
+  </div>
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
+      <h3>Star Citizen</h3>
+      <p class="lede">Dual-stick or HOTAS + pedals.</p>
+      <ol>
+        <li>Chassis: Dynamic.</li>
+        <li>Loadout: <strong>Flight</strong> → <em>Dual Stick</em> / <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
+        <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
+      </ol>
+    </article>
+    <article class="card">
+      <h3>DCS</h3>
+      <p class="lede">Center-stick HOTAS + pedals.</p>
+      <ol>
+        <li>Chassis: Dynamic or Static (neighbors → Static).</li>
+        <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>.</li>
+        <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
+      </ol>
+    </article>
+    <article class="card">
+      <h3>iRacing / ACC</h3>
+      <p class="lede">Wheel + pedals; triples or quad.</p>
+      <ol>
+        <li>Chassis: Dynamic for motion; Static for planted torque only.</li>
+        <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple/Quad</em>.</li>
+        <li>Option: <em>Racing Actuator Kit</em> for heave/brake surge.</li>
+      </ol>
+    </article>
+  </div>
+</section>
+
 <!-- RESERVE -->
-<section class="wrap" id="reserve">
+<section id="reserve" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Reserve Your Slot</h2>
     <span class="pill">Pilot batch</span>
   </div>
-
-  <div class="reserve__grid">
-    <div class="panel reserve__form">
-      <div class="reserve__introline" style="font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em">
-        We're building with early adopters
-      </div>
-
-      <label class="reserve__label">Email
-        <input id="rEmail" type="email" class="reserve__input" placeholder="you@email.com">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+    <div class="panel" style="display:grid;gap:12px;max-width:420px">
+      <div class="reserve-introline" style="font-size:.8rem;font-weight:700;line-height:1.4;color:var(--accent);text-transform:uppercase;letter-spacing:.03em">We're building with early adopters</div>
+      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Email
+        <input id="rEmail" type="email" placeholder="you@email.com" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
       </label>
-
-      <label class="reserve__label">Region
-        <select id="rRegion" class="reserve__select">
+      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Region
+        <select id="rRegion" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
           <option value="">Select...</option>
           <option>US / Canada</option>
           <option>EU / UK</option>
@@ -1815,9 +1698,8 @@ footer{
           <option>Other</option>
         </select>
       </label>
-
-      <label class="reserve__label">Primary Mode
-        <select id="rMode" class="reserve__select">
+      <label style="font-size:.8rem;font-weight:600;color:var(--text);display:flex;flex-direction:column;gap:6px">Primary Mode
+        <select id="rMode" style="border-radius:10px;border:1px solid var(--border);background:rgba(0,0,0,.4);color:var(--text);font-family:inherit;font-size:.9rem;line-height:1.3;padding:10px 12px;font-weight:600;outline:none">
           <option value="">Select...</option>
           <option>Racing / ACC / iRacing</option>
           <option>Flight / DCS / MSFS</option>
@@ -1825,49 +1707,49 @@ footer{
           <option>Creator / Stream Desk + Simpit</option>
         </select>
       </label>
-
       <button id="reserveBtn" type="button" class="btn btn--primary" style="justify-content:center">Reserve My Spot</button>
-      <div id="reserveNote" class="reserve__note"></div>
+      <div id="reserveNote" style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em"></div>
+
+      <div style="font-size:.7rem;line-height:1.4;font-weight:600;color:var(--muted);">
+        No payment now. You’re just locking a pilot-batch build slot so we can confirm fit, mounts, and region.
+      </div>
+      <div style="font-size:.7rem;line-height:1.4;font-weight:600;color:var(--muted);margin-top:6px;">
+        Initial pilot shipping: US / EU / ZA. Others: we’ll confirm.
+      </div>
     </div>
 
-    <div class="panel reserve__steps">
-      <div class="reserve__step-num">Step 1</div>
-      <div class="reserve__step-title">You spec the rig</div>
-      <div class="reserve__step-copy">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
-
-      <div class="reserve__step-num">Step 2</div>
-      <div class="reserve__step-title">We confirm fit + layout</div>
-      <div class="reserve__step-copy">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
-
-      <div class="reserve__step-num">Step 3</div>
-      <div class="reserve__step-title">You're in the pilot batch</div>
-      <div class="reserve__step-copy">Early frames, tuning notes, priority on extra mounts.</div>
+    <div class="panel" style="display:grid;gap:12px">
+      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 1</div>
+      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You spec the rig</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
+      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 2</div>
+      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">We confirm fit + layout</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
+      <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 3</div>
+      <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You're in the pilot batch</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early frames, tuning notes, priority on extra mounts.</div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="wrap" id="faq">
+<section id="faq" class="wrap">
   <div class="section__head">
     <h2 class="section__title">FAQ</h2>
     <span class="pill">Straight answers</span>
   </div>
-
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
     <p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, yaw onset — not theme-park throw.</p>
   </details>
-
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
     <p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward.</p>
   </details>
-
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
     <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
   </details>
-
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
     <p>Yes — arms mount into frame structure, not a wobbly desk post.</p>
@@ -1878,6 +1760,12 @@ footer{
   © <span id="year"></span> CoreFlux Simpits
   <div class="footer-note">
     Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
+  </div>
+  <div class="footer-note" style="margin-top:20px;">
+    Specs, pricing, and geometry may be refined with pilot builders.
+  </div>
+  <div class="footer-note">
+    Questions before you reserve? build@coreflux.simpits
   </div>
 </footer>
 
@@ -1907,9 +1795,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     mock.addEventListener('mouseenter',stop);
     mock.addEventListener('mouseleave',play);
   }
-
   if (fitBtn && mock){
-    // default is FILL (mock has no .fit initially)
+    // mock starts in 'fit' mode for safe mobile framing
     fitBtn.addEventListener('click',()=>{
       mock.classList.toggle('fit');
       const pressed = mock.classList.contains('fit');
@@ -1917,9 +1804,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       fitBtn.setAttribute('aria-pressed', String(pressed));
     });
   }
-
-  show(0);
-  play();
+  show(0); play();
 });
 
 /* Mock glow parallax */
@@ -1936,7 +1821,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 })();
 
-/* Configurator logic */
+/* Configurator logic (auto-upgrade to Dynamic for motion kits) */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -2025,9 +1910,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 
     if(linesEl){
-      linesEl.innerHTML = picked
-        .map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`)
-        .join('');
+      linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
     }
     if(countEl){
       countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
@@ -2066,7 +1949,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
-  // normalise data-price / data-label on load
   (function syncOnce(){
     $$('input', root).forEach(i=>{
       const p = parsePrice(i);
@@ -2084,7 +1966,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   recalc();
 })();
 
-/* Sticky CTA visibility */
+/* Sticky CTA show/hide */
 (function(){
   const cta = document.getElementById('stickyCTA');
   const hero = document.querySelector('.hero');
@@ -2097,7 +1979,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   io.observe(hero);
 })();
 
-/* Reserve form */
+/* Reserve form handling */
 (function(){
   const email = document.getElementById('rEmail');
   const region = document.getElementById('rRegion');
