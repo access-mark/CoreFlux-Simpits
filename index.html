@@ -3,26 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CoreFlux Simpit — One Rig. Infinite Worlds.</title>
+<title>CoreFlux Simpits — One Rig. Infinite Worlds.</title>
 <meta name="description" content="One Rig. All Roles. Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. No drilling. Apartment safe." />
 <link rel="icon" href="assets/images/coreflux-logo.png" />
 <link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="CoreFlux Simpit — One Rig. Infinite Worlds." />
+<meta property="og:title" content="CoreFlux Simpits — One Rig. Infinite Worlds." />
 <meta property="og:description" content="Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. Precision aluminium. No drilling. Living-room ready." />
 <meta property="og:image" content="assets/images/Top%20View.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 /* ======================================================
-   CoreFlux Simpit — Production CSS (Stable Canvas)
-   - Single-page header (no nav pills)
-   - Taller brand bar with enlarged logo
-   - Tagline dominant
-   - Consistent canvas bg
-   - Hero + carousel
-   - Configurator
-   - Image frames auto border/shadow
+   CoreFlux Simpits — Production CSS (Stable Canvas)
+   - Logo pinned left
+   - Center hero headline in header (2-line lockup)
+   - Larger tagline/name
+   - Plural: Simpits
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -52,7 +49,7 @@
 
   --logo-h:54px;
 
-  --nav-h:140px; /* taller brand bar */
+  --nav-h:160px; /* taller to handle centered text stack */
   --content-max:1200px;
 }
 
@@ -97,7 +94,7 @@ section{
   z-index:1;
 }
 
-/* global animated particle canvas */
+/* particles bg */
 #aiCanvas{
   position:fixed;
   inset:0;
@@ -108,8 +105,9 @@ section{
 }
 
 /* ======================================================
-   HEADER / BRAND BAR
+   HEADER
    ====================================================== */
+
 .nav{
   position:sticky;
   top:0;
@@ -123,24 +121,25 @@ section{
   display:flex;
   align-items:center;
 }
+
 .nav__inner{
-  height:100%;
   width:100%;
-  display:flex;
+  max-width:var(--content-max);
+  padding:0 4vw;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
-  justify-content:center;
-  text-align:center;
+  position:relative;
 }
 
-.brand{
+/* left: logo */
+.brand-left{
   display:flex;
   align-items:center;
-  gap:20px;
-  min-width:0;
-  flex-wrap:nowrap;
+  justify-content:flex-start;
 }
-
-.brand__logo-img{
+.brand-left__logo-img{
   height:140px;
   max-height:140px;
   width:auto;
@@ -149,43 +148,54 @@ section{
   display:block;
 }
 
-.brand__text{
+/* center: text lockup */
+.brand-center{
+  text-align:center;
   display:flex;
   flex-direction:column;
+  align-items:center;
+  justify-content:center;
   line-height:1.05;
-  align-items:flex-start;
+  min-width:0;
+  pointer-events:none;
+  user-select:none;
+  margin:0 auto;
 }
 
-.brand__tagline{
+.brand-center__tagline{
   font-weight:800;
-  font-size:1.6rem;
-  line-height:1.15;
-  letter-spacing:-.03em;
+  font-size:clamp(1.6rem,2.2vw,2.2rem); /* bigger */
+  line-height:1.1;
+  letter-spacing:-.035em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
   text-shadow:
-    0 0 20px rgba(0,198,255,.45),
-    0 0 40px rgba(0,198,255,.28),
-    0 0 70px rgba(255,210,63,.22);
-  order:1;
+    0 0 24px rgba(0,198,255,.45),
+    0 0 48px rgba(0,198,255,.28),
+    0 0 80px rgba(255,210,63,.22);
   white-space:nowrap;
 }
 
-.brand__name{
+.brand-center__name{
   font-weight:700;
-  font-size:1rem;
+  font-size:clamp(1rem,1.6vw,1.4rem); /* ~2x previous .8rem */
   line-height:1.2;
   letter-spacing:.05em;
   color:var(--text);
-  opacity:.8;
+  opacity:.9;
   text-transform:uppercase;
-  order:2;
   white-space:nowrap;
 }
 
-/* sticky CTA bottom right */
+/* right side empty spacer for now (keeps center actually centered) */
+.brand-right{
+  min-width:140px; /* roughly match logo width to balance grid */
+  height:1px;
+}
+
+/* sticky CTA */
 #stickyCTA{
   position:fixed;
   right:16px;
@@ -207,7 +217,7 @@ section{
   cursor:pointer;
 }
 
-/* base button styles */
+/* buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -312,7 +322,7 @@ section{
   100%{opacity:1;transform:translateY(0)}
 }
 
-/* quick stats row */
+/* stat bar */
 .statbar{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -340,7 +350,7 @@ section{
   font-weight:500;
 }
 
-/* HERO MOCK / carousel */
+/* HERO carousel */
 .mock-wrap{
   position:relative;
 }
@@ -369,7 +379,7 @@ section{
   z-index:1;
 }
 
-/* slides default COVER/FILL */
+/* default is FILL (cover) */
 .mock__slide{
   position:absolute;
   inset:0;
@@ -385,7 +395,6 @@ section{
   opacity:1;
   transform:scale(1.08);
 }
-
 /* FIT mode override */
 .mock.fit .mock__slide{
   object-fit:contain;
@@ -393,7 +402,6 @@ section{
   background:#0b1020;
 }
 
-/* dots + toggle */
 .mock__nav{
   position:absolute;
   bottom:12px;
@@ -433,7 +441,7 @@ section{
 }
 
 /* ======================================================
-   SECTION HEAD / PANEL / CARDS
+   SECTIONS / CARDS / PANELS
    ====================================================== */
 .section__head{
   display:flex;
@@ -514,7 +522,7 @@ section{
   margin:4px 0;
 }
 
-/* proof-strip / force */
+/* proof strip / force */
 .proof-strip{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -675,7 +683,7 @@ section{
   color:var(--muted);
 }
 
-/* config summary bar (inside kits etc.) */
+/* config summary blurb */
 .config-summary{
   margin-top:16px;
   border:1px solid var(--border);
@@ -816,13 +824,13 @@ section{
   display:block;
 }
 
-/* summary (right column in configurator) */
+/* summary side panel */
 aside.panel{
   position:sticky;
   top:100px;
 }
 
-/* reserve form layout */
+/* reserve grid */
 .reserve__grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -885,7 +893,7 @@ aside.panel{
   margin-bottom:8px;
 }
 
-/* helper image frame (proof shots etc.) */
+/* helper img frame */
 .img-frame{
   border-radius:12px;
   border:1px solid var(--border);
@@ -924,6 +932,7 @@ footer{
 /* ======================================================
    RESPONSIVE
    ====================================================== */
+
 @media (max-width:1080px){
   .hero{
     grid-template-columns:1fr;
@@ -944,47 +953,45 @@ footer{
   :root{
     --logo-h:46px;
   }
+  /* header grid: keep 3 cols but shrink right spacer */
+  .brand-right{
+    min-width:100px;
+  }
 }
 
-@media (max-width:520px){
+@media (max-width:640px){
   :root{
-    --nav-h:120px;
-    --logo-h:40px;
+    --nav-h:180px;
   }
-
-  .brand{
-    flex-direction:column;
-    gap:8px;
+  .nav__inner{
+    grid-template-columns:auto 1fr auto;
+    row-gap:12px;
   }
-
-  .brand__logo-img{
-    height:100px;
-    max-height:100px;
+  .brand-left__logo-img{
+    height:110px;
+    max-height:110px;
   }
-
-  .brand__text{
-    align-items:center;
-    text-align:center;
-  }
-
-  .brand__tagline{
-    font-size:1.3rem;
-    line-height:1.2;
+  .brand-center__tagline{
+    font-size:1.5rem;
+    line-height:1.15;
     white-space:normal;
     text-align:center;
   }
-
-  .brand__name{
-    font-size:.8rem;
+  .brand-center__name{
+    font-size:1rem;
     line-height:1.2;
     text-align:center;
   }
+  .brand-right{
+    min-width:60px;
+  }
+}
 
+@media (max-width:520px){
   .config-summary{
     flex-direction:column;
     align-items:flex-start;
   }
-
   .reserve__grid{
     grid-template-columns:1fr;
   }
@@ -998,14 +1005,20 @@ footer{
 <button id="stickyCTA" onclick="document.querySelector('#configurator').scrollIntoView({behavior:'smooth'})">Build Now</button>
 
 <header class="nav" aria-label="Primary">
-  <div class="wrap nav__inner">
-    <div class="brand" aria-label="CoreFlux">
-      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
-      <div class="brand__text">
-        <span class="brand__tagline">One Rig. All Roles.</span>
-        <span class="brand__name">CoreFlux Simpit</span>
-      </div>
+  <div class="nav__inner">
+    <!-- left logo -->
+    <div class="brand-left" aria-label="CoreFlux">
+      <img class="brand-left__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
     </div>
+
+    <!-- centered lockup -->
+    <div class="brand-center">
+      <div class="brand-center__tagline">One Rig. All Roles.</div>
+      <div class="brand-center__name">CoreFlux Simpits</div>
+    </div>
+
+    <!-- right spacer for balance -->
+    <div class="brand-right" aria-hidden="true"></div>
   </div>
 </header>
 
@@ -1056,7 +1069,7 @@ footer{
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <!-- default is FILL mode (cover). We'll add .fit only when toggled -->
+    <!-- default is FILL (cover) -->
     <div class="mock" id="mock" aria-label="Rig views">
       <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="false">Fit</button>
 
@@ -1862,7 +1875,7 @@ footer{
 </section>
 
 <footer>
-  © <span id="year"></span> CoreFlux Simpit
+  © <span id="year"></span> CoreFlux Simpits
   <div class="footer-note">
     Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
   </div>
