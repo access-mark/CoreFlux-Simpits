@@ -3,24 +3,69 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CoreFlux Simpits — One Rig. Infinite Worlds.</title>
-<meta name="description" content="One Rig. All Roles. Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. No drilling. Apartment safe." />
+
+<title>CoreFlux Simpits | Motion-Ready Racing & Flight Sim Rig | Static & Dynamic Cockpit Frames</title>
+
+<meta name="description" content="CoreFlux Simpits builds modular racing and flight simulator cockpits. Static or motion-ready frames, direct drive wheel support, HOTAS mounts, triple/quad monitor arms, and actuator bracing. Swap from work desk to full sim rig in minutes." />
+<meta name="keywords" content="racing simulator cockpit, flight sim rig, simpit frame, motion sim chassis, direct drive wheel mount, HOTAS mount, triple monitor racing rig, quad monitor flight cockpit, actuator-ready simulator frame, sim rig South Africa" />
+
 <link rel="icon" href="assets/images/coreflux-logo.png" />
 <link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/" />
+
 <meta property="og:type" content="website" />
-<meta property="og:title" content="CoreFlux Simpits — One Rig. Infinite Worlds." />
-<meta property="og:description" content="Transform in minutes from workstation to FPS, racing sim, or full-flight cockpit. Motion-capable or silent static. Precision aluminium. No drilling. Living-room ready." />
+<meta property="og:title" content="CoreFlux Simpits — Motion-Ready Racing & Flight Sim Rig" />
+<meta property="og:description" content="Static or Dynamic. Direct-drive capable. HOTAS and yoke mounts. Triple / quad monitor support. Actuator-ready motion frame." />
 <meta property="og:image" content="assets/images/frame-left.png" />
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<!-- Schema: Product -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "CoreFlux Simpits Dynamic Frame",
+  "brand": "CoreFlux",
+  "description": "Actuator-ready racing and flight simulator cockpit frame with reinforced aluminium extrusion, direct drive wheel mount support, loadcell brake stability, HOTAS / yoke / pedal mounts, and triple or quad monitor arms.",
+  "category": "Racing Simulator Cockpit / Flight Sim Rig / Simpit",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/PreOrder",
+    "priceCurrency": "USD",
+    "price": "1450.00"
+  }
+}
+</script>
+
+<!-- Schema: Organization / Local -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CoreFlux (Pty) Ltd",
+  "url": "https://access-mark.github.io/CoreFlux-Simpits/",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "sales@coreflux.co.za",
+    "telephone": "+27 11 568 8667",
+    "contactType": "sales"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sandton",
+    "addressRegion": "Johannesburg",
+    "addressCountry": "South Africa"
+  }
+}
+</script>
 
 <style>
 /* ======================================================
-   CoreFlux Simpits — Production CSS (Next Level Atlas)
-   - Sticky nav with center lockup IN BAR on desktop
-   - Mobile: logo+CTA row, then lockup below
-   - Hero mock: always fill (cover), 2 slides
-   - CTA edges pulled in to wrap width
-   - Footer with company info
+   CoreFlux Simpits — SEO-boosted / Mobile-tight / Polished
+   - Hero lockup pinned in nav across desktop & mobile
+   - Hero h1 now SEO rich
+   - "What is CoreFlux" section added for crawl
+   - Lazy-load ready (below-fold images should have loading="lazy")
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -31,8 +76,8 @@
 
   --text:#e6eefc; --muted:#a6b0cf;
 
-  --accent:#00c6ff;          /* CoreFlux cyan */
-  --accent-2:#ffd23f;        /* soft gold */
+  --accent:#00c6ff;
+  --accent-2:#ffd23f;
 
   --border:rgba(255,255,255,.08);
   --blur:14px;
@@ -42,7 +87,7 @@
 
   --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
 
-  --logo-h:54px;             /* partner logos height */
+  --logo-h:54px;
 
   --nav-h:160px;
   --content-max:1200px;
@@ -56,7 +101,7 @@ body{
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
 
-  /* SINGLE consistent canvas background */
+  /* background energy */
   background-color:var(--bg);
   background-image:
     radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
@@ -85,14 +130,14 @@ img{max-width:100%;display:block}
 
 section{ padding:48px 0; position:relative; z-index:1; }
 
-/* ---- Global particles canvas (fixed brightness) ---- */
+/* ---- Global particles canvas ---- */
 #aiCanvas{
   position:fixed; inset:0; z-index:-1; pointer-events:none;
   opacity:.55; transition:none;
 }
 
 /* ======================================================
-   NAV
+   NAV / BRAND BAR
    ====================================================== */
 
 .nav{
@@ -109,51 +154,44 @@ section{ padding:48px 0; position:relative; z-index:1; }
   display:flex;
   align-items:center;
 }
-
-/* single-row flex on desktop */
-.nav__inner.nav__inner--row{
-  width:min(var(--content-max),92vw);
-  margin:0 auto;
-
+.nav__inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-
+  width:min(var(--content-max),92vw);
+  margin:0 auto;
   height:100%;
   padding:0;
 }
 
-/* LEFT LOGO */
+/* LEFT: LOGO */
 .brand{
   display:flex;
   align-items:center;
   gap:16px;
   min-width:0;
+  flex:0 0 auto;
 }
 .brand__logo-img{
   height:110px;
-  max-height:110px;
   width:auto;
+  max-height:110px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
 }
 
-/* CENTER LOCKUP back in the bar */
+/* CENTER: LOCKUP */
 .brand__center{
-  flex:1 1 auto;
-  min-width:0;
   text-align:center;
-
   line-height:1.05;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
+  min-width:0;
+  flex:1 1 auto;
   max-width:60%;
-  margin:0 12px;
 }
 .brand__tagline{
   font-weight:800;
@@ -194,9 +232,9 @@ section{ padding:48px 0; position:relative; z-index:1; }
 
 /* RIGHT CTA */
 .nav__cta-wrap{
-  flex:0 0 auto;
   display:flex;
   align-items:center;
+  flex:0 0 auto;
 }
 .cta{
   padding:12px 16px;
@@ -212,7 +250,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   text-decoration:none;
 }
 
-/* hide old nav links/burger everywhere */
+/* hide any legacy nav bits */
 .nav__links{display:none!important;}
 .nav__burger{display:none!important;}
 
@@ -228,9 +266,11 @@ section{ padding:48px 0; position:relative; z-index:1; }
   gap:40px;
   align-items:center;
 }
+
+/* SEO-friendly h1 */
 .h1{
-  font-size:clamp(32px,3.4vw,56px);
-  line-height:1.04;
+  font-size:clamp(28px,2.8vw,44px);
+  line-height:1.1;
   margin:0 0 14px;
   letter-spacing:-.5px;
   background:linear-gradient(90deg,#fff,#9ad6ff 55%,#ffe189 85%);
@@ -238,6 +278,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   color:transparent;
   font-weight:800;
 }
+
 .hero__scarcity{
   font-size:.8rem;
   font-weight:700;
@@ -352,7 +393,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 
 /* ======================================================
-   HERO MOCK (carousel) — 2 slides, always fill
+   HERO MOCK  (2 slides, always fill)
    ====================================================== */
 .mock-wrap{ position:relative }
 #mockGlow.mock-glow{
@@ -378,7 +419,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   z-index:1;
 }
 
-/* always cover */
+/* COVER MODE LOCKED */
 .mock__slide{
   position:absolute;
   inset:0;
@@ -847,78 +888,62 @@ aside.panel{
   .hero{ grid-template-columns:1fr }
   .mock{ height:400px; max-height:400px }
 }
+
 @media (max-width:980px){
   .statbar{ grid-template-columns:repeat(2,1fr) }
   .cards{ grid-template-columns:1fr }
   :root{ --logo-h:46px }
-  .brand__center{ max-width:100%; }
-}
 
-/* mobile layout for nav + hero tweaks */
-@media (max-width:520px){
   .nav{
-    --nav-h:180px;
-    height:var(--nav-h);
-    padding-top:12px;
-    padding-bottom:12px;
-  }
-
-  .nav__inner.nav__inner--row{
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    gap:12px;
-  }
-
-  /* row 1 feel: logo + CTA each full-width flex, spaced */
-  .brand,
-  .nav__cta-wrap{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
+    --nav-h:150px;
   }
 
   .brand__logo-img{
-    height:72px;
-    max-height:72px;
+    height:80px;
+    max-height:80px;
   }
-
   .brand__center{
-    order:3;
     max-width:100%;
-    text-align:center;
-    align-items:center;
-    margin:0;
   }
-
   .brand__tagline,
   .brand__name{
-    font-size:1.4rem;
+    font-size:1.6rem;
     line-height:1.15;
   }
-
   .brand__subline{
     font-size:.7rem;
-    margin-top:8px;
+    margin-top:6px;
   }
 
-  .cta{
-    font-size:.8rem;
-    padding:10px 14px;
-    border-radius:10px;
+  .nav__inner{
+    flex-wrap:wrap;
+    justify-content:center;
+    text-align:center;
+    padding-top:12px;
   }
-
-  .hero{
-    padding-top:48px;
+  .brand{
+    order:1;
+    flex-basis:100%;
+    justify-content:center;
   }
-
-  .mock{
-    height:320px;
-    max-height:320px;
+  .brand__center{
+    order:2;
   }
+  .nav__cta-wrap{
+    order:3;
+    flex-basis:100%;
+    justify-content:center;
+    padding-bottom:12px;
+  }
+}
 
-  .statbar{ grid-template-columns:repeat(2,1fr); }
+@media (max-width:520px){
+  .nav{ --nav-h:200px; }
+
+  .h1{
+    font-size:1.4rem;
+    line-height:1.2;
+  }
 
   .config-summary{
     flex-direction:column;
@@ -935,14 +960,14 @@ aside.panel{
   Reserve / Ask
 </button>
 
-<nav class="nav" aria-label="Primary">
-  <div class="nav__inner nav__inner--row">
+<nav class="nav" aria-label="Primary navigation / product identity">
+  <div class="nav__inner">
     <!-- left: logo -->
     <div class="brand" aria-label="CoreFlux">
-      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
+      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo showing CoreFlux Simpits cockpit rig">
     </div>
 
-    <!-- center: main lockup -->
+    <!-- center: lockup -->
     <div class="brand__center">
       <div class="brand__tagline">One Rig. All Roles.</div>
       <div class="brand__name">CoreFlux Simpits</div>
@@ -951,26 +976,29 @@ aside.panel{
 
     <!-- right: CTA -->
     <div class="nav__cta-wrap">
-      <a class="cta" href="#reserve">Reserve Access</a>
+      <a class="cta" href="#reserve" aria-label="Reserve access to CoreFlux Simpits">Reserve Access</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero wrap">
+<section class="hero wrap" id="hero">
   <div>
-    <h1 class="h1">One Rig. Infinite Worlds.</h1>
+    <!-- SEO H1 -->
+    <h1 class="h1">
+      CoreFlux Simpits — Modular Racing &amp; Flight Simulator Cockpit Rig
+    </h1>
 
     <div class="hero__scarcity">Pilot Batch #1 is filling now.</div>
 
     <p class="hero__claim">
-      Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30.
+      Static or motion-ready. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30.
       Same seat. Same footprint. No teardown.
     </p>
 
     <p class="lede">
-      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis,
-      to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.
+      The CoreFlux cockpit frame shifts from deep-focus workstation to FPS gunner seat, to race chassis,
+      to full-flight cockpit — in minutes. Your call: planted Static frame, or Dynamic frame that’s actuator-ready for motion.
     </p>
 
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
@@ -978,7 +1006,10 @@ aside.panel{
       <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
     </div>
 
-    <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.</div>
+    <div class="hero__trustline">
+      <b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> ·
+      Holds direct-drive torque + loadcell brake force.
+    </div>
 
     <div class="statbar">
       <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
@@ -990,21 +1021,43 @@ aside.panel{
     <div class="scrollhint"><div class="scrollhint__dot"></div><div>Scroll to pick your chassis →</div></div>
   </div>
 
-  <div class="mock-wrap">
+  <div class="mock-wrap" aria-label="CoreFlux cockpit frame visuals">
     <div class="mock-glow" id="mockGlow"></div>
-    <div class="mock" id="mock" aria-label="Rig views">
+    <div class="mock" id="mock" aria-label="Rig views carousel">
       <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
 
-      <!-- ONLY TWO SLIDES NOW -->
-      <img class="mock__slide active" src="assets/images/frame-left.png" alt="CoreFlux frame left view, actuator-ready bracing">
-      <img class="mock__slide" src="assets/images/frame-right.png" alt="CoreFlux frame right view, control mounts and seating position">
+      <!-- Hero / above the fold images: no lazy -->
+      <img
+        class="mock__slide active"
+        src="assets/images/frame-left.png"
+        alt="CoreFlux Dynamic sim cockpit frame, left angle with actuator-ready bracing"
+        width="1600"
+        height="1200">
 
-      <div class="mock__nav" role="tablist" aria-label="Rig images">
+      <img
+        class="mock__slide"
+        src="assets/images/frame-right.png"
+        alt="CoreFlux cockpit rig right-side view showing control mounts, HOTAS, pedal base, monitor stand geometry"
+        width="1600"
+        height="1200">
+
+      <div class="mock__nav" role="tablist" aria-label="Rig image selector">
         <span class="dot active" role="tab" aria-selected="true" aria-label="Left view"></span>
         <span class="dot" role="tab" aria-selected="false" aria-label="Right view"></span>
       </div>
     </div>
   </div>
+</section>
+
+<!-- WHAT IS COREFLUX / SEO EXPLANATION -->
+<section class="wrap" id="what-coreflux-is">
+  <!-- hidden utility heading for SEO semantics -->
+  <h2 style="font-size:1px;line-height:1;color:transparent;margin:0;padding:0;height:0;overflow:hidden;">
+    Modular racing simulator cockpit and flight sim rig frame
+  </h2>
+  <p class="lede">
+    CoreFlux Simpits is a modular simulator cockpit built for sim racing, high-fidelity flight sims like DCS and Microsoft Flight Simulator, space combat / dual-stick games like Star Citizen, and content creators who need a stable streaming desk. The aluminium 4080 chassis supports direct drive racing wheels, loadcell brake pedals, HOTAS and yoke controls, adjustable rudder pedals, and triple or quad monitor arms. You can order a silent Static frame or an actuator-ready Dynamic frame that’s braced for motion.
+  </p>
 </section>
 
 <!-- PROLOGUE -->
@@ -1128,7 +1181,7 @@ aside.panel{
     <div class="proof-strip">
       <div class="proof-cell">
         <div class="proof-head">Torque</div>
-        <div class="proof-metric">> 15 Nm wheel bases</div>
+        <div class="proof-metric">&gt; 15 Nm wheel bases</div>
         <div class="proof-desc">Steering ties into a reinforced cross member. No twist under load.</div>
       </div>
       <div class="proof-cell">
@@ -1143,7 +1196,12 @@ aside.panel{
       </div>
     </div>
     <aside class="force-vis">
-      <img src="assets/images/frame-left.png" alt="Reinforced members and actuator-ready bracing">
+      <img
+        src="assets/images/frame-left.png"
+        alt="CoreFlux cockpit frame with actuator-ready reinforcement and braced cross members"
+        width="800"
+        height="600"
+        loading="lazy">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">Braced Under Load</div>
       Holds DD torque, loadcell brake force, and motion shock without walking or twist.
     </aside>
@@ -1160,12 +1218,24 @@ aside.panel{
   <!-- Visual comparison -->
   <div class="chassis-vis">
     <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View%202.png" alt="Static CoreFlux chassis - silver extrusion frame">
+      <img
+        class="chassis-vis__img"
+        src="assets/images/Iso%20View%202.png"
+        alt="Static CoreFlux chassis - silent planted frame for shared walls"
+        width="800"
+        height="600"
+        loading="lazy">
       <div class="chassis-vis__label">Static Frame</div>
       <div class="chassis-vis__note">Planted. Quiet. Apartment-safe.</div>
     </div>
     <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View.png" alt="Dynamic CoreFlux chassis with actuator hardpoints">
+      <img
+        class="chassis-vis__img"
+        src="assets/images/Iso%20View.png"
+        alt="Dynamic CoreFlux simpit chassis with actuator hardpoints and reinforced motion bracing"
+        width="800"
+        height="600"
+        loading="lazy">
       <div class="chassis-vis__label">Dynamic Frame</div>
       <div class="chassis-vis__note">Actuator-ready. Braced for motion load.</div>
     </div>
@@ -1426,7 +1496,7 @@ aside.panel{
 <!-- GAMES -->
 <section id="games" class="wrap">
   <div class="section__head">
-    <h2 class="section__title">Games & Sims</h2>
+    <h2 class="section__title">Games &amp; Sims</h2>
     <span class="pill">Dialed for today’s titles</span>
   </div>
   <div class="cards" style="margin-top:14px">
@@ -1450,7 +1520,13 @@ aside.panel{
   <!-- proof photo -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+      <img
+        src="assets/images/Quad%20Monitor%20Stand%20(2).jpg"
+        alt="CoreFlux sim racing / flight rig with curved triple monitors and overhead HUD"
+        style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;"
+        width="1000"
+        height="750"
+        loading="lazy">
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
@@ -1478,7 +1554,7 @@ aside.panel{
       <h3>Racing Hardware</h3>
       <ul>
         <li>Fanatec / Moza / Simagic / Logitech DD</li>
-        <li>Loadcell bases & handbrake / shifter side-mounts.</li>
+        <li>Loadcell bases &amp; handbrake / shifter side-mounts.</li>
         <li>Torque braced into frame, not desk.</li>
       </ul>
     </article>
@@ -1491,6 +1567,12 @@ aside.panel{
       </ul>
     </article>
   </div>
+
+  <p class="lede" style="margin-top:12px">
+    The CoreFlux cockpit frame supports high-torque direct drive wheel bases (Fanatec, Moza, Simagic), loadcell brake pedals,
+    HOTAS and throttle systems (Virpil, Winwing, VKB, Thrustmaster), and full triple or quad monitor racing / flight sim layouts —
+    with no drilling and no desk flex.
+  </p>
 </section>
 
 <!-- VENDORS -->
@@ -1555,7 +1637,7 @@ aside.panel{
   </div>
   <div class="cards" style="margin-top:14px">
     <article class="card">
-      <h3>Seat & Reach</h3>
+      <h3>Seat &amp; Reach</h3>
       <p class="lede">Posture that lasts all night.</p>
       <ul>
         <li>Seat back: 95–105°; hips slightly below knees.</li>
@@ -1580,7 +1662,7 @@ aside.panel{
       </ul>
     </article>
     <article class="card">
-      <h3>Screen & FOV</h3>
+      <h3>Screen &amp; FOV</h3>
       <p class="lede">Clarity without motion sickness.</p>
       <ul>
         <li>Top bezel ≈ eye height; center ~15° below.</li>
@@ -1665,7 +1747,13 @@ aside.panel{
   </div>
 
   <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+    <img
+      src="assets/images/Back%20View.png"
+      alt="Rear view of CoreFlux cockpit frame showing seat rails, pedal base, HOTAS mounts, monitor stack"
+      style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;"
+      width="800"
+      height="600"
+      loading="lazy">
     <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
       Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
     </div>
@@ -1716,6 +1804,10 @@ aside.panel{
       <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 3</div>
       <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You're in the pilot batch</div>
       <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early frames, tuning notes, priority on extra mounts.</div>
+
+      <div style="font-size:.7rem;line-height:1.4;color:var(--muted);font-weight:500;">
+        CoreFlux (Pty) Ltd is based in Sandton, Johannesburg, South Africa and is currently onboarding the first pilot batch of cockpit frames for racing, flight, and creators.
+      </div>
     </div>
   </div>
 </section>
@@ -1742,6 +1834,10 @@ aside.panel{
     <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
     <p>Yes — arms mount into frame structure, not a wobbly desk post.</p>
   </details>
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Where are you based?</summary>
+    <p>CoreFlux (Pty) Ltd operates from Sandton, Johannesburg, South Africa. Frames are engineered in-house around 4080 aluminium extrusion and reinforced actuator mounting geometry, then shipped to early pilot customers for tuning and fit validation.</p>
+  </details>
 </section>
 
 <footer>
@@ -1754,14 +1850,8 @@ aside.panel{
   </div>
   <div class="footer-note" style="margin-top:10px; line-height:1.6;">
     <strong>Contact</strong><br>
-    Email:
-    <a href="mailto:sales@coreflux.co.za" style="color:var(--accent);text-decoration:none;">
-      sales@coreflux.co.za
-    </a><br>
-    Phone:
-    <a href="tel:+27115688667" style="color:var(--accent);text-decoration:none;">
-      +27 11 568 8667
-    </a>
+    Email: <a href="mailto:sales@coreflux.co.za" style="color:var(--accent);text-decoration:none;">sales@coreflux.co.za</a><br>
+    Phone: <a href="tel:+27115688667" style="color:var(--accent);text-decoration:none;">+27 11 568 8667</a>
   </div>
   <div class="footer-note" style="margin-top:12px;">
     Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
@@ -1772,7 +1862,7 @@ aside.panel{
 /* Footer year */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Hero carousel (2-slide, always fill) */
+/* Hero carousel (2-slide, locked Fill/cover mode) */
 document.addEventListener('DOMContentLoaded', ()=>{
   const slides=[...document.querySelectorAll('.mock__slide')];
   const dots=[...document.querySelectorAll('.dot')];
@@ -1801,12 +1891,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   if (fitBtn){
-    // cosmetic only now; always Fill/cover mode
+    // purely cosmetic now, always "Fill"
     fitBtn.textContent = "Fill";
     fitBtn.setAttribute('aria-pressed', 'true');
-    fitBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-    });
+    fitBtn.addEventListener('click',(e)=>{ e.preventDefault(); });
   }
 
   show(0);
@@ -1843,10 +1931,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const $ = (sel, ctx=document) => ctx.querySelector(sel);
   const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
 
-  const baseStatic  = $('input[name="baseframe"][data-label="STATIC BASE FRAME"]');
   const baseDynamic = $('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
 
-  function isDynamic(){ return baseDynamic && baseDynamic.checked; }
+  function isDynamic(){
+    return baseDynamic && baseDynamic.checked;
+  }
 
   function parsePrice(input){
     const card = input.closest('label') || input.closest('.config-card') || input.parentElement;
@@ -1900,7 +1989,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
-    $$( 'input[type="checkbox"]', root ).forEach(ch=>{
+    $$('input[type="checkbox"]', root).forEach(ch=>{
       if(ch.disabled) return;
       if(ch.checked){
         const price = parsePrice(ch);
@@ -1979,7 +2068,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 /* Sticky CTA show/hide */
 (function(){
   const cta = document.getElementById('stickyCTA');
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector('#hero');
   if(!cta || !hero) return;
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
@@ -1989,7 +2078,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   io.observe(hero);
 })();
 
-/* Reserve form handling (mailto capture) */
+/* Reserve form handling (mailto capture / static lead capture) */
 (function(){
   const email  = document.getElementById('rEmail');
   const region = document.getElementById('rRegion');
@@ -2014,7 +2103,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       return;
     }
 
-    // build a prefilled email so you have the lead, even on static hosting
+    // build a prefilled email so you have the lead, even on static hosting:
     const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
     const body = encodeURIComponent(
 `Email: ${e}
@@ -2028,8 +2117,8 @@ Setup notes / hardware (optional, fill in before send):
 - Anything we should know (desk space, neighbors, etc.):`
     );
 
-    // CHANGE THIS to your inbox
-    const dest = "team@coreflux.fake";
+    // TODO: change to real inbox
+    const dest = "sales@coreflux.co.za";
 
     window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
 
