@@ -16,11 +16,12 @@
 <style>
 /* ======================================================
    CoreFlux Simpits — Production CSS (Next Level)
-   - Taller nav banner, centered lockup
+   - Taller nav banner
    - Logo left, CTA right
+   - Doubled center lockup in nav
+   - Nav bounded to .wrap width, not viewport edge
    - No nav pills
-   - Hero scarcity + Reserve-first CTA
-   - Price clarity in configurator
+   - Fill mode locked (no crop) in hero mock
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -44,8 +45,10 @@
 
   --logo-h:54px;             /* partner logos height */
 
-  --nav-h:160px;
+  --nav-h:180px;
   --content-max:1200px;
+
+  --side-pad: max((100vw - var(--content-max))/2, 4vw);
 }
 
 /* ---- Base ---- */
@@ -73,7 +76,10 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
 /* wrapper */
-.wrap{ width:min(var(--content-max),92vw); margin:0 auto; }
+.wrap{
+  width:min(var(--content-max),92vw);
+  margin:0 auto;
+}
 
 .lede{
   color:var(--muted);
@@ -83,12 +89,20 @@ img{max-width:100%;display:block}
   max-width:680px;
 }
 
-section{ padding:48px 0; position:relative; z-index:1; }
+section{
+  padding:48px 0;
+  position:relative;
+  z-index:1;
+}
 
-/* ---- Global particles canvas (fixed brightness) ---- */
+/* ---- Global particles canvas ---- */
 #aiCanvas{
-  position:fixed; inset:0; z-index:-1; pointer-events:none;
-  opacity:.55; transition:none;
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.55;
+  transition:none;
 }
 
 /* ======================================================
@@ -108,27 +122,30 @@ section{ padding:48px 0; position:relative; z-index:1; }
 
   display:flex;
   align-items:center;
+  padding-left:var(--side-pad);
+  padding-right:var(--side-pad);
 }
 .nav__inner{
-  display:flex;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
-  justify-content:space-between;
   width:100%;
   height:100%;
-  padding:0;
+  max-width:var(--content-max);
+  margin:0 auto;
+  column-gap:20px;
 }
 
 /* LEFT: LOGO */
-.brand{
+.brand-left{
   display:flex;
   align-items:center;
-  gap:16px;
   min-width:0;
 }
 .brand__logo-img{
-  height:110px;
+  height:120px;
   width:auto;
-  max-height:110px;
+  max-height:120px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
@@ -146,7 +163,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 .brand__tagline{
   font-weight:800;
-  font-size:2rem;
+  font-size:2.4rem;
   line-height:1.1;
   letter-spacing:-.03em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
@@ -160,14 +177,14 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 .brand__name{
   font-weight:900;
-  font-size:2rem;
+  font-size:2.4rem;
   line-height:1.1;
   color:var(--text);
   letter-spacing:-.03em;
   margin-top:4px;
 }
 .brand__subline{
-  margin-top:8px;
+  margin-top:10px;
   font-size:.8rem;
   font-weight:700;
   line-height:1.3;
@@ -198,9 +215,10 @@ section{ padding:48px 0; position:relative; z-index:1; }
   border:none;
   cursor:pointer;
   text-decoration:none;
+  white-space:nowrap;
 }
 
-/* hide old nav links/burger everywhere */
+/* kill legacy nav links/burger */
 .nav__links{display:none!important;}
 .nav__burger{display:none!important;}
 
@@ -363,24 +381,24 @@ section{ padding:48px 0; position:relative; z-index:1; }
   box-shadow:0 0 80px rgba(0,198,255,.35), 0 40px 120px rgba(0,0,0,.6);
   z-index:1
 }
+
+/* FORCE FILL MODE ALWAYS ON:
+   - mock always has .fit in markup
+   - slides default to contain
+*/
 .mock__slide{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain; /* locked */
+  background:#0b1020;
   opacity:0;
-  transform:scale(1.03);
-  transition:opacity 1s ease, transform 9s ease
+  transform:scale(1);
+  transition:opacity 1s ease;
 }
 .mock__slide.active{
   opacity:1;
-  transform:scale(1.08)
-}
-.mock.fit .mock__slide{
-  object-fit:contain;
-  transform:scale(1)!important;
-  background:#0b1020
 }
 
 /* dots + toggle */
@@ -527,7 +545,8 @@ section{ padding:48px 0; position:relative; z-index:1; }
   width:100%;
   max-width:320px;
   margin:0 auto 12px;
-  height:auto
+  height:auto;
+  object-fit:contain;
 }
 .chassis-vis__label{
   font-size:.8rem;
@@ -604,7 +623,12 @@ section{ padding:48px 0; position:relative; z-index:1; }
   width:100%;
   height:auto;
   display:block;
-  margin:0 auto 12px
+  margin:0 auto 12px;
+  object-fit:contain;
+  background:#000;
+  border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
 }
 
 /* spec grid */
@@ -860,26 +884,54 @@ aside.panel{
   .hero{ grid-template-columns:1fr }
   .mock{ height:400px; max-height:400px }
 }
+
 @media (max-width:980px){
   .statbar{ grid-template-columns:repeat(2,1fr) }
   .cards{ grid-template-columns:1fr }
   :root{ --logo-h:46px }
+
+  .brand__tagline,
+  .brand__name{
+    font-size:2rem;
+  }
+  .nav{
+    --nav-h:170px;
+  }
 }
+
+@media (max-width:640px){
+  .nav__inner{
+    grid-template-columns:1fr;
+    row-gap:12px;
+    text-align:center;
+    justify-items:center;
+  }
+  .brand-left{
+    order:2;
+  }
+  .nav__cta-wrap{
+    order:3;
+  }
+  .brand__center{
+    order:1;
+  }
+}
+
 @media (max-width:520px){
   .brand__logo-img{
-    height:80px;
-    max-height:80px;
+    height:84px;
+    max-height:84px;
   }
   .brand__tagline,
   .brand__name{
-    font-size:1.4rem;
+    font-size:1.6rem;
     line-height:1.15;
   }
   .brand__subline{
     font-size:.7rem;
   }
   .nav{
-    --nav-h:140px;
+    --nav-h:160px;
   }
 
   .config-summary{
@@ -898,9 +950,9 @@ aside.panel{
 </button>
 
 <nav class="nav" aria-label="Primary">
-  <div class="wrap nav__inner">
+  <div class="nav__inner">
     <!-- left: logo -->
-    <div class="brand" aria-label="CoreFlux">
+    <div class="brand-left" aria-label="CoreFlux">
       <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
     </div>
 
@@ -927,7 +979,7 @@ aside.panel{
 
     <p class="hero__claim">
       Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30.
-      Same seat. Same footprint. Zero rebuild.
+      Same seat. Same footprint. No teardown.
     </p>
 
     <p class="lede">
@@ -954,7 +1006,7 @@ aside.panel{
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <div class="mock fit" id="mock" aria-label="Rig views">
+    <div class="mock" id="mock" aria-label="Rig views">
       <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
 
       <!-- slides -->
@@ -1092,7 +1144,7 @@ aside.panel{
     <div class="proof-strip">
       <div class="proof-cell">
         <div class="proof-head">Torque</div>
-        <div class="proof-metric">> 15 Nm wheel bases</div>
+        <div class="proof-metric">&gt; 15 Nm wheel bases</div>
         <div class="proof-desc">Steering ties into a reinforced cross member. No twist under load.</div>
       </div>
       <div class="proof-cell">
@@ -1414,7 +1466,7 @@ aside.panel{
   <!-- proof photo -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:contain;">
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
@@ -1629,7 +1681,7 @@ aside.panel{
   </div>
 
   <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:contain;">
     <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
       Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
     </div>
@@ -1741,15 +1793,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     mock.addEventListener('mouseenter',stop);
     mock.addEventListener('mouseleave',play);
   }
+
   if (fitBtn && mock){
-    // mock starts in 'fit' mode for safe mobile framing
+    // Fit mode is visually locked as contain. We just fake the toggle text.
     fitBtn.addEventListener('click',()=>{
-      mock.classList.toggle('fit');
-      const pressed = mock.classList.contains('fit');
+      // no class flip. just flip label for feel
+      const pressed = fitBtn.getAttribute('aria-pressed') === 'true';
+      fitBtn.setAttribute('aria-pressed', String(!pressed));
       fitBtn.textContent = pressed ? 'Fill' : 'Fit';
-      fitBtn.setAttribute('aria-pressed', String(pressed));
     });
   }
+
   show(0); play();
 });
 
@@ -1811,7 +1865,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function selectedRadios(){
     const sel=[];
     for(const g of radioGroups){
-      const r = root.querySelector(`input[type="radio"][name="${g}"]:checked`);
+      const r = root.querySelector(\`input[type="radio"][name="\${g}"]:checked\`);
       if(r) sel.push(r);
     }
     return sel;
@@ -1840,31 +1894,31 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
-    $$( 'input[type="checkbox"]', root ).forEach(ch=>{
+    $$('input[type="checkbox"]', root).forEach(ch=>{
       if(ch.disabled) return;
       if(ch.checked){
         const price = parsePrice(ch);
         total += price;
-        picked.push(`${labelFor(ch)} — $${price}`);
+        picked.push(\`\${labelFor(ch)} — $\${price}\`);
       }
     });
 
     selectedRadios().forEach(r=>{
       const price = parsePrice(r);
       total += price;
-      picked.push(`${labelFor(r)} — $${price}`);
+      picked.push(\`\${labelFor(r)} — $\${price}\`);
     });
 
     if(linesEl){
       linesEl.innerHTML = picked
-        .map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`)
+        .map(t=>\`<li style="padding:6px 0;border-bottom:1px solid var(--border)">\${t}</li>\`)
         .join('');
     }
     if(countEl){
-      countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
+      countEl.textContent = \`\${picked.length} module\${picked.length===1?'':'s'} selected\`;
     }
     if(totalEl){
-      totalEl.textContent = `$${total}`;
+      totalEl.textContent = \`$\${total}\`;
     }
   }
 
@@ -1957,21 +2011,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
     // build a prefilled email so you have the lead, even on static hosting
     const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
     const body = encodeURIComponent(
-`Email: ${e}
-Region: ${rg}
-Primary Mode: ${md}
+\`Email: \${e}
+Region: \${rg}
+Primary Mode: \${md}
 
 Setup notes / hardware (optional, fill in before send):
 - Wheel base / HOTAS / pedals:
 - Triple / quad / VR:
 - Static or Dynamic interest:
-- Anything we should know (desk space, neighbors, etc.):`
+- Anything we should know (desk space, neighbors, etc.):\`
     );
 
-    // CHANGE THIS to your inbox
+    // TODO: replace this with your inbox
     const dest = "team@coreflux.fake";
 
-    window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
+    window.location.href = \`mailto:\${dest}?subject=\${subject}&body=\${body}\`;
 
     note.textContent="Locked. We'll reach out with pilot batch details.";
     note.style.color="var(--text)";
