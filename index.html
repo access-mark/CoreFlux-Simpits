@@ -5,25 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
 <title>CoreFlux Simpits — Motion-Ready Racing & Flight Rig | One Rig. All Roles.</title>
+
 <meta name="description" content="CoreFlux Simpits: one rig that swaps from workstation to FPS, sim racing, and full-flight cockpit in minutes. Static or motion-ready Dynamic chassis with actuator hardpoints compatible with pro systems like Qubic System. No drilling. Apartment-safe." />
-<meta name="keywords" content="sim rig, motion rig, racing cockpit, flight sim cockpit, Qubic System compatible, actuator-ready rig, direct drive wheel mount, HOTAS mount, loadcell pedals, sim racing chassis, Star Citizen cockpit, DCS cockpit, iRacing rig, ACC rig">
+
+<meta name="keywords" content="sim rig, motion rig, racing cockpit, flight sim cockpit, Qubic System compatible, actuator-ready rig, direct drive wheel mount, HOTAS mount, loadcell pedals, sim racing chassis, Star Citizen cockpit, DCS cockpit, iRacing rig, ACC rig, heave surge traction loss, 3DoF motion platform, 4DoF actuator system, home cockpit, pilot training rig">
+
 <link rel="icon" href="assets/images/coreflux-logo.png" />
 <link rel="canonical" href="https://access-mark.github.io/CoreFlux-Simpits/" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="CoreFlux Simpits — Motion-Ready Racing & Flight Rig" />
-<meta property="og:description" content="Dynamic actuator-ready chassis with braced hardpoints. Swap between racing, flight, FPS, and work in under 5 minutes." />
-<meta property="og:image" content="assets/images/Top%20View.png" />
+<meta property="og:description" content="Dynamic sim chassis with actuator hardpoints for 3DoF / 4DoF motion (Qubic System class), direct-drive wheel support, HOTAS, pedals, triples/quad displays. One Rig. All Roles." />
+<meta property="og:image" content="assets/images/frame-left.png" />
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 /* ======================================================
-   CoreFlux Simpits — Production CSS (Motion-ready + SEO)
-   - Hero lockup stays in nav (desktop + mobile stack)
-   - Dynamic chassis is explicitly motion/actuator-ready
-   - SEO terms surfaced in visible copy
-   - Mobile nav stacking fix
+   CoreFlux Simpits — Production CSS (SEO + Motion rev)
+   - Sticky nav with center lockup
+   - Brand left / CTA right with safe gutters
+   - Hero mock: 2 slides, always cover
+   - Added Motion System section
+   - Mobile tweaks for nav block
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -88,7 +92,7 @@ img{max-width:100%;display:block}
 
 section{ padding:48px 0; position:relative; z-index:1; }
 
-/* ---- Global particles canvas (fixed brightness) ---- */
+/* ---- Global particles canvas ---- */
 #aiCanvas{
   position:fixed; inset:0; z-index:-1; pointer-events:none;
   opacity:.55; transition:none;
@@ -114,20 +118,20 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 .nav__inner{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
-  width:min(var(--content-max),92vw); /* <- pull in edges */
+  gap:16px;
+  width:min(var(--content-max),92vw);
   margin:0 auto;
   height:100%;
-  padding:0;
+  padding:16px 0;
 }
 
 /* LEFT: LOGO */
-.brand{
+.brand-left{
+  flex:0 0 auto;
   display:flex;
-  align-items:center;
-  gap:16px;
-  min-width:0;
+  align-items:flex-start;
 }
 .brand__logo-img{
   height:110px;
@@ -139,15 +143,15 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 
 /* CENTER: LOCKUP */
-.brand__center{
-  text-align:center;
-  line-height:1.05;
+.brand-center{
+  flex:1 1 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
+  text-align:center;
+  line-height:1.05;
   min-width:0;
-  max-width:60%;
 }
 .brand__tagline{
   font-weight:800;
@@ -188,8 +192,9 @@ section{ padding:48px 0; position:relative; z-index:1; }
 
 /* RIGHT CTA */
 .nav__cta-wrap{
+  flex:0 0 auto;
   display:flex;
-  align-items:center;
+  align-items:flex-start;
 }
 .cta{
   padding:12px 16px;
@@ -205,7 +210,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   text-decoration:none;
 }
 
-/* hide old nav links/burger everywhere */
+/* hide any legacy nav bits */
 .nav__links{display:none!important;}
 .nav__burger{display:none!important;}
 
@@ -345,7 +350,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
 }
 
 /* ======================================================
-   HERO MOCK (carousel) — 2 slides, always fill
+   HERO MOCK (carousel) — 2 slides, always cover
    ====================================================== */
 .mock-wrap{ position:relative }
 #mockGlow.mock-glow{
@@ -370,14 +375,12 @@ section{ padding:48px 0; position:relative; z-index:1; }
   box-shadow:0 0 80px rgba(0,198,255,.35), 0 40px 120px rgba(0,0,0,.6);
   z-index:1;
 }
-
-/* always cover */
 .mock__slide{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover; /* force fill always */
   opacity:0;
   transform:scale(1.03);
   transition:opacity 1s ease, transform 9s ease;
@@ -387,7 +390,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   transform:scale(1.08);
 }
 
-/* dots + toggle (toggle is cosmetic now) */
+/* dots */
 .mock__nav{
   position:absolute;
   bottom:12px;
@@ -409,6 +412,8 @@ section{ padding:48px 0; position:relative; z-index:1; }
   background:linear-gradient(135deg,var(--accent),#4be3d1);
   transform:scale(1.2);
 }
+
+/* fake toggle (kept for visual affordance but no-op) */
 .mock__toggle{
   position:absolute;
   top:12px;
@@ -423,7 +428,7 @@ section{ padding:48px 0; position:relative; z-index:1; }
   font-size:12px;
   line-height:1.2;
   color:var(--text);
-  cursor:pointer;
+  cursor:default;
 }
 
 /* ======================================================
@@ -679,30 +684,6 @@ section{ padding:48px 0; position:relative; z-index:1; }
   line-height:1.3
 }
 
-/* logo strip */
-.logo-strip{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:40px;
-  padding:24px 0
-}
-.logo-strip img,
-.logo-strip svg{
-  height:var(--logo-h);
-  max-height:var(--logo-h);
-  width:auto;
-  opacity:.8;
-  transition:opacity .25s ease, transform .25s ease, filter .25s ease;
-  filter:drop-shadow(0 6px 14px rgba(0,198,255,.12))
-}
-.logo-strip img:hover,
-.logo-strip svg:hover{
-  opacity:1;
-  transform:translateY(-2px) scale(1.04);
-  filter:drop-shadow(0 8px 18px rgba(0,198,255,.18))
-}
-
 /* sticky CTA */
 #stickyCTA{
   position:fixed;
@@ -866,28 +847,29 @@ aside.panel{
   .statbar{ grid-template-columns:repeat(2,1fr) }
   .cards{ grid-template-columns:1fr }
   :root{ --logo-h:46px }
-  .brand__center{ max-width:100%; }
-}
-@media (max-width:520px){
+
   .nav__inner{
-    flex-direction:column;
+    flex-wrap:wrap;
+    align-items:center;
     justify-content:center;
-    gap:8px;
     text-align:center;
+    gap:12px;
     padding-top:12px;
-    padding-bottom:12px;
   }
-  .brand{
+  .brand-left{
     order:1;
+    justify-content:center;
+  }
+  .brand-center{
+    order:2;
+  }
+  .nav__cta-wrap{
+    order:3;
     justify-content:center;
   }
   .brand__logo-img{
     height:80px;
     max-height:80px;
-  }
-  .brand__center{
-    order:2;
-    max-width:100%;
   }
   .brand__tagline,
   .brand__name{
@@ -897,13 +879,14 @@ aside.panel{
   .brand__subline{
     font-size:.7rem;
   }
-  .nav__cta-wrap{
-    order:3;
-  }
   .nav{
-    --nav-h:140px;
+    --nav-h:auto;
+    min-height:180px;
+    height:auto;
+    padding-bottom:12px;
   }
-
+}
+@media (max-width:520px){
   .config-summary{
     flex-direction:column;
     align-items:flex-start
@@ -919,15 +902,15 @@ aside.panel{
   Reserve / Ask
 </button>
 
-<nav class="nav" aria-label="Primary">
+<nav class="nav" aria-label="Primary navigation / CoreFlux Simpits motion-ready sim rig">
   <div class="nav__inner">
     <!-- left: logo -->
-    <div class="brand" aria-label="CoreFlux">
-      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
+    <div class="brand-left" aria-label="CoreFlux brand">
+      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo - motion-ready racing & flight sim chassis">
     </div>
 
-    <!-- center: main lockup -->
-    <div class="brand__center">
+    <!-- center: lockup -->
+    <div class="brand-center">
       <div class="brand__tagline">One Rig. All Roles.</div>
       <div class="brand__name">CoreFlux Simpits</div>
       <div class="brand__subline">Pilot Batch #1 now forming</div>
@@ -935,7 +918,7 @@ aside.panel{
 
     <!-- right: CTA -->
     <div class="nav__cta-wrap">
-      <a class="cta" href="#reserve">Reserve Access</a>
+      <a class="cta" href="#reserve" aria-label="Reserve your CoreFlux motion-ready simpit slot">Reserve Access</a>
     </div>
   </div>
 </nav>
@@ -953,15 +936,15 @@ aside.panel{
     </p>
 
     <p class="lede">
-      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis,
-      to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.
+      The CoreFlux Dynamic Simpit is a motion-ready racing / flight / space sim cockpit and daily workstation.
+      It shifts from deep-focus desk to FPS gunner seat, to direct-drive race chassis, to full-flight HOTAS
+      — in minutes. You choose: planted Static frame, or Dynamic frame reinforced for 3DoF / 4DoF actuator stacks.
     </p>
 
     <p class="lede">
-      The Dynamic chassis is motion-ready: it’s built to accept modern 3DoF and 4DoF actuator kits
-      (the kind sim racers and flight crews use for telemetry-driven heave, surge, traction loss, and attitude change)
-      without tearing itself apart. You get real car weight transfer, aircraft pitch/roll cues, and controlled impact feel —
-      not a wobbly desk on stilts.
+      The Dynamic chassis includes gusseted hardpoints for modern linear actuator systems (Qubic System class),
+      so you can run real heave / surge / traction loss / roll cues without bending your rig or
+      knocking monitors out of alignment. This is controlled motion feedback — not a wobbly Playseat.
     </p>
 
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
@@ -969,7 +952,10 @@ aside.panel{
       <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
     </div>
 
-    <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.</div>
+    <div class="hero__trustline">
+      <b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> ·
+      Holds direct-drive torque, loadcell brake force, and full HOTAS.
+    </div>
 
     <div class="statbar">
       <div class="stat"><div class="v">≤ 5 min</div><div class="k">Mode switch</div></div>
@@ -983,16 +969,20 @@ aside.panel{
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <div class="mock" id="mock" aria-label="Rig views">
+    <div class="mock" id="mock" aria-label="CoreFlux Dynamic motion-ready sim rig preview">
       <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="true">Fill</button>
 
       <!-- ONLY TWO SLIDES -->
-      <img class="mock__slide active" src="assets/images/frame-left.png" alt="CoreFlux Dynamic chassis left view with actuator hardpoints and reinforced cross members">
-      <img class="mock__slide" src="assets/images/frame-right.png" alt="CoreFlux Dynamic chassis right view showing HOTAS / wheel / pedal mounting geometry">
+      <img class="mock__slide active"
+           src="assets/images/frame-left.png"
+           alt="CoreFlux Dynamic sim racing / flight cockpit, left view showing actuator hardpoints and reinforced cross members for 3DoF / 4DoF motion">
+      <img class="mock__slide"
+           src="assets/images/frame-right.png"
+           alt="CoreFlux Simpits right view with HOTAS, wheel mount, pedal base, monitor stack and motion-ready bracing">
 
       <div class="mock__nav" role="tablist" aria-label="Rig images">
-        <span class="dot active" role="tab" aria-selected="true" aria-label="Left view"></span>
-        <span class="dot" role="tab" aria-selected="false" aria-label="Right view"></span>
+        <span class="dot active" role="tab" aria-selected="true" aria-label="Left view of actuator-ready CoreFlux frame"></span>
+        <span class="dot" role="tab" aria-selected="false" aria-label="Right view of CoreFlux cockpit with HOTAS and wheel mount"></span>
       </div>
     </div>
   </div>
@@ -1005,23 +995,24 @@ aside.panel{
     <span class="pill">One stop. No compromise.</span>
   </div>
   <p class="lede">
-    Work, FPS, racing, full flight — without rebuilding a room. Fast to re-configure, comfortable all day, clean enough for the living room.
+    This is your permanent desk, sim racing cockpit, and full-flight HOTAS platform — in the same footprint.
+    Fast to re-configure, comfortable all day, clean enough for the living room.
   </p>
   <div class="cards" style="margin-top:16px">
     <article class="card">
       <h3>Focus without friction</h3>
       <p class="lede">Work like it’s a dedicated workstation.</p>
-      <p>Keyboard, mouse, mic, camera, Stream Deck — frame mounted. Cable runs are tidy. Nothing wobbles.</p>
+      <p>Keyboard, mouse, mic, camera, Stream Deck — mounted to the frame. Cable runs are tidy. Nothing wobbles on stream.</p>
     </article>
     <article class="card">
       <h3>Flow, not setup</h3>
       <p class="lede">Mode-switching takes minutes, not hours.</p>
-      <p>Indexed geometry locks angles and reach. Swap without re-measuring.</p>
+      <p>Indexed geometry locks angles and reach. Swap without re-measuring every time you go from FPS to racing or flight sim.</p>
     </article>
     <article class="card">
       <h3>Comfort that lasts</h3>
       <p class="lede">All-day ergonomics, all-night sessions.</p>
-      <p>Seat rails, reach, angles dial in precisely. The frame absorbs load; your body doesn’t.</p>
+      <p>Seat rails, pedal reach, monitor height, and stick/wheel angle all dial in precisely. The frame takes the load, not your spine.</p>
     </article>
   </div>
 </section>
@@ -1036,17 +1027,17 @@ aside.panel{
     <article class="card">
       <h3>Workstation → FPS</h3>
       <p class="lede">Sit-stand posture dialed. Keyboard clears, sticks come in.</p>
-      <p>Rigid extrusion, zero flex, cables that don’t snag. The rig disappears.</p>
+      <p>Rigid aluminium extrusion, zero flex, cables that don’t snag when you swing in a throttle or dual-stick setup.</p>
     </article>
     <article class="card">
       <h3>FPS → Racing</h3>
       <p class="lede">Wheel on, pedals aligned, rails snap to your mark.</p>
-      <p>Angles and reach lock with repeatable stops. Muscle memory holds.</p>
+      <p>Angles and reach lock with repeatable stops. Your muscle memory survives every swap. Direct-drive torque lives here instead of on your desk.</p>
     </article>
     <article class="card">
       <h3>Racing → Flight</h3>
-      <p class="lede">Center-stick / dual-stick / yoke. Swap without chaos.</p>
-      <p>Avionics and throttle sit exactly where they should.</p>
+      <p class="lede">Center-stick / dual-stick / yoke in minutes.</p>
+      <p>Throttle and avionics sit where they should. Rudder pedals stay planted. This is a proper flight simpit, not a wobbly clamp rig.</p>
     </article>
   </div>
 </section>
@@ -1062,17 +1053,17 @@ aside.panel{
       <div class="proof-cell">
         <div class="proof-head">Desk Clamp</div>
         <div class="proof-metric">Desk flex = aim drift</div>
-        <div class="proof-desc">Monitors too high. Wheel shakes the table. Mic arm wobbles on stream.</div>
+        <div class="proof-desc">Monitors too high. Wheel shakes the table. Mic arm wobbles on stream. Not motion-capable at all.</div>
       </div>
       <div class="proof-cell">
         <div class="proof-head">Wheel Stand</div>
         <div class="proof-metric">Trip hazard. Spaghetti.</div>
-        <div class="proof-desc">Pedals walk. Angles never match twice. Living room exploded.</div>
+        <div class="proof-desc">Pedals walk. Angles never match twice. You can’t add actuators to this without chaos.</div>
       </div>
       <div class="proof-cell">
         <div class="proof-head">PVC Cockpit</div>
         <div class="proof-metric">Great racer. Bad desk.</div>
-        <div class="proof-desc">No camera arm, no keyboard tray, trash posture. You can’t do 8-hour days there.</div>
+        <div class="proof-desc">No camera arm, no keyboard tray, trash posture for work. Not something you can live in 8+ hours and then bolt Qubic System actuators to.</div>
       </div>
     </div>
   </div>
@@ -1089,71 +1080,104 @@ aside.panel{
       <div>
         <div class="specbox__head">Structure</div>
         <div class="specbox__metric">4080 anodized extrusion</div>
-        <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling.</div>
+        <div class="specbox__desc">Industrial profile. Pre-cut. All fasteners included. Zero drilling. Rigid under direct-drive wheel torque and loadcell brake force.</div>
       </div>
     </div>
     <div class="specbox">
       <div>
         <div class="specbox__head">Repeatability</div>
         <div class="specbox__metric">Indexed mount points</div>
-        <div class="specbox__desc">Angles + reach return to exact marks. Muscle memory survives swaps.</div>
+        <div class="specbox__desc">Angles + reach return to exact marks. Your racing/flight muscle memory survives mode swaps.</div>
       </div>
     </div>
     <div class="specbox">
       <div>
         <div class="specbox__head">Cable sanity</div>
         <div class="specbox__metric">Internal routing</div>
-        <div class="specbox__desc">Tie-down channels and pass-throughs keep USB/power out of your feet.</div>
+        <div class="specbox__desc">Tie-down channels and pass-throughs keep USB / power out of your feet, even with multiple HOTAS, shifters, or motion actuators wired in.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FORCE / MOTION -->
+<!-- FORCE & MOTION -->
 <section id="force" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Force & Motion Handling</h2>
     <span class="pill">Direct drive · Loadcell · Actuation-ready</span>
   </div>
-
   <div class="force-flex">
     <div class="proof-strip">
-
       <div class="proof-cell">
         <div class="proof-head">Torque</div>
-        <div class="proof-metric">&gt; 15 Nm direct-drive wheel bases</div>
-        <div class="proof-desc">
-          Steering column ties into a reinforced cross member in the frame.
-          You get road feel / aero load without wheel flex or column wobble.
-        </div>
+        <div class="proof-metric">> 15 Nm wheel bases</div>
+        <div class="proof-desc">Steering ties into a reinforced cross member. No twist under high-torque DD wheels from Fanatec, Moza, Simagic, etc.</div>
       </div>
-
       <div class="proof-cell">
         <div class="proof-head">Brake</div>
         <div class="proof-metric">Loadcell stability</div>
-        <div class="proof-desc">
-          Pedal tray locks off indexed rails.
-          You can stand on a 200 kg+ loadcell brake without the tray walking forward.
-        </div>
+        <div class="proof-desc">Pedal tray locks off indexed rails. You can bury a loadcell brake without the pedal deck walking or rotating.</div>
       </div>
-
       <div class="proof-cell">
         <div class="proof-head">Motion / Actuation</div>
         <div class="proof-metric">3DoF / 4DoF compatible</div>
         <div class="proof-desc">
-          The Dynamic chassis includes dedicated actuator hardpoints and gusseted members so you can bolt on pro motion systems
-          (Qubic System–style linear actuator stacks used in serious sim racing and full-flight sims)
-          without twisting your geometry or blowing your monitor alignment when surge / heave cues hit.
+          The Dynamic chassis has gusseted actuator hardpoints so you can bolt on pro linear actuator stacks
+          (Qubic System–class 3DoF / 4DoF motion platforms) for heave, surge, traction loss and roll cues —
+          without bending your frame or shaking monitors out of alignment.
         </div>
       </div>
-
     </div>
-
     <aside class="force-vis">
-      <img src="assets/images/frame-left.png" alt="Dynamic CoreFlux frame with actuator hardpoints and reinforced cross members for motion load">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">Actuator-ready, not theme-park shaky</div>
-      The Dynamic frame is braced so motion cues feel like car weight transfer / aircraft attitude change — not random shaking.
+      <img src="assets/images/frame-left.png" alt="Dynamic CoreFlux Simpits frame with actuator mounting gussets and reinforced members for motion systems">
+      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:4px">
+        Actuator-ready, not theme-park shaky
+      </div>
+      The Dynamic frame is braced so motion cues feel like car weight transfer, brake surge, aircraft pitch/roll —
+      not random shaking. You get signal, not gimmick.
     </aside>
+  </div>
+</section>
+
+<!-- MOTION / ACTUATOR SYSTEM -->
+<section id="motion" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Motion System Integration</h2>
+    <span class="pill">Qubic System style 3DoF / 4DoF</span>
+  </div>
+  <div class="panel" style="display:grid;gap:16px;">
+    <p class="lede">
+      Want real chassis feedback? The CoreFlux Dynamic frame is built to accept modern actuator kits —
+      the same style of high-speed linear actuators sim racers and flight sim builders use for heave, surge,
+      traction loss, pitch, roll and yaw onset training.
+    </p>
+
+    <div style="display:grid;gap:12px;font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">
+      <div style="color:var(--text);font-weight:700;font-size:.9rem;line-height:1.3;">
+        3DoF / 4DoF motion ready
+      </div>
+      <div>
+        The Dynamic chassis has welded-style gusseting and dedicated hardpoints so actuator load goes into
+        reinforced members — not into your monitor arms or keyboard tray. You can run real heave/surge hits
+        (think braking into T1 or slamming collective) without throwing geometry out.
+      </div>
+
+      <div style="color:var(--text);font-weight:700;font-size:.9rem;line-height:1.3;margin-top:12px;">
+        Telemetry-driven cues
+      </div>
+      <div>
+        Surge under braking. Traction loss oversteer. Pitch/roll on takeoff or bank. It's not a rumble seat —
+        it’s actual motion tied to sim telemetry. Think iRacing, ACC, DCS, MSFS, X-Plane, Star Citizen.
+      </div>
+
+      <div style="color:var(--text);font-weight:700;font-size:.9rem;line-height:1.3;margin-top:12px;">
+        Apartment sanity
+      </div>
+      <div>
+        We're not building an amusement park ride. Travel is tuned for feel and repeatability — not violent throw.
+        That means you get signal your body understands, without sounding like you're dropping a washing machine from orbit.
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1167,12 +1191,16 @@ aside.panel{
   <!-- Visual comparison -->
   <div class="chassis-vis">
     <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View%202.png" alt="Static CoreFlux chassis - silver extrusion frame">
+      <img class="chassis-vis__img"
+           src="assets/images/Iso%20View%202.png"
+           alt="Static CoreFlux Simpits frame: silent planted aluminium sim rig for racing, flight, and FPS without motion actuators">
       <div class="chassis-vis__label">Static Frame</div>
       <div class="chassis-vis__note">Planted. Quiet. Apartment-safe.</div>
     </div>
     <div class="chassis-vis__item">
-      <img class="chassis-vis__img" src="assets/images/Iso%20View.png" alt="Dynamic CoreFlux chassis with actuator hardpoints">
+      <img class="chassis-vis__img"
+           src="assets/images/Iso%20View.png"
+           alt="Dynamic CoreFlux Simpits frame with gusseted actuator hardpoints for 3DoF / 4DoF Qubic System class motion stacks">
       <div class="chassis-vis__label">Dynamic Frame</div>
       <div class="chassis-vis__note">Actuator-ready. Braced for motion load.</div>
     </div>
@@ -1182,23 +1210,22 @@ aside.panel{
     <article class="card">
       <h3>Static Frame</h3>
       <p class="lede">Locked. Silent. Apartment-safe.</p>
-      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
-      <p><strong>Why:</strong> Cheaper entry, no floor drama.</p>
+      <p>Zero actuators. Still supports direct-drive wheels, loadcell pedals, HOTAS, dual/quad display.</p>
+      <p><strong>Why:</strong> Cheaper entry, no floor drama, and totally fine in shared-wall environments.</p>
     </article>
     <article class="card">
       <h3>Dynamic Frame</h3>
       <p class="lede">Motion-capable. Built to take hits.</p>
-      <p>Reinforced members and actuator points translate telemetry into cues without twisting.</p>
-      <p><strong>Why:</strong> Race/flight cues you can feel.</p>
+      <p>Reinforced members and actuator points translate telemetry into cues without twisting or loosening.</p>
+      <p><strong>Why:</strong> Race/flight cues you can feel — braking load, turbulence, traction loss — not guess.</p>
       <p style="font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:500">
-        We brace the chassis so your 3DoF / 4DoF actuator kit can throw heave, surge and traction loss without ripping alignment.
-        You get controlled motion, not “theme park”.
+        We design the geometry and bracing; you bolt on your preferred actuator kit (Qubic System style 3DoF / 4DoF, etc).
       </p>
     </article>
     <article class="card">
       <h3>Upgrade Path</h3>
       <p class="lede">Static today → Dynamic later.</p>
-      <p>Shared geometry. Controls and mounts carry forward.</p>
+      <p>Shared geometry. Controls and mounts carry forward, so you don’t buy twice.</p>
       <p><strong>No rebuild.</strong></p>
     </article>
   </div>
@@ -1218,17 +1245,17 @@ aside.panel{
     <article class="card">
       <h3>Work + FPS</h3>
       <p class="lede">Single monitor, low-latency posture.</p>
-      <p>Static chassis + desk tray + single/dual-stick as needed.</p>
+      <p>Static chassis + desk tray + single/dual-stick as needed for Star Citizen / Tarkov / Destiny while still doing meetings during the day.</p>
     </article>
     <article class="card">
       <h3>Race Spec</h3>
       <p class="lede">Direct-drive + loadcell + triples/quad.</p>
-      <p>Dynamic chassis, indexed pedal mount, wheel arm, shifter/handbrake.</p>
+      <p>Dynamic chassis, indexed pedal mount, DD wheel arm, shifter/handbrake, frame-mounted triple or quad display. ACC / iRacing ready.</p>
     </article>
     <article class="card">
       <h3>Flight / Space</h3>
       <p class="lede">Center-stick, dual-stick, or HOTAS.</p>
-      <p>Dynamic chassis with overhead HUD and pedal base for planted yaw.</p>
+      <p>Dynamic chassis with overhead HUD and pedal base for planted yaw. Built for DCS, MSFS, X-Plane, Star Citizen, heli work.</p>
     </article>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
@@ -1263,37 +1290,40 @@ aside.panel{
         <label class="config-card" data-group="baseframe" data-key="base-static">
           <input type="radio" name="baseframe" data-price="1000" data-label="STATIC BASE FRAME">
           <strong>STATIC BASE FRAME — $1,000</strong>
-          <p>Motionless, silent platform. Apartment / shared-wall friendly.</p>
+          <p>Motionless, silent platform. Apartment / shared-wall friendly. Still supports DD wheels, loadcell brakes, HOTAS, triples/quad.</p>
         </label>
 
         <label class="config-card" data-group="baseframe" data-key="base-dynamic">
           <input type="radio" name="baseframe" data-price="1450" data-label="DYNAMIC BASE FRAME">
           <strong>DYNAMIC BASE FRAME — $1,450</strong>
-          <p>Reinforced, actuator-ready. Gusseted hardpoints for 3DoF / 4DoF linear actuator kits (Qubic System class) to drive surge / heave / sway without bending the rig.</p>
+          <p>
+            Reinforced, actuator-ready. Gusseted hardpoints for 3DoF / 4DoF linear actuator kits
+            (Qubic System class) to drive surge / heave / traction loss without bending the rig.
+          </p>
         </label>
 
         <label class="config-card" data-key="pedaltray">
           <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
           <strong>PEDAL TRAY / PLATE — $300</strong>
-          <p>Rigid pedal mount with indexed position. No forward walk.</p>
+          <p>Rigid pedal mount with indexed position. No forward walk under full loadcell braking.</p>
         </label>
 
         <label class="config-card" data-key="stand">
           <input type="checkbox" data-price="500" data-label="MONITOR STAND">
           <strong>MONITOR STAND — $500</strong>
-          <p>Primary display stand (VESA 75/100). Rock-solid.</p>
+          <p>Primary display stand (VESA 75/100). Rock-solid for work, racing HUD, or avionics stack.</p>
         </label>
 
         <label class="config-card" data-key="deskpad">
           <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
           <strong>MOUSE PAD BASE — $120</strong>
-          <p>Keyboard + mouse tray for real desk posture.</p>
+          <p>Keyboard + mouse tray for real desk posture. FPS usable, meeting friendly.</p>
         </label>
 
         <label class="config-card" data-key="pulloutkb">
           <input type="checkbox" data-price="160" data-label="PULLOUT KEYBOARD TRAY">
           <strong>PULLOUT KEYBOARD TRAY — $160</strong>
-          <p>Slide-out typing surface. Retracts for racing/flight.</p>
+          <p>Slide-out typing surface. Retracts for racing/flight so nothing hits your wheel or throttle.</p>
         </label>
       </div>
 
@@ -1307,19 +1337,19 @@ aside.panel{
         <label class="config-card" data-group="monitor" data-key="single">
           <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
           <strong>SINGLE MONITOR ARM — $150</strong>
-          <p>One display arm (24–34″). Ideal for workstation / FPS.</p>
+          <p>One display arm (24–34″). Ideal for workstation / FPS / primary Star Citizen display.</p>
         </label>
 
         <label class="config-card" data-group="monitor" data-key="triple">
           <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
           <strong>TRIPLE MONITOR ARM — $400</strong>
-          <p>Three-arm racing/flight wrap. Angled side panels.</p>
+          <p>Three-arm racing/flight wrap. Angled side panels for iRacing / ACC immersion and flight peripheral vision.</p>
         </label>
 
         <label class="config-card" data-group="monitor" data-key="quad">
           <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
           <strong>QUAD MONITOR SETUP — $450</strong>
-          <p>Triple horizon + overhead HUD/telemetry/chat.</p>
+          <p>Triple horizon + overhead HUD / avionics / chat. Classic sim racing + DCS combo.</p>
         </label>
       </div>
 
@@ -1333,25 +1363,28 @@ aside.panel{
         <label class="config-card" data-key="flight-single">
           <input type="checkbox" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
           <strong>FLIGHT: STICK + THROTTLE — $220</strong>
-          <p>Single-stick and throttle setup.</p>
+          <p>Single-stick and throttle setup, perfect for DCS / MSFS / heli collective / throttle quadrant.</p>
         </label>
 
         <label class="config-card" data-key="flight-dual">
           <input type="checkbox" data-price="240" data-label="FLIGHT: DUAL STICK">
           <strong>FLIGHT: DUAL STICK — $240</strong>
-          <p>Mirrored dual-stick arms. Helos / space sims.</p>
+          <p>Mirrored dual-stick arms. Helo or space sim twin-stick (Star Citizen / Elite / VTOL VR style).</p>
         </label>
 
         <label class="config-card" data-key="flight-pedal">
           <input type="checkbox" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
           <strong>FLIGHT: PEDAL MOUNT — $180</strong>
-          <p>Adjustable rudder pedal base. Stable yaw; zero floor creep.</p>
+          <p>Adjustable rudder pedal base. Stable yaw; zero floor creep; great for VTOL hover and carrier ops.</p>
         </label>
 
         <label class="config-card requires-dynamic" data-key="flight-actuator">
           <input type="checkbox" data-price="380" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>FLIGHT: ACTUATOR MOUNT KIT — $380</strong>
-          <p>Dedicated actuator hardpoints + reinforcement plates for heave/surge cues. Designed for modern motion stacks used in pro flight / space / helo sims.</p>
+          <p>
+            Dedicated actuator hardpoints + reinforcement plates for vertical heave / pitch / roll cues.
+            Built for modern motion stacks used in pro flight and space sim pits.
+          </p>
           <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
       </div>
@@ -1366,25 +1399,28 @@ aside.panel{
         <label class="config-card" data-key="race-wheel">
           <input type="checkbox" data-price="250" data-label="RACING: WHEEL ARM">
           <strong>RACING: WHEEL ARM — $250</strong>
-          <p>Direct-drive capable mount. Zero flex at 15+ Nm.</p>
+          <p>Direct-drive capable mount. Zero flex at 15+ Nm. Your DD wheel ties into reinforced members, not a folding table.</p>
         </label>
 
         <label class="config-card" data-key="race-pedal">
           <input type="checkbox" data-price="180" data-label="RACING: PEDAL MOUNT">
           <strong>RACING: PEDAL MOUNT — $180</strong>
-          <p>Indexed pedal base. Holds under full brake force.</p>
+          <p>Indexed pedal base. Holds position under full brake force without sliding or toe-angle drift.</p>
         </label>
 
         <label class="config-card" data-key="race-shifter">
           <input type="checkbox" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
           <strong>RACING: GEARSHIFT MOUNT — $140</strong>
-          <p>Side-mounted shifter/handbrake plate. Adjustable height/reach.</p>
+          <p>Side-mounted shifter / handbrake plate. Adjustable height/reach for rally / drift / H-pattern muscle memory.</p>
         </label>
 
         <label class="config-card requires-dynamic" data-key="race-actuator">
           <input type="checkbox" data-price="420" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>RACING: ACTUATOR MOUNT KIT — $420</strong>
-          <p>Actuator crossmembers + gussets to carry surge/heave loads under braking and curb strike. Keeps wheel, pedals, and screens aligned under motion.</p>
+          <p>
+            Actuator crossmembers + gussets to carry surge / heave / traction loss loads under braking and curb strike.
+            Keeps wheel, pedals, and monitors aligned even when the motion platform throws weight transfer at you.
+          </p>
           <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
       </div>
@@ -1399,19 +1435,19 @@ aside.panel{
         <label class="config-card" data-key="stream-cam">
           <input type="checkbox" data-price="100" data-label="STREAM: CAMERA ARM">
           <strong>STREAM: CAMERA ARM — $100</strong>
-          <p>Low-vibration arm for webcam or overhead angles.</p>
+          <p>Low-vibration camera arm for face/overhead. No “wobblecam”.</p>
         </label>
 
         <label class="config-card" data-key="stream-light">
           <input type="checkbox" data-price="120" data-label="STREAM: KEY LIGHT ARM">
           <strong>STREAM: KEY LIGHT ARM — $120</strong>
-          <p>Stable light mount off-frame so lighting doesn’t shake.</p>
+          <p>Stable light mount off-frame so lighting doesn’t shake when you brake or bank.</p>
         </label>
 
         <label class="config-card" data-key="stream-deck">
           <input type="checkbox" data-price="90" data-label="STREAM: STREAM DECK ARM">
           <strong>STREAM: STREAM DECK ARM — $90</strong>
-          <p>Dedicated arm for Stream Deck / Loupedeck.</p>
+          <p>Dedicated Stream Deck / Loupedeck arm positioned exactly where your hand rests.</p>
         </label>
       </div>
 
@@ -1424,7 +1460,7 @@ aside.panel{
       <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$0</h2>
       <div style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);margin-bottom:12px">
-        Static = planted + quiet. Dynamic = actuator-ready. You can upgrade Static later.
+        Static = planted + quiet. Dynamic = actuator-ready motion frame. You can upgrade Static later.
       </div>
       <a href="#reserve" class="btn btn--primary" style="width:100%;justify-content:center">Reserve My Slot</a>
     </aside>
@@ -1440,29 +1476,34 @@ aside.panel{
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Flight</h3>
-      <p class="lede">MSFS • DCS • X-Plane • IL-2</p>
-      <p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control.</p>
+      <p class="lede">Microsoft Flight Simulator • DCS • X-Plane • IL-2</p>
+      <p>Center/dual-stick or yoke. Pedal tray alignment for smooth rudder control, collective / throttle exactly where it should be.</p>
     </article>
     <article class="card">
       <h3>Racing</h3>
       <p class="lede">iRacing • ACC • Assetto • Forza</p>
-      <p>Wheel mounts with rigid clamping and repeatable seating marks.</p>
+      <p>Wheel mounts with rigid clamping and repeatable seating marks. Braced for DD torque and loadcell braking. Motion-ready if you want it.</p>
     </article>
     <article class="card">
-      <h3>FPS / Tactical</h3>
-      <p class="lede">CS • Valorant • Destiny • Tarkov • Star Citizen</p>
-      <p>Keyboard clearance, clean cable routes, quick swap to sticks or throttle.</p>
+      <h3>FPS / Space / Tactical</h3>
+      <p class="lede">CS • Valorant • Tarkov • Star Citizen</p>
+      <p>Keyboard clearance, clean cable routes, easy stick/throttle swap for Star Citizen or dual-stick VTOL, then back to desk posture for work.</p>
     </article>
   </div>
 
   <!-- proof photo -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg"
+           alt="CoreFlux Simpits quad-monitor configuration: triple curved sim racing wrap plus overhead HUD / avionics / chat display"
+           style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
-      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
-      That’s curved triples for race/FPS peripheral vision and an elevated HUD / maps / chat display — mounted to frame, not a wobbly desk arm.
+      <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">
+        Triples + Overhead HUD
+      </div>
+      That’s curved triples for race/FPS peripheral vision and an elevated HUD / maps / avionics / chat display —
+      mounted to the frame, not a wobbly desk arm. Works for iRacing, ACC, DCS, Star Citizen multi-MFD layouts.
     </div>
   </div>
 </section>
@@ -1477,25 +1518,25 @@ aside.panel{
     <article class="card">
       <h3>Flight Sticks / HOTAS</h3>
       <ul>
-        <li>Virpil / Winwing / Thrustmaster / VKB</li>
-        <li>Center-stick, dual-stick, or throttle patterns.</li>
+        <li>Virpil • Winwing • Thrustmaster • VKB</li>
+        <li>Center-stick, dual-stick, or throttle plates included.</li>
         <li>Pedal tray clears common rudder sets.</li>
       </ul>
     </article>
     <article class="card">
       <h3>Racing Hardware</h3>
       <ul>
-        <li>Fanatec / Moza / Simagic / Logitech DD</li>
-        <li>Loadcell bases &amp; handbrake / shifter side-mounts.</li>
-        <li>Torque braced into frame, not desk.</li>
+        <li>Fanatec • Moza • Simagic • Logitech DD</li>
+        <li>Loadcell brakes + handbrake / shifter side-mounts.</li>
+        <li>Torque is braced into the frame, not a flimsy desk.</li>
       </ul>
     </article>
     <article class="card">
       <h3>Streaming / Creator</h3>
       <ul>
-        <li>Camera arm for face/overhead.</li>
-        <li>Key/fill light arms for consistency.</li>
-        <li>Stream Deck arm where your hand lives.</li>
+        <li>Camera arm for face, overhead, or cockpit POV.</li>
+        <li>Key/fill light arms that don’t shake under braking.</li>
+        <li>Stream Deck arm where your hand naturally rests.</li>
       </ul>
     </article>
   </div>
@@ -1508,50 +1549,46 @@ aside.panel{
     <span class="pill">We plate for these out of the box</span>
   </div>
   <p class="lede" style="max-width:800px">
-    We ship pre-drilled plates to match these ecosystems. No adapters. No guesswork. Bolt it on, tighten it down, fly / drive.
+    We ship pre-drilled plates to match these ecosystems. No adapters. No guesswork. Bolt it on, tighten it down,
+    race / fly / stream. Send your bolt pattern in Reserve if you’re running something custom.
   </p>
   <div class="cards" style="margin-top:14px">
     <article class="card" style="border:1px solid rgba(0,198,255,.45);box-shadow:0 24px 60px rgba(0,198,255,.25),0 0 60px rgba(0,198,255,.2)">
       <h3>Virpil Controls</h3>
       <p class="lede">Constellation Alpha / Prime • MongoosT-50CM • VMAX Prime • ACE pedals</p>
       <ul>
-        <li>Plates include stick + throttle + pedal patterns</li>
-        <li>Clamp-free HOTAS — zero flex under pull</li>
-        <li>Ready for dual-stick space / heli layouts</li>
+        <li>Stick + throttle + pedal patterns ready.</li>
+        <li>Clamp-free HOTAS — zero flex under pull.</li>
+        <li>Ready for dual-stick space / heli layouts.</li>
       </ul>
     </article>
     <article class="card" style="border:1px solid rgba(255,210,63,.45);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>VKB Controllers</h3>
       <p class="lede">Gladiator / NXT / EVO • STECS throttle</p>
       <ul>
-        <li>Side-stick and center-stick geometry supported</li>
-        <li>Repeatable wrist-neutral positioning</li>
-        <li>Swaps from “desk height” to “cockpit height” fast</li>
+        <li>Side-stick and center-stick geometry supported.</li>
+        <li>Repeatable wrist-neutral positioning.</li>
+        <li>Swap from “desk height” to “cockpit height” fast.</li>
       </ul>
     </article>
     <article class="card" style="border:1px solid rgba(0,198,255,.4);box-shadow:0 24px 60px rgba(0,198,255,.22),0 0 60px rgba(0,198,255,.18)">
       <h3>Moza Racing</h3>
       <p class="lede">R-series direct drive bases • QR hubs</p>
       <ul>
-        <li>4-bolt DD pattern captured in reinforced wheel arm</li>
-        <li>Holds torque without column wobble</li>
-        <li>Pedal base braced for full loadcell pressure</li>
+        <li>4-bolt DD pattern captured in reinforced wheel arm.</li>
+        <li>Holds torque without column wobble.</li>
+        <li>Pedal base braced for full loadcell pressure.</li>
       </ul>
     </article>
     <article class="card" style="border:1px solid rgba(255,210,63,.4);box-shadow:0 24px 60px rgba(255,210,63,.22),0 0 60px rgba(255,210,63,.18)">
       <h3>Fanatec</h3>
       <p class="lede">Podium / ClubSport / CSL DD • QR2 ecosystem</p>
       <ul>
-        <li>160×160 underside mount locked into frame rails</li>
-        <li>Shifter / handbrake arm with indexed reach</li>
-        <li>Stays aligned even under actuator surge</li>
+        <li>160×160 underside mount locked into frame rails.</li>
+        <li>Shifter / handbrake arm with indexed reach.</li>
+        <li>Stays aligned even under surge from motion.</li>
       </ul>
     </article>
-  </div>
-  <div class="panel" style="margin-top:24px;text-align:center">
-    <div style="font-size:.8rem;line-height:1.4;font-weight:600;color:var(--text)">
-      Running something else?<br>We cut customs. Send your bolt pattern in Reserve and we’ll plate it.
-    </div>
   </div>
 </section>
 
@@ -1563,12 +1600,12 @@ aside.panel{
   </div>
   <div class="cards" style="margin-top:14px">
     <article class="card">
-      <h3>Seat &amp; Reach</h3>
+      <h3>Seat & Reach</h3>
       <p class="lede">Posture that lasts all night.</p>
       <ul>
         <li>Seat back: 95–105°; hips slightly below knees.</li>
         <li>Knees: ~110° racing; ~100–110° flight.</li>
-        <li>Arms: 15–30° bend at full lock/stick deflection.</li>
+        <li>Arms: 15–30° bend at full lock / stick deflection.</li>
       </ul>
     </article>
     <article class="card">
@@ -1588,11 +1625,11 @@ aside.panel{
       </ul>
     </article>
     <article class="card">
-      <h3>Screen &amp; FOV</h3>
+      <h3>Screen & FOV</h3>
       <p class="lede">Clarity without motion sickness.</p>
       <ul>
         <li>Top bezel ≈ eye height; center ~15° below.</li>
-        <li>Triples 45–60°; true scale over “wide”.</li>
+        <li>Triples 45–60°; true scale over “super wide”.</li>
       </ul>
     </article>
     <article class="card">
@@ -1600,15 +1637,15 @@ aside.panel{
       <p class="lede">Smooth center, control at edge.</p>
       <ul>
         <li>Flight: curve 15–25; deadzone 2–3%.</li>
-        <li>Brake: linear or mild progressive.</li>
+        <li>Brake: linear or mild progressive ramp.</li>
       </ul>
     </article>
     <article class="card">
       <h3>VR Notes</h3>
       <p class="lede">Comfort first, frames second.</p>
       <ul>
-        <li>Dial IPD physically, then software.</li>
-        <li>Enable reprojection if FPS dips.</li>
+        <li>Dial IPD physically, then software refine.</li>
+        <li>Use reprojection if FPS dips instead of brute-forcing resolution.</li>
       </ul>
     </article>
   </div>
@@ -1625,9 +1662,9 @@ aside.panel{
       <h3>Star Citizen</h3>
       <p class="lede">Dual-stick or HOTAS + pedals.</p>
       <ol>
-        <li>Chassis: Dynamic.</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Dual Stick</em> / <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>, <em>Quad Monitor Setup</em>.</li>
-        <li>Add: <em>Flight Actuator Kit</em> for motion cues.</li>
+        <li>Chassis: Dynamic (motion-ready for spaceflight cues).</li>
+        <li>Loadout: <strong>Flight</strong> → Dual Stick or Stick + Throttle, Flight Pedal Mount, Quad Monitor Setup.</li>
+        <li>Add: Flight Actuator Kit for surge / roll cues in atmospheric flight.</li>
       </ol>
     </article>
     <article class="card">
@@ -1635,17 +1672,17 @@ aside.panel{
       <p class="lede">Center-stick HOTAS + pedals.</p>
       <ol>
         <li>Chassis: Dynamic or Static (neighbors → Static).</li>
-        <li>Loadout: <strong>Flight</strong> → <em>Stick + Throttle</em>, <em>Flight Pedal Mount</em>.</li>
-        <li>Option: <em>Flight Actuator Kit</em> for carrier/helo cues.</li>
+        <li>Loadout: <strong>Flight</strong> → Stick + Throttle, Flight Pedal Mount.</li>
+        <li>Option: Flight Actuator Kit for carrier launch / helo hover feedback.</li>
       </ol>
     </article>
     <article class="card">
       <h3>iRacing / ACC</h3>
       <p class="lede">Wheel + pedals; triples or quad.</p>
       <ol>
-        <li>Chassis: Dynamic for motion; Static for planted torque only.</li>
-        <li>Loadout: <strong>Racing</strong> → <em>Wheel Arm</em>, <em>Racing Pedal Mount</em>, <em>Gearshift Mount</em>, <em>Triple/Quad</em>.</li>
-        <li>Option: <em>Racing Actuator Kit</em> for heave/brake surge.</li>
+        <li>Chassis: Dynamic for motion (heave/surge/traction loss); Static for planted torque only.</li>
+        <li>Loadout: <strong>Racing</strong> → Wheel Arm, Racing Pedal Mount, Gearshift Mount, Triple/Quad displays.</li>
+        <li>Option: Racing Actuator Kit for braking surge and curb strike feel.</li>
       </ol>
     </article>
   </div>
@@ -1660,22 +1697,25 @@ aside.panel{
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Long-session comfort</h3>
-      <p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it.</p>
+      <p>Seat rails slide. Arm reach dials. Monitor height locks. You actually live here — workday + game night.</p>
     </article>
     <article class="card">
       <h3>Low visual noise</h3>
-      <p>Clean in a living room or office. Cables disappear. Lighting’s on-frame.</p>
+      <p>Clean enough for a living room or office. Cable routing disappears. Lighting is on-frame, not clamped to random shelves.</p>
     </article>
     <article class="card">
       <h3>72-hour test</h3>
-      <p>Workday + game sessions + late flight ops without teardown.</p>
+      <p>Full workday, sim racing stint, late flight ops — no teardown. This replaces “desk plus cockpit pile.”</p>
     </article>
   </div>
 
   <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+    <img src="assets/images/Back%20View.png"
+         alt="Rear view of CoreFlux Simpits Dynamic frame showing seat rails, pedal base, HOTAS / shifter arms, monitor stack, and actuator-capable gussets"
+         style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
     <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
-      Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
+      Seat rails, pedal base, HOTAS / shifter arms, monitor stack, cable routing, even motion hardpoints — all in one footprint.
+      Dial posture once and it stays there between roles.
     </div>
   </div>
 </section>
@@ -1717,13 +1757,13 @@ aside.panel{
     <div class="panel" style="display:grid;gap:12px">
       <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 1</div>
       <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You spec the rig</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Static or Dynamic, racing / flight / creator gear, monitor layout.</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Static or Dynamic, racing / flight / creator gear, monitor layout, motion or no motion.</div>
       <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 2</div>
       <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">We confirm fit + layout</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Clearances, posture, cable routing sanity-check. Parts list delivered.</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500;margin-bottom:8px">Clearances, posture, DD torque, actuator load paths, cable routing sanity-check. Parts list delivered.</div>
       <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 3</div>
       <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You're in the pilot batch</div>
-      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early frames, tuning notes, priority on extra mounts.</div>
+      <div class="stepbox__copy" style="font-size:.8rem;line-height:1.4;color:var(--muted);font-weight:500">Early frames, tuning notes, priority on extra mounts and actuator plates.</div>
     </div>
   </div>
 </section>
@@ -1734,21 +1774,53 @@ aside.panel{
     <h2 class="section__title">FAQ</h2>
     <span class="pill">Straight answers</span>
   </div>
+
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Is this compatible with Qubic System-style motion actuators?</summary>
+    <p>
+      Yes. The CoreFlux Dynamic chassis is designed around reinforced actuator hardpoints so you can mount modern
+      3DoF / 4DoF linear actuator stacks (Qubic System class) for heave, surge, traction loss, roll and pitch cues.
+      We brace the load into the frame, not into your monitor arms or keyboard tray.
+    </p>
+  </details>
+
   <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Will Dynamic shake my house apart?</summary>
-    <p>Dynamic is actuator-ready; travel is tuned for cues — heave, surge, traction loss, yaw onset — not “throw you around the room.” You get telemetry-driven load, not theme-park chaos.</p>
+    <p>
+      The Dynamic frame is actuator-ready, but travel is tuned for signal, not chaos.
+      You're getting braking surge, curb strike, turbulence, yaw onset — not amusement-park throw.
+      It's designed for repeatable training-level motion, not destruction.
+    </p>
   </details>
-  <details class="panel" style="margin:10px 0%;">
+
+  <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Can I start Static and upgrade later?</summary>
-    <p>Yes. Static → Dynamic is supported. Controls, screens, mounts, Stream Deck arm all carry forward. You can add actuator hardware later.</p>
+    <p>
+      Yes. Static → Dynamic is supported. You keep your controls, screens, pedal deck, Stream Deck arm, etc.
+      You’re not rebuying your rig. You’re gaining reinforced actuator hardpoints and motion capability.
+    </p>
   </details>
-  <details class="panel" style="margin:10px 0%;">
+
+  <details class="panel" style="margin:10px 0;">
+    <summary style="font-weight:800;cursor:pointer;">Is this just a Playseat / Next Level Racing cockpit?</summary>
+    <p>
+      No. This is meant to be your full-time workstation <em>and</em> your sim racing / flight sim cockpit.
+      It routes cables cleanly, supports direct-drive torque and loadcell braking, supports HOTAS / dual-stick / yoke,
+      and has dedicated actuator gussets for motion platforms. It’s built to live in your room, not live in storage.
+    </p>
+  </details>
+
+  <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">How long does assembly take?</summary>
-    <p>About 2 hours with a hex set. Modules click in — no drilling.</p>
+    <p>About 2 hours with a hex set. Pre-cut extrusion, indexed mounts, no drilling.</p>
   </details>
-  <details class="panel" style="margin:10px 0%;">
+
+  <details class="panel" style="margin:10px 0;">
     <summary style="font-weight:800;cursor:pointer;">Triple / Quad monitor really stable?</summary>
-    <p>Yes — arms mount into frame structure, not a wobbly desk post.</p>
+    <p>
+      Yes — the triple / quad monitor stack mounts into the frame structure, not a wobbly desk arm.
+      Even under braking surge or roll cues from actuators, alignment stays consistent.
+    </p>
   </details>
 </section>
 
@@ -1762,11 +1834,18 @@ aside.panel{
   </div>
   <div class="footer-note" style="margin-top:10px; line-height:1.6;">
     <strong>Contact</strong><br>
-    Email: <a href="mailto:sales@coreflux.co.za" style="color:var(--accent);text-decoration:none;">sales@coreflux.co.za</a><br>
-    Phone: <a href="tel:+27115688667" style="color:var(--accent);text-decoration:none;">+27 11 568 8667</a>
+    Email:
+    <a href="mailto:sales@coreflux.co.za" style="color:var(--accent);text-decoration:none;">
+      sales@coreflux.co.za
+    </a><br>
+    Phone:
+    <a href="tel:+27115688667" style="color:var(--accent);text-decoration:none;">
+      +27 11 568 8667
+    </a>
   </div>
   <div class="footer-note" style="margin-top:12px;">
-    Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
+    Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.”
+    You’re helping shape final spec.
   </div>
 </footer>
 
@@ -1803,12 +1882,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   if (fitBtn){
-    // cosmetic only now; always Fill/cover mode
     fitBtn.textContent = "Fill";
     fitBtn.setAttribute('aria-pressed', 'true');
-    fitBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-    });
+    fitBtn.addEventListener('click',(e)=>{ e.preventDefault(); });
   }
 
   show(0);
@@ -1845,7 +1921,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const $ = (sel, ctx=document) => ctx.querySelector(sel);
   const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
 
-  const baseStatic  = $('input[name="baseframe"][data-label="STATIC BASE FRAME"]');
   const baseDynamic = $('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
 
   function isDynamic(){ return baseDynamic && baseDynamic.checked; }
@@ -1935,7 +2010,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const input = card.querySelector('input');
       if(!input) return;
 
-      // if this requires Dynamic and we're not Dynamic, auto-pick Dynamic
+      // If this card needs Dynamic and we're not Dynamic, auto-pick Dynamic
       if(card.classList.contains('requires-dynamic') && !isDynamic()){
         if(baseDynamic){
           baseDynamic.checked = true;
@@ -2016,7 +2091,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       return;
     }
 
-    // build a prefilled email so you have the lead, even on static hosting
+    // build prefilled mail
     const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
     const body = encodeURIComponent(
 `Email: ${e}
@@ -2027,11 +2102,12 @@ Setup notes / hardware (optional, fill in before send):
 - Wheel base / HOTAS / pedals:
 - Triple / quad / VR:
 - Static or Dynamic interest:
+- Motion / actuator interest (3DoF / 4DoF? Qubic System?):
 - Anything we should know (desk space, neighbors, etc.):`
     );
 
-    // CHANGE THIS to your inbox
-    const dest = "team@coreflux.fake";
+    // TODO: set to your real inbox
+    const dest = "sales@coreflux.co.za";
 
     window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
 
