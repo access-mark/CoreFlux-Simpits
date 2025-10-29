@@ -15,25 +15,21 @@
 
 <style>
 /* ======================================================
-   CoreFlux Simpits — Production CSS
-   - Global dark field + cyan/gold bloom
-   - Sticky glass nav
-   - Big brand block centered
-   - Proof/social
-   - Reserve clarity
+   CoreFlux Simpits — Production CSS (Next Level)
+   - Taller nav banner, centered lockup
+   - Logo left, CTA right
+   - No nav pills
+   - Hero scarcity + Reserve-first CTA
+   - Price clarity in configurator
    ====================================================== */
 
 /* ---- Tokens ---- */
 :root{
-  --bg:#0b1020;
-  --bg-2:#0a0f1e;
-  --bg-3:#090e1a;
+  --bg:#0b1020; --bg-2:#0a0f1e; --bg-3:#090e1a;
 
-  --panel:#111831;
-  --panel-2:#0f152b;
+  --panel:#111831; --panel-2:#0f152b;
 
-  --text:#e6eefc;
-  --muted:#a6b0cf;
+  --text:#e6eefc; --muted:#a6b0cf;
 
   --accent:#00c6ff;          /* CoreFlux cyan */
   --accent-2:#ffd23f;        /* soft gold */
@@ -44,13 +40,11 @@
     0 10px 30px rgba(0,0,0,.45),
     inset 0 1px 0 rgba(255,255,255,.04);
 
-  --radius-xl:24px;
-  --radius-lg:18px;
-  --radius-md:14px;
+  --radius-xl:24px; --radius-lg:18px; --radius-md:14px;
 
-  --logo-h:54px;
+  --logo-h:54px;             /* partner logos height */
 
-  --nav-h:140px;             /* taller hero banner */
+  --nav-h:160px;
   --content-max:1200px;
 }
 
@@ -62,6 +56,7 @@ body{
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
 
+  /* SINGLE consistent canvas background */
   background-color:var(--bg);
   background-image:
     radial-gradient(1000px 700px at 70% -10%, rgba(0,198,255,.10) 0%, transparent 60%),
@@ -78,10 +73,7 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
 /* wrapper */
-.wrap{
-  width:min(var(--content-max),92vw);
-  margin:0 auto;
-}
+.wrap{ width:min(var(--content-max),92vw); margin:0 auto; }
 
 .lede{
   color:var(--muted);
@@ -91,20 +83,12 @@ img{max-width:100%;display:block}
   max-width:680px;
 }
 
-section{
-  padding:48px 0;
-  position:relative;
-  z-index:1;
-}
+section{ padding:48px 0; position:relative; z-index:1; }
 
-/* ---- Global particles canvas ---- */
+/* ---- Global particles canvas (fixed brightness) ---- */
 #aiCanvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  opacity:.55;
-  transition:none;
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  opacity:.55; transition:none;
 }
 
 /* ======================================================
@@ -118,114 +102,107 @@ section{
   height:var(--nav-h);
 
   backdrop-filter:saturate(140%) blur(var(--blur));
-  background:rgba(8,12,26,.72);
+  background:rgba(8,12,26,.8);
   border-bottom:1px solid var(--border);
-  box-shadow:0 20px 40px rgba(0,0,0,.8);
-}
+  box-shadow:0 30px 60px rgba(0,0,0,.9);
 
+  display:flex;
+  align-items:center;
+}
 .nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
   height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center; /* center the block */
   padding:0;
-  position:relative;
 }
 
-/* brand block */
-.brand-shell{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  line-height:1.05;
-  max-width:90%;
-}
-
-/* logo stays left edge of nav visually but inside layout we keep it inline;
-   so we fake "left" with absolute logo for desktop */
-.brand-shell__row{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  position:relative;
-  padding-left:120px; /* reserve space for left-fixed logo */
-}
-
-/* left logo */
-.brand__logo-outer{
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%);
+/* LEFT: LOGO */
+.brand{
   display:flex;
   align-items:center;
-  justify-content:center;
-  width:110px;
-  height:110px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:
-    0 24px 60px rgba(0,0,0,.8),
-    0 0 80px rgba(0,198,255,.4);
+  gap:16px;
+  min-width:0;
 }
-
 .brand__logo-img{
-  height:96px;
+  height:110px;
   width:auto;
-  max-height:96px;
+  max-height:110px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
 }
 
-/* headline + subhead */
-.brand__stack{
+/* CENTER: LOCKUP */
+.brand__center{
+  text-align:center;
+  line-height:1.05;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  min-width:0;
 }
-
 .brand__tagline{
   font-weight:800;
-  letter-spacing:-.02em;
+  font-size:2rem;
+  line-height:1.1;
+  letter-spacing:-.03em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
   text-shadow:
-    0 0 16px rgba(0,198,255,.4),
-    0 0 36px rgba(0,198,255,.25),
-    0 0 60px rgba(255,210,63,.18);
-  font-size:clamp(1.4rem,1.2vw,1.6rem);
-  line-height:1.1;
-  white-space:nowrap;
+    0 0 24px rgba(0,198,255,.4),
+    0 0 48px rgba(0,198,255,.25),
+    0 0 80px rgba(255,210,63,.18);
 }
-
-/* doubled scale main name */
 .brand__name{
-  font-weight:800;
-  letter-spacing:-.03em;
+  font-weight:900;
+  font-size:2rem;
+  line-height:1.1;
   color:var(--text);
-  line-height:1.05;
-  text-align:center;
-  font-size:clamp(2.2rem,2.2vw,2.6rem);
-  white-space:nowrap;
+  letter-spacing:-.03em;
+  margin-top:4px;
+}
+.brand__subline{
+  margin-top:8px;
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  background:rgba(0,198,255,.08);
+  border:1px solid rgba(0,198,255,.4);
+  border-radius:999px;
+  padding:4px 10px;
+  box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);
 }
 
-/* kill nav link pills on desktop entirely */
-.nav__links{
-  display:none;
+/* RIGHT CTA */
+.nav__cta-wrap{
+  display:flex;
+  align-items:center;
+}
+.cta{
+  padding:12px 16px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),#4be3d1);
+  color:#041221;
+  font-weight:800;
+  font-size:.9rem;
+  line-height:1.2;
+  box-shadow:0 12px 28px rgba(0,198,255,.28);
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
 }
 
-/* burger never shown now */
-.nav__burger{
-  display:none;
-}
+/* hide old nav links/burger everywhere */
+.nav__links{display:none!important;}
+.nav__burger{display:none!important;}
 
 /* ======================================================
    HERO
@@ -239,7 +216,6 @@ section{
   gap:40px;
   align-items:center;
 }
-
 .h1{
   font-size:clamp(32px,3.4vw,56px);
   line-height:1.04;
@@ -250,7 +226,19 @@ section{
   color:transparent;
   font-weight:800;
 }
-
+.hero__scarcity{
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--accent);
+  background:rgba(0,198,255,.08);
+  border:1px solid rgba(0,198,255,.4);
+  border-radius:8px;
+  display:inline-block;
+  padding:6px 8px;
+  box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);
+  margin-bottom:12px;
+}
 .hero__claim{
   font-size:1rem;
   font-weight:700;
@@ -259,7 +247,6 @@ section{
   max-width:640px;
   margin:0 0 14px;
 }
-
 .hero__trustline{
   margin-top:16px;
   font-size:.8rem;
@@ -271,14 +258,6 @@ section{
 .hero__trustline b{
   color:var(--text);
   font-weight:700;
-}
-
-/* CTA row w/ Reserve Spot */
-.hero__cta-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:10px;
 }
 
 /* scroll hint */
@@ -299,9 +278,7 @@ section{
   height:18px;
   border-radius:3px;
   background:radial-gradient(circle at 50% 0%,rgba(0,198,255,1) 0%,rgba(0,198,255,0) 70%);
-  box-shadow:
-    0 0 10px rgba(0,198,255,.9),
-    0 0 40px rgba(0,198,255,.5);
+  box-shadow:0 0 10px rgba(0,198,255,.9), 0 0 40px rgba(0,198,255,.5);
   animation:scrollpulse 1.8s infinite
 }
 @keyframes scrollpulse{
@@ -363,9 +340,7 @@ section{
 }
 
 /* HERO MOCK (carousel) */
-.mock-wrap{
-  position:relative
-}
+.mock-wrap{ position:relative }
 #mockGlow.mock-glow{
   position:absolute;
   inset:-60px;
@@ -375,7 +350,7 @@ section{
   background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),
     rgba(0,198,255,.45) 0%,
     rgba(75,227,209,.22) 35%,
-    rgba(0,198,255,0) 70%)
+    rgba(0,198,255,0) 70%);
 }
 .mock{
   position:relative;
@@ -385,9 +360,7 @@ section{
   background:#0b1020;
   height:540px;
   max-height:540px;
-  box-shadow:
-    0 0 80px rgba(0,198,255,.35),
-    0 40px 120px rgba(0,0,0,.6);
+  box-shadow:0 0 80px rgba(0,198,255,.35), 0 40px 120px rgba(0,0,0,.6);
   z-index:1
 }
 .mock__slide{
@@ -530,7 +503,44 @@ section{
   line-height:1.4;
   font-weight:500
 }
-.card li{ margin:4px 0 }
+.card li{
+  margin:4px 0
+}
+
+/* chassis photo row */
+.chassis-vis{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-top:16px
+}
+.chassis-vis__item{
+  flex:1 1 260px;
+  background:rgba(17,22,38,.7);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:16px;
+  text-align:center;
+}
+.chassis-vis__img{
+  width:100%;
+  max-width:320px;
+  margin:0 auto 12px;
+  height:auto
+}
+.chassis-vis__label{
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.3;
+  color:var(--text)
+}
+.chassis-vis__note{
+  font-size:.75rem;
+  font-weight:500;
+  line-height:1.4;
+  color:var(--muted)
+}
 
 /* proof strip + force sidebar */
 .proof-strip{
@@ -542,9 +552,7 @@ section{
   background:rgba(0,0,0,.4);
   border:1px solid rgba(0,198,255,.4);
   border-radius:14px;
-  box-shadow:
-    0 24px 60px rgba(0,0,0,.8),
-    0 0 60px rgba(0,198,255,.18);
+  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
   padding:16px;
   font-size:.8rem;
   line-height:1.4;
@@ -584,9 +592,7 @@ section{
   background:rgba(0,0,0,.4);
   border:1px solid rgba(0,198,255,.4);
   border-radius:14px;
-  box-shadow:
-    0 24px 60px rgba(0,0,0,.8),
-    0 0 60px rgba(0,198,255,.18);
+  box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
   padding:16px;
   text-align:center;
   font-size:.75rem;
@@ -598,45 +604,7 @@ section{
   width:100%;
   height:auto;
   display:block;
-  margin:0 auto 12px;
-}
-
-/* chassis photo row */
-.chassis-vis{
-  display:flex;
-  flex-wrap:wrap;
-  gap:16px;
-  margin-top:16px
-}
-.chassis-vis__item{
-  flex:1 1 260px;
-  background:rgba(17,22,38,.7);
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  padding:16px;
-  text-align:center;
-}
-.chassis-vis__img{
-  width:100%;
-  max-width:320px;
-  margin:0 auto 12px;
-  height:auto;
-  object-fit:cover; /* force fill behavior */
-  border-radius:12px;
-  background:#000;
-}
-.chassis-vis__label{
-  font-size:.8rem;
-  font-weight:700;
-  line-height:1.3;
-  color:var(--text)
-}
-.chassis-vis__note{
-  font-size:.75rem;
-  font-weight:500;
-  line-height:1.4;
-  color:var(--muted)
+  margin:0 auto 12px
 }
 
 /* spec grid */
@@ -707,6 +675,30 @@ section{
   font-weight:500;
   font-size:.8rem;
   line-height:1.3
+}
+
+/* logo strip */
+.logo-strip{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:40px;
+  padding:24px 0
+}
+.logo-strip img,
+.logo-strip svg{
+  height:var(--logo-h);
+  max-height:var(--logo-h);
+  width:auto;
+  opacity:.8;
+  transition:opacity .25s ease, transform .25s ease, filter .25s ease;
+  filter:drop-shadow(0 6px 14px rgba(0,198,255,.12))
+}
+.logo-strip img:hover,
+.logo-strip svg:hover{
+  opacity:1;
+  transform:translateY(-2px) scale(1.04);
+  filter:drop-shadow(0 8px 18px rgba(0,198,255,.18))
 }
 
 /* sticky CTA */
@@ -785,33 +777,23 @@ footer{
   position:relative
 }
 .config-group--core{
-  background:
-    radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%),
-    rgba(20,24,40,.6);
+  background:radial-gradient(circle at 10% 0%,rgba(90,110,170,.08) 0%,rgba(0,0,0,0) 60%), rgba(20,24,40,.6);
   border:1px solid rgba(255,255,255,.18)
 }
 .config-group--monitor{
-  background:
-    radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%),
-    rgba(0,30,45,.55);
+  background:radial-gradient(circle at 0% 0%,rgba(0,198,255,.12) 0%,rgba(0,0,0,0) 60%), rgba(0,30,45,.55);
   border:1px solid rgba(0,198,255,.6)
 }
 .config-group--flight{
-  background:
-    radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%),
-    rgba(0,40,35,.55);
+  background:radial-gradient(circle at 0% 0%,rgba(75,227,209,.14) 0%,rgba(0,0,0,0) 60%), rgba(0,40,35,.55);
   border:1px solid rgba(75,227,209,.6)
 }
 .config-group--racing{
-  background:
-    radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%),
-    rgba(40,30,0,.5);
+  background:radial-gradient(circle at 0% 0%,rgba(255,210,63,.14) 0%,rgba(0,0,0,0) 60%), rgba(40,30,0,.5);
   border:1px solid rgba(255,210,63,.6)
 }
 .config-group--stream{
-  background:
-    radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%),
-    rgba(40,0,35,.5);
+  background:radial-gradient(circle at 0% 0%,rgba(255,0,200,.16) 0%,rgba(0,0,0,0) 60%), rgba(40,0,35,.5);
   border:1px solid rgba(255,0,200,.5)
 }
 
@@ -863,6 +845,7 @@ footer{
 .requires-dynamic.locked .req-note{
   display:block
 }
+
 aside.panel{
   position:sticky;
   top:100px;
@@ -874,64 +857,34 @@ aside.panel{
    ====================================================== */
 
 @media (max-width:1080px){
-  .hero{
-    grid-template-columns:1fr
-  }
-  .mock{
-    height:400px;
-    max-height:400px
-  }
+  .hero{ grid-template-columns:1fr }
+  .mock{ height:400px; max-height:400px }
 }
-
 @media (max-width:980px){
-  .statbar{
-    grid-template-columns:repeat(2,1fr)
-  }
-  .cards{
-    grid-template-columns:1fr
-  }
-  :root{
-    --logo-h:46px
-  }
-
-  /* brand shell: collapse the left-logo padding */
-  .brand-shell__row{
-    padding-left:0;
-  }
-  .brand__logo-outer{
-    position:static;
-    transform:none;
-    width:96px;
-    height:96px;
-    margin-bottom:8px;
-  }
-  .nav__inner{
-    justify-content:center;
-  }
+  .statbar{ grid-template-columns:repeat(2,1fr) }
+  .cards{ grid-template-columns:1fr }
+  :root{ --logo-h:46px }
 }
-
 @media (max-width:520px){
-  .brand__logo-outer{
-    width:84px;
-    height:84px;
-  }
   .brand__logo-img{
-    height:72px;
-    max-height:72px;
+    height:80px;
+    max-height:80px;
   }
-  :root{
-    --logo-h:40px
+  .brand__tagline,
+  .brand__name{
+    font-size:1.4rem;
+    line-height:1.15;
   }
+  .brand__subline{
+    font-size:.7rem;
+  }
+  .nav{
+    --nav-h:140px;
+  }
+
   .config-summary{
     flex-direction:column;
     align-items:flex-start
-  }
-  .brand__tagline{
-    font-size:1.2rem;
-    line-height:1.15;
-  }
-  .brand__name{
-    font-size:2rem;
   }
 }
 </style>
@@ -940,25 +893,28 @@ aside.panel{
 <body>
 <canvas id="aiCanvas"></canvas>
 
-<button id="stickyCTA" onclick="document.querySelector('#configurator').scrollIntoView({behavior:'smooth'})">Build Now</button>
+<button id="stickyCTA" onclick="document.querySelector('#reserve').scrollIntoView({behavior:'smooth'})">
+  Reserve / Ask
+</button>
 
 <nav class="nav" aria-label="Primary">
   <div class="wrap nav__inner">
-
-    <div class="brand-shell">
-      <div class="brand-shell__row">
-        <div class="brand__logo-outer">
-          <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo">
-        </div>
-
-        <div class="brand__stack">
-          <span class="brand__tagline">One Rig. All Roles.</span>
-          <span class="brand__name">CoreFlux Simpits</span>
-        </div>
-      </div>
+    <!-- left: logo -->
+    <div class="brand" aria-label="CoreFlux">
+      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
     </div>
 
-    <!-- nav__links intentionally removed -->
+    <!-- center: main lockup -->
+    <div class="brand__center">
+      <div class="brand__tagline">One Rig. All Roles.</div>
+      <div class="brand__name">CoreFlux Simpits</div>
+      <div class="brand__subline">Pilot Batch #1 now forming</div>
+    </div>
+
+    <!-- right: CTA -->
+    <div class="nav__cta-wrap">
+      <a class="cta" href="#reserve">Reserve Access</a>
+    </div>
   </div>
 </nav>
 
@@ -966,15 +922,22 @@ aside.panel{
 <section class="hero wrap">
   <div>
     <h1 class="h1">One Rig. Infinite Worlds.</h1>
-    <p class="hero__claim">Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30. Same seat. Same footprint. Zero rebuild.</p>
-    <p class="lede">
-      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis, to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform. Mount a proper mic, camera, key light and ship clean video/audio to clients. This is not cosplay furniture.
+
+    <div class="hero__scarcity">Pilot Batch #1 is filling now.</div>
+
+    <p class="hero__claim">
+      Static or motion-capable. Work at 09:00. FPS at lunch. ACC at 20:00. Carrier ops in DCS at 23:30.
+      Same seat. Same footprint. Zero rebuild.
     </p>
 
-    <div class="hero__cta-row">
-      <a href="#configurator" class="btn btn--primary">Configure My Build</a>
+    <p class="lede">
+      The CoreFlux Dynamic Simpit shifts from deep-focus workstation to FPS gunner seat, to race chassis,
+      to full-flight cockpit — in minutes. Your call: planted static frame, or actuator-ready motion platform.
+    </p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+      <a href="#reserve" class="btn btn--primary">Reserve My Slot</a>
       <a href="#chassis" class="btn btn--ghost">Static vs Dynamic</a>
-      <a href="#reserve" class="btn btn--ghost">Reserve Spot</a>
     </div>
 
     <div class="hero__trustline"><b>≤5 min mode switch</b> · <b>2 hr assembly</b> · <b>No drilling</b> · Holds direct-drive torque + loadcell brake force.</div>
@@ -1176,21 +1139,27 @@ aside.panel{
     <article class="card">
       <h3>Static Frame</h3>
       <p class="lede">Locked. Silent. Apartment-safe.</p>
-      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.<br><strong>Why:</strong> Cheaper entry, no floor drama.<br><strong>Noise:</strong> Low mechanical noise. No shock through the floor.</p>
+      <p>Zero actuators. Still supports DD wheels, loadcell pedals, HOTAS, dual/quad display.</p>
+      <p><strong>Why:</strong> Cheaper entry, no floor drama.</p>
     </article>
     <article class="card">
       <h3>Dynamic Frame</h3>
       <p class="lede">Motion-capable. Built to take hits.</p>
-      <p>Reinforced members and actuator points translate telemetry into cues without twisting.<br><strong>Why:</strong> Race/flight cues you can feel.<br><strong>Note:</strong> Motion kit adds physical movement. Check neighbors below you.</p>
+      <p>Reinforced members and actuator points translate telemetry into cues without twisting.</p>
+      <p><strong>Why:</strong> Race/flight cues you can feel.</p>
+      <p style="font-size:.75rem;line-height:1.4;color:var(--muted);font-weight:500">
+        Motion hardware itself is third-party. We design the bracing and mounts, not a theme-park ride.
+      </p>
     </article>
     <article class="card">
       <h3>Upgrade Path</h3>
       <p class="lede">Static today → Dynamic later.</p>
-      <p>Shared geometry. Controls and mounts carry forward.<br><strong>No rebuild.</strong></p>
+      <p>Shared geometry. Controls and mounts carry forward.</p>
+      <p><strong>No rebuild.</strong></p>
     </article>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-    <a href="#configurator" class="btn btn--primary">Spec My Chassis</a>
+    <a href="#reserve" class="btn btn--primary">Spec My Chassis</a>
     <a href="#reserve" class="btn btn--ghost">Reserve Pilot Batch</a>
   </div>
 </section>
@@ -1219,18 +1188,8 @@ aside.panel{
     </article>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
-    <a href="#configurator" class="btn btn--primary">Build Mine</a>
+    <a href="#reserve" class="btn btn--primary">Build Mine</a>
     <a href="#quickstart" class="btn btn--ghost">Game Tuning</a>
-  </div>
-</section>
-
-<!-- SOCIAL PROOF -->
-<section class="wrap" id="pilot-proof">
-  <div class="panel" style="display:grid;gap:8px;max-width:600px;margin:0 auto 24px;text-align:left">
-    <div style="font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;">Pilot feedback</div>
-    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“Static frame held my DD wheel at 15 Nm. Didn’t walk. Didn’t twist.”</div>
-    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“Assembly was two hours, not a weekend project.”</div>
-    <div style="font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);">“I work in it all day and still want to sit in it at night.”</div>
   </div>
 </section>
 
@@ -1240,7 +1199,11 @@ aside.panel{
     <h2 class="section__title">Configurator</h2>
     <span class="pill">Live total · Real modules</span>
   </div>
-  <p class="lede">Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.</p>
+  <p class="lede">
+    Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.<br><br>
+    Typical Static builds land around $1.8k–$2.5k with controls. Dynamic motion-ready builds land around
+    $2.8k–$3.6k before actuators. You can start Static and upgrade later — mounts carry forward.
+  </p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <!-- LEFT -->
@@ -1448,10 +1411,10 @@ aside.panel{
     </article>
   </div>
 
-  <!-- real photo proof -->
+  <!-- proof photo -->
   <div class="panel" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
     <div style="flex:2 1 260px;min-width:240px">
-      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:cover;">
+      <img src="assets/images/Quad%20Monitor%20Stand%20(2).jpg" alt="CoreFlux rig running curved triple setup plus overhead HUD monitor" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
     </div>
     <div style="flex:1 1 200px;min-width:200px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--muted)">
       <div style="color:var(--text);font-weight:700;font-size:.8rem;line-height:1.3;margin-bottom:6px">Triples + Overhead HUD</div>
@@ -1607,38 +1570,6 @@ aside.panel{
   </div>
 </section>
 
-<!-- FIT -->
-<section id="fit" class="wrap">
-  <div class="section__head">
-    <h2 class="section__title">Fit Check</h2>
-    <span class="pill">Real posture, not cosplay</span>
-  </div>
-  <div class="cards" style="margin-top:14px">
-    <article class="card">
-      <h3>Long-session comfort</h3>
-      <p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it.</p>
-    </article>
-    <article class="card">
-      <h3>Low visual noise</h3>
-      <p>Clean in a living room or office. Cables disappear. Lighting’s on-frame.</p>
-    </article>
-    <article class="card">
-      <h3>72-hour test</h3>
-      <p>Workday + game sessions + late flight ops without teardown.</p>
-    </article>
-  </div>
-
-  <div class="panel" style="margin-top:16px;text-align:center">
-    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;object-fit:cover;">
-    <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
-      Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
-    </div>
-    <div style="font-size:.7rem;color:var(--muted);margin-top:8px;font-weight:600;max-width:520px;margin-left:auto;margin-right:auto;">
-      Broad fit range from shorter pilots to tall drivers — we confirm during Reserve.
-    </div>
-  </div>
-</section>
-
 <!-- QUICK-START -->
 <section id="quickstart" class="wrap">
   <div class="section__head">
@@ -1676,6 +1607,35 @@ aside.panel{
   </div>
 </section>
 
+<!-- FIT -->
+<section id="fit" class="wrap">
+  <div class="section__head">
+    <h2 class="section__title">Fit Check</h2>
+    <span class="pill">Real posture, not cosplay</span>
+  </div>
+  <div class="cards" style="margin-top:14px">
+    <article class="card">
+      <h3>Long-session comfort</h3>
+      <p>Seat rails slide. Arm reach dials. Monitor height locks. Live in it.</p>
+    </article>
+    <article class="card">
+      <h3>Low visual noise</h3>
+      <p>Clean in a living room or office. Cables disappear. Lighting’s on-frame.</p>
+    </article>
+    <article class="card">
+      <h3>72-hour test</h3>
+      <p>Workday + game sessions + late flight ops without teardown.</p>
+    </article>
+  </div>
+
+  <div class="panel" style="margin-top:16px;text-align:center">
+    <img src="assets/images/Back%20View.png" alt="Rear view of CoreFlux frame showing seat rails, pedal base, and side mounts" style="width:100%;max-width:480px;height:auto;margin:0 auto 12px;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);background:#000;">
+    <div style="font-size:.75rem;line-height:1.4;font-weight:500;color:var(--muted);max-width:520px;margin:0 auto">
+      Seat rails, pedal base, HOTAS / shifter arms, monitor stack — all in one footprint. Dial posture once and it stays there.
+    </div>
+  </div>
+</section>
+
 <!-- RESERVE -->
 <section id="reserve" class="wrap">
   <div class="section__head">
@@ -1709,15 +1669,7 @@ aside.panel{
       </label>
       <button id="reserveBtn" type="button" class="btn btn--primary" style="justify-content:center">Reserve My Spot</button>
       <div id="reserveNote" style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);min-height:1.4em"></div>
-
-      <div style="font-size:.7rem;line-height:1.4;font-weight:600;color:var(--muted);">
-        No payment now. You’re just locking a pilot-batch build slot so we can confirm fit, mounts, and region.
-      </div>
-      <div style="font-size:.7rem;line-height:1.4;font-weight:600;color:var(--muted);margin-top:6px;">
-        Initial pilot shipping: US / EU / ZA. Others: we’ll confirm.
-      </div>
     </div>
-
     <div class="panel" style="display:grid;gap:12px">
       <div class="stepbox__num" style="font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1.3">Step 1</div>
       <div class="stepbox__title" style="font-size:.95rem;line-height:1.3;font-weight:700;color:var(--text)">You spec the rig</div>
@@ -1760,12 +1712,6 @@ aside.panel{
   © <span id="year"></span> CoreFlux Simpits
   <div class="footer-note">
     Geometry, actuator bracing, and tolerances are being dialed with pilot builders. You’re not “preordering a box.” You’re helping shape final spec.
-  </div>
-  <div class="footer-note" style="margin-top:20px;">
-    Specs, pricing, and geometry may be refined with pilot builders.
-  </div>
-  <div class="footer-note">
-    Questions before you reserve? build@coreflux.simpits
   </div>
 </footer>
 
@@ -1894,7 +1840,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let total = 0;
     const picked = [];
 
-    $$('input[type="checkbox"]', root).forEach(ch=>{
+    $$( 'input[type="checkbox"]', root ).forEach(ch=>{
       if(ch.disabled) return;
       if(ch.checked){
         const price = parsePrice(ch);
@@ -1910,7 +1856,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
 
     if(linesEl){
-      linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
+      linesEl.innerHTML = picked
+        .map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`)
+        .join('');
     }
     if(countEl){
       countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
@@ -1925,6 +1873,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const input = card.querySelector('input');
       if(!input) return;
 
+      // if this requires Dynamic and we're not Dynamic, auto-pick Dynamic
       if(card.classList.contains('requires-dynamic') && !isDynamic()){
         if(baseDynamic){
           baseDynamic.checked = true;
@@ -1949,6 +1898,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
+  // sync dataset price/label once
   (function syncOnce(){
     $$('input', root).forEach(i=>{
       const p = parsePrice(i);
@@ -1979,30 +1929,52 @@ document.addEventListener('DOMContentLoaded', ()=>{
   io.observe(hero);
 })();
 
-/* Reserve form handling */
+/* Reserve form handling (mailto capture) */
 (function(){
-  const email = document.getElementById('rEmail');
+  const email  = document.getElementById('rEmail');
   const region = document.getElementById('rRegion');
-  const mode = document.getElementById('rMode');
-  const btn = document.getElementById('reserveBtn');
-  const note = document.getElementById('reserveNote');
+  const mode   = document.getElementById('rMode');
+  const btn    = document.getElementById('reserveBtn');
+  const note   = document.getElementById('reserveNote');
   if(!btn) return;
 
   btn.addEventListener('click',()=>{
-    const e=email.value.trim(), rg=region.value.trim(), md=mode.value.trim();
+    const e  = email.value.trim();
+    const rg = region.value.trim();
+    const md = mode.value.trim();
+
     if(!e){
       note.textContent="Add an email so we can reach you.";
       note.style.color="var(--accent)";
       return;
     }
-    if(!rg||!md){
+    if(!rg || !md){
       note.textContent="Tell us where you are and what you fly/drive.";
       note.style.color="var(--accent)";
       return;
     }
+
+    // build a prefilled email so you have the lead, even on static hosting
+    const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
+    const body = encodeURIComponent(
+`Email: ${e}
+Region: ${rg}
+Primary Mode: ${md}
+
+Setup notes / hardware (optional, fill in before send):
+- Wheel base / HOTAS / pedals:
+- Triple / quad / VR:
+- Static or Dynamic interest:
+- Anything we should know (desk space, neighbors, etc.):`
+    );
+
+    // CHANGE THIS to your inbox
+    const dest = "team@coreflux.fake";
+
+    window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
+
     note.textContent="Locked. We'll reach out with pilot batch details.";
     note.style.color="var(--text)";
-    console.log("[RESERVE]", {email:e,region:rg,mode:md});
   });
 })();
 
