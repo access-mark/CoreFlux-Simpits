@@ -16,12 +16,13 @@
 <style>
 /* ======================================================
    CoreFlux Simpit — Production CSS (Stable Canvas)
-   - Single-page nav (no pills)
-   - Bigger logo
-   - Consistent dark canvas
-   - Hero + mock carousel
+   - Single-page header (no nav pills)
+   - Taller brand bar with enlarged logo
+   - Tagline dominant
+   - Consistent canvas bg
+   - Hero + carousel
    - Configurator
-   - Image blocks default fill
+   - Image frames auto border/shadow
    ====================================================== */
 
 /* ---- Tokens ---- */
@@ -51,7 +52,7 @@
 
   --logo-h:54px;
 
-  --nav-h:96px;
+  --nav-h:140px; /* taller brand bar */
   --content-max:1200px;
 }
 
@@ -96,7 +97,7 @@ section{
   z-index:1;
 }
 
-/* canvas bg layer */
+/* global animated particle canvas */
 #aiCanvas{
   position:fixed;
   inset:0;
@@ -107,7 +108,7 @@ section{
 }
 
 /* ======================================================
-   NAV (single page, no pills)
+   HEADER / BRAND BAR
    ====================================================== */
 .nav{
   position:sticky;
@@ -118,25 +119,31 @@ section{
   background:rgba(8,12,26,.72);
   border-bottom:1px solid var(--border);
   box-shadow:0 20px 40px rgba(0,0,0,.8);
+
+  display:flex;
+  align-items:center;
 }
 .nav__inner{
   height:100%;
+  width:100%;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:center;
+  text-align:center;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:20px;
   min-width:0;
+  flex-wrap:nowrap;
 }
 
 .brand__logo-img{
-  height:110px;            /* bigger logo */
+  height:140px;
+  max-height:140px;
   width:auto;
-  max-height:110px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
@@ -146,34 +153,39 @@ section{
   display:flex;
   flex-direction:column;
   line-height:1.05;
-}
-
-.brand__name{
-  font-weight:800;
-  letter-spacing:.5px;
-  font-size:1rem;
-  line-height:1;
-  color:var(--text);
-  opacity:.7;
+  align-items:flex-start;
 }
 
 .brand__tagline{
   font-weight:800;
-  font-size:1.25rem;
-  letter-spacing:-.02em;
+  font-size:1.6rem;
+  line-height:1.15;
+  letter-spacing:-.03em;
   background:linear-gradient(90deg,#cfe9ff 0%, #7fd3ff 55%, #ffe189 100%);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
   text-shadow:
-    0 0 16px rgba(0,198,255,.4),
-    0 0 36px rgba(0,198,255,.25),
-    0 0 60px rgba(255,210,63,.18);
+    0 0 20px rgba(0,198,255,.45),
+    0 0 40px rgba(0,198,255,.28),
+    0 0 70px rgba(255,210,63,.22);
+  order:1;
+  white-space:nowrap;
 }
 
-/* we removed nav__links pills completely */
+.brand__name{
+  font-weight:700;
+  font-size:1rem;
+  line-height:1.2;
+  letter-spacing:.05em;
+  color:var(--text);
+  opacity:.8;
+  text-transform:uppercase;
+  order:2;
+  white-space:nowrap;
+}
 
-/* sticky CTA button bottom right */
+/* sticky CTA bottom right */
 #stickyCTA{
   position:fixed;
   right:16px;
@@ -195,7 +207,7 @@ section{
   cursor:pointer;
 }
 
-/* generic button styles */
+/* base button styles */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -357,7 +369,7 @@ section{
   z-index:1;
 }
 
-/* slides default FILL */
+/* slides default COVER/FILL */
 .mock__slide{
   position:absolute;
   inset:0;
@@ -374,7 +386,7 @@ section{
   transform:scale(1.08);
 }
 
-/* when toggled fit */
+/* FIT mode override */
 .mock.fit .mock__slide{
   object-fit:contain;
   transform:scale(1)!important;
@@ -577,6 +589,8 @@ section{
   width:100%;
   height:auto;
   display:block;
+  object-fit:cover;
+  background:#000;
 }
 .force-vis__title{
   color:var(--text);
@@ -661,7 +675,7 @@ section{
   color:var(--muted);
 }
 
-/* config summary bar (not sticky footer, inside kits) */
+/* config summary bar (inside kits etc.) */
 .config-summary{
   margin-top:16px;
   border:1px solid var(--border);
@@ -808,7 +822,7 @@ aside.panel{
   top:100px;
 }
 
-/* reserve form inputs */
+/* reserve form layout */
 .reserve__grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -871,7 +885,7 @@ aside.panel{
   margin-bottom:8px;
 }
 
-/* helper image frame (for standalone proof shots) */
+/* helper image frame (proof shots etc.) */
 .img-frame{
   border-radius:12px;
   border:1px solid var(--border);
@@ -930,25 +944,47 @@ footer{
   :root{
     --logo-h:46px;
   }
-  /* sticky nav still shows brand only */
 }
 
 @media (max-width:520px){
-  .brand__logo-img{
-    height:90px;
-    max-height:90px;
-  }
-  .brand__tagline{
-    font-size:1.05rem;
-    line-height:1.15;
-  }
   :root{
+    --nav-h:120px;
     --logo-h:40px;
   }
+
+  .brand{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .brand__logo-img{
+    height:100px;
+    max-height:100px;
+  }
+
+  .brand__text{
+    align-items:center;
+    text-align:center;
+  }
+
+  .brand__tagline{
+    font-size:1.3rem;
+    line-height:1.2;
+    white-space:normal;
+    text-align:center;
+  }
+
+  .brand__name{
+    font-size:.8rem;
+    line-height:1.2;
+    text-align:center;
+  }
+
   .config-summary{
     flex-direction:column;
     align-items:flex-start;
   }
+
   .reserve__grid{
     grid-template-columns:1fr;
   }
@@ -966,8 +1002,8 @@ footer{
     <div class="brand" aria-label="CoreFlux">
       <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux logo">
       <div class="brand__text">
-        <span class="brand__name">CoreFlux Simpit</span>
         <span class="brand__tagline">One Rig. All Roles.</span>
+        <span class="brand__name">CoreFlux Simpit</span>
       </div>
     </div>
   </div>
@@ -1020,7 +1056,7 @@ footer{
 
   <div class="mock-wrap">
     <div class="mock-glow" id="mockGlow"></div>
-    <!-- default NOT .fit => we start in FILL mode -->
+    <!-- default is FILL mode (cover). We'll add .fit only when toggled -->
     <div class="mock" id="mock" aria-label="Rig views">
       <button class="mock__toggle" id="fitToggle" type="button" aria-pressed="false">Fit</button>
 
@@ -1860,7 +1896,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 
   if (fitBtn && mock){
-    // default mode is FILL (mock does NOT start with .fit)
+    // default is FILL (mock has no .fit initially)
     fitBtn.addEventListener('click',()=>{
       mock.classList.toggle('fit');
       const pressed = mock.classList.contains('fit');
