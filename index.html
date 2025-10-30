@@ -7,7 +7,7 @@
   <title>CoreFlux Simpits — Motion-Ready Racing & Flight Cockpit | One Rig. All Roles.</title>
 
   <meta name="description" content="CoreFlux Simpits: one rig that converts from work setup to racing cockpit, HOTAS flight sim, and space sim in minutes. Static or actuator-ready Dynamic frame. Direct drive steering, loadcell pedals, HOTAS, Qubic System motion compatibility. No drilling. Apartment safe." />
-  <meta name="keywords" content="simpit, sim rig, racing cockpit, flight simpit, HOTAS mount, direct drive wheel mount, loadcell pedal mount, motion platform frame, Qubic System compatible, DCS setup, iRacing cockpit, ACC rig, Star Citizen dual stick, actuator-ready sim rig, 4080 aluminium extrusion cockpit, South Africa sim rig, CoreFlux Simpits" />
+  <meta name="keywords" content="simpit, sim rig, racing cockpit, flight simpit, HOTAS mount, direct drive wheel mount, loadcell pedal mount, motion platform frame, Qubic System compatible, DCS setup, iRacing cockpit, ACC rig, Star Citizen dual stick, actuator-ready sim rig, 4080 aluminium extrusion cockpit, South Africa sim rig, CoreFlux Simpits, FIGHT3RPHOENIX" />
   <meta name="theme-color" content="#0b1020" />
 
   <link rel="icon" href="assets/images/coreflux-logo.png" />
@@ -16,7 +16,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="CoreFlux Simpits — One Rig. Infinite Worlds." />
-  <meta property="og:description" content="Swap from work to FPS to iRacing to full HOTAS flight without rebuilding your room. Static or actuator-ready Dynamic frame. Pilot Batch #1 now forming." />
+  <meta property="og:description" content="Swap from work to FPS to iRacing to full HOTAS flight without rebuilding your room. Static or actuator-ready Dynamic frame. Pilot Batch #1 now forming. Featuring FIGHT3RPHOENIX Phoenix Primus layout." />
   <meta property="og:image" content="https://access-mark.github.io/CoreFlux-Simpits/assets/images/frame-left.png" />
   <meta property="og:site_name" content="CoreFlux Simpits" />
 
@@ -29,10 +29,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
-  /* ======================================================
-     CoreFlux Simpits — Launch Build (with FIGHT3RPHOENIX)
-     ====================================================== */
-
   :root{
     --bg:#0b1020; --bg-2:#0a0f1e; --bg-3:#090e1a;
     --panel:#111831; --panel-2:#0f152b;
@@ -71,7 +67,7 @@
 
   #aiCanvas{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
-    opacity:.55; transition:none;
+    opacity:.55;
   }
 
   /* NAV */
@@ -85,14 +81,14 @@
   }
   .nav__inner{
     display:flex; align-items:center; justify-content:space-between;
-    width:min(var(--content-max),92vw); margin:0 auto; height:100%; padding:0; flex-wrap:wrap;
+    width:min(var(--content-max),92vw); margin:0 auto; height:100%; flex-wrap:wrap; gap:12px;
   }
   .brand{display:flex;align-items:center;gap:16px;min-width:0;}
   .brand__logo-img{
     height:110px;width:auto;max-height:110px;max-width:300px;object-fit:contain;
   }
   .brand__center{
-    text-align:center;line-height:1.05;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;max-width:60%;
+    text-align:center;line-height:1.05;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;max-width:50%;
   }
   .brand__tagline{
     font-weight:800;font-size:2.5rem;line-height:1.1;letter-spacing:-.03em;
@@ -105,6 +101,28 @@
     margin-top:10px;font-size:.8rem;font-weight:700;line-height:1.3;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;
     background:rgba(0,198,255,.08);border:1px solid rgba(0,198,255,.4);border-radius:999px;padding:4px 10px;
     box-shadow:0 0 24px rgba(0,198,255,.4),0 24px 60px rgba(0,0,0,.9);white-space:nowrap;
+  }
+  .nav__right{
+    display:flex;align-items:center;gap:12px;
+  }
+  .ambassador-badge{
+    background:rgba(0,0,0,.35);
+    border:1px solid rgba(0,198,255,.4);
+    border-radius:999px;
+    padding:6px 12px 6px 6px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .ambassador-logo{
+    width:42px;height:42px;border-radius:12px;object-fit:contain;background:rgba(0,0,0,.5);border:1px solid rgba(0,198,255,.3);
+  }
+  .ambassador-text{
+    display:flex;flex-direction:column;line-height:1.1;
+  }
+  .ambassador-text small{
+    font-size:.55rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;
+  }
+  .ambassador-text strong{
+    font-size:.7rem;color:var(--text);font-weight:800;
   }
   .nav__cta-wrap{display:flex;align-items:center;}
   .cta{
@@ -154,7 +172,6 @@
   .stat .v{font-weight:800;font-size:18px;line-height:1.2;color:var(--text)}
   .stat .k{color:var(--muted);font-size:12px;line-height:1.2;font-weight:500}
 
-  /* HERO MOCK */
   .mock-wrap{position:relative}
   #mockGlow.mock-glow{
     position:absolute;inset:-60px;z-index:0;pointer-events:none;filter:blur(40px);
@@ -182,7 +199,6 @@
     background:rgba(255,255,255,.06);backdrop-filter:blur(8px);font-weight:900;font-size:12px;line-height:1.2;color:var(--text);cursor:pointer;
   }
 
-  /* SECTIONS */
   .section__head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
   .section__title{font-size:clamp(22px,2.2vw,34px);letter-spacing:-.2px;font-weight:700;color:var(--text);}
   .pill{font-size:12px;color:#06142b;background:linear-gradient(135deg,var(--accent-2),#ffe39a);border-radius:999px;padding:6px 10px;font-weight:800;line-height:1.2}
@@ -266,7 +282,6 @@
   }
   .footer-note{font-size:.7rem;line-height:1.4;color:var(--muted);max-width:600px;margin:12px auto 0;font-weight:500}
 
-  /* CONFIGURATOR basics */
   #moduleList{display:grid;gap:24px;align-content:start}
   .group-head{display:flex;flex-direction:column;gap:6px}
   .group-head h3{margin:0;font-size:1rem;font-weight:700;line-height:1.3;color:var(--text)}
@@ -298,7 +313,8 @@
     .hero{grid-template-columns:1fr}
     .mock{height:400px;max-height:400px}
     .brand__center{order:2;flex:1 1 100%;max-width:100%;margin-top:12px;}
-    .nav__cta-wrap{order:3;margin-left:auto;}
+    .nav__right{order:3;margin-left:auto;}
+    .nav{--nav-h:190px;}
   }
   @media (max-width:980px){
     .statbar{grid-template-columns:repeat(2,1fr)}
@@ -307,12 +323,13 @@
     .force-grid{grid-template-columns:1fr;}
   }
   @media (max-width:520px){
-    .nav{--nav-h:180px;}
+    .nav{--nav-h:210px;}
     .brand__logo-img{height:72px;max-height:72px;}
     .brand__tagline,.brand__name{font-size:1.6rem;line-height:1.15;}
     .brand__subline{font-size:.7rem;}
     .hero{padding-top:100px;}
     .config-summary{flex-direction:column;align-items:flex-start}
+    .ambassador-badge{width:100%;justify-content:flex-start}
   }
   </style>
 </head>
@@ -327,15 +344,24 @@
 <nav class="nav" aria-label="Primary">
   <div class="nav__inner">
     <div class="brand" aria-label="CoreFlux">
-      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo - precision aluminium cockpit systems, South Africa">
+      <img class="brand__logo-img" src="assets/images/coreflux-logo.png" alt="CoreFlux Simpits logo">
     </div>
     <div class="brand__center">
       <div class="brand__tagline">One Rig. All Roles.</div>
       <div class="brand__name">CoreFlux Simpits</div>
       <div class="brand__subline">Pilot Batch #1 now forming</div>
     </div>
-    <div class="nav__cta-wrap">
-      <a class="cta" href="#reserve">Reserve Access</a>
+    <div class="nav__right">
+      <div class="ambassador-badge" aria-label="CoreFlux ambassador">
+        <img src="assets/images/logos/fight3rphoenix.png" alt="FIGHT3RPHOENIX" class="ambassador-logo" loading="lazy">
+        <div class="ambassador-text">
+          <small>Ambassador</small>
+          <strong>FIGHT3RPHOENIX</strong>
+        </div>
+      </div>
+      <div class="nav__cta-wrap">
+        <a class="cta" href="#reserve">Reserve Access</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -879,7 +905,6 @@
   </div>
 </section>
 
-<!-- FIGHT3RPHOENIX AMBASSADOR -->
 <section id="fight3r" class="wrap">
   <div class="section__head">
     <h2 class="section__title">FIGHT3RPHOENIX — Ambassador Edition</h2>
@@ -889,7 +914,8 @@
   <div class="panel" style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
     <div style="flex:1 1 280px;min-width:260px">
       <p>
-        We partnered with <b>FIGHT3RPHOENIX</b> to dial the <b>Phoenix Primus</b> layout — the same Star Citizen rig he flies and streams on.
+        We partnered with <b>FIGHT3RPHOENIX</b> — a highly rated PvP player and Star Citizen streamer — to dial the <b>Phoenix Primus</b> layout.
+        This is the same rig he currently flies and streams on.
       </p>
       <p>
         Seat, HOTAS/dual-stick, pedal base, cam/mic arms and stream displays are all on repeatable geometry, so he can go live without rebuilding the cockpit.
@@ -898,19 +924,16 @@
         Watch him live:
         <a href="https://www.twitch.tv/FIGHT3RPHOENIX" target="_blank" rel="noreferrer">twitch.tv/FIGHT3RPHOENIX</a>
       </p>
-      <p style="margin-top:8px;color:var(--muted);font-size:.78rem">
-        We describe him as a <b>highly rated PvP player</b> and Star Citizen streamer — no “top 5%” claims.
-      </p>
     </div>
 
-    <div style="flex:0 0 240px;max-width:280px">
+    <div style="flex:0 0 260px;max-width:260px">
       <div class="panel" style="background:rgba(255,255,255,.02);text-align:center">
         <img src="assets/images/logos/fight3rphoenix.png"
              alt="FIGHT3RPHOENIX"
-             style="max-height:120px;object-fit:contain;margin:0 auto 12px"
+             style="max-height:130px;object-fit:contain;margin:0 auto 12px"
              loading="lazy">
         <div style="font-weight:700">Phoenix Primus layout</div>
-        <div style="font-size:.75rem;color:var(--muted)">SC cockpit + stream arms + pedal clearance</div>
+        <div style="font-size:.75rem;color:var(--muted)">Star Citizen cockpit + stream arms + pedal clearance</div>
       </div>
     </div>
 
@@ -1187,7 +1210,6 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* Hero carousel */
 document.addEventListener('DOMContentLoaded', ()=>{
   const slides=[...document.querySelectorAll('.mock__slide')];
   const dots=[...document.querySelectorAll('.dot')];
@@ -1222,7 +1244,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   play();
 });
 
-/* Mock glow parallax */
 (function(){
   const glow = document.getElementById('mockGlow');
   if(!glow) return;
@@ -1236,7 +1257,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 })();
 
-/* Configurator logic */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -1371,7 +1391,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   recalc();
 })();
 
-/* Sticky CTA show/hide */
 (function(){
   const cta = document.getElementById('stickyCTA');
   const hero = document.querySelector('.hero');
@@ -1384,7 +1403,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   io.observe(hero);
 })();
 
-/* Reserve form handling */
 (function(){
   const email  = document.getElementById('rEmail');
   const region = document.getElementById('rRegion');
@@ -1430,7 +1448,6 @@ Setup notes / hardware (optional):
   });
 })();
 
-/* Background particles */
 (function(){
   const c = document.getElementById('aiCanvas');
   if(!c) return;
@@ -1515,14 +1532,13 @@ Setup notes / hardware (optional):
   requestAnimationFrame(tick);
 })();
 
-/* Structured Data */
 (function(){
   const schema = {
     "@context":"https://schema.org",
     "@type":"Product",
     "name":"CoreFlux Simpits Dynamic Frame",
     "brand":{"@type":"Brand","name":"CoreFlux Simpits"},
-    "description":"Actuator-ready aluminium simpit chassis that transforms between racing cockpit, HOTAS flight sim, dual-stick space sim, and full workstation.",
+    "description":"Actuator-ready aluminium simpit chassis that transforms between racing cockpit, HOTAS flight sim, dual-stick space sim, and full workstation. Featuring the FIGHT3RPHOENIX Phoenix Primus layout.",
     "category":"Racing Simulator Cockpit / Flight Simpit / Motion Platform Frame",
     "material":"4080 anodized aluminium extrusion",
     "offers":{
@@ -1531,12 +1547,6 @@ Setup notes / hardware (optional):
       "price":"1450",
       "availability":"https://schema.org/PreOrder",
       "url":"https://access-mark.github.io/CoreFlux-Simpits/#reserve"
-    },
-    "review":{
-      "@type":"Review",
-      "reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},
-      "author":{"@type":"Person","name":"Pilot Batch Tester"},
-      "reviewBody":"I went from office mode to ACC with traction loss and surge cues in under two minutes. It doesn’t feel like a DIY rig. It feels like hardware."
     }
   };
   const s = document.createElement('script');
