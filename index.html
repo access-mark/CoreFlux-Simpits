@@ -240,7 +240,7 @@
   .force-cards{display:flex;flex-direction:column;gap:12px;}
   .proof-cell{
     background:rgba(0,0,0,.4);border:1px solid rgba(0,198,255,.4);border-radius:14px;
-    box-shadow:0 24px 60px rgba(0,0,0,.8), 0 0 60px rgba(0,198,255,.18);
+    box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 60px rgba(0,198,255,.18);
     padding:16px;font-size:.8rem;line-height:1.4;font-weight:500;color:var(--text);
     transition:box-shadow .25s,transform .25s;
   }
@@ -282,6 +282,7 @@
   }
   .footer-note{font-size:.7rem;line-height:1.4;color:var(--muted);max-width:600px;margin:12px auto 0;font-weight:500}
 
+  /* configurator */
   #moduleList{display:grid;gap:24px;align-content:start}
   .group-head{display:flex;flex-direction:column;gap:6px}
   .group-head h3{margin:0;font-size:1rem;font-weight:700;line-height:1.3;color:var(--text)}
@@ -693,32 +694,33 @@
   </div>
 </section>
 
+<!-- CONFIGURATOR: MULTI-SELECT VERSION -->
 <section id="configurator" class="wrap">
   <div class="section__head">
     <h2 class="section__title">Configurator</h2>
-    <span class="pill">Live total · Real modules</span>
+    <span class="pill">Multi-select enabled</span>
   </div>
   <p class="lede">
-    Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.
-    Typical Static builds land around $1.8k–$2.5k. Dynamic motion-ready builds land around $2.8k–$3.6k before actuators.
+    You can now tick more than one in a group — triples + quad, racing + flight, stream + motion. If you pick something that needs Dynamic, we’ll auto pick Dynamic for you.
   </p>
 
   <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
     <div id="moduleList">
+      <!-- CORE -->
       <div class="config-group config-group--core">
         <div class="group-head" style="grid-column:1/-1">
           <h3>Core System</h3>
-          <p class="lede">This is the chassis. Everything mounts to this geometry.</p>
+          <p class="lede">Pick Static, Dynamic, or both (we’ll clean it up in the summary).</p>
         </div>
 
-        <label class="config-card" data-group="baseframe" data-key="base-static">
-          <input type="radio" name="baseframe" data-price="1000" data-label="STATIC BASE FRAME">
+        <label class="config-card" data-key="base-static">
+          <input type="checkbox" data-price="1000" data-label="STATIC BASE FRAME">
           <strong>STATIC BASE FRAME — $1,000</strong>
           <p>Motionless, silent platform. Apartment / shared-wall friendly.</p>
         </label>
 
-        <label class="config-card" data-group="baseframe" data-key="base-dynamic">
-          <input type="radio" name="baseframe" data-price="1450" data-label="DYNAMIC BASE FRAME" checked>
+        <label class="config-card" data-key="base-dynamic">
+          <input type="checkbox" data-price="1450" data-label="DYNAMIC BASE FRAME" checked>
           <strong>DYNAMIC BASE FRAME — $1,450</strong>
           <p>Reinforced, actuator-ready. Braced for surge / heave / traction loss.</p>
         </label>
@@ -748,33 +750,35 @@
         </label>
       </div>
 
+      <!-- MONITOR: now multi-select -->
       <div class="config-group config-group--monitor">
         <div class="group-head" style="grid-column:1/-1">
           <h3>Monitor System</h3>
-          <p class="lede">Pick your viewport. Re-arm later anytime.</p>
+          <p class="lede">Tick one, two, or all — some pilots run triples + overhead.</p>
         </div>
 
-        <label class="config-card" data-group="monitor" data-key="single">
-          <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
+        <label class="config-card" data-key="mon-single">
+          <input type="checkbox" data-price="150" data-label="SINGLE MONITOR ARM">
           <strong>SINGLE MONITOR ARM — $150</strong>
           <p>One display arm (24–34″). Ideal for workstation / FPS.</p>
         </label>
-        <label class="config-card" data-group="monitor" data-key="triple">
-          <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
+        <label class="config-card" data-key="mon-triple">
+          <input type="checkbox" data-price="400" data-label="TRIPLE MONITOR ARM">
           <strong>TRIPLE MONITOR ARM — $400</strong>
           <p>Three-arm racing/flight wrap.</p>
         </label>
-        <label class="config-card" data-group="monitor" data-key="quad">
-          <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
+        <label class="config-card" data-key="mon-quad">
+          <input type="checkbox" data-price="450" data-label="QUAD MONITOR SETUP">
           <strong>QUAD MONITOR SETUP — $450</strong>
           <p>Triple horizon + overhead HUD/telemetry/chat.</p>
         </label>
       </div>
 
+      <!-- FLIGHT -->
       <div class="config-group config-group--flight">
         <div class="group-head" style="grid-column:1/-1">
           <h3>Flight Controls</h3>
-          <p class="lede">HOTAS / dual-stick / throttle. Repeatable reach every time.</p>
+          <p class="lede">HOTAS / dual-stick / pedals — tick what you fly.</p>
         </div>
 
         <label class="config-card" data-key="flight-single">
@@ -799,14 +803,15 @@
           <input type="checkbox" data-price="380" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>FLIGHT: ACTUATOR MOUNT KIT — $380</strong>
           <p>Hardpoints + reinforcement plates for Qubic-style kits.</p>
-          <div class="req-note">Requires Dynamic Base Frame.</div>
+          <div class="req-note">Requires Dynamic Base Frame. We’ll tick it.</div>
         </label>
       </div>
 
+      <!-- RACING -->
       <div class="config-group config-group--racing">
         <div class="group-head" style="grid-column:1/-1">
           <h3>Racing Controls</h3>
-          <p class="lede">Steering, pedals, shifting — under real torque.</p>
+          <p class="lede">Wheel, pedals, shifter — all can be on.</p>
         </div>
 
         <label class="config-card" data-key="race-wheel">
@@ -831,14 +836,15 @@
           <input type="checkbox" data-price="420" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
           <strong>RACING: ACTUATOR MOUNT KIT — $420</strong>
           <p>Actuator crossmembers + gussets to carry surge/heave.</p>
-          <div class="req-note">Requires Dynamic Base Frame.</div>
+          <div class="req-note">Requires Dynamic Base Frame. We’ll tick it.</div>
         </label>
       </div>
 
+      <!-- CREATOR -->
       <div class="config-group config-group--stream">
         <div class="group-head" style="grid-column:1/-1">
           <h3>Creator / Stream Setup</h3>
-          <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
+          <p class="lede">For your stream layout.</p>
         </div>
         <label class="config-card" data-key="stream-cam">
           <input type="checkbox" data-price="100" data-label="STREAM: CAMERA ARM">
@@ -864,7 +870,7 @@
       <p id="selectedCount" class="lede">0 modules selected</p>
       <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$1450</h2>
       <div style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);margin-bottom:12px">
-        Static = planted and quiet. Dynamic = actuator-ready, braced for motion. You can upgrade Static later.
+        If you add actuator kits, we force Dynamic so the rig isn’t broken.
       </div>
       <a href="#reserve" class="btn btn--primary" style="width:100%;justify-content:center">Reserve My Slot</a>
     </aside>
@@ -1257,6 +1263,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 })();
 
+/* MULTI-SELECT CONFIGURATOR LOGIC */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -1265,19 +1272,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const countEl = document.getElementById('selectedCount');
   const linesEl = document.getElementById('buildLines');
 
-  const radioGroups = Array.from(new Set(
-    [...root.querySelectorAll('input[type="radio"][name]')].map(i=>i.name)
-  ));
-
   function parsePrice(input){
+    if (input.dataset.price) return Number(input.dataset.price) || 0;
     const card = input.closest('.config-card');
     const strong = card ? card.querySelector('strong') : null;
     const src = (strong ? strong.textContent : '') || '';
-    const matches = [...src.matchAll(/\$\s*([\d][\d,\s]*(?:\.\d+)?)/g)];
-    if(!matches.length) return 0;
-    const raw = matches[matches.length - 1][1].replace(/[,\s]/g,'');
-    const n = Number(raw);
-    return isNaN(n) ? 0 : n;
+    const m = src.match(/\$\s*([\d,]+)/);
+    return m ? Number(m[1].replace(/,/g,'')) : 0;
   }
 
   function labelFor(input){
@@ -1285,109 +1286,70 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const card = input.closest('.config-card');
     const strong = card ? card.querySelector('strong') : null;
     if (strong) return strong.textContent.replace(/\s*[–—-]\s*\$.*$/,'').trim();
-    return input.name || 'Item';
+    return 'Item';
   }
 
-  function isDynamic(){
-    const dyn = root.querySelector('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
+  function hasDynamic(){
+    const dyn = root.querySelector('[data-key="base-dynamic"] input');
     return dyn && dyn.checked;
   }
 
-  function updateDynamicLocks(){
-    const cards = root.querySelectorAll('.requires-dynamic');
-    const dynamic = isDynamic();
-    cards.forEach(card=>{
-      const input = card.querySelector('input');
-      if(dynamic){
-        card.classList.remove('locked');
-        input.disabled = false;
-      } else {
-        card.classList.add('locked');
-        input.checked = false;
-        input.disabled = true;
-      }
-    });
-  }
-
-  function selectedRadios(){
-    const sel=[];
-    for(const g of radioGroups){
-      const r = root.querySelector(`input[type="radio"][name="${g}"]:checked`);
-      if(r) sel.push(r);
+  function ensureDynamic(){
+    const dyn = root.querySelector('[data-key="base-dynamic"] input');
+    if (dyn){
+      dyn.checked = true;
+      // optional: if both static and dynamic end up checked, leave it — user said multi is ok
     }
-    return sel;
   }
 
   function recalc(){
     let total = 0;
     const picked = [];
-
-    root.querySelectorAll('input[type="checkbox"]').forEach(ch=>{
-      if(ch.disabled) return;
-      if(ch.checked){
-        const p = parsePrice(ch);
-        total += p;
-        picked.push(`${labelFor(ch)} — $${p}`);
+    root.querySelectorAll('.config-card input[type="checkbox"]').forEach(ch=>{
+      if (ch.checked){
+        const price = parsePrice(ch);
+        const label = labelFor(ch);
+        total += price;
+        picked.push(label + ' — $' + price);
       }
     });
-
-    selectedRadios().forEach(r=>{
-      const p = parsePrice(r);
-      total += p;
-      picked.push(`${labelFor(r)} — $${p}`);
-    });
-
-    if(linesEl){
+    if (linesEl){
       linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
     }
-    if(countEl){
+    if (countEl){
       countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
     }
-    if(totalEl){
-      totalEl.textContent = `$${total}`;
+    if (totalEl){
+      totalEl.textContent = '$' + total;
     }
   }
 
   root.querySelectorAll('.config-card').forEach(card=>{
-    card.addEventListener('click',(e)=>{
+    card.addEventListener('click', (e)=>{
       const input = card.querySelector('input');
-      if(!input) return;
+      if (!input) return;
 
-      if(card.classList.contains('requires-dynamic') && !isDynamic()){
-        const dyn = root.querySelector('input[name="baseframe"][data-label="DYNAMIC BASE FRAME"]');
-        if(dyn){
-          dyn.checked = true;
-        }
+      // if this item needs dynamic and it's not on, force it
+      if (card.classList.contains('requires-dynamic') && !hasDynamic()){
+        ensureDynamic();
       }
 
-      updateDynamicLocks();
-
-      if(input.disabled) return;
-
-      if(e.target !== input){
-        if(input.type==='checkbox'){
-          input.checked = !input.checked;
-        }
-        if(input.type==='radio'){
-          input.checked = true;
-        }
+      // toggle this item
+      if (e.target !== input){
+        input.checked = !input.checked;
       }
 
       recalc();
     });
   });
 
-  root.querySelectorAll('input').forEach(i=>{
+  // init prices/labels
+  root.querySelectorAll('input[type="checkbox"]').forEach(i=>{
     const p = parsePrice(i);
-    if(p>0) i.dataset.price = String(p);
-    if(!i.dataset.label) i.dataset.label = labelFor(i);
-    i.addEventListener('change', ()=>{
-      updateDynamicLocks();
-      recalc();
-    });
+    if (p>0) i.dataset.price = String(p);
+    if (!i.dataset.label) i.dataset.label = labelFor(i);
   });
 
-  updateDynamicLocks();
   recalc();
 })();
 
