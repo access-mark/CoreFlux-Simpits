@@ -23,10 +23,10 @@
   <!-- preload -->
   <link rel="preload" as="image" href="assets/images/frame-left.png" />
   <link rel="preload" as="image" href="assets/images/frame-right.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" as="style" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
   :root{
@@ -309,7 +309,6 @@
 
   aside.panel{position:sticky;top:100px;padding:20px}
 
-  /* responsive */
   @media (max-width:1080px){
     .hero{grid-template-columns:1fr}
     .mock{height:400px;max-height:400px}
@@ -701,10 +700,26 @@
   </div>
   <p class="lede">
     Step 1: choose Static or Dynamic base. Step 2: bolt on what you run. Total updates live.
-    Typical Static builds land around $1.8k–$2.5k. Dynamic motion-ready builds land around $2.8k–$3.6k before actuators.
+    Typical Static builds land around $2.25k–$3.1k. Dynamic motion-ready builds land around $3.5k–$4.5k before actuators.
+    <strong style="color:var(--text);display:block;margin-top:4px;">Pricing excludes shipping, duties and taxes from South Africa.</strong>
   </p>
 
-  <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:24px">
+  <!-- Config tutorial -->
+  <div class="panel" style="margin-top:14px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+    <div style="flex:1 1 180px;min-width:180px">
+      <div style="font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px">How to use this</div>
+      <p style="margin:0;font-size:.78rem;color:var(--muted);line-height:1.4">
+        1) Tap the card, not the checkbox. 2) If a card says “requires Dynamic,” we’ll auto-switch you to Dynamic. 3) Your build appears on the right. 4) Hit “Reserve” and send us your bolt pattern.
+      </p>
+    </div>
+    <div style="flex:1 1 160px;min-width:180px">
+      <p style="margin:0;font-size:.75rem;color:var(--muted);line-height:1.4">
+        Want to start Static and upgrade later? Pick Static now, then add only the modules you need — the geometry is shared.
+      </p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;margin-top:0">
     <div id="moduleList">
       <div class="config-group config-group--core">
         <div class="group-head" style="grid-column:1/-1">
@@ -713,38 +728,38 @@
         </div>
 
         <label class="config-card" data-group="baseframe" data-key="base-static">
-          <input type="radio" name="baseframe" data-price="1000" data-label="STATIC BASE FRAME">
-          <strong>STATIC BASE FRAME — $1,000</strong>
+          <input type="radio" name="baseframe" data-price="1250" data-label="STATIC BASE FRAME">
+          <strong>STATIC BASE FRAME — $1,250</strong>
           <p>Motionless, silent platform. Apartment / shared-wall friendly.</p>
         </label>
 
         <label class="config-card" data-group="baseframe" data-key="base-dynamic">
-          <input type="radio" name="baseframe" data-price="1450" data-label="DYNAMIC BASE FRAME" checked>
-          <strong>DYNAMIC BASE FRAME — $1,450</strong>
+          <input type="radio" name="baseframe" data-price="1815" data-label="DYNAMIC BASE FRAME" checked>
+          <strong>DYNAMIC BASE FRAME — $1,815</strong>
           <p>Reinforced, actuator-ready. Braced for surge / heave / traction loss.</p>
         </label>
 
         <label class="config-card" data-key="pedaltray">
-          <input type="checkbox" data-price="300" data-label="PEDAL TRAY / PLATE">
-          <strong>PEDAL TRAY / PLATE — $300</strong>
+          <input type="checkbox" data-price="375" data-label="PEDAL TRAY / PLATE">
+          <strong>PEDAL TRAY / PLATE — $375</strong>
           <p>Rigid pedal mount with indexed position. No forward walk.</p>
         </label>
 
         <label class="config-card" data-key="stand">
-          <input type="checkbox" data-price="500" data-label="MONITOR STAND">
-          <strong>MONITOR STAND — $500</strong>
+          <input type="checkbox" data-price="625" data-label="MONITOR STAND">
+          <strong>MONITOR STAND — $625</strong>
           <p>Primary display stand (VESA 75/100). Rock-solid.</p>
         </label>
 
         <label class="config-card" data-key="deskpad">
-          <input type="checkbox" data-price="120" data-label="MOUSE PAD BASE">
-          <strong>MOUSE PAD BASE — $120</strong>
+          <input type="checkbox" data-price="150" data-label="MOUSE PAD BASE">
+          <strong>MOUSE PAD BASE — $150</strong>
           <p>Keyboard + mouse tray for true desk posture even in cockpit mode.</p>
         </label>
 
         <label class="config-card" data-key="pulloutkb">
-          <input type="checkbox" data-price="160" data-label="PULLOUT KEYBOARD TRAY">
-          <strong>PULLOUT KEYBOARD TRAY — $160</strong>
+          <input type="checkbox" data-price="200" data-label="PULLOUT KEYBOARD TRAY">
+          <strong>PULLOUT KEYBOARD TRAY — $200</strong>
           <p>Slide-out typing surface. Retracts instantly.</p>
         </label>
       </div>
@@ -756,18 +771,18 @@
         </div>
 
         <label class="config-card" data-group="monitor" data-key="single">
-          <input type="radio" name="monitor" data-price="150" data-label="SINGLE MONITOR ARM">
-          <strong>SINGLE MONITOR ARM — $150</strong>
+          <input type="radio" name="monitor" data-price="188" data-label="SINGLE MONITOR ARM">
+          <strong>SINGLE MONITOR ARM — $188</strong>
           <p>One display arm (24–34″). Ideal for workstation / FPS.</p>
         </label>
         <label class="config-card" data-group="monitor" data-key="triple">
-          <input type="radio" name="monitor" data-price="400" data-label="TRIPLE MONITOR ARM">
-          <strong>TRIPLE MONITOR ARM — $400</strong>
+          <input type="radio" name="monitor" data-price="500" data-label="TRIPLE MONITOR ARM">
+          <strong>TRIPLE MONITOR ARM — $500</strong>
           <p>Three-arm racing/flight wrap.</p>
         </label>
         <label class="config-card" data-group="monitor" data-key="quad">
-          <input type="radio" name="monitor" data-price="450" data-label="QUAD MONITOR SETUP">
-          <strong>QUAD MONITOR SETUP — $450</strong>
+          <input type="radio" name="monitor" data-price="563" data-label="QUAD MONITOR SETUP">
+          <strong>QUAD MONITOR SETUP — $563</strong>
           <p>Triple horizon + overhead HUD/telemetry/chat.</p>
         </label>
       </div>
@@ -779,26 +794,26 @@
         </div>
 
         <label class="config-card" data-key="flight-single">
-          <input type="checkbox" data-price="220" data-label="FLIGHT: STICK + THROTTLE">
-          <strong>FLIGHT: STICK + THROTTLE — $220</strong>
+          <input type="checkbox" data-price="275" data-label="FLIGHT: STICK + THROTTLE">
+          <strong>FLIGHT: STICK + THROTTLE — $275</strong>
           <p>Single-stick and throttle setup.</p>
         </label>
 
         <label class="config-card" data-key="flight-dual">
-          <input type="checkbox" data-price="240" data-label="FLIGHT: DUAL STICK">
-          <strong>FLIGHT: DUAL STICK — $240</strong>
+          <input type="checkbox" data-price="300" data-label="FLIGHT: DUAL STICK">
+          <strong>FLIGHT: DUAL STICK — $300</strong>
           <p>Mirrored dual-stick arms. Star Citizen / heli ready.</p>
         </label>
 
         <label class="config-card" data-key="flight-pedal">
-          <input type="checkbox" data-price="180" data-label="FLIGHT: PEDAL MOUNT">
-          <strong>FLIGHT: PEDAL MOUNT — $180</strong>
+          <input type="checkbox" data-price="225" data-label="FLIGHT: PEDAL MOUNT">
+          <strong>FLIGHT: PEDAL MOUNT — $225</strong>
           <p>Adjustable rudder pedal base.</p>
         </label>
 
         <label class="config-card requires-dynamic" data-key="flight-actuator">
-          <input type="checkbox" data-price="380" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
-          <strong>FLIGHT: ACTUATOR MOUNT KIT — $380</strong>
+          <input type="checkbox" data-price="475" data-label="FLIGHT: ACTUATOR MOUNT KIT" data-requires="dynamic">
+          <strong>FLIGHT: ACTUATOR MOUNT KIT — $475</strong>
           <p>Hardpoints + reinforcement plates for Qubic-style kits.</p>
           <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
@@ -811,26 +826,26 @@
         </div>
 
         <label class="config-card" data-key="race-wheel">
-          <input type="checkbox" data-price="250" data-label="RACING: WHEEL ARM">
-          <strong>RACING: WHEEL ARM — $250</strong>
+          <input type="checkbox" data-price="313" data-label="RACING: WHEEL ARM">
+          <strong>RACING: WHEEL ARM — $313</strong>
           <p>Direct-drive capable mount. Zero flex at 15+ Nm.</p>
         </label>
 
         <label class="config-card" data-key="race-pedal">
-          <input type="checkbox" data-price="180" data-label="RACING: PEDAL MOUNT">
-          <strong>RACING: PEDAL MOUNT — $180</strong>
+          <input type="checkbox" data-price="225" data-label="RACING: PEDAL MOUNT">
+          <strong>RACING: PEDAL MOUNT — $225</strong>
           <p>Indexed pedal base. Holds under loadcell.</p>
         </label>
 
         <label class="config-card" data-key="race-shifter">
-          <input type="checkbox" data-price="140" data-label="RACING: GEARSHIFT MOUNT">
-          <strong>RACING: GEARSHIFT MOUNT — $140</strong>
+          <input type="checkbox" data-price="175" data-label="RACING: GEARSHIFT MOUNT">
+          <strong>RACING: GEARSHIFT MOUNT — $175</strong>
           <p>Side-mounted shifter/handbrake plate.</p>
         </label>
 
         <label class="config-card requires-dynamic" data-key="race-actuator">
-          <input type="checkbox" data-price="420" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
-          <strong>RACING: ACTUATOR MOUNT KIT — $420</strong>
+          <input type="checkbox" data-price="525" data-label="RACING: ACTUATOR MOUNT KIT" data-requires="dynamic">
+          <strong>RACING: ACTUATOR MOUNT KIT — $525</strong>
           <p>Actuator crossmembers + gussets to carry surge/heave.</p>
           <div class="req-note">Requires Dynamic Base Frame.</div>
         </label>
@@ -842,18 +857,18 @@
           <p class="lede">Camera, lighting, Stream Deck — frame mounted.</p>
         </div>
         <label class="config-card" data-key="stream-cam">
-          <input type="checkbox" data-price="100" data-label="STREAM: CAMERA ARM">
-          <strong>STREAM: CAMERA ARM — $100</strong>
+          <input type="checkbox" data-price="125" data-label="STREAM: CAMERA ARM">
+          <strong>STREAM: CAMERA ARM — $125</strong>
           <p>Low-vibration arm for cockpit POV.</p>
         </label>
         <label class="config-card" data-key="stream-light">
-          <input type="checkbox" data-price="120" data-label="STREAM: KEY LIGHT ARM">
-          <strong>STREAM: KEY LIGHT ARM — $120</strong>
+          <input type="checkbox" data-price="150" data-label="STREAM: KEY LIGHT ARM">
+          <strong>STREAM: KEY LIGHT ARM — $150</strong>
           <p>Frame mounted light, no shake.</p>
         </label>
         <label class="config-card" data-key="stream-deck">
-          <input type="checkbox" data-price="90" data-label="STREAM: STREAM DECK ARM">
-          <strong>STREAM: STREAM DECK ARM — $90</strong>
+          <input type="checkbox" data-price="115" data-label="STREAM: STREAM DECK ARM">
+          <strong>STREAM: STREAM DECK ARM — $115</strong>
           <p>Dedicated arm for deck. Muscle memory placement.</p>
         </label>
       </div>
@@ -863,29 +878,13 @@
       <h3>Your Build</h3>
       <ul id="buildLines" style="list-style:none;margin:10px 0 12px;padding:0;max-height:240px;overflow:auto"></ul>
       <p id="selectedCount" class="lede">0 modules selected</p>
-      <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$1450</h2>
+      <h2 id="totalPrice" style="margin:10px 0;font-size:1.8rem">$1815</h2>
       <div style="font-size:.75rem;line-height:1.4;font-weight:600;color:var(--muted);margin-bottom:12px">
         Static = planted and quiet. Dynamic = actuator-ready, braced for motion. You can upgrade Static later.
+        <br>Shipping/duties/taxes are separate from South Africa.
       </div>
       <a href="#reserve" class="btn btn--primary" style="width:100%;justify-content:center">Reserve My Slot</a>
     </aside>
-  </div>
-</section>
-
-<!-- tiny tutorial / how-to for configurator -->
-<section class="wrap" id="config-howto">
-  <div class="panel" style="display:grid;gap:10px;">
-    <h2 style="margin:0;font-size:1rem;">How to use the configurator</h2>
-    <p style="margin:0;font-size:.8rem;color:var(--muted);">
-      1) Click the <strong>base frame</strong> first (Static if you want silent / planted, Dynamic if you want motion later).<br>
-      2) Pick your <strong>monitor layout</strong> — single, triple, or quad.<br>
-      3) Add your <strong>control group</strong> (flight, racing, or creator). You can stack more than one.<br>
-      4) Watch the <strong>right-hand panel</strong> — it totals everything.<br>
-      5) Hit <strong>Reserve</strong> and tell us your motion kit / bolt pattern and we cut plates to suit.
-    </p>
-    <p style="margin:0;font-size:.75rem;color:var(--muted);">
-      If you click a motion-only item while on Static, we auto-switch you to Dynamic so you don’t end up with the wrong chassis.
-    </p>
   </div>
 </section>
 
@@ -936,8 +935,7 @@
         This is the same rig he currently flies and streams on.
       </p>
       <p>
-        Seat, dual-stick/HOTAS, pedal base (kept clear for his SC style), cam/mic arms and stream displays are all on repeatable geometry,
-        so he can go live without rebuilding the cockpit.
+        Seat, HOTAS/dual-stick, pedal base, cam/mic arms and stream displays are all on repeatable geometry, so he can go live without rebuilding the cockpit.
       </p>
       <p style="margin-top:8px">
         Watch him live:
@@ -959,7 +957,7 @@
     <ul style="flex:1 1 220px;min-width:200px;margin:0;padding-left:16px;color:var(--muted);font-size:.85rem;line-height:1.5">
       <li>HOTAS ↔ dual-stick swap in minutes</li>
       <li>Frame-mounted camera/mic — no wobble on stream</li>
-      <li>Quad monitor stack inside cockpit reach</li>
+      <li>Pedals on braced base, cable run out of frame</li>
       <li>Stream display mount within hand reach</li>
       <li>Apartment-safe — no wall drilling</li>
     </ul>
@@ -1081,10 +1079,10 @@
   <div class="cards" style="margin-top:14px">
     <article class="card">
       <h3>Star Citizen</h3>
-      <p class="lede">Dual-stick or HOTAS + Tobii.</p>
+      <p class="lede">Dual-stick or HOTAS + pedals.</p>
       <ol>
         <li>Chassis: Dynamic.</li>
-        <li>Loadout: <strong>Flight</strong> → Dual Stick / Stick + Throttle, Flight Pedal Mount (optional for SC), Quad Monitor Setup.</li>
+        <li>Loadout: <strong>Flight</strong> → Dual Stick / Stick + Throttle, Flight Pedal Mount, Quad Monitor Setup.</li>
         <li>Add: Flight Actuator Kit for motion cues.</li>
       </ol>
     </article>
@@ -1202,7 +1200,7 @@
       <h3 style="margin-top:14px;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)">Display Stack</h3>
       <ul style="margin:6px 0 0 16px;color:var(--muted);font-size:.8rem;line-height:1.45">
         <li>Static CoreFlux rig, center monitor arm</li>
-        <li><strong>3 × 34″ AOC 1 ms gaming panels</strong> in a 1000R arc (main cockpit wrap)</li>
+        <li><strong>3 × 34″ AOC 1ms gaming panels</strong> in a 1000R arc (main cockpit wrap)</li>
         <li><strong>Dell 32″ hub monitor</strong> as overhead/top for maps, stream tools, chat</li>
         <li><strong>Tobii Eye Tracker 5</strong> mounted under the center panel</li>
       </ul>
@@ -1221,11 +1219,11 @@
       <h3 style="margin-top:14px;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)">PC / Performance</h3>
       <ul style="margin:6px 0 0 16px;color:var(--muted);font-size:.8rem;line-height:1.45">
         <li><strong>CPU:</strong> AMD Ryzen 9 7950X3D</li>
-        <li><strong>Memory:</strong> 64 GB Corsair Vengeance DDR5 6000</li>
-        <li><strong>Motherboard:</strong> Gigabyte X670E Aorus Master</li>
-        <li><strong>Storage:</strong> High-end NVMe M.2 for Star Citizen asset streaming</li>
-        <li><strong>GPU:</strong> AMD Radeon RX 7900 XTX driving 4 displays</li>
-        <li><strong>Star Citizen perf:</strong> ±80 FPS @ <strong>10 320 × 1 440</strong> (quad ultra-wide layout)</li>
+        <li><strong>RAM:</strong> 64 GB Corsair Vengeance 6000 MHz</li>
+        <li><strong>Motherboard:</strong> X670E Aorus Master</li>
+        <li><strong>Storage:</strong> high-end NVMe M.2 (for SC load/asset streaming)</li>
+        <li><strong>GPU:</strong> Radeon RX 7900 XTX driving 4 screens</li>
+        <li><strong>Star Citizen perf:</strong> ±80 FPS @ <strong>10 320 × 1 440</strong> (ultra-wide quad layout)</li>
       </ul>
     </div>
 
@@ -1237,7 +1235,7 @@
         <li><strong>Flight:</strong> Dual Stick + Throttle</li>
         <li><strong>Stream:</strong> Camera arm + 2 × key light arms + Stream Deck arm</li>
         <li><strong>Extras:</strong> Tobii mount under center screen</li>
-        <li><strong>Pedals:</strong> leave off — SC PvP, dual-stick focus</li>
+        <li><strong>Pedals:</strong> leave off (SC preference)</li>
       </ul>
       <p style="margin-top:10px;font-size:.7rem;color:var(--text);line-height:1.4">
         If you want headroom for motion later, flip the base to <strong>Dynamic</strong>. Geometry stays the same.
@@ -1245,6 +1243,7 @@
     </div>
   </div>
 </section>
+
 
 <section id="faq" class="wrap">
   <div class="section__head">
@@ -1325,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   play();
 });
 
-/* ---------- Configurator (fixed) ---------- */
+/* ---------- Configurator (with 25% uplift) ---------- */
 (function(){
   const root = document.getElementById('moduleList');
   if(!root) return;
@@ -1382,7 +1381,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function selectedRadios(){
     const sel=[];
     for(const g of radioGroups){
-      const r = root.querySelector(\`input[type="radio"][name="\${g}"]:checked\`);
+      const r = root.querySelector(`input[type="radio"][name="${g}"]:checked`);
       if(r) sel.push(r);
     }
     return sel;
@@ -1398,7 +1397,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       if(ch.checked){
         const p = parsePrice(ch);
         total += p;
-        picked.push(\`\${labelFor(ch)} — $\${p}\`);
+        picked.push(`${labelFor(ch)} — $${p}`);
       }
     });
 
@@ -1406,17 +1405,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     selectedRadios().forEach(r=>{
       const p = parsePrice(r);
       total += p;
-      picked.push(\`\${labelFor(r)} — $\${p}\`);
+      picked.push(`${labelFor(r)} — $${p}`);
     });
 
     if(linesEl){
-      linesEl.innerHTML = picked.map(t=>\`<li style="padding:6px 0;border-bottom:1px solid var(--border)">\${t}</li>\`).join('');
+      linesEl.innerHTML = picked.map(t=>`<li style="padding:6px 0;border-bottom:1px solid var(--border)">${t}</li>`).join('');
     }
     if(countEl){
-      countEl.textContent = \`\${picked.length} module\${picked.length===1?'':'s'} selected\`;
+      countEl.textContent = `${picked.length} module${picked.length===1?'':'s'} selected`;
     }
     if(totalEl){
-      totalEl.textContent = \`$\${total}\`;
+      totalEl.textContent = `$${total}`;
     }
   }
 
@@ -1508,19 +1507,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const subject = encodeURIComponent("CoreFlux Simpits Pilot Batch Reservation");
     const body = encodeURIComponent(
-\`Email: \${e}
-Region: \${rg}
-Primary Mode: \${md}
+`Email: ${e}
+Region: ${rg}
+Primary Mode: ${md}
 
 Setup notes / hardware (optional):
 - Wheel base / HOTAS / pedals:
 - Triple / quad / VR:
 - Static or Dynamic interest:
 - Motion / actuator interest (Qubic, D-Box etc.):
-- Anything we should know:\`
+- Anything we should know:`
     );
     const dest = "sales@coreflux.co.za";
-    window.location.href = \`mailto:\${dest}?subject=\${subject}&body=\${body}\`;
+    window.location.href = `mailto:${dest}?subject=${subject}&body=${body}`;
 
     note.textContent="Locked. We'll reach out with pilot batch details.";
     note.style.color="var(--text)";
@@ -1625,7 +1624,7 @@ Setup notes / hardware (optional):
     "offers":{
       "@type":"Offer",
       "priceCurrency":"USD",
-      "price":"1450",
+      "price":"1815",
       "availability":"https://schema.org/PreOrder",
       "url":"https://access-mark.github.io/CoreFlux-Simpits/#reserve"
     }
