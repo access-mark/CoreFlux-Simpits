@@ -132,9 +132,9 @@ section{
   justify-self:start;
 }
 .brand__logo-img{
-  height:120px;
+  height:180px;
   width:auto;
-  max-height:120px;
+  max-height:180px;
   object-fit:contain;
   image-rendering:auto;
   display:block;
